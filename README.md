@@ -29,22 +29,24 @@ gated fusion as additional controls. Option B (LoRA) is deferred.
 
 ## Current status
 
-**Phase 2 completed:** general dataset/split contracts, a structured-only
-3-fold OOF CatBoost teacher, checked model persistence, and **43 passing tests**.
-The real Product Sentiment teacher smoke produced 900 aligned OOF predictions
-and 100 validation predictions, with **zero test predictions or scores**. See
-its [recorded summary](results/phase2_product_sentiment_teacher.json),
-[API and safeguards](docs/PHASE2.md), and [experiment log](docs/EXPERIMENT_LOG.md).
+**Phase 3 completed:** Option A fusion, the direct-target control, checkpoint
+continuation and teacher/head-free inference, with **86 passing tests**. A real
+frozen-E5 synthetic smoke completed on CPU in **47.23 seconds**, with no test
+predictions or scores. Standalone CSV inference reproduced the saved outputs.
+See the [run](results/phase3_synthetic_binary_fusion.json),
+[readback audit](results/phase3_inference_audit.json),
+[Phase 3 API](docs/PHASE3.md), and [experiment log](docs/EXPERIMENT_LOG.md).
+
+Phase 2 implemented general data/split contracts and a 3-fold OOF CatBoost
+teacher. Its [Product Sentiment smoke](results/phase2_product_sentiment_teacher.json)
+produced 900 OOF/100 validation predictions and no test predictions or scores.
 
 Phase 1 reproduced original Joint Frozen LightGBM on that dataset: macro OVR
 AUROC **0.83935** on 509 test rows, one fold with 900 fitting/100 validation rows.
 Its [result](results/phase1_product_sentiment_frozen.json) is preserved.
-Phase 3 fusion is in progress: frozen E5/PCA, the compact structured encoder,
-gate, correction losses, direct-target control, checkpoint continuation and
-teacher/head-free inference are implemented. Initial software tests pass;
-the real-E5 synthetic smoke and final verification are pending. Joint TAR and
-benchmark comparisons remain unevaluated. See [Phase 3 APIs](docs/PHASE3.md)
-and the [project plan](docs/PROJECT_PLAN.md).
+Joint TAR and matched benchmark comparisons remain unevaluated. Phase 4 pilots
+and the nested diagnostic are next in the [project plan](docs/PROJECT_PLAN.md).
+CPU was sufficient for Phase 3; GPU/TAR execution has not been validated.
 
 The historical MulTaBench `master` pin is
 `599bd6a5631c96f8aef297cc4cb6e4c197ae0dca` (July 26, 2026).

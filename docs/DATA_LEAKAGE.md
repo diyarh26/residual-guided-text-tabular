@@ -58,7 +58,7 @@ stateless. Numerical borders, categorical statistics, and trees are learned
 independently inside each CatBoost model's fitting partition. Missing numerics
 use native `nan_mode="Min"`; unknown categories use native token hashing.
 No full-training category vocabulary, median, scale, or PCA is fitted and reused
-by the OOF teachers. A future fusion vocabulary with reserved missing/unknown
+by the OOF teachers. The fusion vocabulary with reserved missing/unknown
 entries remains separate Phase 3 work.
 
 The teacher saves class order derived solely from `A` labels, or validates an
@@ -87,8 +87,8 @@ and a compatible OOF schedule; row disjointness alone is insufficient.
 | Fusion gate, structured encoder, correction head | `A` features, targets, and fixed OOF offsets | Frozen gate/encoder; head may score `V` for selection, then is discarded before final inference |
 | Downstream learner and its preprocessing | `A` original structured columns, learned fused embeddings, original targets | Saved representation and downstream model |
 
-The table describes inner model selection for the planned full pipeline. Only
-the teacher row is implemented for Phase 2; Phase 1 separately tested the
+The table describes inner model selection for the full pipeline implemented
+in Phase 3. Phase 2 supplied the teacher; Phase 1 separately tested the
 original frozen E5/PCA baseline. A locked final refit uses `B_train` in place of
 `A`; `B_test` remains transformation-only. Do not combine supervised artifacts
 from different datasets, evaluation folds, or incompatible schemas. Save
@@ -131,8 +131,8 @@ Targeted data/split and real-CatBoost tests check:
   detection.
 
 These checks establish the tested data/teacher scope. They do not certify
-undisclosed feature provenance, group/time constraints, or a future fusion
-pipeline. Exact final check counts, full-suite results, and executed runs belong
+undisclosed feature provenance, group/time constraints or benchmark
+generalization. Exact final check counts, full-suite results and executed runs belong
 in [HANDOFF.md](HANDOFF.md) and [EXPERIMENT_LOG.md](EXPERIMENT_LOG.md).
 
 ## Implemented fusion checks and remaining evaluation

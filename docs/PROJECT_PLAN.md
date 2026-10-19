@@ -94,9 +94,9 @@ OOF/validation scores are diagnostics, not a final test or fusion result. See
 
 ## Phase 3 - Option A fusion
 
-**Status: In progress.** User authorized implementation and asked to be told
-if GPU training becomes necessary. Start with CPU unit/integration checks and a
-bounded frozen-E5 synthetic smoke; no Phase 4 pilot or TAR run is implied.
+**Status: Completed.** 86 tests passed. The real pinned-E5 synthetic binary
+smoke and standalone saved-bundle CSV inference passed on CPU; no GPU was
+needed. No Phase 4 pilot or TAR run is implied.
 
 Objective: implement the documented frozen-encoder residual-gated method.
 
@@ -109,11 +109,18 @@ Objective: implement the documented frozen-encoder residual-gated method.
   and design a valid cross-fitting/nested diagnostic with aligned feature spaces.
 - [x] Test gradient freezing, dimensions, initialization, class ordering,
   round-trip predictions, and end-to-end synthetic tasks.
-- [ ] Test, document, commit, push, and verify.
+- [x] Test, document, commit, push, and verify.
 
 Deliverables: modular source, training/inference entry points, artifact schema,
 unit/integration/leakage tests. Acceptance: small synthetic runs complete for
 all supported task types, inference works without teacher/head, invariants pass.
+
+Recorded run: `phase3-synthetic-binary-real-e5`, source `23d4ce3`, 60 fitting /
+12 validation / 12 reserved test rows and two text fields. Runtime 47.227 s,
+sampled peak RSS 987,308,032 bytes. Selected epoch 1; patience stopped training
+after epoch 4 of five maximum. Readback verified all 20 raw artifact hashes and
+cold CSV inference (maximum difference 1.11e-16). These are synthetic execution
+checks; nested benchmark evaluation and improvement claims remain later work.
 
 ## Phase 4 - Pilot experiments and decision gate
 

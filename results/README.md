@@ -12,5 +12,12 @@ The original baseline result is preserved; raw teacher models and row audits
 remain private under ignored `results/raw/`.
 
 Commit only reviewed lightweight summaries, tables, figures, and manifests.
+
+`phase3_synthetic_binary_fusion.json` records a real frozen-E5 synthetic
+architecture run: 60 fitting/12 validation/12 reserved test rows, CPU, 47.227 s,
+and no test predictions/scores. `phase3_inference_audit.json` checks artifacts
+and cold saved-bundle CSV prediction equivalence. Synthetic diagnostics do not
+establish benchmark improvement. Training/checkpoint/teacher/bundle files are
+private and ignored; the inference bundle has no teacher or temporary head.
 Keep raw IDs, text, predictions, PCA states, datasets, and weights in ignored
 `results/raw/` or private persistent storage. Record failures and incomplete runs.

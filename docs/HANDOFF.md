@@ -6,21 +6,23 @@ Updated: October 19, 2026 (Asia/Jerusalem).
 
 **Phase 1 - Completed: historical source analysis and one real baseline reproduction.**
 **Phase 2 - Completed: data contracts and leakage-safe teacher.**
-The final full suite passed 43 tests in 9.451 seconds, and infrastructure/link
+The Phase 2 full suite passed 43 tests in 9.451 seconds, and infrastructure/link
 checks passed. One clean-source CPU teacher smoke completed with all audit and
 serialization checks passing; no outer test predictions or scores were made.
-**Phase 3 - In progress.** The user authorized fusion implementation and asked
-to be told if GPU resources are needed. Implement the documented Option A and
-direct-target control, test on CPU, then run a bounded real frozen-E5 synthetic
-smoke if practical. Joint TAR/pilot/full evaluation remain later-phase work.
+**Phase 3 - Completed: Option A fusion and saved-bundle inference.** The user
+asked to be told if GPU resources are needed. CPU was sufficient: the bounded
+real-E5 synthetic smoke and standalone CSV inference passed. Joint TAR,
+benchmark pilots and full evaluation remain later-phase work.
+**Phase 4 - Not started.** Wait for the user's pilot-phase instruction.
 
 Phase 3 source is now implemented in `features.py`, `fusion.py`,
 `downstream.py`, `pipeline.py`, `synthetic.py` and `fusion_runner.py`, with
 thin training and CSV prediction scripts. **86 tests passed in 18.730 s**,
 including original checks, all three synthetic task pipelines, direct control,
 held-out perturbation, exact CPU continuation, CSV prediction and semantic
-artifact validation. Lock/infrastructure/link checks pass. Clean-source
-real-E5 smoke, completion docs and publication remain pending. Exact APIs and
+artifact validation. Lock/infrastructure/link checks pass. The real-E5 smoke
+completed in 47.227 seconds with all checks passing and no reserved-test
+predictions. Exact APIs and
 the nested diagnostic design are in [PHASE3.md](PHASE3.md).
 
 Dataset scope and training protocol are settled: use only datasets whose
@@ -116,9 +118,9 @@ limitations before interpreting broader experiments.
 - Repository: https://github.com/diyarh26/residual-guided-text-tabular
 - Branch: `main`.
 - Latest verified pushed commit at edit time:
-  `20ca04b7ab745d352edcffa05c0312f9761a6645`
-  (`experiments: record Phase 2 teacher smoke and completion`).
-- Phase 3 source and implementation documentation accompany this handoff in
+  `23d4ce34a6e3b23f458dd9bf1d06d1c1be4035d3`
+  (`feat: implement Option A fusion training and teacher-free inference`).
+- Phase 3 results and completion documentation accompany this handoff in
   a follow-up commit. The field above records the last verified commit at edit
   time; compare actual HEAD with the remote to identify the current session tip.
 - This field identifies the previously verified commit, avoiding a self-hash
@@ -180,23 +182,69 @@ all fit/prediction IDs and audits, and checksums. Models and arrays loaded back
 successfully with matching predictions. Preserve this run and its public
 summary without overwriting them. No Phase 2 model experiment failed.
 
-## Exact next steps: Phase 3, after user instruction
+## Recorded Phase 3 result
+
+Run `phase3-synthetic-binary-real-e5`, clean pushed source
+`23d4ce34a6e3b23f458dd9bf1d06d1c1be4035d3`. Reviewed
+[summary](../results/phase3_synthetic_binary_fusion.json) and
+[inference audit](../results/phase3_inference_audit.json).
+Original synthetic binary data: **60 fitting / 12 validation / 12 reserved
+test rows**, two text fields, two numeric fields and one categorical field.
+No benchmark dataset was evaluated during this phase.
+
+Actual pinned E5-small-v2 encoded both fields frozen on CPU, with fitting-only
+PCA-30 per field and structured preprocessing. Three OOF teachers fit 40 rows
+and predict their excluded 20; the separate 60-fit teacher predicts validation.
+The shared gate trained with fixed residual offsets; a head-free frozen gate
+then supplied fused features to the 100-tree downstream LightGBM.
+
+The fixed five-epoch budget stopped after **epoch 4** by patience three;
+**epoch 1** had the minimum validation correction loss (0.6027021408081055).
+Downstream validation AUROC **0.7142857142857143**, log loss
+**0.8421002030754804**, are synthetic diagnostics only. Training loss decreased
+slightly while validation correction loss did not improve after epoch 1;
+this execution does not establish complementarity or benchmark improvement.
+No tuning or second training attempt followed those diagnostics.
+
+Runtime **47.227143 s**, excluding interpreter/import startup; sampled process
+peak RSS **987,308,032 bytes** (~0.920 GiB). Existing Intel CPU, two Torch
+threads, no GPU; service charge recorded as unmeasured. No paid external
+compute was used. Encoder state hash remained
+`880ab04eba37fac79b75f1697064b281566657e68b937eab5057c5c031cfb627`;
+all six pinned model/tokenizer file hashes were unchanged.
+
+The standalone `scripts/predict.py` cold-loaded the bundle and E5 files, with
+no teacher or head weights and no upstream source needed for inference.
+Its 12 saved-order probability rows matched saved validation predictions to
+**1.1102230246251565e-16** maximum absolute difference. A readback audit checked
+all **20 raw file hashes**, dataset/split binding, OOF exclusion/coverage,
+preprocessing fit IDs, PCA shape `(2,30,384)`, selected gate versus checkpoint,
+class/row ordering and metrics. **Reserved-test predictions/scores: 0/0.**
+
+Private run bundle/checkpoint/teacher/raw IDs remain under ignored
+`results/raw/phase3-synthetic-binary-real-e5/`; cold-inference CSV is under
+`results/raw/phase3-inference-readback/`. Preserve both and original summaries.
+Checkpoint tests establish exact same-environment CPU epoch continuation;
+GPU, partial E5 batches and partial LightGBM resumption are untested/unsupported.
+The nested benchmark diagnostic is designed in PHASE3 but has not run.
+No Phase 3 model experiment failed.
+
+## Exact next steps: Phase 4, after user instruction
 
 1. Read AGENTS, this handoff, PROJECT_PLAN, COURSE_REQUIREMENTS, ARCHITECTURE,
    DATA_LEAKAGE, PHASE2 and the baseline analysis. Preserve existing changes.
-2. Integrate the pinned frozen E5, per-field training-only PCA-30 and compact
-   numerical/categorical fusion encoder. Teacher preprocessing stays separate.
-3. Implement the identity-initialized context gate, temporary additive
-   correction losses and direct-target control, using aligned fixed OOF
-   offsets. Keep training-only class and text-field order stable.
-4. Implement selection, checkpoint/resume, save/load, downstream learner and
-   final inference without the teacher or temporary correction head. Test
-   frozen E5, detached offsets, gradients, dimensions and prediction round trips
-   on small synthetic tasks before any pilot.
-5. Preserve the nested complete-pipeline diagnostic required before later
-   improvement claims. Report/commit/push Phase 3 before starting Phase 4;
-   full benchmark and Option B remain separately gated. Do not rerun Phase 1
-   merely to refresh documentation.
+2. Read PHASE3, preregister representative classification/regression pilots,
+   seeds, splits, matched budgets, metrics and reporting. Pin/audit each added
+   dataset; only Product Sentiment CSV is currently verified locally.
+3. Prepare and verify a separate GPU environment for historical Joint TAR if
+   using GPU resources. Tell the user before starting that work. The current
+   lock is CPU-only; actual Colab/GPU/TAR execution remains unvalidated.
+4. Run aligned Joint Frozen, Joint TAR, direct-target gated and residual-guided
+   conditions. Compare final downstream learners. Execute the nested diagnostic
+   entirely within benchmark training as designed in PHASE3 before final claims.
+5. Record curves, variability, runtime, memory, cost, failures and artifacts;
+   report a continue/adjust/stop recommendation before full evaluation. Do not
+   silently redesign Option A or proceed to Phase 5/LoRA. Preserve old runs.
 
 ## Remaining technical boundaries
 

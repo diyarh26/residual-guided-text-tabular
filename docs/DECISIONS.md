@@ -57,5 +57,5 @@ and separate per-dataset training. No further user answer is needed on these
 points; do not reopen them without new conflicting evidence.
 Other technical provenance checks are handled by source inspection rather
 than treated as questions the user must answer. Phase 2 data/teacher components
-are implemented; Phase 3 fusion implementation is in progress, with execution
-and final verification tracked in the handoff.
+and Phase 3 fusion are implemented. Execution and final verification are
+tracked in the handoff; benchmark usefulness remains untested.

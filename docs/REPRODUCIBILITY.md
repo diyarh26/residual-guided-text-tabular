@@ -105,6 +105,10 @@ baseline runner; no Phase 2 Colab execution is claimed.
 ## Train and load Option A (Phase 3)
 
 The exact component/API and nested evaluation design are in [PHASE3.md](PHASE3.md).
+The completed synthetic smoke used clean source
+`23d4ce34a6e3b23f458dd9bf1d06d1c1be4035d3`; its unedited
+[summary](../results/phase3_synthetic_binary_fusion.json) and separate
+[cold-inference audit](../results/phase3_inference_audit.json) record the evidence.
 From clean committed source with the locked environment and prepared E5 assets:
 
 ```powershell

@@ -1,0 +1,32 @@
+{
+  "checked_raw_files": 20,
+  "checks": {
+    "artifact_checksums_match": true,
+    "class_and_row_order_match": true,
+    "cold_csv_inference_matches_saved_predictions": true,
+    "dataset_and_split_binding": true,
+    "inference_has_no_teacher_or_head_weights": true,
+    "metrics_recomputed": true,
+    "pca_and_structured_train_only_scopes": true,
+    "selected_gate_matches_best_checkpoint": true,
+    "six_pinned_e5_files_unchanged": true,
+    "teacher_oof_exclusion_and_coverage": true
+  },
+  "cold_csv_sha256": "b3c8562b3a1deec2675e94d903b43b42cfa7caaed3f822619afa62f1a5a21c42",
+  "format_version": 1,
+  "maximum_csv_difference": 1.1102230246251565e-16,
+  "pca_shape": [
+    2,
+    30,
+    384
+  ],
+  "run_id": "phase3-synthetic-binary-real-e5",
+  "scope": "Readback audit only; no fitting or outer-test prediction/scoring.",
+  "source_commit": "23d4ce34a6e3b23f458dd9bf1d06d1c1be4035d3",
+  "test_predictions": 0,
+  "test_scores": 0,
+  "validation_predictions_shape": [
+    12,
+    2
+  ]
+}

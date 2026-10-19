@@ -1,0 +1,301 @@
+{
+  "artifacts": {
+    "directory": "results/raw/phase3-synthetic-binary-real-e5",
+    "files_sha256": {
+      "bundle/downstream/manifest.json": "39e4db180961c105d7cb469f0e067168afc3669d7e9ff2a51425525597664e51",
+      "bundle/downstream/metadata.json": "86ecc6df1899dfde7f8cb738954d50ab563c3e24c066fba3eed65b0575f7e0f9",
+      "bundle/downstream/model.txt": "5d3d03ca1c5508fc312df9f0b3fec573a994231622723f62651367210f75019a",
+      "bundle/fusion.pt": "f5c57c0b1a7c481ecc7456a2af5ae2639e340be2b43ab9070dcaae2b7fc73059",
+      "bundle/pca/metadata.json": "b3456c1537ed5125fa06038ecca9b905de34af27c5de41c54e766f7c7c0c7661",
+      "bundle/pca/state.npz": "a6dd3495d2d6adaaac8b33d533152d47d17ffcbe1c93e15401aba2dbd2ba53fb",
+      "bundle/pipeline.json": "1b33b5ebe6010e428d2944bfc5cf935e5cc3d407d3f0c93619ef04700633c00c",
+      "bundle/structured/metadata.json": "6f641100d7951912473c1285829aaf6cc865976c1d100b570f22349673991a41",
+      "bundle/structured/state.npz": "7c859a3e27f21ae6f090bfe9dd2e1d386f5361993c147525d54b0314f4fded9c",
+      "splits.json": "815012d0b1105f7141f71a70e417b048338e28c5961275a464c9a9cbc0315733",
+      "synthetic.csv": "040b8b70edefd5a3efa0e2a3555f590350503a6e282c3d51b2479842b10a8cd8",
+      "teacher/fold_0.cbm": "3c595566a171f3d2a1c516b369ae971df389d4f73019049ec280ebf4daad4e9d",
+      "teacher/fold_1.cbm": "cc3583a39a28296144f2b9ed196cd0e1788afcb549c76d834e0d0ac5903a8283",
+      "teacher/fold_2.cbm": "1dd4de7ea77cb8f298ba67ce188753b18adc11f22e9efae1b93162cdfb54e425",
+      "teacher/metadata.json": "b57197191e890e82f3ea941dbd302f64078a0c9fab36846637c796ff9c40aeff",
+      "teacher/predictions.npz": "3b77b39ca5d721561b430c73c562fb3faa7e96dacdb4aba04467dd7c6e34f128",
+      "teacher/validation_teacher.cbm": "75ce37778146fc82bf004cc982f5e6fec9f4764b1db130550f59d40eb2e8c807",
+      "training.pt": "27f7ce1146334dec2a2f6ab1470c8467363dc69a22b27d2aaedb28d0cda9e4c0",
+      "validation_features.csv": "5f0bea5d8576522c674e23826cf7bc76a981d955aa4593fb56f3b2180b4f8002",
+      "validation_predictions.npy": "34d38a260988cf3445eb69128f941a90c59d224c8a677d3644eadd6a6032e0d9"
+    }
+  },
+  "best_epoch": 1,
+  "checks": {
+    "frozen_e5_weights_and_gradients": true,
+    "head_free_teacher_free_bundle": true,
+    "identity_initialization_tested": true,
+    "saved_loaded_predictions_match": true,
+    "teacher_signals_valid_for_objective": true,
+    "training_only_pca": true,
+    "training_only_structured_preprocessing": true
+  },
+  "class_order": [
+    "negative",
+    "positive"
+  ],
+  "command": [
+    "scripts/run_fusion.py",
+    "--config",
+    "configs/phase3_smoke.json",
+    "--run-id",
+    "phase3-synthetic-binary-real-e5",
+    "--summary",
+    "results/phase3_synthetic_binary_fusion.json"
+  ],
+  "completed_epoch": 4,
+  "completed_utc": "2026-10-19T20:09:13.886069+00:00",
+  "config": {
+    "data": {
+      "kind": "synthetic",
+      "seed": 42,
+      "task": "binary",
+      "test_rows": 12,
+      "train_rows": 60,
+      "validation_rows": 12
+    },
+    "encoder": {
+      "batch_size": 32,
+      "device": "cpu",
+      "identifier": "intfloat/e5-small-v2",
+      "max_length": 512,
+      "model_path": "artifacts/e5-small-v2",
+      "revision": "ffb93f3bd4047442299a41ebb6fa998a38507c52"
+    },
+    "output_root": "results/raw",
+    "pipeline": {
+      "category_embedding_dim": 8,
+      "downstream_estimators": 100,
+      "downstream_threads": 2,
+      "dropout": 0.1,
+      "hidden_dim": 64,
+      "structured_dim": 16,
+      "training": {
+        "batch_size": 20,
+        "device": "cpu",
+        "epochs": 5,
+        "lr": 0.001,
+        "objective": "residual",
+        "patience": 3,
+        "seed": 42,
+        "threads": 2,
+        "weight_decay": 0.0001
+      }
+    },
+    "schema_version": 1,
+    "teacher": {
+      "depth": 4,
+      "iterations": 40,
+      "learning_rate": 0.1,
+      "n_splits": 3,
+      "probability_clip": 1e-07,
+      "seed": 42,
+      "thread_count": 2
+    }
+  },
+  "config_sha256": "5ba56a62ddcb8d35fb284a3b53cf5ff605c3285e546317363c3189d2553997f0",
+  "cost": {
+    "basis": "Not measured; no automatic billing estimate",
+    "provider_service_charge_usd": null
+  },
+  "data": {
+    "csv_sha256": null,
+    "kind": "synthetic",
+    "rows": 84,
+    "typed_content_sha256": "b2b27d444a54a8a59bef0440aace0705fdf343505797de8495b96eb3c6f62f50"
+  },
+  "encoder": {
+    "dimension": 384,
+    "kind": "frozen_e5",
+    "missing_text": "",
+    "pooling": "attention-mask mean then L2 normalization",
+    "prefix": "passage: {field}: {value}",
+    "test_injection": false,
+    "verified_files": {
+      "config.json": "5dfb0363cd0243be179c03bcaafd1542d0fbb95e8cbcf575fff3e229342adc2f",
+      "model.safetensors": "45bfa60070649aae2244fbc9d508537779b93b6f353c17b0f95ceccb1c5116c1",
+      "special_tokens_map.json": "b6d346be366a7d1d48332dbc9fdf3bf8960b5d879522b7799ddba59e76237ee3",
+      "tokenizer.json": "d241a60d5e8f04cc1b2b3e9ef7a4921b27bf526d9f6050ab90f9267a1f9e5c66",
+      "tokenizer_config.json": "ae83fa6ca0333117ff12606020af925d648667ef70d92ff7f27d781ba0ca4544",
+      "vocab.txt": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+    }
+  },
+  "encoder_state_sha256": "880ab04eba37fac79b75f1697064b281566657e68b937eab5057c5c031cfb627",
+  "environment": {
+    "packages": {
+      "catboost": "1.2.8",
+      "lightgbm": "4.6.0",
+      "numpy": "2.3.5",
+      "pandas": "2.3.3",
+      "scikit-learn": "1.6.1",
+      "tabstar": "1.1.15",
+      "torch": "2.7.1+cpu",
+      "transformers": "4.57.3"
+    },
+    "platform": "Windows-10-10.0.26200-SP0",
+    "python": "3.11.3 (tags/v3.11.3:f3909b8, Apr  4 2023, 23:49:59) [MSC v.1934 64 bit (AMD64)]"
+  },
+  "environment_lock_sha256": {
+    "pyproject.toml": "dd1f1461ca6b5df1e660d38055441c4145646ab221d911ee5862afa4150f5d31",
+    "uv.lock": "4b1158141440d9024ebf9b1eebd5179e0a491a3ac112ac92353e27ac7bbb3319"
+  },
+  "format_version": 1,
+  "fusion_config": {
+    "category_cardinalities": [
+      5
+    ],
+    "category_embedding_dim": 8,
+    "dropout": 0.1,
+    "embedding_dim": 30,
+    "hidden_dim": 64,
+    "n_classes": 2,
+    "n_numerical": 2,
+    "n_text_fields": 2,
+    "structured_dim": 16,
+    "task": "binary"
+  },
+  "hardware": {
+    "cpu": "Intel64 Family 6 Model 140 Stepping 1, GenuineIntel",
+    "encoder_device": "cpu",
+    "fusion_device": "cpu",
+    "gpu_available": false,
+    "logical_cpus": 8,
+    "ram_bytes": 16859500544,
+    "torch_threads": 2
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.520752747853597,
+      "validation_loss": 0.6027021408081055
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.5202826857566833,
+      "validation_loss": 0.6027684807777405
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.5199079314867655,
+      "validation_loss": 0.6028943657875061
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.5195501347382864,
+      "validation_loss": 0.6028391718864441
+    }
+  ],
+  "limitations": [
+    "Architecture-stage training run; no matched-baseline improvement claim.",
+    "Training fusion embeddings are supervised in-sample, not cross-fitted.",
+    "CPU tested; GPU execution unverified. E5 batches and LightGBM fitting restart on retry."
+  ],
+  "partitions": {
+    "excluded": {
+      "rows": 0,
+      "typed_ordered_ids_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+    },
+    "test": {
+      "rows": 12,
+      "typed_ordered_ids_sha256": "8c7ba2a0a05d375c97e6f02b5ba67dc7e401987c78a2e565ce3004950b0b2e76"
+    },
+    "train": {
+      "rows": 60,
+      "typed_ordered_ids_sha256": "3fdb5e1c8c482684fc1692ae1d5e6818680fd1f857a06d5b4b2e16b0d5f82b7a"
+    },
+    "validation": {
+      "rows": 12,
+      "typed_ordered_ids_sha256": "a6dcd4f9993d7e42a3d65973d4d43c347df15ff28980710996ed5b38bde1a8db"
+    }
+  },
+  "pipeline_config": {
+    "category_embedding_dim": 8,
+    "downstream_estimators": 100,
+    "downstream_threads": 2,
+    "dropout": 0.1,
+    "hidden_dim": 64,
+    "structured_dim": 16,
+    "training": {
+      "batch_size": 20,
+      "device": "cpu",
+      "epochs": 5,
+      "lr": 0.001,
+      "objective": "residual",
+      "patience": 3,
+      "seed": 42,
+      "threads": 2,
+      "weight_decay": 0.0001
+    }
+  },
+  "run_id": "phase3-synthetic-binary-real-e5",
+  "runtime": {
+    "sampled_peak_rss_bytes": 987308032,
+    "total_seconds": 47.22714300000007
+  },
+  "schema": {
+    "categorical_columns": [
+      "region"
+    ],
+    "dataset_id": "refutab_synthetic_v1",
+    "excluded_columns": [],
+    "forbidden_columns": [
+      "fold_marker"
+    ],
+    "id_column": "row_id",
+    "image_columns": [],
+    "numerical_columns": [
+      "value",
+      "context"
+    ],
+    "target_column": "target",
+    "task": "binary",
+    "text_columns": [
+      "description",
+      "summary"
+    ]
+  },
+  "source": {
+    "allow_dirty": false,
+    "commit": "23d4ce34a6e3b23f458dd9bf1d06d1c1be4035d3",
+    "working_tree_dirty": false
+  },
+  "split_assignments_sha256": "9be9f05a3121b9cd7c610d29c7a2071da89356619a7e3cc080c5fcfceb3b2d75",
+  "split_protocol": {
+    "protocol": "synthetic_fixed_partition_v1",
+    "seed": 42
+  },
+  "started_utc": "2026-10-19T20:08:26.660904+00:00",
+  "status": "completed",
+  "teacher": {
+    "config": {
+      "depth": 4,
+      "iterations": 40,
+      "learning_rate": 0.1,
+      "n_splits": 3,
+      "probability_clip": 1e-07,
+      "seed": 42,
+      "task": "binary",
+      "thread_count": 2
+    },
+    "metadata_sha256": "1b392eac257de27dd31ae90b5b12dd2cd7cfd9c8015729b78558a116a20a71bb",
+    "oof_offsets_sha256": "57e7a50633242a43c042c9545d479283855a3aa2249b95d7fb75144e816f5cd2",
+    "used_for_objective": true,
+    "validation_offsets_sha256": "f5aede4d48fd82ecf6c7bebaabfb6763ec87527d8394c1e4f507d270da804b4d"
+  },
+  "test_predictions": 0,
+  "test_scores": 0,
+  "validation_downstream_diagnostics": {
+    "all_classes_present": true,
+    "auc": 0.7142857142857143,
+    "auc_convention": "binary: saved class index 1",
+    "logloss": 0.8421002030754804,
+    "present_class_indices": [
+      0,
+      1
+    ]
+  }
+}

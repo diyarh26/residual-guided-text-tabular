@@ -1,7 +1,7 @@
 # Phase 2 data and structured teacher
 
 The general dataset interface and structured-only three-fold OOF CatBoost
-teacher are implemented. They supply training signals for the planned fusion
+teacher are implemented. They supply training signals for the Phase 3 fusion
 stage; they do not implement the gate, correction-head training, final learner,
 or a ReFuTab improvement result. Phase status and actual executions are recorded
 in [HANDOFF.md](HANDOFF.md) and [EXPERIMENT_LOG.md](EXPERIMENT_LOG.md).
@@ -102,7 +102,7 @@ uses `Logloss`, and multiclass classification uses `MultiClass`.
 Numeric/string/bool categories and sentinel-looking strings remain distinct.
 Unseen categorical tokens use CatBoost's native hashing; there is no globally
 fitted category vocabulary or reserved unknown-category mapping in the teacher.
-The planned fusion encoder's train-fitted missing/unknown vocabulary is a
+The Phase 3 fusion encoder's train-fitted missing/unknown vocabulary is a
 separate Phase 3 component. Teacher preprocessing must never reuse it.
 
 Class order is derived only from training labels, using sorted typed tokens,

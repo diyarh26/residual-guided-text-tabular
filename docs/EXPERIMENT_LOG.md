@@ -210,6 +210,73 @@ CPU threads are fixed before diagnostics. Downstream uses 100 LightGBM trees.
 This is an architecture smoke, not a benchmark pilot or improvement test.
 The clean-source run and real inference readback are pending at this entry.
 
+## October 19, 2026 - Phase 3 real-E5 synthetic smoke completed
+
+Run **`phase3-synthetic-binary-real-e5`** completed from clean pushed source
+**`23d4ce34a6e3b23f458dd9bf1d06d1c1be4035d3`**. The configuration above was
+committed before diagnostics; no tuning or second training run followed.
+The [original summary](../results/phase3_synthetic_binary_fusion.json) contains
+source/config/lock hashes, generated-data/schema/split fingerprints, pinned
+E5 hashes, hardware, learning curves and all raw artifact hashes.
+
+```powershell
+.venv/Scripts/python.exe scripts/run_fusion.py --config configs/phase3_smoke.json --run-id phase3-synthetic-binary-real-e5 --summary results/phase3_synthetic_binary_fusion.json
+.venv/Scripts/python.exe scripts/predict.py --bundle results/raw/phase3-synthetic-binary-real-e5/bundle --input results/raw/phase3-synthetic-binary-real-e5/validation_features.csv --output results/raw/phase3-inference-readback/predictions.csv --threads 2
+```
+
+| Item | Actual outcome |
+| --- | --- |
+| Data | Original synthetic binary task; two text/two numeric/one categorical field |
+| Partitions | 60 fitting, 12 validation, 12 reserved test rows |
+| Teacher | Three 40-fit/20-excluded-row OOF models; separate 60-fit/12-validation teacher |
+| Text | Actual pinned frozen E5-small-v2; fitting-only PCA `(2,30,384)` components |
+| Gate selection | Epoch 1 selected; stopped after epoch 4 of maximum 5, patience 3 |
+| Selected validation correction loss | 0.6027021408081055 |
+| Downstream | Original structured block plus 60 fused coordinates; 100-tree LightGBM |
+| Validation diagnostic AUROC / log loss | 0.7142857142857143 / 0.8421002030754804 |
+| Reserved-test predictions / scores | **0 / 0** |
+| Runtime | **47.227143 s**, excluding interpreter/import startup |
+| Sampled peak process RSS | **987,308,032 bytes**, approximately **0.920 GiB** |
+| Hardware | Existing Intel CPU; two Torch threads; no GPU |
+| Cost | Unmeasured in script; no paid external compute service used |
+
+All runtime checks passed. E5 state hash before/after remained
+`880ab04eba37fac79b75f1697064b281566657e68b937eab5057c5c031cfb627` and all six
+verified model/tokenizer files remained unchanged. PCA and structured fit IDs
+equaled the 60 permitted fitting IDs. OOF teachers excluded their prediction
+rows and validation was separate. The inference bundle has no teacher or
+temporary-head weights; it keeps the trained structured encoder/gate and native
+downstream learner, with verified pretrained E5 referenced externally.
+
+Cold standalone CSV inference loaded the saved bundle and E5 in a new process.
+Its saved class order (`negative`, `positive`) and all 12 validation row IDs
+matched the reference. Maximum probability difference was
+**1.1102230246251565e-16**. The separate
+[readback audit](../results/phase3_inference_audit.json) checked all **20 raw file
+hashes**, content/split binding, OOF row exclusions/coverage, preprocessing
+scope, selected versus last checkpoint, class/order/shape, recomputed metrics
+and unchanged E5 assets. That audit performed no training or test scoring.
+
+Private artifacts persist under ignored
+`results/raw/phase3-synthetic-binary-real-e5/`; separate CSV readback is under
+`results/raw/phase3-inference-readback/`. Preserve them and their public
+summaries. The original Phase 1/2 results were neither edited nor rerun.
+The final source suite passed **86 tests in 18.730 s**; after adding the private
+validation CSV export and CLI thread option, the three targeted runner/CSV
+checks passed again in **3.116 s**. Dependency-lock, infrastructure/link,
+publication and whitespace checks passed.
+
+Limitations: synthetic validation only, no matched benchmark baseline or
+statistical comparison. Training correction loss decreased slightly, while
+validation correction loss was lowest at epoch 1; this does not establish useful
+complementarity. Regression/multiclass pipelines and the direct control were
+exercised with real neural/teacher/downstream models and explicit text fixtures
+in tests; only this binary smoke used actual E5. Exact CPU continuation was
+tested; GPU and Colab execution remain unvalidated. The nested benchmark
+diagnostic is specified but not executed. No Phase 3 model experiment failed.
+Phase 3 meets its implementation acceptance checks. Phase 4 pilots and the
+Joint TAR GPU environment remain the next phase, pending user instruction.
+
 ## Required entry for each later experiment
 
 Record run ID/time/status (planned/running/completed/failed/interrupted), exact

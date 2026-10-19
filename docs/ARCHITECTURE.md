@@ -31,7 +31,11 @@ or enforce them. Classification uses one saved training-derived class order.
 
 **Training interpretation resolved by the user on October 19, 2026:** train separately on each dataset's training split and leave its test split untouched. Keep fitted artifacts and target-trained weights separate for each dataset and outer evaluation fold. Fit preprocessing and models only on the permitted training partition; use an independent inner validation partition for selection. The full OOF teacher construction, final-refit boundaries, and supervised-representation diagnostics remain required by [DATA_LEAKAGE.md](DATA_LEAKAGE.md). This is the user's confirmed project interpretation, not a claim of separate course-staff confirmation.
 
-For row `i` and text field `j`, let `x_ij` be text, `u_i` the original structured features, and `c_j` a fixed column identity. Preserve the schema order through encoding, concatenation, serialization, and prediction. Define fixed handling for missing text and structured values before fusion experiments; the planned fusion vocabulary maps unseen categories to a reserved unknown category. The implemented teacher instead uses stateless typed category tokens and native CatBoost hashing; its preprocessing is separate.
+For row `i` and text field `j`, let `x_ij` be text, `u_i` the original structured
+features, and `c_j` a fixed column identity. Schema order is preserved through
+encoding, concatenation, serialization and prediction. Missing text becomes
+empty before prefixing. The fusion vocabulary reserves missing/unknown codes;
+the separate teacher uses stateless typed tokens and native CatBoost hashing.
 
 ## Components
 
