@@ -21,4 +21,14 @@ execution, test-label/feature perturbation, bundle checksums/semantic alignment,
 and CSV prediction. Text substitutes are explicit in unit tests; real frozen
 E5 is exercised separately by the recorded synthetic smoke. No synthetic metric
 establishes benchmark improvement. GPU and nested benchmark evaluation remain
-unexecuted.
+unexecuted at the Phase 3 checkpoint.
+
+Phase 4 adds versioned-download/path/overwrite checks, original and grouped
+split/OOF exclusions, metric edge cases, frozen-cache bindings/corruption,
+source-compatible PCA persistence, and TAR source/patch/checkpoint tests with
+explicit tiny CPU fixtures. A native PEFT weight round trip checks recovery
+after training but before PCA. Runner integration exercises the all-stage test
+barrier, preserved failures/new continuation attempts, artifact inventories,
+and recovery of durable test predictions. Report tests block decisions with
+incomplete/nonfinite/misaligned comparisons. Notebook tests exercise the SHA
+and launch guards. These tests do not claim actual CUDA/Colab execution.

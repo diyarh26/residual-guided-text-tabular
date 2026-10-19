@@ -1,0 +1,173 @@
+{
+  "schema_version": 1,
+  "preregistered_date": "2026-10-19",
+  "upstream_sha": "599bd6a5631c96f8aef297cc4cb6e4c197ae0dca",
+  "choice_policy": "Prespecified before new model scores: smallest eligible classification task already pinned; compact regression schema with two short text fields and numerical/categorical structured fields. Preserve every historical benchmark feature.",
+  "test_access_policy": "No fitting, model selection or target-score inspection during preparation. Split construction and non-fitting content hashes/audits may read the table.",
+  "datasets": [
+    {
+      "directory": "data/multabench-product-sentiment-v1",
+      "kaggle_ref": "chico89/multabench-product-sentiment",
+      "kaggle_version": 1,
+      "url": "https://www.kaggle.com/api/v1/datasets/download/chico89/multabench-product-sentiment?datasetVersionNumber=1",
+      "archive_sha256": "edb1fba6ceffd81cb11d9246b5ffbcd3e12dc961c91c097d689ca3396779bc88",
+      "files": {
+        "data.csv": "8a75a9880a5a1a619b16622c7f8f257ff8d19fde9b02864bf0059d5b0a8c2bb7",
+        "metadata.json": "db78538f386c3eed11df6c9110fbd8de30c9f7c72311ff85ee6811fd75bfde13"
+      },
+      "metadata_dataset_id": "MUL_TEXT_CONSUMER_PRODUCT_SENTIMENT",
+      "release_created_utc": "2026-04-01T17:16:19.353Z",
+      "original_image_col": null,
+      "csv_columns": [
+        "Product_Description",
+        "Product_Type",
+        "Sentiment"
+      ],
+      "schema": {
+        "dataset_id": "MUL_TEXT_PRODUCT_SENTIMENT",
+        "task": "multiclass",
+        "target_column": "Sentiment",
+        "text_columns": [
+          "Product_Description"
+        ],
+        "numerical_columns": [
+          "Product_Type"
+        ],
+        "categorical_columns": [],
+        "forbidden_columns": [
+          "Text_ID",
+          "Unnamed: 0",
+          "row_id",
+          "fold_id",
+          "teacher_prediction",
+          "residual"
+        ]
+      },
+      "audit": {
+        "rows": 5091,
+        "missing_counts": {
+          "Product_Description": 0,
+          "Product_Type": 0,
+          "Sentiment": 0
+        },
+        "pandas_dtypes": {
+          "Product_Description": "object",
+          "Product_Type": "int64",
+          "Sentiment": "object"
+        },
+        "duplicate_complete_rows_beyond_first": 4,
+        "duplicate_text_values_beyond_first": {
+          "Product_Description": 7
+        },
+        "class_counts": {
+          "Cannot Say": 97,
+          "Negative": 324,
+          "No Sentiment": 1653,
+          "Positive": 3017
+        }
+      },
+      "pinned_curation_url": "https://github.com/alanarazi7/MulTaBench/blob/599bd6a5631c96f8aef297cc4cb6e4c197ae0dca/multabench/benchmark/datasets/MUL_TEXT_PRODUCT_SENTIMENT.py",
+      "pinned_curation_sha256": "0a5fc45357bdcb07a60e39c84942b05132e6610c5aa48253502ff0bc3879666f",
+      "license": {
+        "curated_release_declaration": "Other (specified in description)",
+        "source": {
+          "status": "source_metadata_only",
+          "source_metadata_url": "https://www.openml.org/api/v1/json/data/46651",
+          "declared_license": "MachineHack prediction competition",
+          "source_version": "1",
+          "original_data_url": "https://machinehack.com/hackathons/product_sentiment_classification_weekend_hackathon_19/overview"
+        },
+        "redistribution": "not approved by this inventory; raw data remains ignored"
+      },
+      "row_id_policy": "Zero-based original CSV row position, persisted outside features."
+    },
+    {
+      "directory": "data/multabench-video-games-sales-v1",
+      "kaggle_ref": "chico89/multabench-video-games-sales",
+      "kaggle_version": 1,
+      "url": "https://www.kaggle.com/api/v1/datasets/download/chico89/multabench-video-games-sales?datasetVersionNumber=1",
+      "archive_sha256": "2246d30847ab12d0dea5d422c09fee208a6312c0ab382db1ab8da8f4c4672567",
+      "files": {
+        "data.csv": "635a4b91782c5d0f2f809614bfa86c66687b2ea781c90f8d6397e815a5e73d8d",
+        "metadata.json": "f364bad35542e994be2731225edb21c45233d37c800d132775f8ca41dc40f744"
+      },
+      "metadata_dataset_id": "REG_TEXT_SOCIAL_VIDEO_GAMES_SALES",
+      "release_created_utc": "2026-04-01T17:16:18.983Z",
+      "original_image_col": null,
+      "csv_columns": [
+        "Name",
+        "Platform",
+        "Year",
+        "Genre",
+        "Publisher",
+        "Global_Sales"
+      ],
+      "schema": {
+        "dataset_id": "REG_TEXT_VIDEO_GAMES_SALES",
+        "task": "regression",
+        "target_column": "Global_Sales",
+        "text_columns": [
+          "Name",
+          "Publisher"
+        ],
+        "numerical_columns": [
+          "Year"
+        ],
+        "categorical_columns": [
+          "Platform",
+          "Genre"
+        ],
+        "forbidden_columns": [
+          "Rank",
+          "NA_Sales",
+          "EU_Sales",
+          "JP_Sales",
+          "Other_Sales",
+          "Unnamed: 0",
+          "row_id",
+          "fold_id",
+          "teacher_prediction",
+          "residual"
+        ]
+      },
+      "audit": {
+        "rows": 16598,
+        "missing_counts": {
+          "Name": 0,
+          "Platform": 0,
+          "Year": 271,
+          "Genre": 0,
+          "Publisher": 58,
+          "Global_Sales": 0
+        },
+        "pandas_dtypes": {
+          "Name": "object",
+          "Platform": "object",
+          "Year": "float64",
+          "Genre": "object",
+          "Publisher": "object",
+          "Global_Sales": "float64"
+        },
+        "duplicate_complete_rows_beyond_first": 1,
+        "duplicate_feature_rows_beyond_first": 2,
+        "duplicate_text_values_beyond_first": {
+          "Name": 5105
+        },
+        "target_finite": true
+      },
+      "pinned_curation_url": "https://github.com/alanarazi7/MulTaBench/blob/599bd6a5631c96f8aef297cc4cb6e4c197ae0dca/multabench/benchmark/datasets/REG_TEXT_VIDEO_GAMES_SALES.py",
+      "pinned_curation_sha256": "bbff09b7ebbd2102ac5df35d6d5ab0d5433c18bceecef6e152e5ec80f5ae1597",
+      "license": {
+        "curated_release_declaration": "Other (specified in description)",
+        "source": {
+          "status": "source_metadata_only",
+          "source_metadata_url": "https://www.kaggle.com/api/v1/datasets/view/gregorut/videogamesales",
+          "declared_license": "Unknown",
+          "source_version_at_inspection": 2
+        },
+        "redistribution": "not approved by this inventory; raw data remains ignored"
+      },
+      "row_id_policy": "Zero-based original CSV row position, persisted outside features."
+    }
+  ]
+}

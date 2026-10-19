@@ -1,5 +1,14 @@
 # Colab execution workflow
 
+For the current Phase 4 comparison, use
+[phase4_pilot.ipynb in Colab](https://colab.research.google.com/github/diyarh26/residual-guided-text-tabular/blob/main/notebooks/phase4_pilot.ipynb)
+and read [PHASE4_GPU.md](PHASE4_GPU.md). It uses the separate Linux CUDA lock,
+actual-device preflight, durable Drive logs and explicit launch guard. The
+registered full run has 36 fitting stages and then 24 locked outer-test
+prediction calls; a partial CPU run cannot unlock these tests. Actual GPU/TAR
+training remains unvalidated. [PHASE4.md](PHASE4.md) defines the matched
+conditions, grouped diagnostics and reporting gate.
+
 [phase1_baseline.ipynb](../notebooks/phase1_baseline.ipynb) is a thin runner for
 the original historical Joint Frozen LightGBM baseline on CPU. Its cells call
 repository source; no model, embedding, splitting, or metric logic lives in the
@@ -86,11 +95,13 @@ and manifest. For retry, use a new run ID and pass the prior persistent
 epoch state resumes; frozen embedding batches, preprocessing and teacher fits
 restart. A checkpoint is available only after a complete fusion epoch.
 
-The current lock runs on CPU, including in a Colab runtime with a GPU attached.
-Phase 3 needs only a bounded synthetic architecture check; later GPU/TAR runs
-require a separately pinned and verified GPU environment. This documented
-workflow has not been executed in Colab. Local smoke execution is recorded
-separately in EXPERIMENT_LOG.
+The root lock runs on CPU, including in a Colab runtime with a GPU attached.
+Phase 3 needs only a bounded synthetic architecture check. Phase 4 now has a
+separate [GPU lock and notebook](PHASE4_GPU.md); it must pass its actual runtime
+checks before the complete matched comparison. CPU pilot stages cannot be
+resumed as GPU stages: start a fresh GPU run because device, embeddings and
+environment bindings differ. These documented Colab workflows have not been
+executed in Colab. Local smoke execution is recorded separately in EXPERIMENT_LOG.
 
 ## Persistence and retry limitations
 
@@ -109,8 +120,11 @@ or describe a full restart as checkpoint resumption. Check the actual process
 and saved status after a browser disconnection, since disconnection alone does
 not prove the runtime stopped.
 
-Future resumable training must verify the same source SHA, data/model revisions,
-split IDs, configuration hash, feature/class order, and environment before
-restoring model, optimizer, scheduler, and random state. No such optimizer
-resume API is claimed by this Phase 1 notebook. GPU/TAR execution and ReFuTab
-training require their own later configuration, tests, and execution record.
+The Phase 1 notebook has no optimizer resume API. Phase 3 implements verified
+fusion epoch checkpoints; the Phase 4 ledger adds immutable attempts and
+audited TAR Trainer checkpoint continuation. Those paths verify source SHA,
+data/model revisions, split IDs, configuration, feature/class order and
+environment before restoring permitted state. LightGBM fitting still restarts.
+Use the [Phase 4 continuation instructions](PHASE4_GPU.md), retain failed
+attempts, and record actual runtime validation. An implemented GPU resume path
+does not establish successful GPU continuation or bitwise reproducibility.

@@ -5,8 +5,8 @@
 ReFuTab investigates whether a structured-only teacher can guide a text fusion
 network to learn information that complements numerical and categorical
 features. This is a Technion NLP (097215) Track 1 algorithm project, due
-**October 26, 2026**. The research hypothesis is untested; no benchmark results
-or performance improvements are claimed.
+**October 26, 2026**. The research hypothesis remains unestablished; no ReFuTab
+benchmark improvement is claimed.
 
 ## Proposed method
 
@@ -29,6 +29,16 @@ gated fusion as additional controls. Option B (LoRA) is deferred.
 
 ## Current status
 
+**Phase 4 is in progress:** the matched pilot runner, grouped complete-pipeline
+diagnostics, frozen-text cache, TAR runtime adapter and descriptive result
+aggregation are implemented. The registered plan contains **36 fitting stages
+and 24 locked outer-test evaluations** across classification and regression.
+The full comparison requires a real GPU; no GPU/TAR run or Phase 4 completion
+is claimed. See the [pilot protocol](docs/PHASE4.md) and
+[GPU handoff](docs/PHASE4_GPU.md). A bounded CPU subset can run nine Product
+Sentiment stages while keeping every outer test untouched; it cannot establish
+the complete comparison or support an improvement recommendation.
+
 **Phase 3 completed:** Option A fusion, the direct-target control, checkpoint
 continuation and teacher/head-free inference, with **86 passing tests**. A real
 frozen-E5 synthetic smoke completed on CPU in **47.23 seconds**, with no test
@@ -44,9 +54,10 @@ produced 900 OOF/100 validation predictions and no test predictions or scores.
 Phase 1 reproduced original Joint Frozen LightGBM on that dataset: macro OVR
 AUROC **0.83935** on 509 test rows, one fold with 900 fitting/100 validation rows.
 Its [result](results/phase1_product_sentiment_frozen.json) is preserved.
-Joint TAR and matched benchmark comparisons remain unevaluated. Phase 4 pilots
-and the nested diagnostic are next in the [project plan](docs/PROJECT_PLAN.md).
-CPU was sufficient for Phase 3; GPU/TAR execution has not been validated.
+Joint TAR and the full matched benchmark comparison remain unevaluated. The
+[project plan](docs/PROJECT_PLAN.md) keeps Phase 4 open until actual results and
+a recommendation are reported. CPU was sufficient for Phase 3; GPU/TAR
+execution has not been validated.
 
 The historical MulTaBench `master` pin is
 `599bd6a5631c96f8aef297cc4cb6e4c197ae0dca` (July 26, 2026).
@@ -92,6 +103,17 @@ py -3.11 -m uv run --frozen python scripts/prepare_phase1.py --skip-model
 py -3.11 -m uv run --frozen python scripts/run_teacher.py --run-id my-new-teacher-run --summary results/my-new-teacher-run.json
 ```
 
+For Phase 4, prepare the two immutable pilot tables with
+`uv run --frozen python scripts/prepare_phase4.py`. Use the
+[GPU pilot notebook in Colab](https://colab.research.google.com/github/diyarh26/residual-guided-text-tabular/blob/main/notebooks/phase4_pilot.ipynb)
+for the complete comparison. Select a GPU runtime, set `PROJECT_SHA` to the full
+reviewed and pushed implementation commit, and follow the
+[GPU instructions](docs/PHASE4_GPU.md). The notebook installs a separate locked
+CUDA environment, verifies the actual device, saves outputs to private Drive,
+and waits for its explicit launch switch. A T4 is a first device to try; whether
+the original FP32 TAR batch of 256 fits is unverified. No automatic batch-size
+change is applied. CPU stages and GPU stages require separate run bindings.
+
 ## Reproduction and development
 
 Read [AGENTS.md](AGENTS.md) and [the handoff](docs/HANDOFF.md) at the start of
@@ -110,10 +132,11 @@ Completed/failed executions and their exact provenance belong in
 ```text
 configs/                Locked pilot inputs and dataset inventory
 docs/                   Requirements, plan, architecture, decisions, handoff
-src/refutab/            Baseline, data, teacher, features, fusion and pipeline
+src/refutab/            Baseline, teacher, fusion, TAR, pilot and reporting modules
 scripts/                Preparation, training and CSV inference entry points
 tests/                  Protocol, fit-scope, teacher/leakage, persistence checks
-notebooks/              Thin Colab CPU baseline runner
+notebooks/              Thin Colab CPU baseline and GPU pilot runners
+environments/gpu/       Separate Linux CUDA dependency lock
 third_party/            Upstream pin and attribution; checkout ignored
 data/                   Local datasets (ignored)
 artifacts/              Local model outputs (ignored)

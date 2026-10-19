@@ -1,0 +1,38 @@
+[project]
+name = "refutab-gpu"
+version = "0.1.0"
+description = "Separate Linux CUDA environment for the Phase 4 matched pilot"
+requires-python = ">=3.11,<3.12"
+license = "MIT"
+dependencies = [
+  "accelerate==1.12.0",
+  "catboost==1.2.8",
+  "huggingface-hub==0.36.0",
+  "joblib==1.5.2",
+  "lightgbm==4.6.0",
+  "numpy==2.3.5",
+  "pandas==2.3.3",
+  "peft==0.18.0",
+  "pillow==11.3.0",
+  "psutil==7.0.0",
+  "scikit-learn==1.6.1",
+  "scipy==1.16.3",
+  "skrub==0.6.2",
+  "tabstar==1.1.15",
+  "torch==2.7.1+cu126",
+  "torchvision==0.22.1+cu126",
+  "transformers==4.57.3",
+]
+
+[tool.uv]
+package = false
+environments = ["sys_platform == 'linux' and platform_machine == 'x86_64'"]
+
+[[tool.uv.index]]
+name = "pytorch-cu126"
+url = "https://download.pytorch.org/whl/cu126"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu126" }
+torchvision = { index = "pytorch-cu126" }

@@ -277,6 +277,31 @@ diagnostic is specified but not executed. No Phase 3 model experiment failed.
 Phase 3 meets its implementation acceptance checks. Phase 4 pilots and the
 Joint TAR GPU environment remain the next phase, pending user instruction.
 
+## Phase 4 registration and software checks — October 19, 2026
+
+Status: implementation/preparation complete; real pilot execution pending.
+Registered `configs/phase4_pilot.json` and `configs/phase4_datasets.json`
+before new method fits/scores. Product Sentiment v1 and Video Games Sales v1
+both have original `image_col: null`. All six main and six grouped nested
+case preflights pass, including historical A-only feature classification.
+No outer-test prediction was made by these preflights.
+
+The CPU full suite passed **152 tests in 32.508 seconds**. Coverage includes
+grouped complete-pipeline splits and teacher exclusion, frozen cache/PCA,
+original TAR integration with explicit CPU fixtures/native PEFT restoration,
+stage and outer-prediction recovery, corruption rejection, aggregation gates,
+and static notebook/source/launch guards. During development, a new test first
+failed to import because of an extra parenthesis, then exposed that corruption
+in a completed unselected stage was not checked on continuation. Both were
+fixed; continuation now verifies every completed stage's exact file inventory.
+These were software-test failures, not failed benchmark experiments.
+
+CPU dependency lock validation and infrastructure/local-link/publication checks
+passed. The CUDA Linux lock resolves separately and retains common CPU package
+versions. No GPU wheel was installed locally and no CUDA/Colab run is claimed.
+The recorded CPU preflight will follow a clean-source commit; it will not
+include TAR or unlock the outer tests. See [PHASE4.md](PHASE4.md).
+
 ## Required entry for each later experiment
 
 Record run ID/time/status (planned/running/completed/failed/interrupted), exact

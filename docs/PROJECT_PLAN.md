@@ -124,11 +124,14 @@ checks; nested benchmark evaluation and improvement claims remain later work.
 
 ## Phase 4 - Pilot experiments and decision gate
 
-**Status: Not started.**
+**Status: In progress.** User authorized the needed work and asked to be told
+when GPU access is required. Two version-pinned datasets and matched pilot
+settings are registered; 152 tests and real split/feature preflights pass.
+Separate CUDA lock and Colab launcher are ready; real GPU/TAR execution remains pending.
 
 Objective: determine whether the method merits broader evaluation.
 
-- [ ] Pre-register representative classification/regression pilots and seeds.
+- [x] Pre-register representative classification/regression pilots and seeds.
 - [ ] Run aligned Joint Frozen, Joint TAR, direct-target gated, and residual-guided
   conditions; measure final learner scores as well as correction-head behavior.
 - [ ] Save configurations, learning curves, runtime, memory, hardware, failures,

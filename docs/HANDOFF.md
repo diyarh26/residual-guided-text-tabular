@@ -13,7 +13,10 @@ serialization checks passing; no outer test predictions or scores were made.
 asked to be told if GPU resources are needed. CPU was sufficient: the bounded
 real-E5 synthetic smoke and standalone CSV inference passed. Joint TAR,
 benchmark pilots and full evaluation remain later-phase work.
-**Phase 4 - Not started.** Wait for the user's pilot-phase instruction.
+**Phase 4 - In progress.** The user authorized the needed work and asked to be
+told when GPU resources are needed. Prepare the locked comparisons and grouped
+nested diagnostics, run bounded CPU checks, and provide a concrete GPU launcher.
+Do not claim Phase 4 completed without real TAR/comparison evidence.
 
 Phase 3 source is now implemented in `features.py`, `fusion.py`,
 `downstream.py`, `pipeline.py`, `synthetic.py` and `fusion_runner.py`, with
@@ -41,8 +44,8 @@ Do not ask the user to reconfirm these answers.
   `599bd6a5631c96f8aef297cc4cb6e4c197ae0dca`. The ignored detached checkout
   remains unmodified; no upstream code is vendored or relicensed.
 - Validated all 40 original version-1 metadata schemas: **20 eligible datasets
-  without image columns; 20 image-column datasets excluded**. Only the product
-  sentiment CSV was downloaded; the other 19 eligible CSVs still need content
+  without image columns; 20 image-column datasets excluded**. Product Sentiment
+  and Video Games Sales CSVs are now verified; the other 18 eligible CSVs need content
   hashes and feature audits before execution. See [DATASETS.md](DATASETS.md)
   and [configs/datasets.json](../configs/datasets.json).
 - Locked the CPU Python 3.11 environment in `pyproject.toml` and `uv.lock`.
@@ -118,9 +121,9 @@ limitations before interpreting broader experiments.
 - Repository: https://github.com/diyarh26/residual-guided-text-tabular
 - Branch: `main`.
 - Latest verified pushed commit at edit time:
-  `23d4ce34a6e3b23f458dd9bf1d06d1c1be4035d3`
-  (`feat: implement Option A fusion training and teacher-free inference`).
-- Phase 3 results and completion documentation accompany this handoff in
+  `2f9947eb1bd0a6ddad6548b47edc5eca60f5c5f8`
+  (`experiments: record Phase 3 real-E5 smoke and inference verification`).
+- Phase 4 preparation accompanies this handoff in
   a follow-up commit. The field above records the last verified commit at edit
   time; compare actual HEAD with the remote to identify the current session tip.
 - This field identifies the previously verified commit, avoiding a self-hash
@@ -229,27 +232,41 @@ GPU, partial E5 batches and partial LightGBM resumption are untested/unsupported
 The nested benchmark diagnostic is designed in PHASE3 but has not run.
 No Phase 3 model experiment failed.
 
-## Exact next steps: Phase 4, after user instruction
+## Phase 4 preparation and current next steps
 
-1. Read AGENTS, this handoff, PROJECT_PLAN, COURSE_REQUIREMENTS, ARCHITECTURE,
-   DATA_LEAKAGE, PHASE2 and the baseline analysis. Preserve existing changes.
-2. Read PHASE3, preregister representative classification/regression pilots,
-   seeds, splits, matched budgets, metrics and reporting. Pin/audit each added
-   dataset; only Product Sentiment CSV is currently verified locally.
-3. Prepare and verify a separate GPU environment for historical Joint TAR if
-   using GPU resources. Tell the user before starting that work. The current
-   lock is CPU-only; actual Colab/GPU/TAR execution remains unvalidated.
-4. Run aligned Joint Frozen, Joint TAR, direct-target gated and residual-guided
-   conditions. Compare final downstream learners. Execute the nested diagnostic
-   entirely within benchmark training as designed in PHASE3 before final claims.
-5. Record curves, variability, runtime, memory, cost, failures and artifacts;
-   report a continue/adjust/stop recommendation before full evaluation. Do not
-   silently redesign Option A or proceed to Phase 5/LoRA. Preserve old runs.
+The user authorized the needed work and requested notice when a GPU is needed.
+`configs/phase4_pilot.json` registers both audited no-image datasets, three
+original outer holdouts each, four matched conditions and three grouped nested
+direct/residual diagnostics per dataset inside outer fold-0 training. This is
+36 fitted stages and 24 outer-test prediction calls. All stages must complete
+before any new outer-test predictions. Original Phase 1 visibility is disclosed;
+this remains exploratory. The fixed descriptive decision rule does not permit
+a gain recommendation with missing TAR or incomplete diagnostic coverage.
+
+`pilot.py`, `pilot_protocol.py`, `pilot_features.py`, `tar.py` and
+`pilot_report.py` implement the runner, source-compatible representations,
+grouped split/OOF audits, safe caches/continuation, and aggregate reporting.
+**152 tests passed in 32.508 seconds.** Both real tables pass all 12 main/nested
+feature-role and split preflights. Separate Linux CUDA locks and the thin
+`notebooks/phase4_pilot.ipynb` launcher are prepared; actual GPU/Colab execution
+has not occurred. Full execution instructions are in [PHASE4.md](PHASE4.md)
+and [PHASE4_GPU.md](PHASE4_GPU.md).
+
+1. Commit/push this registered implementation before recording the bounded
+   Product Sentiment fold-0 CPU preflight (nine stages; zero outer tests).
+   Save reviewed evidence; do not mix these CPU models into the CUDA comparison.
+2. Tell the user the full comparison now needs one CUDA GPU, and provide the
+   Colab link and immutable source SHA. Run the fresh registered GPU plan when
+   that resource is available; preserve actual OOM/failures without auto-tuning.
+3. Audit full artifacts and coverage, report the pilot recommendation, then
+   decide whether full evaluation is warranted. Phase 4 remains in progress;
+   do not proceed silently to Phase 5 or Option B.
 
 ## Remaining technical boundaries
 
-- Joint TAR remains the primary comparison for supervised ReFuTab; its training,
-  local model-path lookups, and GPU execution have not been validated. No full
+- Joint TAR remains the primary comparison for supervised ReFuTab; original
+  source calls, local-model redirection, save/load and continuation have CPU
+  fixture coverage, while real GPU training remains unvalidated. No full
   evaluation or Option B is authorized by completion of this smoke run.
 - The historical snapshot has no license file; preserve the ignored checkout
   and provenance policy in [UPSTREAM.md](UPSTREAM.md). Do not publish its source,

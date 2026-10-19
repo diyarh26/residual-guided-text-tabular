@@ -11,4 +11,9 @@ audited configured runs without predicting the outer test. See
 `ReFuTabPipeline.predict` loads frozen E5, saved preprocessing, gate and
 LightGBM; it needs no teacher or temporary correction head. See
 [the Phase 3 API](../../docs/PHASE3.md) for training, persistence and exact
-verification boundaries. Benchmark comparisons remain later work.
+verification boundaries. Phase 4 adds `pilot_protocol.py` (historical and grouped
+splits/metrics), `pilot_features.py` (checked frozen cache/source-compatible
+PCA), `tar.py` (scoped original TAR calls and persistent GPU checkpoints),
+`pilot.py` (matched stages/test barrier), and `pilot_report.py` (task-separated
+descriptive aggregation). See [Phase 4](../../docs/PHASE4.md); actual GPU TAR
+execution remains pending.

@@ -169,6 +169,30 @@ before running its recorded commands. The course PDF is deliberately absent
 from public clones; requirements notes include its local hash and references.
 The validator does not need the PDF or any network access.
 
+## Phase 4 pilot execution
+
+The registered design, differences from the unchanged Phase 1 baseline, test
+barrier and continuation rules are in [PHASE4.md](PHASE4.md). Prepare audited
+data with `uv run --frozen python scripts/prepare_phase4.py`; this verifies the
+original no-image metadata and immutable archive/member hashes. Model/source
+preparation remains `scripts/prepare_phase1.py`.
+
+The bounded local CPU preflight command is:
+
+```powershell
+uv run --frozen python scripts/run_pilot.py --run-id phase4-product-sentiment-cpu-preflight --methods frozen direct residual --dataset MUL_TEXT_PRODUCT_SENTIMENT --fold 0 --device cpu
+```
+
+This runs nine of 36 stages (main plus three grouped direct/residual diagnostics)
+and makes zero outer-test predictions. It does not replace the fresh full CUDA
+comparison. See [PHASE4_GPU.md](PHASE4_GPU.md) for the separate Linux CUDA lock,
+Colab notebook, persisted output directory and exact continuation command.
+Continuation requires identical source/data/config/splits/device/environment,
+verifies completed artifacts, and retains earlier failed attempts. Whole
+execution duration/RSS includes frozen encoder loading and cache prefetch;
+stage durations alone omit the shared prefetch work. GPU execution and memory
+capacity remain unvalidated until the real run.
+
 ## Historical upstream source
 
 The immutable identity is in
