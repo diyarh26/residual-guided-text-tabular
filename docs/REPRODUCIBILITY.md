@@ -58,7 +58,12 @@ from actual Colab execution; local success does not establish Colab execution.
 
 Check out the source commit recorded in the desired teacher summary. Install
 the locked Python 3.11 environment, then prepare the pinned source and pilot
-data; E5 weights are unnecessary for this stage:
+data; E5 weights are unnecessary for this stage.
+
+The completed smoke used source
+`f805d81c0a5badc228f423b7b26befd5f137bafd`; see its unedited
+[summary](../results/phase2_product_sentiment_teacher.json). Use a fresh run ID
+when reproducing it; the archived attempt is preserved.
 
 ```powershell
 py -3.11 -m uv sync --locked

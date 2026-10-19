@@ -1,0 +1,252 @@
+{
+  "artifacts": {
+    "directory": "results/raw/phase2-product-sentiment-teacher-fold0",
+    "files_sha256": {
+      "schema.json": "cb4d3f0addeb50bd6c8101e869a605fbc179625c88e854f669bc72d98a877212",
+      "splits.json": "426a59c70a2e53e0a7a8fbc4cf00bfcb7eac7de044c99892bf938d3f0887b848",
+      "teacher/fold_0.cbm": "c0975d1ae6757281b31e132776bcdd1458a376096062cb61033a647e1cdde37f",
+      "teacher/fold_1.cbm": "26f3390f7631e4a7c8709eddcd908c016a35190b71be8a81f853625e33bd31ee",
+      "teacher/fold_2.cbm": "77a32f8bc8e58d359a298ceffc227975d152927bd157305e716ac2ff2fe73049",
+      "teacher/metadata.json": "6f0014be68c6c33da7ff1fd2e276ad51c73aeb0487ed32927bff2f4026e10c9d",
+      "teacher/predictions.npz": "2d60dd0c63748b221396dcbe0fadf4eea078c58c5fc2a8f98d506dfef55ac993",
+      "teacher/validation_teacher.cbm": "fffd4ee034166ceb242b5a641693a03dab562b3625c2ca0f533a3f8d16449ac0"
+    }
+  },
+  "checks": {
+    "exactly_one_oof_prediction_per_training_row": true,
+    "fit_predict_row_exclusion": true,
+    "no_heldout_labels_in_fitting": true,
+    "schema_excludes_text_target_ids": true,
+    "separate_validation_teacher": true,
+    "serialization_round_trip": true
+  },
+  "class_order": [
+    "Cannot Say",
+    "Negative",
+    "No Sentiment",
+    "Positive"
+  ],
+  "command": [
+    "scripts/run_teacher.py",
+    "--config",
+    "configs/phase2_teacher.json",
+    "--run-id",
+    "phase2-product-sentiment-teacher-fold0",
+    "--summary",
+    "results/phase2_product_sentiment_teacher.json"
+  ],
+  "completed_utc": "2026-10-19T19:29:37.364359+00:00",
+  "config": {
+    "dataset_path": "data/multabench-product-sentiment-v1/data.csv",
+    "dataset_sha256": "8a75a9880a5a1a619b16622c7f8f257ff8d19fde9b02864bf0059d5b0a8c2bb7",
+    "metadata_path": "data/multabench-product-sentiment-v1/metadata.json",
+    "metadata_sha256": "db78538f386c3eed11df6c9110fbd8de30c9f7c72311ff85ee6811fd75bfde13",
+    "output_root": "results/raw",
+    "schema": {
+      "categorical_columns": [],
+      "dataset_id": "MUL_TEXT_PRODUCT_SENTIMENT",
+      "forbidden_columns": [
+        "Text_ID",
+        "Unnamed: 0",
+        "row_id",
+        "fold_id",
+        "teacher_prediction",
+        "residual"
+      ],
+      "numerical_columns": [
+        "Product_Type"
+      ],
+      "target_column": "Sentiment",
+      "task": "multiclass",
+      "text_columns": [
+        "Product_Description"
+      ]
+    },
+    "schema_version": 1,
+    "splits": {
+      "baseline_config": "configs/phase1_frozen.json",
+      "baseline_reference": "results/phase1_product_sentiment_frozen.json",
+      "protocol": "historical_phase1"
+    },
+    "teacher": {
+      "depth": 4,
+      "iterations": 40,
+      "learning_rate": 0.1,
+      "n_splits": 3,
+      "probability_clip": 1e-07,
+      "seed": 42,
+      "thread_count": 2
+    }
+  },
+  "config_sha256": "097fe7e8b0918f75be66a73bf5a96f28bf08564374e765073f9bbaed0d1a2dc3",
+  "cost": {
+    "basis": "Not measured; no automatic billing estimate",
+    "provider_service_charge_usd": null
+  },
+  "data": {
+    "csv_sha256": "8a75a9880a5a1a619b16622c7f8f257ff8d19fde9b02864bf0059d5b0a8c2bb7",
+    "rows": 5091,
+    "typed_content_sha256": "8561148d66c40b7fc4c2f721ea1c50b8cf40193cb635289777b1061b77308926"
+  },
+  "diagnostics": {
+    "oof": {
+      "all_classes_present": true,
+      "auc": 0.806459815788321,
+      "auc_convention": "macro OVR: all classes",
+      "logloss": 0.5007548549097071,
+      "present_class_indices": [
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    "validation": {
+      "all_classes_present": true,
+      "auc": 0.8202633422209448,
+      "auc_convention": "macro OVR: all classes",
+      "logloss": 0.4668987050618735,
+      "present_class_indices": [
+        0,
+        1,
+        2,
+        3
+      ]
+    }
+  },
+  "environment": {
+    "packages": {
+      "catboost": "1.2.8",
+      "numpy": "2.3.5",
+      "pandas": "2.3.3",
+      "scikit-learn": "1.6.1",
+      "tabstar": "1.1.15"
+    },
+    "platform": "Windows-10-10.0.26200-SP0",
+    "python": "3.11.3 (tags/v3.11.3:f3909b8, Apr  4 2023, 23:49:59) [MSC v.1934 64 bit (AMD64)]"
+  },
+  "environment_lock_sha256": {
+    "pyproject.toml": "dd1f1461ca6b5df1e660d38055441c4145646ab221d911ee5862afa4150f5d31",
+    "uv.lock": "4b1158141440d9024ebf9b1eebd5179e0a491a3ac112ac92353e27ac7bbb3319"
+  },
+  "folds": [
+    {
+      "fit_ids_sha256": "a74e6b1dfea28d503fa4bdefeab5f1f13cec49e6d381d0890ca8325386dd5165",
+      "fit_rows": 600,
+      "fold": 0,
+      "predicted_rows": 300,
+      "prediction_ids_sha256": "6e7da382e5ca350acd2727223f3defb5ae881982d96f578379f8a57528cb283f",
+      "selection_rows": 0
+    },
+    {
+      "fit_ids_sha256": "e3d5c579f72c330ee00485679823f009d643499fbeafed2ec01dee2e37022ef4",
+      "fit_rows": 600,
+      "fold": 1,
+      "predicted_rows": 300,
+      "prediction_ids_sha256": "ee7bec34714925910472a6deec334dcec77f5de6bebedd5116e3047fdad5ec49",
+      "selection_rows": 0
+    },
+    {
+      "fit_ids_sha256": "afd52cd61bc8f1f0f1144cf5197403ff5ff566072a6d0a3fc5c14ae23485896b",
+      "fit_rows": 600,
+      "fold": 2,
+      "predicted_rows": 300,
+      "prediction_ids_sha256": "352c4ec254d3a77e3821ef71ebce8f87b093b6b9fec65e4da37e13bf7783f806",
+      "selection_rows": 0
+    }
+  ],
+  "format_version": 1,
+  "hardware": {
+    "cpu": "Intel64 Family 6 Model 140 Stepping 1, GenuineIntel",
+    "device": "cpu",
+    "gpu_used": false,
+    "logical_cpus": 8,
+    "ram_bytes": 16859500544
+  },
+  "limitations": [
+    "Structured teacher diagnostics only; no final test, fusion, or method improvement result.",
+    "Fixed-budget native probabilities; no fitted calibration or hyperparameter selection.",
+    "OOF teachers do not imply cross-fitted supervised fusion embeddings."
+  ],
+  "partitions": {
+    "excluded": {
+      "rows": 3582,
+      "typed_ordered_ids_sha256": "63c2943bb09431eff4634944c9c1c321722d9acf5c1724aa0882ac1e6d9d48c4"
+    },
+    "test": {
+      "rows": 509,
+      "typed_ordered_ids_sha256": "e214974932daa1c30caffd696b09169d8b236a49b90c2e63fc52f9428032eb8d"
+    },
+    "train": {
+      "rows": 900,
+      "typed_ordered_ids_sha256": "1f8c0797da9297072b6f5163517f0bf46253307b8a869f88c3b497ca6d46a6ad"
+    },
+    "validation": {
+      "rows": 100,
+      "typed_ordered_ids_sha256": "f7a4bf9da6ca7dcd2dfa78a6c956be339401e1f13b36e7aecf53d69fec9ae7e9"
+    }
+  },
+  "run_id": "phase2-product-sentiment-teacher-fold0",
+  "runtime": {
+    "sampled_peak_rss_bytes": 156069888,
+    "total_seconds": 0.8031464000014239
+  },
+  "schema": {
+    "categorical_columns": [],
+    "dataset_id": "MUL_TEXT_PRODUCT_SENTIMENT",
+    "excluded_columns": [],
+    "forbidden_columns": [
+      "Text_ID",
+      "Unnamed: 0",
+      "row_id",
+      "fold_id",
+      "teacher_prediction",
+      "residual"
+    ],
+    "id_column": null,
+    "image_columns": [],
+    "numerical_columns": [
+      "Product_Type"
+    ],
+    "target_column": "Sentiment",
+    "task": "multiclass",
+    "text_columns": [
+      "Product_Description"
+    ]
+  },
+  "source": {
+    "allow_dirty": false,
+    "commit": "f805d81c0a5badc228f423b7b26befd5f137bafd",
+    "working_tree_dirty": false
+  },
+  "split_assignments_sha256": "8aa12dd87d7d7a6828d19d02474f1cde3dbd8476d616dfe37851b9a1adec8ec3",
+  "split_protocol": {
+    "outer_fold": 0,
+    "outer_seed": 42,
+    "protocol": "historical_phase1",
+    "reference_sha256": "441ee18f023f174f2d7aaa3313f0f56e8f8a137c4135cb4b020687571fa355fd",
+    "source_config_sha256": "0b2f137eaac98075e2f47a31637b5a865741ceeec0646dab6545b67a42eb2eb4",
+    "tabstar": "1.1.15",
+    "upstream_commit": "599bd6a5631c96f8aef297cc4cb6e4c197ae0dca",
+    "validation_seed": 41
+  },
+  "started_utc": "2026-10-19T19:29:36.583024+00:00",
+  "status": "completed",
+  "teacher_config": {
+    "depth": 4,
+    "iterations": 40,
+    "learning_rate": 0.1,
+    "n_splits": 3,
+    "probability_clip": 1e-07,
+    "seed": 42,
+    "task": "multiclass",
+    "thread_count": 2
+  },
+  "test_predictions": 0,
+  "test_scores": 0,
+  "validation_teacher": {
+    "fit_ids_sha256": "1f8c0797da9297072b6f5163517f0bf46253307b8a869f88c3b497ca6d46a6ad",
+    "fit_rows": 900,
+    "predicted_rows": 100
+  }
+}

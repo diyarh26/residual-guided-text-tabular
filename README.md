@@ -29,16 +29,18 @@ gated fusion as additional controls. Option B (LoRA) is deferred.
 
 ## Current status
 
-**Phase 1 completed:** historical-source/schema analysis, a locked CPU environment,
-original baseline runner, and nine passing tests. Joint Frozen LightGBM on the
-Product Sentiment smoke configuration achieved **macro OVR AUROC 0.83935**
-(900 fit / 100 validation / 509 test; one fold). See the
-[recorded result](results/phase1_product_sentiment_frozen.json) and
-[experiment log](docs/EXPERIMENT_LOG.md). ReFuTab and Joint TAR are not evaluated
-yet. Phase 2 is in progress: the general dataset/split interface and structured-only
-3-fold CatBoost teacher pass the 43-test suite. The recorded teacher
-smoke run and final publication checks are pending. See the
-[Phase 2 API and safeguards](docs/PHASE2.md) and [project plan](docs/PROJECT_PLAN.md).
+**Phase 2 completed:** general dataset/split contracts, a structured-only
+3-fold OOF CatBoost teacher, checked model persistence, and **43 passing tests**.
+The real Product Sentiment teacher smoke produced 900 aligned OOF predictions
+and 100 validation predictions, with **zero test predictions or scores**. See
+its [recorded summary](results/phase2_product_sentiment_teacher.json),
+[API and safeguards](docs/PHASE2.md), and [experiment log](docs/EXPERIMENT_LOG.md).
+
+Phase 1 reproduced original Joint Frozen LightGBM on that dataset: macro OVR
+AUROC **0.83935** on 509 test rows, one fold with 900 fitting/100 validation rows.
+Its [result](results/phase1_product_sentiment_frozen.json) is preserved.
+Full ReFuTab fusion and Joint TAR are unevaluated; Phase 3 fusion is next in the
+[project plan](docs/PROJECT_PLAN.md).
 
 The historical MulTaBench `master` pin is
 `599bd6a5631c96f8aef297cc4cb6e4c197ae0dca` (July 26, 2026).
@@ -76,6 +78,13 @@ On Linux use `python3` and `uv`, or use the
 the immutable source, pilot data, and E5 weights into ignored local directories.
 Run only from clean committed source and use a new run ID for each attempt.
 See [exact reproduction and artifact details](docs/REPRODUCIBILITY.md).
+
+The Phase 2 teacher needs only the pinned source/data, without E5 weights:
+
+```powershell
+py -3.11 -m uv run --frozen python scripts/prepare_phase1.py --skip-model
+py -3.11 -m uv run --frozen python scripts/run_teacher.py --run-id my-new-teacher-run --summary results/my-new-teacher-run.json
+```
 
 ## Reproduction and development
 

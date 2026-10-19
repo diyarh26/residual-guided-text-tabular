@@ -115,8 +115,8 @@ These are software checks, not benchmark improvement results. Expected-error
 tests intentionally preserve failed manifests and reject overwritten artifacts.
 
 Test setup initially attempted teacher imports before CatBoost installation;
-locked environment installation resolved that dependency error. No Phase 2
-benchmark model run has failed or completed at this entry's creation.
+locked environment installation resolved that dependency error. This setup
+preceded the real teacher run recorded below; no Phase 2 model experiment failed.
 
 The configured pilot will use the exact Phase 1 Product Sentiment version-1
 partitions and upstream source, 900 training/100 validation/509 reserved test
@@ -127,6 +127,61 @@ predict 100 validation rows. Seed 42, 40 iterations, depth 4, learning rate 0.1,
 two CPU threads and native probabilities with clipping epsilon 1e-7 are fixed
 before inspecting diagnostics. No fitted calibration, early stopping,
 hyperparameter search, test prediction, or test scoring is included.
+
+## October 19, 2026 - Phase 2 structured-only teacher smoke completed
+
+Run **`phase2-product-sentiment-teacher-fold0`** completed from clean, pushed
+source **`f805d81c0a5badc228f423b7b26befd5f137bafd`**. The immutable
+[aggregate summary](../results/phase2_product_sentiment_teacher.json) contains
+the exact configuration, upstream/data hashes, typed schema/content/split
+fingerprints, dependency locks, hardware and raw artifact hashes.
+
+```powershell
+.venv/Scripts/python.exe scripts/run_teacher.py --config configs/phase2_teacher.json --run-id phase2-product-sentiment-teacher-fold0 --summary results/phase2_product_sentiment_teacher.json
+```
+
+| Item | Recorded outcome |
+| --- | --- |
+| Data | Product Sentiment version 1; original no-image schema; 5,091 rows; four classes |
+| Fitting/prediction scope | Three OOF teachers, each 600 fit / 300 excluded-row predictions; one 900-fit / 100-validation teacher |
+| Reserved rows | 509 outer test rows and 3,582 reduced-cap exclusions; no teacher fit/prediction |
+| Teacher input | Numeric `Product_Type` only; text/target/IDs excluded |
+| OOF diagnostic macro OVR AUROC / log loss | 0.806459815788321 / 0.5007548549097071 |
+| Validation diagnostic macro OVR AUROC / log loss | 0.8202633422209448 / 0.4668987050618735 |
+| Test predictions / scores | **0 / 0** |
+| Runtime | **0.8031464 s**, excluding interpreter/import startup |
+| Sampled peak process RSS during fit/save/load | **156,069,888 bytes**, approximately 0.145 GiB |
+| Hardware | Existing local CPU, Intel Family 6 Model 140; 8 logical CPUs, 16,859,500,544 bytes RAM; CatBoost uses two threads |
+| Cost | Script records unmeasured service charge; no paid external compute service used |
+
+All runner checks passed: exactly one aligned OOF probability/offset vector per
+training row, fitting/prediction row exclusion, separate A-only validation
+teacher, explicit structured schema, no held-out labels in fitting, and native
+model/array save/load. Class order: `Cannot Say`, `Negative`, `No Sentiment`,
+`Positive`. No fitted calibration, checkpoint selection or hyperparameter
+search occurred. The fixed configuration was committed before the diagnostics.
+
+An independent read-only evidence audit matched every public/raw artifact
+checksum and provenance hash; reconstructed Phase 1 assignments; checked the
+three 600/300 fit/prediction audits, 900/100 validation audit and reserved-row
+exclusion; verified `(900, 4)` OOF and `(100, 4)` validation arrays, class order,
+finite offsets and metrics; and reproduced saved predictions from loaded
+models. The audit performed no training or outer test prediction/scoring.
+The public summary contains no raw IDs, prediction arrays, data or models.
+
+Private bundles persist under ignored
+`results/raw/phase2-product-sentiment-teacher-fold0/`; preserve this completed
+attempt and its original summary. The old Phase 1 summary was not edited or
+rerun. The software suite passed **43 tests in 9.451 s** before the recorded
+run. Infrastructure/link, dependency-lock and publication checks passed.
+
+Limitations: the real smoke covers one small multiclass structured-only teacher;
+regression and binary paths were exercised with synthetic real-CatBoost tests.
+These OOF/validation diagnostics are on different partitions from Phase 1's
+test score and cannot establish a gain over that baseline. No fusion, TAR,
+full-benchmark or final-test result is claimed. OOF teachers do not make future
+supervised embeddings cross-fitted. Phase 2 meets its acceptance criteria;
+Phase 3 fusion is next; wait for the user's instruction before starting it.
 
 ## Required entry for each later experiment
 

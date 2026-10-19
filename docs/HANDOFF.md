@@ -5,12 +5,12 @@ Updated: October 19, 2026 (Asia/Jerusalem).
 ## Current phase and status
 
 **Phase 1 - Completed: historical source analysis and one real baseline reproduction.**
-**Phase 2 - In progress.** User authorized Phase 2 after the completed baseline.
-Dataset/split contracts and the structured-only OOF teacher are implemented.
+**Phase 2 - Completed: data contracts and leakage-safe teacher.**
 The final full suite passed 43 tests in 9.451 seconds, and infrastructure/link
-checks passed. A clean-source pilot teacher run and publication
-verification remain pending. Fusion, Joint TAR experiments, and full evaluation remain
-later-phase work. Do not begin Phase 3 in this session.
+checks passed. One clean-source CPU teacher smoke completed with all audit and
+serialization checks passing; no outer test predictions or scores were made.
+**Phase 3 - Not started.** Fusion, Joint TAR experiments, and full evaluation
+remain later-phase work. Wait for the user's next-phase instruction.
 
 Dataset scope and training protocol are settled: use only datasets whose
 original benchmark schema has no image column; train separate pipelines per
@@ -43,6 +43,13 @@ Do not ask the user to reconfirm these answers.
 - Fresh public clone preparation of pinned source and pilot data passed after
   retrying a temporary DNS failure. This did not repeat training or establish a
   complete fresh-clone model-download/training run.
+- Phase 2 added explicit schema/table and partition APIs plus three-fold OOF
+  CatBoost with regression/binary/multiclass support, native missing/unseen
+  handling, training-only class order and validation teacher, finite additive
+  offsets, row audits, checked persistence and a thin configured runner.
+  All 43 tests passed, including the original nine, 16 data/split checks,
+  14 teacher checks with real CatBoost and four runner checks. Full suite,
+  locked dependency check and infrastructure/link checks passed locally.
 
 See [BASELINE_ANALYSIS.md](BASELINE_ANALYSIS.md),
 [REPRODUCIBILITY.md](REPRODUCIBILITY.md), [COLAB.md](COLAB.md), and
@@ -77,8 +84,9 @@ The harness invoked unchanged original sampling, splitting, `fit`, and
 PCA-30 fitted only on the 900 fit rows, and independently checked AUROC. E5
 weights stayed unchanged, all gradients remained absent, and evaluation mode
 was active; the original source's `requires_grad` flags were preserved.
-**The held-out test partition was predicted and evaluated once.** No test-score
-tuning or subsequent model experiment was performed.
+**The Phase 1 held-out test partition was predicted and evaluated once.**
+No test-score tuning or subsequent baseline evaluation was performed. The
+Phase 2 teacher below makes no outer test predictions.
 
 Raw IDs, predictions, PCA state, and upstream logs remain ignored under
 `results/raw/phase1-product-sentiment-frozen-fold0/`; datasets and E5 weights
@@ -97,9 +105,9 @@ limitations before interpreting broader experiments.
 - Repository: https://github.com/diyarh26/residual-guided-text-tabular
 - Branch: `main`.
 - Latest verified pushed commit at edit time:
-  `676a8c31099ad5744347d4792deca331d1e2d5ec`
-  (`experiments: record Phase 1 frozen baseline and verification`).
-- Phase 2 implementation and documentation accompany this handoff in
+  `f805d81c0a5badc228f423b7b26befd5f137bafd`
+  (`feat: add leakage-safe OOF CatBoost teacher and data contracts`).
+- Phase 2 results and completion documentation accompany this handoff in
   a follow-up commit. The field above records the last verified commit at edit
   time; compare actual HEAD with the remote to identify the current session tip.
 - This field identifies the previously verified commit, avoiding a self-hash
@@ -117,7 +125,7 @@ git ls-remote origin refs/heads/main
 Do not rerun the recorded baseline merely to refresh documentation. Exact run
 and preparation commands are in [REPRODUCIBILITY.md](REPRODUCIBILITY.md).
 
-## Phase 2 implementation and remaining checks
+## Recorded Phase 2 result and APIs
 
 Implemented APIs: `src/refutab/data.py` (explicit schema/owned tables),
 `splits.py` (saved ID partitions/fingerprints), `teacher.py` (three OOF CatBoost
@@ -135,30 +143,49 @@ makes no test predictions, and never scores the test. Four model fitting
 audits and full row IDs remain private; reviewed summaries contain hashes and
 OOF/validation diagnostics only. No calibration/early stopping/search is used.
 
-Remaining before Phase 2 completion: commit/push clean source, execute the single configured small teacher
-smoke, inspect/record its artifacts, finish documentation, commit/push and verify.
-Do not rerun the Phase 1 baseline. Do not begin Phase 3 in this session.
+Actual run: `phase2-product-sentiment-teacher-fold0`, clean pushed source
+`f805d81c0a5badc228f423b7b26befd5f137bafd`. Reviewed result:
+[phase2_product_sentiment_teacher.json](../results/phase2_product_sentiment_teacher.json).
+Same pinned dataset/source and partitions as Phase 1, with typed content hash
+`8561148d66c40b7fc4c2f721ea1c50b8cf40193cb635289777b1061b77308926`.
+Three fold models each fit 600 rows and predict their excluded 300 rows;
+every training row receives exactly one four-class OOF probability/offset.
+The fourth teacher fits the 900 training rows to predict the 100 validation
+rows. Class order is `Cannot Say`, `Negative`, `No Sentiment`, `Positive`.
 
-Historical Phase 2 task checklist (implemented; final verification pending):
+OOF macro OVR AUROC **0.806459815788321**, log loss **0.5007548549097071**;
+validation AUROC **0.8202633422209448**, log loss **0.4668987050618735**.
+These are teacher diagnostics on different partitions from the Phase 1 test
+score; they are not an improvement comparison. **Test predictions: 0; test
+scores: 0.** Runtime **0.8031464 s** excluding interpreter/import startup;
+sampled process peak RSS during fit/save/load **156,069,888 bytes** (~0.145 GiB).
+Existing local CPU hardware was used; the script records service cost as
+unmeasured. No E5 model loaded and no gate or correction head was trained.
+
+Private artifacts persist under ignored
+`results/raw/phase2-product-sentiment-teacher-fold0/`: full split IDs, schema,
+four native models, OOF/validation predictions and offsets, fold assignments,
+all fit/prediction IDs and audits, and checksums. Models and arrays loaded back
+successfully with matching predictions. Preserve this run and its public
+summary without overwriting them. No Phase 2 model experiment failed.
+
+## Exact next steps: Phase 3, after user instruction
 
 1. Read AGENTS, this handoff, PROJECT_PLAN, COURSE_REQUIREMENTS, ARCHITECTURE,
-   DATA_LEAKAGE, and the Phase 1 analysis. Preserve existing changes.
-2. Build the general dataset/schema interface, including stable field/class
-   ordering, missing values, regression/binary/multiclass support, and an
-   explicit audit excluding IDs, targets, split markers, and target-derived
-   metadata from features. The Phase 1 full-row upstream adapter reproduces a
-   baseline; it does not certify every other dataset's feature safety.
-3. Persist official outer and internal-validation assignments and fingerprints;
-   retain historical split semantics explicitly or document a justified change.
-   Pin and hash each additional dataset before executing it.
-4. Implement a structured-only **3-fold OOF CatBoost teacher**, isolated by
-   dataset/outer fold. Every OOF row must be excluded from its teacher's fitting,
-   preprocessing, calibration, and selection; validation uses a separate
-   training-only teacher.
-5. Test split disjointness, forbidden features, train-only fitting, exactly one
-   aligned OOF prediction per row, stable class probabilities, unknown values,
-   and deterministic failures. Record checks, update the handoff/plan/log,
-   commit, push, and verify. Fusion remains Phase 3 work.
+   DATA_LEAKAGE, PHASE2 and the baseline analysis. Preserve existing changes.
+2. Integrate the pinned frozen E5, per-field training-only PCA-30 and compact
+   numerical/categorical fusion encoder. Teacher preprocessing stays separate.
+3. Implement the identity-initialized context gate, temporary additive
+   correction losses and direct-target control, using aligned fixed OOF
+   offsets. Keep training-only class and text-field order stable.
+4. Implement selection, checkpoint/resume, save/load, downstream learner and
+   final inference without the teacher or temporary correction head. Test
+   frozen E5, detached offsets, gradients, dimensions and prediction round trips
+   on small synthetic tasks before any pilot.
+5. Preserve the nested complete-pipeline diagnostic required before later
+   improvement claims. Report/commit/push Phase 3 before starting Phase 4;
+   full benchmark and Option B remain separately gated. Do not rerun Phase 1
+   merely to refresh documentation.
 
 ## Remaining technical boundaries
 

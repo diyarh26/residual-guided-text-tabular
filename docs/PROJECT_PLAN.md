@@ -66,8 +66,9 @@ TAR, regression baseline, or full-benchmark result is claimed.
 
 ## Phase 2 - Data handling and leakage-safe teacher
 
-**Status: In progress.** User authorized Phase 2; dataset/split contracts,
-structured-only OOF teacher, and leakage tests are being implemented.
+**Status: Completed.** Dataset/split contracts, structured-only OOF teacher,
+43 passing tests, and one recorded clean-source CPU teacher smoke are delivered.
+The 509 outer test rows were neither predicted nor scored in Phase 2.
 
 Objective: build a general data interface and trustworthy teacher signals.
 
@@ -77,12 +78,19 @@ Objective: build a general data interface and trustworthy teacher signals.
 - [x] Fit 3-fold OOF structured-only CatBoost with isolated fold preprocessing.
 - [x] Separate internal validation and final evaluation; handle binary clipping,
   multiclass class coverage, and probability/calibration decisions train-only.
-- [ ] Add disjointness, fit-provenance, ID/target exclusion, alignment, and
+- [x] Add disjointness, fit-provenance, ID/target exclusion, alignment, and
   deterministic failure tests; test, document, commit, push, and verify.
 
 Deliverables: dataset/teacher APIs, configurations, provenance artifacts, tests.
 Acceptance: each OOF row was excluded from its teacher fit, transformations
 never fit on evaluation data, and supported tasks pass meaningful tests.
+
+Recorded run: `phase2-product-sentiment-teacher-fold0`, source `f805d81`.
+Three models each fit 600 rows/predict 300 excluded rows; a fourth fits all
+900 training rows to predict 100 validation rows. Native score/offset bundles
+pass save/load checks. Runtime 0.803 seconds, sampled peak RSS 156,069,888 bytes.
+OOF/validation scores are diagnostics, not a final test or fusion result. See
+[PHASE2.md](PHASE2.md) and [EXPERIMENT_LOG.md](EXPERIMENT_LOG.md).
 
 ## Phase 3 - Option A fusion
 
