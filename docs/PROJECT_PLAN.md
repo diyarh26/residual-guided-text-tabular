@@ -8,7 +8,8 @@ Completed / Blocked. [HANDOFF.md](HANDOFF.md) records the current session state.
 
 ## Phase 0 - Repository and research infrastructure
 
-**Status: In progress** (final validation and remote synchronization pending).
+**Status: Completed.** Public repository and initial push verified; infrastructure
+checks also passed from a fresh public clone. See HANDOFF for commit provenance.
 
 Objective: establish an understandable, attributable, reproducible research
 workspace without implementing or training the method.
@@ -18,9 +19,9 @@ workspace without implementing or training the method.
 - [x] Verify GitHub account `diyarh26` and absence of the requested repository.
 - [x] Investigate historical master, source compatibility, and license history.
 - [x] Establish documentation, persistent agent instructions, and directory roles.
-- [ ] Validate infrastructure, local links, pin, and private-file exclusions.
-- [ ] Create public repository; review, commit, push, and verify remote SHA.
-- [ ] Report Phase 0 and leave Phase 1 unstarted.
+- [x] Validate infrastructure, local links, pin, and private-file exclusions.
+- [x] Create public repository; review, commit, push, and verify remote SHA.
+- [x] Prepare Phase 0 report and leave Phase 1 unstarted.
 
 Deliverables: README, AGENTS, all requested docs, source lock, ignore/license
 policy, directory scaffold, GitHub repository, infrastructure validator.

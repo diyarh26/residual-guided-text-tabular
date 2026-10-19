@@ -4,7 +4,7 @@ Updated: October 19, 2026 (Asia/Jerusalem).
 
 ## Current phase and status
 
-**Phase 0 - In progress: final infrastructure checks and GitHub publication.**
+**Phase 0 - Completed: documentation, provenance, checks, and public repository.**
 Phase 1 has not started. The full algorithm, baseline, and all experiments are
 unimplemented. Stop after Phase 0 reporting in this session.
 
@@ -23,23 +23,43 @@ unimplemented. Stop after Phase 0 reporting in this session.
   MIT license for original work, private-file exclusions, and an infrastructure
   validator. No upstream implementation is copied into the repository.
 
-## Verified work and outstanding validation
+## Verified work
 
 PDF SHA-256: `406ca54fc55e77d54058b0b14fa32ffddf3bb24d5a41ddc69ac08880399a8811`.
 The source PDF remains local and is ignored along with extraction/rendering
 intermediates. Python 3.11 is available via `py -3.11`; `python` is a Windows
-Store alias in the current shell. Final validator, clean-clone check, diff
-review, commit, and push results will be recorded before session completion.
+Store alias in the current shell.
+
+- `py -3.11 scripts/verify_phase0.py`: PASS (required files, local Markdown
+  links, source-pin chronology, and ignored publication boundaries).
+- `git diff --cached --check` before the initial commit and
+  `git show --format= --check HEAD` in a fresh clone: PASS.
+- Reviewed staged paths/diff and searched common token/private-key patterns:
+  no PDF, upstream source, credentials, datasets, weights, or large files staged.
+- Fresh public clone at `e205946b9a0d7cb410449445cf0ca83ada37de6d`:
+  validator and whitespace checks PASS; clean status; no course PDF required.
+- Initial GitHub push succeeded; `git ls-remote` matched local HEAD; GitHub
+  reports PUBLIC, nonempty repository with default branch `main`.
+- Optional Actions CI was deferred because the authenticated token lacks
+  workflow scope; no extra account permission is needed for these local checks.
+
+During development, the validator caught a missing SHA mention and Windows
+CRLF handling in Git stdin probes; both were corrected before publication.
+Infrastructure validation does not establish ML or leakage correctness.
 
 No baseline or method tests exist because no training code exists. No model
 scores, checkpoints, failed ML experiments, or completed benchmark runs exist.
 
 ## Git and repository
 
-- Repository target: https://github.com/diyarh26/residual-guided-text-tabular
+- Public repository: https://github.com/diyarh26/residual-guided-text-tabular
 - Branch: `main`.
-- Latest verified commit at edit time: no initial commit yet.
-- Final synchronization: pending. Do not assume uploaded state until verified.
+- Latest verified commit at edit time:
+  `e205946b9a0d7cb410449445cf0ca83ada37de6d`
+  (`docs: initialize ReFuTab research plan and project handoff`).
+- That commit is pushed and verified against `origin/main`. This completion
+  update follows it in a separate documentation commit; compare actual HEAD
+  with the remote using the commands below for the final session tip.
 - To identify the commit containing this handoff: `git log -1 --format="%H %s"`.
   A handoff cannot store its own commit SHA; its field records the previously
   verified commit and final remote checks must compare actual HEAD.

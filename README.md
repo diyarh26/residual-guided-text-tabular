@@ -29,7 +29,7 @@ gated fusion as additional controls. Option B (LoRA) is deferred.
 
 ## Current status
 
-Phase 0: repository, academic requirements, research plan, historical-source
+**Phase 0 completed:** repository, academic requirements, research plan, historical-source
 pin, and persistent handoff. No algorithm, baseline reproduction, dependency
 lock for ML, or training/inference API exists yet. Later phases are explicitly
 tracked in [the project plan](docs/PROJECT_PLAN.md).
