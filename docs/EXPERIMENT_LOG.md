@@ -2,8 +2,8 @@
 
 ## October 19, 2026 - Phase 0 infrastructure
 
-**No model training, baseline reproduction, benchmark evaluation, or numerical
-performance experiment has been run.** There are no scores or checkpoints.
+At the end of Phase 0, **no model training, baseline reproduction, benchmark
+evaluation, or numerical performance experiment had been run**.
 
 Activities: reviewed the complete eight-page course PDF, inspected repository
 state/GitHub authentication, investigated historical upstream source, and
@@ -19,7 +19,8 @@ affect source content. PDF intermediates remain ignored under `tmp/pdfs/`.
 Infrastructure validation passed locally and in a fresh public clone; staged
 whitespace and publication-boundary checks passed, and the initial GitHub push
 was verified. These checks do not evaluate a model. Details and source commit
-provenance are in [HANDOFF.md](HANDOFF.md). There is no ML environment lock yet.
+provenance are in [HANDOFF.md](HANDOFF.md). No ML environment lock existed at
+that milestone; Phase 1 subsequently added it.
 
 ## October 19, 2026 - Phase 1 setup and preregistered smoke baseline
 
@@ -29,8 +30,9 @@ are eligible. Prepared Kaggle Product Sentiment version 1 and pinned E5 revision
 `ffb93f3bd4047442299a41ebb6fa998a38507c52` with content hashes.
 
 Environment setup initially selected Joblib 1.6.0, which removed
-`joblib.externals.cloudpickle` required by Skrub 0.6.2. Two test-discovery attempts
-failed during imports before any model experiment. Pinning original Joblib
+`joblib.externals.cloudpickle` required by Skrub 0.6.2. Early test-discovery
+attempts failed during setup (NumPy was not installed yet, then the Joblib
+incompatibility prevented imports), before any model experiment. Pinning original Joblib
 1.5.2 resolved the incompatibility. Nine tests then passed, including original
 split/metric behavior, train-only PCA, unknown-category handling, frozen encoder
 inference, run safety, and fresh-clone bootstrap. A source review found and fixed
@@ -40,8 +42,65 @@ Before any test score, fixed one CPU Joint Frozen LightGBM smoke configuration:
 Product Sentiment, fold 0, original 1,000-row outer training cap, PCA 30, original
 E5 prefix/pooling/tokenization and learner settings. Expected rows are 900 fit,
 100 validation, and 509 test. This is a reduced baseline reproduction, not a
-paper-table score or ReFuTab experiment. The executable code/config will be
-committed before its real run. No baseline score is available at this entry.
+paper-table score or ReFuTab experiment. The executable code/config was committed
+and pushed as `3188a243064f6c0eb8624dd5eed4744ec4d3c037` before the real run.
+
+## October 19, 2026 - Completed original Joint Frozen smoke baseline
+
+**Status: Completed.** Run ID `phase1-product-sentiment-frozen-fold0`.
+Source `3188a243064f6c0eb8624dd5eed4744ec4d3c037`, clean at start; upstream
+`599bd6a5631c96f8aef297cc4cb6e4c197ae0dca`, unchanged. The full machine-readable
+[result](../results/phase1_product_sentiment_frozen.json) records exact revisions,
+hashes, class order, packages, hardware, parameters, and artifact fingerprints.
+
+| Item | Observed value |
+| --- | --- |
+| Dataset | Historical Product Sentiment, Kaggle version 1, 4 classes |
+| Condition / learner | Original Joint Frozen / LightGBM |
+| Original training cap / fold | 1,000 / 0 |
+| Fit / validation / test rows | 900 / 100 / 509 |
+| Test macro one-vs-rest AUROC | **0.8393533369478667** |
+| Test log loss (secondary) | 0.8197310907083184 |
+| Training / test inference seconds | 431.471 / 117.262 |
+| Total wall seconds | 559.912 (9.33 minutes) |
+| Sampled peak process RSS | 1,060,134,912 bytes (0.987 GiB) |
+| Hardware / Python | Windows CPU, 8 logical CPUs, 4 Torch threads / 3.11.3 |
+| Seeds | Base/outer/PCA/learner 42; internal validation 41 |
+
+Command from that clean source commit:
+
+```powershell
+.venv\Scripts\python.exe scripts/run_baseline.py --config configs/phase1_frozen.json --run-id phase1-product-sentiment-frozen-fold0 --summary results/phase1_product_sentiment_frozen.json
+```
+
+PCA fitted on exactly 900 rows (384 to 30 dimensions), E5 remained in evaluation
+mode with no gradients and identical before/after weight hashes, and exactly
+one held-out prediction call occurred. Original AUROC/log loss independently
+matched the saved predictions. Original source treats `Product_Type` as numeric;
+the final input has that one structured column and 30 text PCA columns.
+
+The independent [content audit](../results/phase1_content_audit.json) reproduced
+the exact ordered splits and found no exact shared descriptions, feature pairs,
+or full rows across these selected partitions. The full table still has four
+excess duplicate full rows and seven duplicate descriptions; other folds require
+their own audit. No deduplication or alternative split replaced the benchmark.
+
+Raw IDs, predictions, PCA states, and logs persist locally under ignored
+`results/raw/phase1-product-sentiment-frozen-fold0/`. Only reviewed aggregate
+summaries are published. No external paid compute service was used; the run's
+zero service charge excludes electricity/hardware. Later runner metadata leaves
+provider charges unmeasured instead of assuming zero on other hosts.
+
+Fresh public-clone source/versioned-data preparation passed; its first attempt
+failed on temporary GitHub DNS resolution and succeeded on retry. The `.venv`
+was installed fresh from the lock. Nine unit tests and notebook static checks
+passed. Colab/GPU execution has not been performed. No model experiment failed.
+
+Limitations: one multiclass task and one fold, reduced fitting sample, original
+CPU defaults, and a minimal compatible dependency closure rather than the full
+historical lock. No statistical improvement, ReFuTab, TAR, regression run, or
+full-benchmark coverage is established. No test-driven tuning or second run was
+performed. Phase 2 may now implement the general data interface and OOF teacher.
 
 ## Required entry for each later experiment
 

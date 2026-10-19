@@ -1,8 +1,9 @@
 # MulTaBench provenance and historical source pin
 
-Inspected on **October 19, 2026**. Phase 0 records provenance and statically
-inspects source. No upstream code is vendored, no submodule is installed, and no
-baseline training or dataset download has been run. The machine-readable pin is
+Inspected on **October 19, 2026**. Phase 0 established provenance; Phase 1 added
+the direct-source analysis in [BASELINE_ANALYSIS.md](BASELINE_ANALYSIS.md) and a
+completed frozen smoke baseline in [EXPERIMENT_LOG.md](EXPERIMENT_LOG.md).
+No upstream code is vendored and no submodule is installed. The machine-readable pin is
 [../third_party/multabench.lock.json](../third_party/multabench.lock.json).
 
 ## Selection and evidence

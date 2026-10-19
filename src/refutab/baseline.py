@@ -145,7 +145,7 @@ def run_baseline(
         "config": config, "config_sha256": sha256_file(config_path), "allow_dirty": allow_dirty,
         "command": sys.argv, "artifacts": {"run_directory": run_dir.relative_to(root).as_posix() if run_dir.is_relative_to(root) else str(run_dir)},
         "environment": {"python": sys.version, "platform": platform.platform()},
-        "cost": {"incremental_service_charge_usd": 0, "basis": "Local existing hardware; electricity and equipment excluded."},
+        "cost": {"incremental_service_charge_usd": None, "basis": "Provider charges are not measured by this runner; record them separately. Electricity and equipment excluded."},
     }
     _write_json(run_dir / "manifest.json", manifest)
     try:

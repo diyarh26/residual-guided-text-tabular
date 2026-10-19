@@ -4,135 +4,148 @@ Updated: October 19, 2026 (Asia/Jerusalem).
 
 ## Current phase and status
 
-**Phase 1 - In progress: source audit, environment, and baseline reproduction.**
-The user authorized Phase 1 on October 19, 2026. Phase 0 remains complete.
-Original-source baseline orchestration is prepared; no ReFuTab teacher/fusion
-implementation exists. Do not begin Phase 2 in this session.
+**Phase 1 - Completed: historical source analysis and one real baseline reproduction.**
+**Phase 2 - Not started.** Phase 0 remains complete. No ReFuTab teacher, fusion
+network, Joint TAR experiment, or full benchmark evaluation is implemented or
+claimed. Stop at the Phase 1 report; begin the next phase when authorized.
 
-## Latest user clarification
+Dataset scope and training protocol are settled: use only datasets whose
+original benchmark schema has no image column; train separate pipelines per
+dataset/outer fold using internal validation and an untouched outer test split.
+Do not ask the user to reconfirm these answers.
 
-On October 19, 2026, the user clarified: "the data sets that dont have images
-column". Use only benchmark datasets whose original schema has no image column;
-exclude datasets containing an image column. This resolves dataset scope.
-Enumerating and checking the eligible roster is Phase 1 technical work.
-The user then confirmed separate training on each dataset's training split with
-an untouched test split: "no that is good to train separately". Use independent
-pipelines per dataset/outer fold and internal validation for model selection.
-Both user questions are resolved. No further user answer is needed on dataset
-scope or this training protocol; all existing leakage safeguards remain required.
+## Completed and verified work
 
-## Completed work
+- Phase 0 established this existing workspace, the public repository, persistent
+  instructions, and the course requirements after reviewing all eight PDF
+  pages. The PDF stays local and ignored. Its SHA-256 is
+  `406ca54fc55e77d54058b0b14fa32ffddf3bb24d5a41ddc69ac08880399a8811`.
+- Audited the exact E5/PCA/TAR, data, split, validation, and metric flows at
+  historical MulTaBench `master`
+  `599bd6a5631c96f8aef297cc4cb6e4c197ae0dca`. The ignored detached checkout
+  remains unmodified; no upstream code is vendored or relicensed.
+- Validated all 40 original version-1 metadata schemas: **20 eligible datasets
+  without image columns; 20 image-column datasets excluded**. Only the product
+  sentiment CSV was downloaded; the other 19 eligible CSVs still need content
+  hashes and feature audits before execution. See [DATASETS.md](DATASETS.md)
+  and [configs/datasets.json](../configs/datasets.json).
+- Locked the CPU Python 3.11 environment in `pyproject.toml` and `uv.lock`.
+  Fresh `.venv` installation and **nine tests passed**. The tests cover original
+  split semantics, binary holdout-size behavior, PCA-30 train-only fitting,
+  unknown categories, E5 evaluation/no-gradient behavior, original multiclass
+  metrics and fallback, failure manifests, and bootstrap overwrite protection.
+- Added immutable source/data/model preparation, the original-baseline harness,
+  a reduced smoke configuration, and a thin Colab notebook with persistent raw
+  outputs. The notebook was statically checked; **Colab was not executed**.
+- Fresh public clone preparation of pinned source and pilot data passed after
+  retrying a temporary DNS failure. This did not repeat training or establish a
+  complete fresh-clone model-download/training run.
 
-- Inspected the existing workspace, originally containing only the course PDF.
-  Kept the folder in place and initialized `main` without nesting.
-- Reviewed all eight PDF pages (text and rendered views), recorded its SHA-256,
-  and extracted authoritative requirements with page/section references.
-- Verified GitHub authentication as `diyarh26`, Git identity, and that the
-  requested repository did not already exist before creation.
-- Investigated historical MulTaBench master; pinned the July 26 commit in
-  `third_party/multabench.lock.json`. Preliminary source compatibility and
-  current-source/paper/license discrepancies are in `docs/UPSTREAM.md`.
-- Created persistent instructions, required documentation, directory roles,
-  MIT license for original work, private-file exclusions, and an infrastructure
-  validator. No upstream implementation is copied into the repository.
+See [BASELINE_ANALYSIS.md](BASELINE_ANALYSIS.md),
+[REPRODUCIBILITY.md](REPRODUCIBILITY.md), [COLAB.md](COLAB.md), and
+[EXPERIMENT_LOG.md](EXPERIMENT_LOG.md) for details, exact setup, and failures.
 
-## Verified work
+## Recorded Phase 1 result
 
-PDF SHA-256: `406ca54fc55e77d54058b0b14fa32ffddf3bb24d5a41ddc69ac08880399a8811`.
-The source PDF remains local and is ignored along with extraction/rendering
-intermediates. Python 3.11 is available via `py -3.11`; `python` is a Windows
-Store alias in the current shell.
+Run: `phase1-product-sentiment-frozen-fold0`.
+Reviewed summary: [phase1_product_sentiment_frozen.json](../results/phase1_product_sentiment_frozen.json).
 
-- `py -3.11 scripts/verify_phase0.py`: PASS (required files, local Markdown
-  links, source-pin chronology, and ignored publication boundaries).
-- `git diff --cached --check` before the initial commit and
-  `git show --format= --check HEAD` in a fresh clone: PASS.
-- Reviewed staged paths/diff and searched common token/private-key patterns:
-  no PDF, upstream source, credentials, datasets, weights, or large files staged.
-- Fresh public clone at `e205946b9a0d7cb410449445cf0ca83ada37de6d`:
-  validator and whitespace checks PASS; clean status; no course PDF required.
-- Initial GitHub push succeeded; `git ls-remote` matched local HEAD; GitHub
-  reports PUBLIC, nonempty repository with default branch `main`.
-- Optional Actions CI was deferred because the authenticated token lacks
-  workflow scope; no extra account permission is needed for these local checks.
-
-During development, the validator caught a missing SHA mention and Windows
-CRLF handling in Git stdin probes; both were corrected before publication.
-Infrastructure validation does not establish ML or leakage correctness.
-
-No baseline or method tests exist because no training code exists. No model
-scores, checkpoints, failed ML experiments, or completed benchmark runs exist.
-
-## Git and repository
-
-- Public repository: https://github.com/diyarh26/residual-guided-text-tabular
-- Branch: `main`.
-- Latest verified commit at edit time:
-  `fe2c3a3406c96e5fea17cbede6fe584e474d9a8f`
-  (`docs: confirm separate per-dataset training protocol`).
-- That commit is pushed and verified against `origin/main`. This clarification
-  update follows it in a separate documentation commit; compare actual HEAD
-  with the remote using the commands below for the final session tip.
-- To identify the commit containing this handoff: `git log -1 --format="%H %s"`.
-  A handoff cannot store its own commit SHA; its field records the previously
-  verified commit and final remote checks must compare actual HEAD.
-
-## Exact next steps for Phase 1 (after Phase 0 report)
-
-1. Read AGENTS, this handoff, PROJECT_PLAN, COURSE_REQUIREMENTS, UPSTREAM,
-   ARCHITECTURE, and DATA_LEAKAGE. Review current Git status and preserve changes.
-2. Apply the confirmed protocol: select datasets without an original image column
-   and train each separately, keeping its test split untouched. Validate the
-   eligible roster, split boundaries, historical multiclass metrics, and
-   source-license applicability through technical inspection.
-3. Inspect a local detached copy of the pinned historical source. Map the exact
-   E5/PCA/TAR/data/split/evaluation flows and identify a minimal integration seam.
-4. Build and lock a compatible environment. Pin model/tokenizer/data revisions;
-   record differences between source CLI settings and paper descriptions.
-5. Add a small baseline/smoke configuration and thin Colab runner, run one real
-   original text-tabular baseline, and persist its full provenance and metrics.
-6. Record the actual command, hardware, runtime, results/failures, and smoke tests;
-   update docs, commit, push, verify. Only then begin Phase 2 teacher work.
-
-## Important paths and commands
-
-| Path | Purpose |
+| Item | Actual result |
 | --- | --- |
-| `AGENTS.md` | Mandatory future-agent rules |
-| `docs/PROJECT_PLAN.md` | All eight numbered phases and acceptance criteria |
-| `docs/COURSE_REQUIREMENTS.md` | Authoritative PDF extraction and open conflicts |
-| `docs/UPSTREAM.md`, `third_party/multabench.lock.json` | Historical source provenance |
-| `docs/ARCHITECTURE.md`, `docs/DATA_LEAKAGE.md` | Proposed method and safeguards |
-| `docs/DECISIONS.md`, `docs/EXPERIMENT_LOG.md` | Decisions, open questions, honest run log |
-| `docs/REPRODUCIBILITY.md`, `docs/COLAB.md` | Setup, future run manifests, persistence |
-| `scripts/verify_phase0.py` | Standard-library infrastructure check |
+| Condition | Original LightGBM Joint Frozen; CPU; outer fold 0 |
+| Dataset | `MUL_TEXT_PRODUCT_SENTIMENT`, Kaggle version 1, 5,091 rows, 4 classes |
+| Reduced cap and actual partitions | 1,000 outer training rows: **900 fit / 100 validation**; **509 test** |
+| Seeds | Base/outer/PCA/LightGBM: **42**; original internal validation: **41** |
+| Macro one-vs-rest AUROC | **0.8393533369478667** |
+| Original supplementary log loss | **0.8197310907083184** |
+| Runtime | **559.912 s** total; **431.471 s** training; **117.262 s** test inference |
+| Sampled peak process RSS | **1,060,134,912 bytes**, approximately **0.987 GiB** |
+| Service charge | **USD 0** on existing local hardware; electricity/equipment excluded |
+
+The clean, pushed source commit used by the run was
+`3188a243064f6c0eb8624dd5eed4744ec4d3c037`. Real E5-small-v2 revision:
+`ffb93f3bd4047442299a41ebb6fa998a38507c52`. Dataset CSV SHA-256:
+`8a75a9880a5a1a619b16622c7f8f257ff8d19fde9b02864bf0059d5b0a8c2bb7`.
+The summary records full environment, hardware, configuration, source/asset
+hashes, class order, partition fingerprints, and raw artifact checksums.
+
+The harness invoked unchanged original sampling, splitting, `fit`, and
+`score_all_metrics`. It observed the actual preprocessing fit IDs, verified
+PCA-30 fitted only on the 900 fit rows, and independently checked AUROC. E5
+weights stayed unchanged, all gradients remained absent, and evaluation mode
+was active; the original source's `requires_grad` flags were preserved.
+**The held-out test partition was predicted and evaluated once.** No test-score
+tuning or subsequent model experiment was performed.
+
+Raw IDs, predictions, PCA state, and upstream logs remain ignored under
+`results/raw/phase1-product-sentiment-frozen-fold0/`; datasets and E5 weights
+remain ignored under `data/` and `artifacts/`. Lightweight content-audit evidence
+is recorded in `results/phase1_content_audit.json`. Preserve all original run
+artifacts; run IDs and reviewed summaries must never be overwritten.
+
+This result establishes that the small original baseline path works. It is one
+dataset, one fold, and a reduced training cap, with no improvement claim or
+complete reproduction of published benchmark tables. Original row splitting
+retains possible duplicate-content overlap; see the content audit and dataset
+limitations before interpreting broader experiments.
+
+## Git and publication state
+
+- Repository: https://github.com/diyarh26/residual-guided-text-tabular
+- Branch: `main`.
+- Latest verified pushed commit at edit time:
+  `3188a243064f6c0eb8624dd5eed4744ec4d3c037`
+  (`feat: add pinned historical baseline runner and reproducible CPU setup`).
+- The result summaries and completion documentation accompany this handoff in
+  a follow-up commit. The field above records the last verified commit at edit
+  time; compare actual HEAD with the remote to identify the current session tip.
+- This field identifies the previously verified commit, avoiding a self-hash
+  loop. Use `git log -1 --format="%H %s"` for the commit containing this handoff.
 
 ```powershell
+uv sync --locked
+uv run --frozen python -m unittest discover -s tests -v
 py -3.11 scripts/verify_phase0.py
 git status --short --branch
 git log -1 --format="%H %s"
 git ls-remote origin refs/heads/main
 ```
 
-## Decisions, blockers, and next-agent warnings
+Do not rerun the recorded baseline merely to refresh documentation. Exact run
+and preparation commands are in [REPRODUCIBILITY.md](REPRODUCIBILITY.md).
 
-- Joint TAR is mandatory primary comparison for this supervised gate despite
-  frozen E5; direct-target gating is an essential controlled ablation.
-- Historical master is `599bd6a5631c96f8aef297cc4cb6e4c197ae0dca`, not
-  `paper_version` or current master. No license file exists in the selected
-  tree; later MIT licensing is recorded without vendoring/relicensing it here.
-- Dataset scope and training protocol are resolved: no image-column datasets;
-  separate per-dataset training with untouched test splits and internal validation.
-  Dataset enumeration, multiclass metrics, source licensing, and artifacts are
-  technical follow-up work. Do not ask the user to reconfirm these answers.
-- PDF reference [1] points to STRABLE's identifier; the named MulTaBench source
-  is arXiv:2605.10616. July 26 is tutor/user-provided, not a PDF publication date.
-- OOF teacher outputs do not make fusion embeddings OOF. Audit supervised-gate
-  optimism with the planned nested diagnostic; do not mix unaligned fold spaces.
-- Phase 1 CPU dependencies are locked in `uv.lock`; fresh `.venv` installation
-  and nine tests passed. Use `uv sync --locked`; do not install latest upstream.
-  First real baseline is pending at this pre-run infrastructure commit.
-- Preserve the original PDF locally; no redistribution permission is recorded.
-  Do not commit datasets, tokens, model weights, or large embedding caches.
-- User explicitly authorized Phase 1. Run only the small original baseline and
-  its checks; no full benchmark, new teacher/fusion algorithm, or Option B.
+## Exact next steps: Phase 2
+
+1. Read AGENTS, this handoff, PROJECT_PLAN, COURSE_REQUIREMENTS, ARCHITECTURE,
+   DATA_LEAKAGE, and the Phase 1 analysis. Preserve existing changes.
+2. Build the general dataset/schema interface, including stable field/class
+   ordering, missing values, regression/binary/multiclass support, and an
+   explicit audit excluding IDs, targets, split markers, and target-derived
+   metadata from features. The Phase 1 full-row upstream adapter reproduces a
+   baseline; it does not certify every other dataset's feature safety.
+3. Persist official outer and internal-validation assignments and fingerprints;
+   retain historical split semantics explicitly or document a justified change.
+   Pin and hash each additional dataset before executing it.
+4. Implement a structured-only **3-fold OOF CatBoost teacher**, isolated by
+   dataset/outer fold. Every OOF row must be excluded from its teacher's fitting,
+   preprocessing, calibration, and selection; validation uses a separate
+   training-only teacher.
+5. Test split disjointness, forbidden features, train-only fitting, exactly one
+   aligned OOF prediction per row, stable class probabilities, unknown values,
+   and deterministic failures. Record checks, update the handoff/plan/log,
+   commit, push, and verify. Fusion remains Phase 3 work.
+
+## Remaining technical boundaries
+
+- Joint TAR remains the primary comparison for supervised ReFuTab; its training,
+  local model-path lookups, and GPU execution have not been validated. No full
+  evaluation or Option B is authorized by completion of this smoke run.
+- The historical snapshot has no license file; preserve the ignored checkout
+  and provenance policy in [UPSTREAM.md](UPSTREAM.md). Do not publish its source,
+  datasets, weights, course PDF, credentials, or raw experiment data.
+- OOF teacher outputs do not make a target-trained fusion representation OOF.
+  Keep the planned nested diagnostic and coordinate-alignment safeguards for
+  later method evaluation; do not silently redesign Option A.
+- The course PDF's MulTaBench reference identifier is erroneous; use the
+  verified MulTaBench paper identifier `2605.10616`. Requirements and attribution
+  distinctions remain in [COURSE_REQUIREMENTS.md](COURSE_REQUIREMENTS.md).

@@ -148,6 +148,7 @@ class ManifestSafetyTests(unittest.TestCase):
             manifest_path = root / "runs/failed-test/manifest.json"
             manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
             self.assertEqual(manifest["status"], "failed")
+            self.assertIsNone(manifest["cost"]["incremental_service_charge_usd"])
             self.assertEqual(manifest["failure"]["type"], "ValueError")
             self.assertTrue((manifest_path.parent / "failure.txt").is_file())
             original = manifest_path.read_bytes()

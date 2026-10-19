@@ -39,8 +39,9 @@ ask the user to reconfirm them.
 
 ## Workflow and scope gates
 
-- Work in numbered phases. Phase 0 is infrastructure only. Stop and report it
-  before beginning Phase 1. Do not start expensive training implicitly.
+- Work in numbered phases and read their current status. Phases 0 and 1 are
+  complete; Phase 2 is next. Report each phase before major implementation in
+  the next one. Do not start expensive training implicitly.
 - Reproduce a valid upstream baseline in Phase 1 before implementing ReFuTab.
 - Use the historical `master` pin in `third_party/multabench.lock.json`.
   Selected SHA: `599bd6a5631c96f8aef297cc4cb6e4c197ae0dca`.
@@ -60,7 +61,9 @@ ask the user to reconfirm them.
 - Use modular Python, explicit configuration, practical type annotations, clear
   exceptions and logs. No hardcoded dataset column names or silent skips.
 - Pin experiment dependencies and model/data revisions before baseline execution.
-  Phase 0 has only a Python standard-library infrastructure validator.
+  Use `uv sync --locked` for the Phase 1 CPU environment, then
+  `uv run --frozen python -m unittest discover -s tests -v`. The standalone
+  `scripts/verify_phase0.py` checks documentation/publication boundaries only.
 - Run meaningful unit/integration checks appropriate to each change. Before each
   milestone, run the documented checks and record their exact outcome.
 - Every run records source SHA, upstream SHA, config, split IDs/hashes, seeds,

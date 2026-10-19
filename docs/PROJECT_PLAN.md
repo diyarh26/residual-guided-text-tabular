@@ -32,8 +32,9 @@ may remain open if no dependent implementation is performed.
 
 ## Phase 1 - MulTaBench analysis and baseline reproduction
 
-**Status: In progress.** Source/schema audits and runner are prepared; environment
-installation, runtime tests, and the first real baseline are in progress.
+**Status: Completed.** Fresh locked CPU setup, nine tests, original baseline,
+source/schema audits, and thin Colab runner are delivered. The notebook is
+statically validated; actual Colab/GPU execution remains untested.
 
 Objective: reproduce the historical benchmark before introducing ReFuTab.
 
@@ -42,20 +43,26 @@ image column. Enumerate and validate the eligible roster in Phase 1.
 Confirmed training protocol: train separately per dataset/outer fold on training
 rows, use internal validation for selection, and keep test data untouched.
 
-- [ ] Validate leakage-safe split boundaries and historical multiclass metrics.
+- [x] Validate leakage-safe split boundaries and historical multiclass metrics.
 - [x] Confirm historical-source redistribution policy; retain original attribution.
 - [x] Map E5/PCA/TAR, data schema, split source, validation, metrics, and integration
   points in the pinned source; Phase 0 inspection is preliminary analysis only.
-- [ ] Choose and pin compatible Python/ML dependencies and model/data revisions.
-- [ ] Add a small runnable baseline/smoke configuration and thin Colab runner.
-- [ ] Reproduce one original baseline on a small text-tabular task; save exact
+- [x] Choose and pin compatible Python/ML dependencies and model/data revisions.
+- [x] Add a small runnable baseline/smoke configuration and thin Colab runner.
+- [x] Reproduce one original baseline on a small text-tabular task; save exact
   command, environment, hardware, seed, split IDs, metrics, and failure logs.
-- [ ] Test, document, commit, push, and verify.
+- [x] Test, document, commit, push, and verify.
 
 Deliverables: source-flow analysis, dependency lock, smoke test, real baseline
 artifact/metrics manifest, exact local/Colab commands. Acceptance: clean setup
 can run the baseline with verified split/metric semantics and traceable output.
 No new algorithm until the baseline works correctly.
+
+Completed run: `phase1-product-sentiment-frozen-fold0`, source `3188a24`, macro
+OVR AUROC 0.8393533369478667, log loss 0.8197310907083184, 559.912 seconds CPU,
+sampled peak RSS 1,060,134,912 bytes. Original reduced cap gives 900 fit / 100
+validation / 509 test rows. This meets the minimal baseline gate; no ReFuTab,
+TAR, regression baseline, or full-benchmark result is claimed.
 
 ## Phase 2 - Data handling and leakage-safe teacher
 

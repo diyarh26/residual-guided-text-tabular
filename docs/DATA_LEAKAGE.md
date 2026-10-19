@@ -1,6 +1,12 @@
 # Planned splitting and leakage safeguards
 
-Status: specification only. None of the checks or training stages below is implemented or validated yet. The authoritative academic wording, user clarifications, and remaining technical questions are recorded in [COURSE_REQUIREMENTS.md](COURSE_REQUIREMENTS.md); this document defines the planned engineering protocol.
+Status: the Phase 1 original frozen baseline has validated split disjointness,
+train-only PCA fitting, frozen E5 weights, and original multiclass metrics.
+Teacher OOF and supervised fusion stages below remain planned and unimplemented.
+The authoritative academic wording and user clarifications are recorded in
+[COURSE_REQUIREMENTS.md](COURSE_REQUIREMENTS.md). The baseline's
+[result](../results/phase1_product_sentiment_frozen.json) and independent
+[split/content audit](../results/phase1_content_audit.json) document the checked scope.
 
 ## Evaluation boundary
 

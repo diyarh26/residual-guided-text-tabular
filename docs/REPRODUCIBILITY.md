@@ -10,6 +10,9 @@ The environment uses CPython 3.11 and `uv==0.11.24`. Core numerical/ML packages
 match the selected source's requirements, with CPU builds of Torch 2.7.1 and
 Torchvision 0.22.1. The hash-bearing `uv.lock` fixes the complete resolved
 dependency closure; it deliberately excludes unrelated learner ecosystems.
+This minimal, compatibility-tested closure is not identical to the full original
+lock: some transitive packages are newer (for example Tokenizers 0.22.2 versus
+0.22.1). Exact actual versions are saved in each run; no paper-score match is claimed.
 The package manager installs into the ignored `.venv/`, leaving global packages
 alone. This is a CPU baseline environment; it does not validate GPU/TAR support.
 
@@ -51,6 +54,19 @@ stage requires a new attempt ID. The notebook has static validation separately
 from actual Colab execution; local success does not establish Colab execution.
 
 ## Reproduce the infrastructure checks
+
+The first successful run used exact project commit
+`3188a243064f6c0eb8624dd5eed4744ec4d3c037`; its unedited
+[summary](../results/phase1_product_sentiment_frozen.json) records all inputs.
+Later report changes do not imply the experiment was rerun. A subsequent metadata
+fix leaves service charges unmeasured on other hosts; the recorded local run
+used no external paid compute service. It does not change prediction behavior.
+
+One metadata-only detail: `eligibility_roster_sha256` in the first run hashes
+the Windows working file with CRLF endings. Git stores its LF-normalized text,
+so this raw-file hash differs in a fresh LF checkout; parsed JSON contents match
+the committed roster. Actual CSV, model, executable configuration, and environment
+lock hashes were verified. Do not reinterpret this as a different dataset release.
 
 Use Git and CPython 3.11 (no third-party Python packages required):
 

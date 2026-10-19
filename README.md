@@ -29,10 +29,13 @@ gated fusion as additional controls. Option B (LoRA) is deferred.
 
 ## Current status
 
-**Phase 1 in progress:** historical-source/schema analysis, a locked CPU
-environment, original Joint Frozen baseline runner, and protocol tests are
-prepared. The first recorded baseline is pending. ReFuTab's teacher/fusion
-algorithm is not implemented. See [the project plan](docs/PROJECT_PLAN.md).
+**Phase 1 completed:** historical-source/schema analysis, a locked CPU environment,
+original baseline runner, and nine passing tests. Joint Frozen LightGBM on the
+Product Sentiment smoke configuration achieved **macro OVR AUROC 0.83935**
+(900 fit / 100 validation / 509 test; one fold). See the
+[recorded result](results/phase1_product_sentiment_frozen.json) and
+[experiment log](docs/EXPERIMENT_LOG.md). ReFuTab and Joint TAR are not evaluated
+yet. The [project plan](docs/PROJECT_PLAN.md) keeps Phase 2 unstarted.
 
 The historical MulTaBench `master` pin is
 `599bd6a5631c96f8aef297cc4cb6e4c197ae0dca` (July 26, 2026).

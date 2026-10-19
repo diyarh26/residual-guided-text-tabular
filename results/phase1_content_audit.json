@@ -1,0 +1,204 @@
+{
+  "data_sha256": "8a75a9880a5a1a619b16622c7f8f257ff8d19fde9b02864bf0059d5b0a8c2bb7",
+  "features": {
+    "actual_pandas_csv_dtypes": {
+      "Product_Description": "object",
+      "Product_Type": "int64",
+      "Sentiment": "object"
+    },
+    "categorical": [],
+    "numerical": [
+      "Product_Type"
+    ],
+    "original_detector_fit_rows": 900,
+    "product_type_unique_fit_values": 10,
+    "text": [
+      "Product_Description"
+    ]
+  },
+  "full_table_duplicates": {
+    "complete_row": {
+      "duplicate_content_groups": 4,
+      "excess_duplicate_rows": 4
+    },
+    "description": {
+      "duplicate_content_groups": 7,
+      "excess_duplicate_rows": 7
+    },
+    "feature_pair": {
+      "duplicate_content_groups": 4,
+      "excess_duplicate_rows": 4
+    }
+  },
+  "independent_original_split_recomputation_match": true,
+  "interpretation": "The original table contains duplicates, but the selected smoke-run partitions contain no exact duplicate content within or across partitions under any audited key. This audit covers exact equality only; historical row splitting remains unchanged and does not guarantee duplicate-group isolation in other runs.",
+  "method": {
+    "content_comparison": "Exact decoded UTF-8 CSV field-value equality using Python csv.DictReader; no normalization, case folding, trimming, tokenization, approximate similarity, or row ID comparison for content.",
+    "content_keys": {
+      "complete_row": [
+        "Product_Description",
+        "Product_Type",
+        "Sentiment"
+      ],
+      "description": [
+        "Product_Description"
+      ],
+      "feature_pair": [
+        "Product_Description",
+        "Product_Type"
+      ]
+    },
+    "duplicate_count_definition": "For each exact content group of size n>1, excess_duplicate_rows contributes n-1. Cross-partition pairs are the product of the two multiplicities.",
+    "row_identifier_policy": "Original zero-based CSV row positions used only locally to select and compare partitions; no row IDs exported.",
+    "split_recomputation": "Fresh pandas.read_csv; pinned original subsample_dataset; unchanged TabSTAR 1.1.15 split_to_test then split_to_val with locked configuration. No model fitting or embedding calls."
+  },
+  "original_dataset_rows": 5091,
+  "row_id_partitions_disjoint": true,
+  "run_id": "phase1-product-sentiment-frozen-fold0",
+  "schema_version": 1,
+  "selected_content_audit": {
+    "complete_row": {
+      "between_partitions": {
+        "fit_vs_test": {
+          "cross_partition_identical_pairs": 0,
+          "rows_in_first_partition": 0,
+          "rows_in_second_partition": 0,
+          "shared_content_groups": 0
+        },
+        "fit_vs_validation": {
+          "cross_partition_identical_pairs": 0,
+          "rows_in_first_partition": 0,
+          "rows_in_second_partition": 0,
+          "shared_content_groups": 0
+        },
+        "validation_vs_test": {
+          "cross_partition_identical_pairs": 0,
+          "rows_in_first_partition": 0,
+          "rows_in_second_partition": 0,
+          "shared_content_groups": 0
+        }
+      },
+      "within_partition": {
+        "fit": {
+          "duplicate_content_groups": 0,
+          "excess_duplicate_rows": 0
+        },
+        "test": {
+          "duplicate_content_groups": 0,
+          "excess_duplicate_rows": 0
+        },
+        "validation": {
+          "duplicate_content_groups": 0,
+          "excess_duplicate_rows": 0
+        }
+      }
+    },
+    "description": {
+      "between_partitions": {
+        "fit_vs_test": {
+          "cross_partition_identical_pairs": 0,
+          "rows_in_first_partition": 0,
+          "rows_in_second_partition": 0,
+          "shared_content_groups": 0
+        },
+        "fit_vs_validation": {
+          "cross_partition_identical_pairs": 0,
+          "rows_in_first_partition": 0,
+          "rows_in_second_partition": 0,
+          "shared_content_groups": 0
+        },
+        "validation_vs_test": {
+          "cross_partition_identical_pairs": 0,
+          "rows_in_first_partition": 0,
+          "rows_in_second_partition": 0,
+          "shared_content_groups": 0
+        }
+      },
+      "within_partition": {
+        "fit": {
+          "duplicate_content_groups": 0,
+          "excess_duplicate_rows": 0
+        },
+        "test": {
+          "duplicate_content_groups": 0,
+          "excess_duplicate_rows": 0
+        },
+        "validation": {
+          "duplicate_content_groups": 0,
+          "excess_duplicate_rows": 0
+        }
+      }
+    },
+    "feature_pair": {
+      "between_partitions": {
+        "fit_vs_test": {
+          "cross_partition_identical_pairs": 0,
+          "rows_in_first_partition": 0,
+          "rows_in_second_partition": 0,
+          "shared_content_groups": 0
+        },
+        "fit_vs_validation": {
+          "cross_partition_identical_pairs": 0,
+          "rows_in_first_partition": 0,
+          "rows_in_second_partition": 0,
+          "shared_content_groups": 0
+        },
+        "validation_vs_test": {
+          "cross_partition_identical_pairs": 0,
+          "rows_in_first_partition": 0,
+          "rows_in_second_partition": 0,
+          "shared_content_groups": 0
+        }
+      },
+      "within_partition": {
+        "fit": {
+          "duplicate_content_groups": 0,
+          "excess_duplicate_rows": 0
+        },
+        "test": {
+          "duplicate_content_groups": 0,
+          "excess_duplicate_rows": 0
+        },
+        "validation": {
+          "duplicate_content_groups": 0,
+          "excess_duplicate_rows": 0
+        }
+      }
+    }
+  },
+  "selected_rows": 1509,
+  "source_code_commit": "3188a243064f6c0eb8624dd5eed4744ec4d3c037",
+  "split_summary": {
+    "fit": {
+      "class_counts": {
+        "Cannot Say": 17,
+        "Negative": 58,
+        "No Sentiment": 292,
+        "Positive": 533
+      },
+      "ordered_ids_sha256": "f7b5a3b620a2054a3f8067c7d04e92435022f4e5c092abb1262b56c0d141d007",
+      "rows": 900
+    },
+    "test": {
+      "class_counts": {
+        "Cannot Say": 10,
+        "Negative": 32,
+        "No Sentiment": 165,
+        "Positive": 302
+      },
+      "ordered_ids_sha256": "71b802e6a80e45191e517c7bfb2291de016e5c1956fe48f31004b45f16762b1d",
+      "rows": 509
+    },
+    "validation": {
+      "class_counts": {
+        "Cannot Say": 2,
+        "Negative": 6,
+        "No Sentiment": 33,
+        "Positive": 59
+      },
+      "ordered_ids_sha256": "6ab6b9284164374db5f64227e48e9b2c79c5fcc266b6cc775176c315168a5a68",
+      "rows": 100
+    }
+  },
+  "upstream_commit": "599bd6a5631c96f8aef297cc4cb6e4c197ae0dca"
+}

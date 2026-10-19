@@ -1,0 +1,330 @@
+{
+  "allow_dirty": false,
+  "artifacts": {
+    "files_sha256": {
+      "pca-1.npz": "d7e465e7e7e85666e26b81f33ead4c29b10dc51d143daf4023787a330d20618a",
+      "predictions.npz": "f4f4b8cff3ca52603bbeb2d5a01fc683ca3ff87e634f1a0c3fada5e6ff19f00d",
+      "splits.json": "efb7a5979aeaa10f09152314f4eeb8cfb4bfbf8aeaa7acbe0ce923f63ed9c4a7",
+      "upstream.log": "c76fa48f7df51c69af4995a63cab0d37da21152030134a6edf3576acdcd3c120"
+    },
+    "run_directory": "results/raw/phase1-product-sentiment-frozen-fold0"
+  },
+  "class_order": [
+    "Cannot Say",
+    "Negative",
+    "No Sentiment",
+    "Positive"
+  ],
+  "command": [
+    "scripts/run_baseline.py",
+    "--config",
+    "configs/phase1_frozen.json",
+    "--run-id",
+    "phase1-product-sentiment-frozen-fold0",
+    "--summary",
+    "results/phase1_product_sentiment_frozen.json"
+  ],
+  "completed_utc": "2026-10-19T19:02:34.756358+00:00",
+  "config": {
+    "condition": "joint_frozen",
+    "dataset_id": "MUL_TEXT_PRODUCT_SENTIMENT",
+    "dataset_path": "data/multabench-product-sentiment-v1/data.csv",
+    "dataset_sha256": "8a75a9880a5a1a619b16622c7f8f257ff8d19fde9b02864bf0059d5b0a8c2bb7",
+    "dataset_slug": "multabench-product-sentiment",
+    "dataset_version": 1,
+    "device": "cpu",
+    "fold": 0,
+    "metadata_path": "data/multabench-product-sentiment-v1/metadata.json",
+    "metadata_sha256": "db78538f386c3eed11df6c9110fbd8de30c9f7c72311ff85ee6811fd75bfde13",
+    "model_identifier": "intfloat/e5-small-v2",
+    "model_path": "artifacts/e5-small-v2",
+    "model_revision": "ffb93f3bd4047442299a41ebb6fa998a38507c52",
+    "output_root": "results/raw",
+    "pca_components": 30,
+    "schema_version": 1,
+    "seed": 42,
+    "torch_threads": 4,
+    "train_examples": 1000,
+    "upstream_commit": "599bd6a5631c96f8aef297cc4cb6e4c197ae0dca",
+    "upstream_path": "third_party/MulTaBench"
+  },
+  "config_sha256": "0b2f137eaac98075e2f47a31637b5a865741ceeec0646dab6545b67a42eb2eb4",
+  "cost": {
+    "basis": "Local existing hardware; electricity and equipment excluded.",
+    "incremental_service_charge_usd": 0
+  },
+  "data": {
+    "benchmark_enum": "MUL_TEXT_PRODUCT_SENTIMENT",
+    "csv_sha256": "8a75a9880a5a1a619b16622c7f8f257ff8d19fde9b02864bf0059d5b0a8c2bb7",
+    "eligibility_roster_sha256": "f9632e3435db6ae6f02a3c309d4946cd6a433a4905f1162190486f6409da05f4",
+    "excluded_by_original_subsampling": 3582,
+    "feature_columns": [
+      "Product_Description",
+      "Product_Type"
+    ],
+    "identical_full_row_duplicates": 4,
+    "metadata_dataset_id": "MUL_TEXT_CONSUMER_PRODUCT_SENTIMENT",
+    "metadata_sha256": "db78538f386c3eed11df6c9110fbd8de30c9f7c72311ff85ee6811fd75bfde13",
+    "original_image_column": null,
+    "rows": 5091,
+    "sampled_ordered_ids_sha256": "ff69208ccd5ebb10aed13c322ee5535b8c923b835f618f803723500b6cdb09c5",
+    "sampled_rows": 1509,
+    "target": "Sentiment",
+    "task": "MULTICLASS",
+    "version": 1
+  },
+  "encoder_audit": {
+    "all_gradients_none": true,
+    "eval_mode": true,
+    "freezing_mechanism": "Unmodified original torch.no_grad encoding; original parameters retain requires_grad flags.",
+    "parameters_requiring_grad": 33360000,
+    "state_sha256": "6430180c66fcd0af13a39375f139871425a31e5029f71ff09d072ea7fbce0087",
+    "weights_unchanged": true
+  },
+  "encoding": {
+    "batch_size": 32,
+    "max_length": 512,
+    "padding": "max_length",
+    "pooling": "attention-mask mean then L2 normalization",
+    "prefix": "passage: {column_name}: {value}",
+    "source_unchanged": true
+  },
+  "environment": {
+    "packages": {
+      "Jinja2": "3.1.6",
+      "MarkupSafe": "3.0.4",
+      "PyYAML": "6.0.3",
+      "accelerate": "1.12.0",
+      "certifi": "2026.10.18",
+      "charset-normalizer": "3.5.2",
+      "colorama": "0.4.6",
+      "contourpy": "1.3.3",
+      "cycler": "0.12.1",
+      "filelock": "4.2.4",
+      "fonttools": "4.67.0",
+      "fsspec": "2026.9.0",
+      "huggingface-hub": "0.36.0",
+      "idna": "3.20",
+      "joblib": "1.5.2",
+      "kiwisolver": "1.5.1",
+      "lightgbm": "4.6.0",
+      "matplotlib": "3.11.2",
+      "mpmath": "1.3.0",
+      "networkx": "3.6.1",
+      "numpy": "2.3.5",
+      "packaging": "26.3",
+      "pandas": "2.3.3",
+      "peft": "0.18.0",
+      "pillow": "11.3.0",
+      "psutil": "7.0.0",
+      "pydot": "4.0.1",
+      "pyparsing": "3.3.3",
+      "python-dateutil": "2.9.0.post0",
+      "pytz": "2026.5",
+      "regex": "2026.9.29",
+      "requests": "2.34.2",
+      "safetensors": "0.8.0",
+      "scikit-learn": "1.6.1",
+      "scipy": "1.16.3",
+      "six": "1.17.0",
+      "skrub": "0.6.2",
+      "sympy": "1.14.0",
+      "tabstar": "1.1.15",
+      "threadpoolctl": "3.7.0",
+      "tokenizers": "0.22.2",
+      "torch": "2.7.1+cpu",
+      "torchvision": "0.22.1+cpu",
+      "tqdm": "4.70.1",
+      "transformers": "4.57.3",
+      "typing_extensions": "4.16.0",
+      "tzdata": "2026.5",
+      "urllib3": "2.8.0"
+    },
+    "platform": "Windows-10-10.0.26200-SP0",
+    "python": "3.11.3 (tags/v3.11.3:f3909b8, Apr  4 2023, 23:49:59) [MSC v.1934 64 bit (AMD64)]"
+  },
+  "environment_lock_sha256": {
+    "pyproject.toml": "ac599a782897e3708c321c65c6d764c8d995d5b8344ea05bf162381e60d71b3e",
+    "uv.lock": "7d54c9b595ab6580f438b45c5c532392a22d5ab3fa47599037deb0ad7f03426c"
+  },
+  "features": {
+    "categorical": [],
+    "numerical": [
+      "Product_Type"
+    ],
+    "ordered_original": [
+      "Product_Description",
+      "Product_Type"
+    ],
+    "ordered_transformed": [
+      "Product_Type",
+      "Product_Description_txt_pca_0",
+      "Product_Description_txt_pca_1",
+      "Product_Description_txt_pca_2",
+      "Product_Description_txt_pca_3",
+      "Product_Description_txt_pca_4",
+      "Product_Description_txt_pca_5",
+      "Product_Description_txt_pca_6",
+      "Product_Description_txt_pca_7",
+      "Product_Description_txt_pca_8",
+      "Product_Description_txt_pca_9",
+      "Product_Description_txt_pca_10",
+      "Product_Description_txt_pca_11",
+      "Product_Description_txt_pca_12",
+      "Product_Description_txt_pca_13",
+      "Product_Description_txt_pca_14",
+      "Product_Description_txt_pca_15",
+      "Product_Description_txt_pca_16",
+      "Product_Description_txt_pca_17",
+      "Product_Description_txt_pca_18",
+      "Product_Description_txt_pca_19",
+      "Product_Description_txt_pca_20",
+      "Product_Description_txt_pca_21",
+      "Product_Description_txt_pca_22",
+      "Product_Description_txt_pca_23",
+      "Product_Description_txt_pca_24",
+      "Product_Description_txt_pca_25",
+      "Product_Description_txt_pca_26",
+      "Product_Description_txt_pca_27",
+      "Product_Description_txt_pca_28",
+      "Product_Description_txt_pca_29"
+    ],
+    "text": [
+      "Product_Description"
+    ],
+    "transformed_width": 31
+  },
+  "hardware": {
+    "cpu": "Intel64 Family 6 Model 140 Stepping 1, GenuineIntel",
+    "device": "cpu",
+    "gpu_used": false,
+    "logical_cpus": 8,
+    "ram_bytes": 16859500544,
+    "torch_threads": 4
+  },
+  "independent_metric_check": 0.8393533369478667,
+  "learner_parameters": {
+    "boosting_type": "gbdt",
+    "class_weight": null,
+    "colsample_bytree": 1.0,
+    "importance_type": "split",
+    "learning_rate": 0.1,
+    "max_depth": -1,
+    "min_child_samples": 20,
+    "min_child_weight": 0.001,
+    "min_split_gain": 0.0,
+    "n_estimators": 100,
+    "n_jobs": null,
+    "num_leaves": 31,
+    "objective": null,
+    "random_state": 42,
+    "reg_alpha": 0.0,
+    "reg_lambda": 0.0,
+    "subsample": 1.0,
+    "subsample_for_bin": 200000,
+    "subsample_freq": 0,
+    "verbose": -1
+  },
+  "limitations": [
+    "One dataset, one outer fold, one original LightGBM Joint Frozen baseline; no ReFuTab or Joint TAR result.",
+    "A reduced 1000-example outer-training cap bounds this smoke reproduction; this is not a full paper-table replication.",
+    "Official random row splitting retains possible duplicate-content overlap; no deduplication or group split was substituted.",
+    "The selected historical source and pinned dependency defaults are preserved."
+  ],
+  "metric_convention": "macro one-vs-rest AUROC; all classes present",
+  "metrics": {
+    "auc": 0.8393533369478667,
+    "logloss": 0.8197310907083184,
+    "score": 0.8393533369478667
+  },
+  "pca": {
+    "Product_Description": {
+      "components": 30,
+      "explained_variance_ratio_sum": 0.5050912499427795,
+      "fit_rows": 900,
+      "input_width": 384,
+      "parameters": {
+        "copy": true,
+        "iterated_power": "auto",
+        "n_components": 30,
+        "n_oversamples": 10,
+        "power_iteration_normalizer": "auto",
+        "random_state": 42,
+        "svd_solver": "auto",
+        "tol": 0.0,
+        "whiten": false
+      }
+    }
+  },
+  "preprocessing_fit": {
+    "matches_audited_training_partition": true,
+    "ordered_ids_sha256": "f7b5a3b620a2054a3f8067c7d04e92435022f4e5c092abb1262b56c0d141d007",
+    "rows": 900
+  },
+  "pretrained_model": {
+    "file_sha256": {
+      "config.json": "5dfb0363cd0243be179c03bcaafd1542d0fbb95e8cbcf575fff3e229342adc2f",
+      "model.safetensors": "45bfa60070649aae2244fbc9d508537779b93b6f353c17b0f95ceccb1c5116c1",
+      "special_tokens_map.json": "b6d346be366a7d1d48332dbc9fdf3bf8960b5d879522b7799ddba59e76237ee3",
+      "tokenizer.json": "d241a60d5e8f04cc1b2b3e9ef7a4921b27bf526d9f6050ab90f9267a1f9e5c66",
+      "tokenizer_config.json": "ae83fa6ca0333117ff12606020af925d648667ef70d92ff7f27d781ba0ca4544",
+      "vocab.txt": "07eced375cec144d27c900241f3e339478dec958f92fddbc551f295c992038a3"
+    },
+    "identifier": "intfloat/e5-small-v2",
+    "revision": "ffb93f3bd4047442299a41ebb6fa998a38507c52",
+    "tree_sha256": "44f7e9a68ef5e2ebf676ff0bae376b69066cfb88acd41ab20a2d88c8e17d2f93"
+  },
+  "run_id": "phase1-product-sentiment-frozen-fold0",
+  "runtime": {
+    "memory_sampling_seconds": 0.1,
+    "sampled_peak_rss_bytes": 1060134912,
+    "test_inference_seconds": 117.26157480000256,
+    "total_seconds": 559.9124437999999,
+    "training_seconds": 431.4707574000022
+  },
+  "schema_version": 1,
+  "seeds": {
+    "base": 42,
+    "internal_validation_fold": -1,
+    "internal_validation_random_state": 41,
+    "lightgbm_random_state": 42,
+    "outer_fold": 0,
+    "outer_random_state": 42,
+    "pca_random_state": 42
+  },
+  "source": {
+    "commit": "3188a243064f6c0eb8624dd5eed4744ec4d3c037",
+    "working_tree_dirty": false
+  },
+  "splits": {
+    "fit": {
+      "ordered_ids_sha256": "f7b5a3b620a2054a3f8067c7d04e92435022f4e5c092abb1262b56c0d141d007",
+      "rows": 900,
+      "sorted_ids_sha256": "2de102ea81b9dbbf1b2172dc438f8aa1c456c8258e16fd3f35ab8e8a421de87f"
+    },
+    "test": {
+      "ordered_ids_sha256": "71b802e6a80e45191e517c7bfb2291de016e5c1956fe48f31004b45f16762b1d",
+      "rows": 509,
+      "sorted_ids_sha256": "f5d9ab19f5d718fc42307d57ddb332e3104c563cdfaa4dfec310344843cbd35f"
+    },
+    "validation": {
+      "ordered_ids_sha256": "6ab6b9284164374db5f64227e48e9b2c79c5fcc266b6cc775176c315168a5a68",
+      "rows": 100,
+      "sorted_ids_sha256": "723fe2e6b02c56a416f9aad1055fb081ba8e2fae821d4cc31739e40618e73ae6"
+    }
+  },
+  "started_utc": "2026-10-19T18:53:14.851737+00:00",
+  "status": "completed",
+  "test_evaluations": 1,
+  "upstream": {
+    "commit": "599bd6a5631c96f8aef297cc4cb6e4c197ae0dca",
+    "imported_modules": {
+      "multabench.baselines.abstract_model": "multabench/baselines/abstract_model.py",
+      "multabench.baselines.lgbm": "multabench/baselines/lgbm.py",
+      "multabench.baselines.preprocessing.text_embeddings": "multabench/baselines/preprocessing/text_embeddings.py",
+      "multabench.baselines.training.metrics": "multabench/baselines/training/metrics.py",
+      "multabench.e5.e5_finetune": "multabench/e5/e5_finetune.py"
+    },
+    "tracked_clean": true
+  }
+}
