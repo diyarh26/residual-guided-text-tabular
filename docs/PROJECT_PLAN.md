@@ -36,7 +36,8 @@ may remain open if no dependent implementation is performed.
 
 Objective: reproduce the historical benchmark before introducing ReFuTab.
 
-- [ ] Resolve/gate course leakage, text/image scope, and metric questions.
+- [ ] Resolve/gate course leakage and metric questions; photos are excluded per
+  user clarification, with the precise non-image dataset roster still pending.
 - [ ] Confirm historical-source redistribution policy; retain original attribution.
 - [ ] Map E5/PCA/TAR, data schema, split source, validation, metrics, and integration
   points in the pinned source; Phase 0 inspection is preliminary analysis only.

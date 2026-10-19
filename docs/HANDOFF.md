@@ -6,7 +6,15 @@ Updated: October 19, 2026 (Asia/Jerusalem).
 
 **Phase 0 - Completed: documentation, provenance, checks, and public repository.**
 Phase 1 has not started. The full algorithm, baseline, and all experiments are
-unimplemented. Stop after Phase 0 reporting in this session.
+unimplemented. This follow-up records a scope clarification only.
+
+## Latest user clarification
+
+On October 19, 2026, the user confirmed the project uses data without photos.
+Photos are excluded from project inputs. Two follow-up questions are pending:
+whether the roster is the official text-tabular subset or all tables with image
+columns removed, and whether ordinary per-dataset training with untouched test
+splits is the intended course leakage rule. Do not infer answers from silence.
 
 ## Completed work
 
@@ -55,9 +63,9 @@ scores, checkpoints, failed ML experiments, or completed benchmark runs exist.
 - Public repository: https://github.com/diyarh26/residual-guided-text-tabular
 - Branch: `main`.
 - Latest verified commit at edit time:
-  `e205946b9a0d7cb410449445cf0ca83ada37de6d`
-  (`docs: initialize ReFuTab research plan and project handoff`).
-- That commit is pushed and verified against `origin/main`. This completion
+  `33bfeb2325ee7a2b442220d03436af788760158e`
+  (`docs: finalize Phase 0 verification and handoff`).
+- That commit is pushed and verified against `origin/main`. This clarification
   update follows it in a separate documentation commit; compare actual HEAD
   with the remote using the commands below for the final session tip.
 - To identify the commit containing this handoff: `git log -1 --format="%H %s"`.
@@ -68,9 +76,10 @@ scores, checkpoints, failed ML experiments, or completed benchmark runs exist.
 
 1. Read AGENTS, this handoff, PROJECT_PLAN, COURSE_REQUIREMENTS, UPSTREAM,
    ARCHITECTURE, and DATA_LEAKAGE. Review current Git status and preserve changes.
-2. Obtain tutor clarification on dataset-level leakage wording and text/image
-   scope; fix multiclass metric handling and source-licensing disposition before
-   dependent implementation. Do not silently choose a course interpretation.
+2. Confirm the precise non-image dataset roster and course training rule.
+   Photos are already excluded. Validate historical multiclass metric behavior
+   and source-license applicability through technical inspection; do not silently
+   choose a course interpretation or ask the user to resolve engineering details.
 3. Inspect a local detached copy of the pinned historical source. Map the exact
    E5/PCA/TAR/data/split/evaluation flows and identify a minimal integration seam.
 4. Build and lock a compatible environment. Pin model/tokenizer/data revisions;
@@ -107,9 +116,9 @@ git ls-remote origin refs/heads/main
 - Historical master is `599bd6a5631c96f8aef297cc4cb6e4c197ae0dca`, not
   `paper_version` or current master. No license file exists in the selected
   tree; later MIT licensing is recorded without vendoring/relicensing it here.
-- Course "all datasets" versus text-only scope, "never seen" dataset wording,
-  multiclass AUROC, and artifact requirements need clarification. Scope/leakage
-  question was sent to the user during Phase 0; no answer recorded yet.
+- User confirmed photos are excluded. The exact dataset roster and "never seen"
+  training rule remain questions for the user. Multiclass metric behavior,
+  source licensing, and artifact inventory remain technical follow-up work.
 - PDF reference [1] points to STRABLE's identifier; the named MulTaBench source
   is arXiv:2605.10616. July 26 is tutor/user-provided, not a PDF publication date.
 - OOF teacher outputs do not make fusion embeddings OOF. Audit supervised-gate
@@ -118,5 +127,6 @@ git ls-remote origin refs/heads/main
   run today's README against the historical source and call it reproduction.
 - Preserve the original PDF locally; no redistribution permission is recorded.
   Do not commit datasets, tokens, model weights, or large embedding caches.
-- User explicitly requested Phase 0 only. Do not start training, expensive
-  experiments, Option B, or major implementation as part of this session.
+- User originally requested Phase 0 first; it is complete. This follow-up asks
+  for clarification only. Do not treat it as an instruction to start training,
+  expensive experiments, Option B, or major implementation.

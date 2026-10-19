@@ -39,8 +39,10 @@ The historical MulTaBench `master` pin is
 See [source provenance and discrepancies](docs/UPSTREAM.md) and the
 [machine-readable pin](third_party/multabench.lock.json).
 
-Before dependent implementation, clarify the PDF's dataset-held-out wording,
-text/image coverage, and multiclass metric. The PDF also has an incorrect
+The user confirmed that photos are excluded. The exact dataset roster (text-tabular
+datasets only versus all tables with image columns removed) is being clarified.
+Before dependent implementation, clarify the PDF's dataset-held-out wording
+and validate the multiclass metric. The PDF also has an incorrect
 MulTaBench arXiv identifier. These are recorded in
 [course requirements](docs/COURSE_REQUIREMENTS.md). The historical snapshot
 has no license file; no upstream code is redistributed here.
