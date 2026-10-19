@@ -38,8 +38,10 @@ Objective: reproduce the historical benchmark before introducing ReFuTab.
 
 Confirmed dataset scope: only benchmark datasets whose original schema has no
 image column. Enumerate and validate the eligible roster in Phase 1.
+Confirmed training protocol: train separately per dataset/outer fold on training
+rows, use internal validation for selection, and keep test data untouched.
 
-- [ ] Resolve/gate course leakage and validate historical multiclass metrics.
+- [ ] Validate leakage-safe split boundaries and historical multiclass metrics.
 - [ ] Confirm historical-source redistribution policy; retain original attribution.
 - [ ] Map E5/PCA/TAR, data schema, split source, validation, metrics, and integration
   points in the pinned source; Phase 0 inspection is preliminary analysis only.

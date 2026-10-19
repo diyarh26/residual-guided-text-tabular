@@ -1,10 +1,10 @@
 # Planned splitting and leakage safeguards
 
-Status: specification only. None of the checks or training stages below is implemented or validated yet. The authoritative academic wording and unresolved conflicts are recorded in [COURSE_REQUIREMENTS.md](COURSE_REQUIREMENTS.md); this document defines the proposed engineering protocol, subject to those decisions.
+Status: specification only. None of the checks or training stages below is implemented or validated yet. The authoritative academic wording, user clarifications, and remaining technical questions are recorded in [COURSE_REQUIREMENTS.md](COURSE_REQUIREMENTS.md); this document defines the planned engineering protocol.
 
 ## Evaluation boundary
 
-Use the official benchmark's held-out test split and task protocol where available. Let `B_train` be its training data and `B_test` its untouched test data. Within `B_train`, create an independent inner training partition `A` and selection partition `V`. Preserve official grouping or temporal constraints rather than applying random row splitting indiscriminately. Save stable row identifiers and the exact assignments before fitting anything.
+Use the official benchmark's held-out test split and task protocol where available. Train separately for each dataset and outer evaluation fold; keep all fitted artifacts and target-trained weights isolated to that dataset/fold. Let `B_train` be its training data and `B_test` its untouched test data. Within `B_train`, create an independent inner training partition `A` and selection partition `V`. Preserve official grouping or temporal constraints rather than applying random row splitting indiscriminately. Save stable row identifiers and the exact assignments before fitting anything.
 
 The proposed sequence is:
 
@@ -15,7 +15,7 @@ The proposed sequence is:
 
 No held-out test labels or test features may be used to fit PCA, scaling, vocabulary/category mappings, calibration, encoders, teachers, gates, or downstream predictors. Frozen E5 may transform held-out text for prediction without fitting. Its external pretraining provenance must be reported; we cannot certify that public pretrained weights never encountered any benchmark text without evidence.
 
-**Open academic interpretation (PDF Section 2.2, page 3):** ordinary disjoint train/validation/test rows may not satisfy a literal requirement that an evaluation dataset has never been seen by the model variant during training. Dataset-level evaluation and row-level splitting are distinct. Do not claim this proposed protocol resolves that wording or silently select an interpretation; confirm the requirement before supervised implementation or final evaluation.
+**Training interpretation resolved by the user on October 19, 2026:** the user confirmed that training separately on each dataset's training split while keeping its test split untouched is acceptable ("no that is good to train separately"). This establishes the project's per-dataset supervised protocol; it is a user clarification, not a claim that course staff independently confirmed or rewrote PDF Section 2.2, page 3. Train-only fitting, independent inner validation, isolated dataset/outer-fold models, and all safeguards below remain required.
 
 ## Three-fold teacher protocol
 
@@ -72,4 +72,4 @@ These are future acceptance criteria for Phases 2 and 3, not completed tests:
 - Verify initial identity gating, saved-versus-loaded prediction equivalence, and a final prediction path that needs neither teacher nor temporary head.
 - Record the nested diagnostic's protocol and results before interpreting final gains. Test any future cross-fitted alignment against deliberate coordinate permutations/sign changes before relying on it.
 
-Every run must save source commit, configuration, data/version references, split IDs, seeds, component fit scopes, class mapping, metric definitions, selected checkpoint, runtime/hardware, and failures. Large/raw data and checkpoints must stay outside Git. Scores are valid for reporting only when these checks pass and the scope/metric conflicts in [COURSE_REQUIREMENTS.md](COURSE_REQUIREMENTS.md) have been resolved.
+Every run must save source commit, configuration, data/version references, split IDs, seeds, component fit scopes, class mapping, metric definitions, selected checkpoint, runtime/hardware, and failures. Large/raw data and checkpoints must stay outside Git. Scores are valid for reporting only when these checks pass, dataset eligibility is verified against the pinned schema, and the historical metric convention in [COURSE_REQUIREMENTS.md](COURSE_REQUIREMENTS.md) has been validated.

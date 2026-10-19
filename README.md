@@ -41,8 +41,10 @@ See [source provenance and discrepancies](docs/UPSTREAM.md) and the
 
 Dataset scope is confirmed: use only benchmark datasets whose original schema
 has no image column. Datasets containing an image column are excluded.
-Before dependent implementation, clarify the PDF's dataset-held-out wording
-and validate the multiclass metric. The PDF also has an incorrect
+The user also confirmed separate training on each dataset's training split,
+with internal validation and an untouched test split. Both course clarifications
+are resolved; Phase 1 will validate split boundaries and historical multiclass
+metrics. The PDF also has an incorrect
 MulTaBench arXiv identifier. These are recorded in
 [course requirements](docs/COURSE_REQUIREMENTS.md). The historical snapshot
 has no license file; no upstream code is redistributed here.

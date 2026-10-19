@@ -17,15 +17,16 @@ until clarified. See [COURSE_REQUIREMENTS.md](COURSE_REQUIREMENTS.md).
 | D009 | Separate OOF teacher correctness from supervised-fusion overfit. | Teacher OOF does not make gate features OOF. Compare a nested diagnostic before final claims; independently fitted latent spaces cannot simply be concatenated across rows. |
 | D010 | Run local and clean-clone infrastructure checks; defer optional GitHub Actions configuration. | The authenticated OAuth token lists repo/read:org/gist scopes but no workflow scope. CI is not a Phase 0 user requirement; do not block the authorized repository setup on extra account permissions. |
 | D011 | Use only benchmark datasets whose original schema has no image column. | User clarified on October 19, 2026: "the data sets that dont have images column". Datasets containing an image column are excluded. Phase 1 will enumerate and validate the eligible roster against the pinned benchmark schema. |
+| D012 | Train separately per dataset and outer evaluation fold on permitted training rows, with internal validation and untouched test data. | On October 19, 2026, the user replied "no that is good to train separately" to the proposed per-dataset training/test protocol. This resolves the project interpretation of the PDF leakage wording; OOF teacher and all train-only fitting safeguards remain required. |
 
-## Questions that gate dependent work
+## Resolved requirements and technical follow-up
 
 1. **Dataset scope resolved:** the user confirmed datasets must have no image
    column in their original schema. Enumerating the eligible datasets is Phase 1
    verification work, not an outstanding question for the user.
-2. **Course leakage wording:** confirm whether "never seen" means unseen rows
-   with per-dataset/fold fitting or an entirely held-out dataset. Ordinary
-   per-dataset supervision is proposed, not asserted as course approval.
+2. **Training rule resolved:** the user confirmed ordinary separate training
+   on each dataset's training partition, with internal validation and an untouched
+   test split. Retain dataset/fold isolation and all documented leakage safeguards.
 3. **Classification metrics:** course requires AUROC; historical implementation
    and multiclass conventions must be mapped before evaluation. Preserve
    official metrics and separately report course metrics after fixing averaging
@@ -38,8 +39,8 @@ until clarified. See [COURSE_REQUIREMENTS.md](COURSE_REQUIREMENTS.md).
    the named MulTaBench paper and user's URL are arXiv:2605.10616. Record the
    mismatch explicitly; use the verified named source for research provenance.
 
-User clarification during the Phase 0 follow-up resolved dataset eligibility.
-The remaining course question is whether ordinary per-dataset training with
-untouched test splits is the intended rule.
+User clarification during the Phase 0 follow-up resolved both dataset eligibility
+and separate per-dataset training. No further user answer is needed on these
+points; do not reopen them without new conflicting evidence.
 Other technical provenance checks will be handled by source inspection rather
 than treated as questions the user must answer. No implementation has started.

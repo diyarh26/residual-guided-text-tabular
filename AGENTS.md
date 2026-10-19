@@ -31,6 +31,12 @@ Dataset scope, confirmed by the user: use only benchmark datasets whose original
 schema has no image column. Exclude datasets containing an image column.
 Validate eligibility against the pinned benchmark schema during Phase 1.
 
+Training protocol, confirmed by the user: train a separate pipeline for each
+dataset and outer evaluation fold, using only its permitted training partition.
+Use internal validation for selection and keep the test split untouched until
+locked evaluation. Dataset scope and this training rule are resolved; do not
+ask the user to reconfirm them.
+
 ## Workflow and scope gates
 
 - Work in numbered phases. Phase 0 is infrastructure only. Stop and report it

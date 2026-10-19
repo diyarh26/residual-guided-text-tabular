@@ -27,20 +27,20 @@ Creativity, motivation, and deep analysis are valued even when an approach does 
 
 The course suggests tabular-aware text encoders or input verbalization, novel embedding fusion, and realistic synthetic text-tabular data augmentation. These are examples, not a prescribed architecture. ReFuTab fits the smart embedding fusion direction; the PDF does not prescribe residual guidance, CatBoost teachers, fold counts, dimensions, gates, or specific losses.
 
-## Leakage requirement and unresolved wording (§2.2, p. 3)
+## Leakage requirement and confirmed training protocol (§2.2, p. 3)
 
 The complete leakage box states:
 
 > You must ensure that your training or pretraining phase does not leak test set information. If you use data from a MulTaBench dataset during training/fine-tuning, you must evaluate that specific dataset using a model variant that has never seen it during its training process. For instance, you should train separate models (or use cross-validation) to evaluate each dataset in the benchmark cleanly.
 
-The prohibition on test-information leakage is explicit. The phrase “that specific dataset” and “has never seen it” is ambiguous: read literally, it could require excluding the entire evaluation dataset from representation training; the examples of separate models/cross-validation can also support ordinary supervised fitting on permitted training partitions. The PDF does not resolve that tension.
+The prohibition on test-information leakage is explicit. The phrase “that specific dataset” and “has never seen it” initially raised a question about entire-dataset exclusion versus ordinary supervised fitting on permitted training partitions. The examples of separate models/cross-validation support the latter interpretation; the user clarification below settles the project's protocol.
 
-**Clarification is required before choosing the target-aware evaluation protocol.** Do not silently treat normal dataset-specific supervised fitting as a confirmed interpretation of the literal requirement. Pending clarification, maintain separate held-out data, train-only preprocessing and representation fitting, isolated model variants, no test-driven selection, and complete split provenance. The user's OOF teacher and cross-fitting safeguards strengthen the protocol but do not by themselves resolve this wording. See [DATA_LEAKAGE.md](DATA_LEAKAGE.md).
+**Resolved by user clarification on October 19, 2026:** when asked whether we may train separately on each dataset's training split and evaluate on its untouched test split, the user replied, "no that is good to train separately". Use separate dataset/outer-fold pipelines, train-only preprocessing and representation fitting, internal validation for selection, no test-driven tuning, and complete split provenance. The three-fold OOF teacher and supervised-representation diagnostics remain required. This records the user's clarification separately from the official PDF wording; it does not claim a new staff statement. See [DATA_LEAKAGE.md](DATA_LEAKAGE.md).
 
 ## Track 1 submission checklist (§2.3, p. 3)
 
 - [ ] **Source code:** general-purpose implementation executable on an arbitrary text-tabular dataset, packaged with pinned dependencies. The PDF gives `pyproject.toml` plus `uv.lock` as an example, while permitting equivalent conventions.
-- [ ] **Evaluation results:** performance reports across **all datasets in MulTaBench**, using **AUROC for classification** and **R² for regression**. Dataset modality scope and multiclass AUROC details require clarification below.
+- [ ] **Evaluation results:** performance reports across **all datasets in MulTaBench**, using **AUROC for classification** and **R² for regression**. The user's clarified scope excludes datasets with an image column; validate historical multiclass AUROC behavior during Phase 1.
 - [ ] **Pretrained/fine-tuned model artifacts, when applicable:** upload model weights to **Hugging Face**. Code may load public weights directly; the PDF says a dedicated download script is unnecessary.
 - [ ] **Inference mode:** run the algorithm using the uploaded models.
 - [ ] **End-to-end training mode:** train/fine-tune the models from scratch to reproduce the uploaded weights.
@@ -79,11 +79,13 @@ Its standard scope is one new qualifying dataset; the optional outstanding scope
 | --- | --- | --- |
 | **All datasets versus modality scope - resolved by user clarification** | §2.1 concerns tabular data with free text; §2.3 literally says all MulTaBench datasets. On October 19, 2026, the user clarified: "the data sets that dont have images column". | Use only datasets whose original schema has no image column; exclude datasets containing an image column. Enumerate eligibility against the pinned benchmark schema in Phase 1. This clarification is recorded separately from the PDF wording. |
 | **Classification metric** | §2.3 requires AUROC for classification but does not define multiclass averaging or absent-class handling. The pinned historical source uses macro one-vs-rest AUROC with a present-class fallback; current master switched to multiclass log loss. See [UPSTREAM.md](UPSTREAM.md). | Validate the historical convention and document class-subset behavior before finalizing evaluation; retain the course's AUROC requirement. Do not import current log loss or substitute accuracy silently. |
-| **Training on an evaluation dataset's training partition** | The leakage paragraph's literal dataset exclusion wording is stronger than ordinary split-level holdout and ambiguous alongside its examples. | Ask for the intended rule and record the response; OOF teacher predictions alone do not settle it. |
+| **Training on an evaluation dataset's training partition - resolved by user clarification** | The leakage paragraph initially raised a dataset-level versus split-level question. On October 19, 2026, the user confirmed separate training on each dataset's training split with untouched test data. | Follow separate per-dataset/outer-fold training with internal validation, train-only fitting, three-fold OOF teacher signals, and no test-driven selection. No further answer on this rule is pending. |
 | **Paper identifier** | PDF reference [1], p. 7, labels MulTaBench as `arXiv:2605.12292`. That identifier actually resolves to [STRABLE](https://arxiv.org/abs/2605.12292). The user-provided [arXiv:2605.10616](https://arxiv.org/abs/2605.10616) resolves to MulTaBench. Both destinations were verified during Phase 0. | Preserve this confirmed citation error in provenance; use the verified MulTaBench link for research references. |
 | **Historical repository date** | **July 26, 2026** is a user/tutor-provided course-publication reference date, not a publication date stated by the PDF. The PDF lists a **July 19, 2026 lecture**, a separate event (p. 1). | Use the tutor's July 26 instruction for historical `master` investigation, without attributing that date to the PDF. Record the selected SHA and any ambiguity separately. |
 
-These unresolved points do not prevent Phase 0 documentation and repository setup. They prevent treating an unconfirmed experiment protocol as an established academic requirement.
+Dataset scope and the training rule are resolved by the user. Remaining source,
+metric, and artifact details are technical verification work for later phases.
+The PDF's original wording remains preserved above for academic provenance.
 
 ## User research choices, not course mandates
 

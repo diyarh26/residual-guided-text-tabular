@@ -6,7 +6,7 @@ Updated: October 19, 2026 (Asia/Jerusalem).
 
 **Phase 0 - Completed: documentation, provenance, checks, and public repository.**
 Phase 1 has not started. The full algorithm, baseline, and all experiments are
-unimplemented. This follow-up records a scope clarification only.
+unimplemented. This follow-up records the final training clarification only.
 
 ## Latest user clarification
 
@@ -14,8 +14,11 @@ On October 19, 2026, the user clarified: "the data sets that dont have images
 column". Use only benchmark datasets whose original schema has no image column;
 exclude datasets containing an image column. This resolves dataset scope.
 Enumerating and checking the eligible roster is Phase 1 technical work.
-Whether ordinary per-dataset training with untouched test splits is the intended
-course leakage rule remains pending. Do not infer an answer from silence.
+The user then confirmed separate training on each dataset's training split with
+an untouched test split: "no that is good to train separately". Use independent
+pipelines per dataset/outer fold and internal validation for model selection.
+Both user questions are resolved. No further user answer is needed on dataset
+scope or this training protocol; all existing leakage safeguards remain required.
 
 ## Completed work
 
@@ -64,8 +67,8 @@ scores, checkpoints, failed ML experiments, or completed benchmark runs exist.
 - Public repository: https://github.com/diyarh26/residual-guided-text-tabular
 - Branch: `main`.
 - Latest verified commit at edit time:
-  `92ffce2d6f6a648525325f8e07385bf128c8c055`
-  (`docs: record exclusion of photos and narrow open questions`).
+  `4d6c2e8c35d7064cedf48cfa3aa6897700a67f43`
+  (`docs: confirm datasets without image columns as evaluation scope`).
 - That commit is pushed and verified against `origin/main`. This clarification
   update follows it in a separate documentation commit; compare actual HEAD
   with the remote using the commands below for the final session tip.
@@ -77,10 +80,10 @@ scores, checkpoints, failed ML experiments, or completed benchmark runs exist.
 
 1. Read AGENTS, this handoff, PROJECT_PLAN, COURSE_REQUIREMENTS, UPSTREAM,
    ARCHITECTURE, and DATA_LEAKAGE. Review current Git status and preserve changes.
-2. Confirm the course training rule. Dataset scope is settled: enumerate only
-   datasets without an image column in their original schema. Validate the roster,
-   historical multiclass metrics, and source-license applicability through
-   technical inspection; do not ask the user to resolve engineering details.
+2. Apply the confirmed protocol: select datasets without an original image column
+   and train each separately, keeping its test split untouched. Validate the
+   eligible roster, split boundaries, historical multiclass metrics, and
+   source-license applicability through technical inspection.
 3. Inspect a local detached copy of the pinned historical source. Map the exact
    E5/PCA/TAR/data/split/evaluation flows and identify a minimal integration seam.
 4. Build and lock a compatible environment. Pin model/tokenizer/data revisions;
@@ -117,9 +120,10 @@ git ls-remote origin refs/heads/main
 - Historical master is `599bd6a5631c96f8aef297cc4cb6e4c197ae0dca`, not
   `paper_version` or current master. No license file exists in the selected
   tree; later MIT licensing is recorded without vendoring/relicensing it here.
-- Dataset scope is resolved: only datasets without an image column. The "never
-  seen" training rule remains a question for the user. Dataset enumeration,
-  multiclass metrics, source licensing, and artifacts are technical follow-up work.
+- Dataset scope and training protocol are resolved: no image-column datasets;
+  separate per-dataset training with untouched test splits and internal validation.
+  Dataset enumeration, multiclass metrics, source licensing, and artifacts are
+  technical follow-up work. Do not ask the user to reconfirm these answers.
 - PDF reference [1] points to STRABLE's identifier; the named MulTaBench source
   is arXiv:2605.10616. July 26 is tutor/user-provided, not a PDF publication date.
 - OOF teacher outputs do not make fusion embeddings OOF. Audit supervised-gate
@@ -128,6 +132,6 @@ git ls-remote origin refs/heads/main
   run today's README against the historical source and call it reproduction.
 - Preserve the original PDF locally; no redistribution permission is recorded.
   Do not commit datasets, tokens, model weights, or large embedding caches.
-- User originally requested Phase 0 first; it is complete. This follow-up asks
-  for clarification only. Do not treat it as an instruction to start training,
+- User originally requested Phase 0 first; it is complete. This follow-up confirms
+  the protocol only. Do not treat it as an instruction to start training,
   expensive experiments, Option B, or major implementation.
