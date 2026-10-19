@@ -9,8 +9,19 @@ Updated: October 19, 2026 (Asia/Jerusalem).
 The final full suite passed 43 tests in 9.451 seconds, and infrastructure/link
 checks passed. One clean-source CPU teacher smoke completed with all audit and
 serialization checks passing; no outer test predictions or scores were made.
-**Phase 3 - Not started.** Fusion, Joint TAR experiments, and full evaluation
-remain later-phase work. Wait for the user's next-phase instruction.
+**Phase 3 - In progress.** The user authorized fusion implementation and asked
+to be told if GPU resources are needed. Implement the documented Option A and
+direct-target control, test on CPU, then run a bounded real frozen-E5 synthetic
+smoke if practical. Joint TAR/pilot/full evaluation remain later-phase work.
+
+Phase 3 source is now implemented in `features.py`, `fusion.py`,
+`downstream.py`, `pipeline.py`, `synthetic.py` and `fusion_runner.py`, with
+thin training and CSV prediction scripts. **86 tests passed in 18.730 s**,
+including original checks, all three synthetic task pipelines, direct control,
+held-out perturbation, exact CPU continuation, CSV prediction and semantic
+artifact validation. Lock/infrastructure/link checks pass. Clean-source
+real-E5 smoke, completion docs and publication remain pending. Exact APIs and
+the nested diagnostic design are in [PHASE3.md](PHASE3.md).
 
 Dataset scope and training protocol are settled: use only datasets whose
 original benchmark schema has no image column; train separate pipelines per
@@ -105,9 +116,9 @@ limitations before interpreting broader experiments.
 - Repository: https://github.com/diyarh26/residual-guided-text-tabular
 - Branch: `main`.
 - Latest verified pushed commit at edit time:
-  `f805d81c0a5badc228f423b7b26befd5f137bafd`
-  (`feat: add leakage-safe OOF CatBoost teacher and data contracts`).
-- Phase 2 results and completion documentation accompany this handoff in
+  `20ca04b7ab745d352edcffa05c0312f9761a6645`
+  (`experiments: record Phase 2 teacher smoke and completion`).
+- Phase 3 source and implementation documentation accompany this handoff in
   a follow-up commit. The field above records the last verified commit at edit
   time; compare actual HEAD with the remote to identify the current session tip.
 - This field identifies the previously verified commit, avoiding a self-hash

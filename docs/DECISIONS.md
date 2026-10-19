@@ -26,6 +26,11 @@ until clarified. See [COURSE_REQUIREMENTS.md](COURSE_REQUIREMENTS.md).
 | D017 | Keep teacher preprocessing stateless before each fold-local CatBoost fit. | Numeric conversion/native missing values and typed categorical tokens need no external fitted vocabulary or scaler. Numeric borders, category statistics and trees are learned only on that teacher's fitting rows. Fusion preprocessing remains separate Phase 3 work. |
 | D018 | Reconstruct the pilot's original historical partitions and verify public Phase 1 fingerprints. | Avoids changing assignments or requiring private Phase 1 raw IDs. Preserve validation seed 41 and explicitly retain 3,582 reduced-cap exclusions. Generic data APIs also accept saved assignments or a separately named local random/stratified protocol; group/time constraints require supplied assignments. |
 | D019 | Save a training-only class order and native teacher artifacts with explicit row audits. | Typed labels remain distinct; binary class index 1 defines the positive offset. Three OOF models exclude their prediction rows; a fourth A-only teacher supplies validation offsets. Native CBM/JSON/NumPy persistence avoids pickle; raw IDs/models remain ignored. |
+| D020 | Phase 3 uses numeric training medians/standardization, typed category vocabularies (missing 0, unknown 1), category embeddings of width 8 and context projection width 16. | Compact initial settings fixed before smoke diagnostics; teacher preprocessing stays separate. All-missing numeric columns use zero and constant scales use one. |
+| D021 | Shared gate uses fixed one-hot field identity, hidden width 64, dropout 0.1 and a zero final layer; temporary head is linear. | Exact initial identity and stable field coordinates; the direct-target control keeps identical capacity and no teacher. |
+| D022 | AdamW gate budget starts at 10 epochs, batch 32, learning rate .001, weight decay .0001, patience 3, seed 42; CPU smoke fixes five epochs/batch 20. | Modest untuned settings, validation loss selects the gate. Checkpoints bind input content, row/schema/source/config context, optimizer/RNG and Torch version. GPU execution is unverified. |
+| D023 | Original structured features plus frozen fused coordinates feed a native LightGBM adapter. | Reuse pinned original categorical helpers at fit time, typed-token inputs and saved mappings at inference; preserve 100-tree defaults/seed 42 with explicit two threads. Omit the original logging-only eval set and avoid another hidden validation split. This is an original adapter, not an unchanged-baseline claim. |
+| D024 | Verify Phase 3 with tiny synthetic tasks and one bounded real-E5 smoke; reserve benchmark pilots for Phase 4. | CPU is adequate for implementation checks. Teacher OOF does not make training embeddings cross-fitted; the nested end-to-end diagnostic design is documented before pilot interpretation. |
 
 ## Resolved requirements and technical follow-up
 
@@ -52,4 +57,5 @@ and separate per-dataset training. No further user answer is needed on these
 points; do not reopen them without new conflicting evidence.
 Other technical provenance checks are handled by source inspection rather
 than treated as questions the user must answer. Phase 2 data/teacher components
-are implemented; Phase 3 fusion remains unstarted.
+are implemented; Phase 3 fusion implementation is in progress, with execution
+and final verification tracked in the handoff.

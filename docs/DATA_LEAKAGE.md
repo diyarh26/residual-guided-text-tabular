@@ -4,8 +4,9 @@ Status: Phase 1 validated the original frozen baseline's split disjointness,
 train-only PCA fitting, frozen E5 weights, and original multiclass metrics.
 Phase 2 implements audited dataset/split contracts and a structured-only
 three-fold OOF CatBoost teacher; its targeted leakage/serialization checks pass.
-The complete supervised fusion pipeline and nested diagnostic remain planned.
-See [PHASE2.md](PHASE2.md) for implemented APIs and
+Phase 3 implements the supervised fusion pipeline and its synthetic boundary
+tests. The nested benchmark diagnostic remains unexecuted. See
+[PHASE2.md](PHASE2.md), [PHASE3.md](PHASE3.md) for implemented APIs and
 [HANDOFF.md](HANDOFF.md) for final milestone verification and execution status.
 The authoritative academic wording and user clarifications are recorded in
 [COURSE_REQUIREMENTS.md](COURSE_REQUIREMENTS.md). The baseline's
@@ -134,22 +135,27 @@ undisclosed feature provenance, group/time constraints, or a future fusion
 pipeline. Exact final check counts, full-suite results, and executed runs belong
 in [HANDOFF.md](HANDOFF.md) and [EXPERIMENT_LOG.md](EXPERIMENT_LOG.md).
 
-## Future fusion and evaluation checks
+## Implemented fusion checks and remaining evaluation
 
-The following remain required in their implementation/evaluation phases:
+Phase 3 tests verify:
 
-- Verify ReFuTab E5 parameters receive no gradients and remain unchanged;
-  verify teacher offsets are detached and only authorized modules update
-  during correction training. Original frozen baseline checks do not establish
-  the behavior of a future fusion integration.
-- Check train-only fusion PCA/structured preprocessing, reserved missing/unknown
-  handling, text-field ordering, identity gate initialization, and final
-  saved-versus-loaded predictions without teacher or temporary head.
-- Repeat held-out perturbation checks for the complete fixed pipeline. Keep
-  model-selection checks separate, because changing validation labels may
-  legitimately change the chosen fusion checkpoint.
-- Record the nested diagnostic's protocol/results before interpreting final
-  gains. Test any future cross-fitted alignment against deliberate coordinate
-  permutations/sign changes before relying on it.
+- Frozen E5 evaluation/no-gradient behavior and unchanged state; detached
+  teacher offsets and inputs; gradients only in gate/structured encoder/head.
+- Fitting-only PCA/structured statistics and vocabulary, missing/unseen category
+  handling, field identities/order, exact initial identity gate and all losses.
+- Regression/binary/multiclass end-to-end execution; direct control without a
+  teacher; inference bundles without teacher/head weights and checked save/load.
+- Changed outer-test features/labels leave fitted PCA/gate and validation
+  predictions unchanged. Changed validation can legitimately select a different
+  gate; fixed-epoch neural tests separate optimizer updates from selection.
+- Exact same-environment CPU dropout/shuffle checkpoint continuation, with
+  changed data/config/offset/context or corrupted state rejected.
+
+Tests use tiny synthetic data and explicit text substitutes except the bounded
+real-E5 smoke recorded separately. They establish software boundaries, not
+benchmark generalization. The nested complete-pipeline diagnostic is specified
+in [PHASE3.md](PHASE3.md) and must run in Phase 4 before final improvement
+claims. Any future cross-fitted alignment still needs deliberate coordinate
+permutation/sign tests; independently fitted latent vectors cannot be stacked.
 
 Every run must save source commit, configuration, data/version references, split IDs, seeds, component fit scopes, class mapping, metric definitions, selected checkpoint, runtime/hardware, and failures. Large/raw data and checkpoints must stay outside Git. Scores are valid for reporting only when these checks pass, dataset eligibility is verified against the pinned schema, and the historical metric convention in [COURSE_REQUIREMENTS.md](COURSE_REQUIREMENTS.md) has been validated.

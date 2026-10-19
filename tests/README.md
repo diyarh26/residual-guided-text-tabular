@@ -14,4 +14,11 @@ label/feature independence, strict feature/row ordering, missing/unseen values,
 class/offset conventions, and checked save/load. Runner tests exercise real
 training with text/target/ID exclusion, preserved failures and overwrite
 protection, and exact historical split reconstruction without model evaluation.
-Fusion tests remain Phase 3 work.
+Phase 3 checks frozen E5, PCA/structured fit scope, identity gating, all three
+residual losses and the direct control, detached inputs/offsets, exact CPU
+dropout/shuffle checkpoint continuation, regression/binary/multiclass pipeline
+execution, test-label/feature perturbation, bundle checksums/semantic alignment,
+and CSV prediction. Text substitutes are explicit in unit tests; real frozen
+E5 is exercised separately by the recorded synthetic smoke. No synthetic metric
+establishes benchmark improvement. GPU and nested benchmark evaluation remain
+unexecuted.

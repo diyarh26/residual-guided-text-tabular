@@ -39,8 +39,12 @@ its [recorded summary](results/phase2_product_sentiment_teacher.json),
 Phase 1 reproduced original Joint Frozen LightGBM on that dataset: macro OVR
 AUROC **0.83935** on 509 test rows, one fold with 900 fitting/100 validation rows.
 Its [result](results/phase1_product_sentiment_frozen.json) is preserved.
-Full ReFuTab fusion and Joint TAR are unevaluated; Phase 3 fusion is next in the
-[project plan](docs/PROJECT_PLAN.md).
+Phase 3 fusion is in progress: frozen E5/PCA, the compact structured encoder,
+gate, correction losses, direct-target control, checkpoint continuation and
+teacher/head-free inference are implemented. Initial software tests pass;
+the real-E5 synthetic smoke and final verification are pending. Joint TAR and
+benchmark comparisons remain unevaluated. See [Phase 3 APIs](docs/PHASE3.md)
+and the [project plan](docs/PROJECT_PLAN.md).
 
 The historical MulTaBench `master` pin is
 `599bd6a5631c96f8aef297cc4cb6e4c197ae0dca` (July 26, 2026).
@@ -104,8 +108,8 @@ Completed/failed executions and their exact provenance belong in
 ```text
 configs/                Locked pilot inputs and dataset inventory
 docs/                   Requirements, plan, architecture, decisions, handoff
-src/refutab/            Baseline, data/splits, OOF teacher; fusion pending
-scripts/                Infrastructure, preparation, baseline/teacher entry points
+src/refutab/            Baseline, data, teacher, features, fusion and pipeline
+scripts/                Preparation, training and CSV inference entry points
 tests/                  Protocol, fit-scope, teacher/leakage, persistence checks
 notebooks/              Thin Colab CPU baseline runner
 third_party/            Upstream pin and attribution; checkout ignored

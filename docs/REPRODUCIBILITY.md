@@ -2,7 +2,8 @@
 
 Phase 1 adds a locked CPU environment and a runner for the original historical
 Joint Frozen baseline. Phase 2 adds data/split contracts and a structured-only
-OOF teacher; fusion and the full ReFuTab algorithm remain unimplemented. Actual
+OOF teacher. Phase 3 implements Option A fusion, direct-target control and
+teacher/head-free prediction; benchmark usefulness is still untested. Actual
 execution outcomes, including failures, belong in [EXPERIMENT_LOG.md](EXPERIMENT_LOG.md).
 
 ## Run the historical CPU baseline
@@ -100,6 +101,38 @@ See [PHASE2.md](PHASE2.md) for the general API and explicit schema/split protoco
 teacher fits are not checkpoint-resumable; an interrupted run keeps its failed
 manifest/trace and needs a new attempt ID. The Phase 1 Colab notebook remains a
 baseline runner; no Phase 2 Colab execution is claimed.
+
+## Train and load Option A (Phase 3)
+
+The exact component/API and nested evaluation design are in [PHASE3.md](PHASE3.md).
+From clean committed source with the locked environment and prepared E5 assets:
+
+```powershell
+py -3.11 -m uv run --frozen python scripts/run_fusion.py --config configs/phase3_smoke.json --run-id my-new-phase3 --summary results/my-new-phase3.json
+py -3.11 -m uv run --frozen python scripts/predict.py --bundle results/raw/my-new-phase3/bundle --input results/raw/my-new-phase3/validation_features.csv --output results/raw/my-inference/predictions.csv
+```
+
+The supplied config uses original synthetic data and actual pinned E5, with
+60 fitting/12 validation/12 reserved test rows. Training writes a private
+inference bundle and independent training checkpoint, fitting/split provenance,
+learning curves, validation predictions and reviewed aggregate summary. No
+test prediction is made. The final prediction bundle omits teacher and temporary
+head weights; pretrained E5 stays in the verified external model directory.
+`--model-path` relocates those files for prediction. Classification CSV columns
+`probability_k` correspond to the printed/saved class order.
+
+Continuation copies a prior matching checkpoint into a **new** attempt:
+
+```powershell
+py -3.11 -m uv run --frozen python scripts/run_fusion.py --config configs/phase3_smoke.json --run-id my-retry --resume-from results/raw/failed-attempt/training.pt
+```
+
+Same-environment CPU epoch continuation includes optimizer, RNG/shuffle,
+best/last weights and patience. It rejects changed data/config/schema/IDs,
+validation, offsets, source context or Torch version. E5 encoding and other
+preprocessing/teacher creation restart; partial E5 batches/LightGBM fits do not
+resume. CPU tests establish continuation, not GPU behavior. Individual helper
+artifacts and run IDs cannot be overwritten. Raw outputs are private.
 
 ## Reproduce the infrastructure checks
 

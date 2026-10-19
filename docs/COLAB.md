@@ -70,6 +70,28 @@ Runner artifacts are created separately under
 `/content/drive/MyDrive/ReFuTab/runs/<run-id>/`; keeping the bootstrap log outside
 that directory lets the runner require a new, unused run directory.
 
+## Phase 3 CPU architecture run
+
+Use the same pinned-commit checkout, Python 3.11 locked environment and verified
+asset preparation above. After mounting Drive, call the source entry point:
+
+```bash
+uv run --frozen python scripts/run_fusion.py --config configs/phase3_smoke.json \
+  --run-id <unique-run-id> --output-root /content/drive/MyDrive/ReFuTab/runs
+```
+
+The new private run contains `bundle/`, `training.pt`, splits, learning curves
+and manifest. For retry, use a new run ID and pass the prior persistent
+`training.pt` with `--resume-from`. Preserve the original attempt. The fusion
+epoch state resumes; frozen embedding batches, preprocessing and teacher fits
+restart. A checkpoint is available only after a complete fusion epoch.
+
+The current lock runs on CPU, including in a Colab runtime with a GPU attached.
+Phase 3 needs only a bounded synthetic architecture check; later GPU/TAR runs
+require a separately pinned and verified GPU environment. This documented
+workflow has not been executed in Colab. Local smoke execution is recorded
+separately in EXPERIMENT_LOG.
+
 ## Persistence and retry limitations
 
 The runner saves a run manifest before fitting and retains failure records and

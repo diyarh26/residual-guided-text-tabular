@@ -1,11 +1,13 @@
-# Proposed Option A architecture
+# Option A architecture
 
 Status: the explicit dataset/split contracts and structured-only three-fold
 OOF CatBoost teacher are implemented in Phase 2; see [PHASE2.md](PHASE2.md).
 Phase 1 reproduced one pinned original Joint Frozen baseline. The frozen
-encoder/PCA fusion integration, compact structured encoder, gate, correction
-head, and final learner below remain Phase 3 design. No ReFuTab improvement is
-claimed. See [PROJECT_PLAN.md](PROJECT_PLAN.md) for phase gates and
+encoder/PCA integration, compact structured encoder, gate, correction head
+and final learner are now implemented in Phase 3; milestone verification is
+tracked in the handoff. See [PHASE3.md](PHASE3.md) for exact APIs, initial
+settings, persistence and the nested diagnostic design. No ReFuTab improvement
+is claimed. See [PROJECT_PLAN.md](PROJECT_PLAN.md) for phase gates and
 [DATA_LEAKAGE.md](DATA_LEAKAGE.md) for the evaluation protocol.
 
 ## Question and comparison
@@ -46,7 +48,7 @@ For row `i` and text field `j`, let `x_ij` be text, `u_i` the original structure
    the API, exact offsets, and current verification scope.
 2. **Frozen text encoder.** E5-small-v2 produces 384-dimensional embeddings. Freeze every encoder parameter, disable training-time dropout, and use inference/evaluation mode. Verify text prefixes, pooling, normalization, and batching against the pinned benchmark during Phase 1; save the chosen settings and exact model revision. No E5 fine-tuning occurs in Option A.
 3. **Per-field PCA.** Fit one PCA from 384 to 30 dimensions for each text column using the allowed training partition only. Apply that same fitted transformation to validation and test text in that field. Do not fit separate validation/test PCAs or mix column coordinate systems. If a fitting partition cannot support the required dimensionality, fail with a documented reason; do not silently change the method.
-4. **Compact structured representation.** A train-fitted preprocessing pipeline handles numerical imputation and scaling, categorical missing/unknown values, and compact categorical encoding. The starting proposal is train-median imputation plus standardization for numerics, a train-only category vocabulary with reserved missing/unknown entries, compact category embeddings, and a small projection producing `s_i`. Category embedding sizes and projection width must be specified and logged before implementation; avoid unbounded one-hot expansion. All trainable category embeddings belong to the structured encoder. This fusion input is separate from the original structured columns supplied to the final tabular learner.
+4. **Compact structured representation.** Train-median numerical imputation (all-missing fallback zero) and population standardization use fitting rows only. Typed category vocabularies reserve missing=0 and unseen=1. Each category has an 8-dimensional learned embedding; numeric values and embeddings feed a 16-wide linear/ReLU context projection. These are fixed starting settings, not optima. This fusion input remains separate from the original structured columns supplied to the final learner.
 5. **Shared, column-aware gate.** For each field, concatenate `e_ij`, `s_i`, and a fixed identity encoding `c_j` in a small MLP. Start with one hidden layer of width 64, ReLU activation, and dropout 0.1. The output has 30 coordinates. Apply the same gate parameters to every text field:
 
    ```text
@@ -73,8 +75,8 @@ The implemented teacher records `epsilon=1e-7` initially and clips to
 before taking logs. Binary class index 1 is positive in the saved class order.
 No probability calibration is fitted. Any future calibration must stay inside
 the teacher's allowed training data; calibration on the row being predicted
-would break OOF exclusion. These offsets are implemented, while the combined
-correction losses in the table remain planned.
+would break OOF exclusion. These offsets and all three combined correction
+losses in the table are implemented.
 
 The **standard gated fusion ablation** keeps E5, PCA, structured representation, gate, head capacity, splits, and comparable training budget aligned, but predicts the original target through the head without a teacher offset. Retrain its own final downstream learner. This isolates the residual objective from the benefit of supervised gating. Evaluate the final downstream predictions, not just the temporary head's loss.
 
@@ -123,7 +125,7 @@ flowchart TD
 
 The diagram shows component roles; validation, final refitting, and fold boundaries are defined in [DATA_LEAKAGE.md](DATA_LEAKAGE.md). There is no correction-head or teacher call at final inference.
 
-## Artifacts and unresolved choices
+## Artifacts and evaluation boundaries
 
 A reproducible prediction bundle must include the schema and class mapping; E5 identifier/revision and encoding settings; per-column PCA state; structured preprocessing and optional encoder state; gate state/configuration; downstream model and its preprocessing; and compatible dependency versions. Training records also retain split IDs, seeds, teacher provenance, checkpoint selection, and source commit. Large artifacts belong in an appropriate artifact store, not Git.
 

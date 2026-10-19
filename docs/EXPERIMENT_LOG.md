@@ -183,6 +183,33 @@ full-benchmark or final-test result is claimed. OOF teachers do not make future
 supervised embeddings cross-fitted. Phase 2 meets its acceptance criteria;
 Phase 3 fusion is next; wait for the user's instruction before starting it.
 
+## October 19, 2026 - Phase 3 implementation and fixed synthetic smoke
+
+User authorized Phase 3 and requested notice if GPU resources become necessary.
+Implemented frozen pinned E5, fitting-only PCA-30 and structured preprocessing,
+identity gate, three task losses, direct control, complete-pipeline fitting,
+head/teacher-free inference, native downstream LightGBM and checked checkpoints.
+**86 tests passed in 18.730 seconds**, with lock/infrastructure/link checks also
+passing. Regression/binary/multiclass pipelines use real CatBoost, neural gates
+and LightGBM with explicit deterministic text substitutes in unit tests.
+Exact CPU dropout/shuffle continuation, forbidden/held-out data boundaries,
+artifact semantic checks and CSV prediction are exercised.
+
+An initial downstream helper test failed because Windows checkout bytes were
+CRLF while the historical Git blob uses LF. Hashing normalized source bytes
+against the inspected pinned blob fixed that provenance check; no historical
+source was modified. No model experiment failed during implementation.
+
+The fixed `phase3_smoke.json` generates a synthetic binary task: 60 fitting,
+12 validation and 12 reserved test rows, two text fields, two numeric columns
+and one categorical field. Actual E5-small-v2 is frozen at the same immutable
+revision as Phase 1; PCA and vocabularies fit only those 60 rows. Gate hidden
+64/dropout .1, category embeddings 8, context width 16, linear temporary head,
+five AdamW epochs/batch 20/lr .001/weight decay .0001/patience 3/seed 42/two
+CPU threads are fixed before diagnostics. Downstream uses 100 LightGBM trees.
+This is an architecture smoke, not a benchmark pilot or improvement test.
+The clean-source run and real inference readback are pending at this entry.
+
 ## Required entry for each later experiment
 
 Record run ID/time/status (planned/running/completed/failed/interrupted), exact

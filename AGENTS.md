@@ -40,7 +40,7 @@ ask the user to reconfirm them.
 ## Workflow and scope gates
 
 - Work in numbered phases and read their current status. Phases 0, 1, and 2
-  are complete; Phase 3 is next. Report each phase before major implementation in
+  are complete; Phase 3 is authorized and in progress. Report each phase before major implementation in
   the next one. Do not start expensive training implicitly.
 - Reproduce a valid upstream baseline in Phase 1 before implementing ReFuTab.
 - Use the historical `master` pin in `third_party/multabench.lock.json`.

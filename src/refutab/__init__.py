@@ -1,3 +1,3 @@
-"""Original ReFuTab orchestration; research method implementation is pending."""
+"""ReFuTab: residual-guided fusion for text-tabular learning."""
 
 __version__ = "0.1.0"

@@ -94,18 +94,20 @@ OOF/validation scores are diagnostics, not a final test or fusion result. See
 
 ## Phase 3 - Option A fusion
 
-**Status: Not started.**
+**Status: In progress.** User authorized implementation and asked to be told
+if GPU training becomes necessary. Start with CPU unit/integration checks and a
+bounded frozen-E5 synthetic smoke; no Phase 4 pilot or TAR run is implied.
 
 Objective: implement the documented frozen-encoder residual-gated method.
 
-- [ ] Integrate pinned frozen E5, per-field train-fitted PCA-30, and structured
+- [x] Integrate pinned frozen E5, per-field train-fitted PCA-30, and structured
   encoding with missing/unknown handling and stable field ordering.
-- [ ] Implement near-identity context gating and temporary correction losses.
-- [ ] Implement training, selection, checkpoint/resume, serialization, and a
+- [x] Implement near-identity context gating and temporary correction losses.
+- [x] Implement training, selection, checkpoint/resume, serialization, and a
   clear prediction API with downstream learner and original structured data.
-- [ ] Add direct-target gated control; audit supervised-representation overfit
+- [x] Add direct-target gated control; document supervised-representation overfit risk
   and design a valid cross-fitting/nested diagnostic with aligned feature spaces.
-- [ ] Test gradient freezing, dimensions, initialization, class ordering,
+- [x] Test gradient freezing, dimensions, initialization, class ordering,
   round-trip predictions, and end-to-end synthetic tasks.
 - [ ] Test, document, commit, push, and verify.
 

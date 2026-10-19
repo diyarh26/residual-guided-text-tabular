@@ -9,4 +9,8 @@ teacher budget and reconstructs those same historical splits from the pinned
 source and public Phase 1 fingerprints. It does not score the outer test.
 Other datasets require audited explicit schemas and versioned file hashes;
 generic runner protocols also support saved IDs or declared local splits.
-Fusion configurations remain Phase 3 work.
+`phase3_smoke.json` fixes the synthetic binary architecture smoke before its
+diagnostics: two text fields, 60 fitting/12 validation/12 reserved test rows,
+real frozen E5, five gate epochs and a 100-tree downstream LightGBM. Other
+configurations may use the generic CSV schema/split interface. This is not a
+Phase 4 benchmark or matched-baseline pilot configuration.

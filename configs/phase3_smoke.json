@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "data": {"kind": "synthetic", "task": "binary", "seed": 42, "train_rows": 60, "validation_rows": 12, "test_rows": 12},
+  "encoder": {"model_path": "artifacts/e5-small-v2", "identifier": "intfloat/e5-small-v2", "revision": "ffb93f3bd4047442299a41ebb6fa998a38507c52", "max_length": 512, "batch_size": 32, "device": "cpu"},
+  "pipeline": {
+    "training": {"objective": "residual", "epochs": 5, "batch_size": 20, "lr": 0.001, "weight_decay": 0.0001, "seed": 42, "patience": 3, "device": "cpu", "threads": 2},
+    "hidden_dim": 64, "dropout": 0.1, "category_embedding_dim": 8, "structured_dim": 16,
+    "downstream_estimators": 100, "downstream_threads": 2
+  },
+  "teacher": {"n_splits": 3, "seed": 42, "iterations": 40, "depth": 4, "learning_rate": 0.1, "thread_count": 2, "probability_clip": 1e-7},
+  "output_root": "results/raw"
+}
