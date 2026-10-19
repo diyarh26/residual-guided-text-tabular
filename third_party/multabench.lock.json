@@ -1,0 +1,41 @@
+{
+  "repository": "https://github.com/alanarazi7/MulTaBench",
+  "branch": "master",
+  "reference_date": "2026-07-26",
+  "cutoff_utc": "2026-07-26T23:59:59Z",
+  "commit": "599bd6a5631c96f8aef297cc4cb6e4c197ae0dca",
+  "committed_at": "2026-07-26T18:26:40Z",
+  "current_master_at_inspection": "19225a546259256431654ec19fa229fa5f8a5a1c",
+  "inspected_on": "2026-10-19",
+  "license_at_selected_commit": "No LICENSE, COPYING or NOTICE file, or README license declaration found in selected tree; coverage requires clarification before vendoring or redistribution.",
+  "license_added_commit": "21382f806df3d4a3c27df46bd25467796301be55",
+  "license_added_committed_at": "2026-10-14T22:08:47Z",
+  "later_license": "MIT",
+  "later_copyright": "Copyright (c) 2026 Alan Arazi",
+  "source_vendored": false,
+  "submodule_installed": false,
+  "selection_method": "Latest eligible commit in currently reachable master first-parent history through the inclusive whole-day UTC cutoff, cross-checked with the GitHub commits API.",
+  "historical_ref_limitation": "Current reachable ancestry and commit timestamps do not independently prove the historical branch tip; no contemporaneous ref archive or complete branch-update event log was obtained.",
+  "parent_commit": "8bf543913c7ac1cdd0d223a509ed8a1b00249310",
+  "parent_committed_at": "2026-07-26T11:38:30Z",
+  "next_first_parent_commit": "8ff8fc5647594077b4fcee6e80d184951fae2c64",
+  "next_first_parent_committed_at": "2026-09-01T12:13:35Z",
+  "current_master_committed_at": "2026-10-19T12:39:05Z",
+  "paper_contemporaneous": "https://arxiv.org/abs/2605.10616v1",
+  "paper_current_at_inspection": "https://arxiv.org/abs/2605.10616v2",
+  "tabstar_split_dependency": {
+    "version": "1.1.15",
+    "wheel": "tabstar-1.1.15-py3-none-any.whl",
+    "wheel_sha256": "9c4bf7392101813aac9c0209edbe664e1091c4463ddb4628869a9569d75c1d4e",
+    "source": "https://pypi.org/pypi/tabstar/1.1.15/json",
+    "inspection": "Wheel downloaded outside the workspace and read as a ZIP; not installed or imported.",
+    "seed": 42
+  },
+  "evidence": {
+    "selected_commit": "https://github.com/alanarazi7/MulTaBench/commit/599bd6a5631c96f8aef297cc4cb6e4c197ae0dca",
+    "selected_tree": "https://github.com/alanarazi7/MulTaBench/tree/599bd6a5631c96f8aef297cc4cb6e4c197ae0dca",
+    "history_api": "https://api.github.com/repos/alanarazi7/MulTaBench/commits?sha=master&until=2026-07-26T23%3A59%3A59Z&per_page=3",
+    "later_license_addition": "https://github.com/alanarazi7/MulTaBench/commit/21382f806df3d4a3c27df46bd25467796301be55",
+    "upstream_report": "docs/UPSTREAM.md"
+  }
+}

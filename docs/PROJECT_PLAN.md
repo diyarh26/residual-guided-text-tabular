@@ -1,0 +1,162 @@
+# Project plan
+
+Last updated: October 19, 2026 (Asia/Jerusalem). Deadline: October 26, 2026.
+Phases follow the user's order; Phase 7 report notes may be prepared alongside
+evaluation, but no untested result may be written as a finding. Option B is
+optional and lowest priority. Status values: Not started / In progress /
+Completed / Blocked. [HANDOFF.md](HANDOFF.md) records the current session state.
+
+## Phase 0 - Repository and research infrastructure
+
+**Status: In progress** (final validation and remote synchronization pending).
+
+Objective: establish an understandable, attributable, reproducible research
+workspace without implementing or training the method.
+
+- [x] Inspect the existing folder; retain it without nesting.
+- [x] Read all eight official PDF pages and document authoritative requirements.
+- [x] Verify GitHub account `diyarh26` and absence of the requested repository.
+- [x] Investigate historical master, source compatibility, and license history.
+- [x] Establish documentation, persistent agent instructions, and directory roles.
+- [ ] Validate infrastructure, local links, pin, and private-file exclusions.
+- [ ] Create public repository; review, commit, push, and verify remote SHA.
+- [ ] Report Phase 0 and leave Phase 1 unstarted.
+
+Deliverables: README, AGENTS, all requested docs, source lock, ignore/license
+policy, directory scaffold, GitHub repository, infrastructure validator.
+Acceptance: required documents and local links pass validation; PDF and outputs
+are excluded; immutable historical SHA is documented; remote is accessible and
+synchronized; handoff exposes all unresolved decisions. Course clarifications
+may remain open if no dependent implementation is performed.
+
+## Phase 1 - MulTaBench analysis and baseline reproduction
+
+**Status: Not started.**
+
+Objective: reproduce the historical benchmark before introducing ReFuTab.
+
+- [ ] Resolve/gate course leakage, text/image scope, and metric questions.
+- [ ] Confirm historical-source redistribution policy; retain original attribution.
+- [ ] Map E5/PCA/TAR, data schema, split source, validation, metrics, and integration
+  points in the pinned source; Phase 0 inspection is preliminary analysis only.
+- [ ] Choose and pin compatible Python/ML dependencies and model/data revisions.
+- [ ] Add a small runnable baseline/smoke configuration and thin Colab runner.
+- [ ] Reproduce one original baseline on a small text-tabular task; save exact
+  command, environment, hardware, seed, split IDs, metrics, and failure logs.
+- [ ] Test, document, commit, push, and verify.
+
+Deliverables: source-flow analysis, dependency lock, smoke test, real baseline
+artifact/metrics manifest, exact local/Colab commands. Acceptance: clean setup
+can run the baseline with verified split/metric semantics and traceable output.
+No new algorithm until the baseline works correctly.
+
+## Phase 2 - Data handling and leakage-safe teacher
+
+**Status: Not started.**
+
+Objective: build a general data interface and trustworthy teacher signals.
+
+- [ ] Support arbitrary stable text/numerical/categorical schema, missing values,
+  regression, binary classification, and multiclass classification.
+- [ ] Persist outer/inner/OOF split IDs, seeds, class ordering, and feature schema.
+- [ ] Fit 3-fold OOF structured-only CatBoost with isolated fold preprocessing.
+- [ ] Separate internal validation and final evaluation; handle binary clipping,
+  multiclass class coverage, and probability/calibration decisions train-only.
+- [ ] Add disjointness, fit-provenance, ID/target exclusion, alignment, and
+  deterministic failure tests; test, document, commit, push, and verify.
+
+Deliverables: dataset/teacher APIs, configurations, provenance artifacts, tests.
+Acceptance: each OOF row was excluded from its teacher fit, transformations
+never fit on evaluation data, and supported tasks pass meaningful tests.
+
+## Phase 3 - Option A fusion
+
+**Status: Not started.**
+
+Objective: implement the documented frozen-encoder residual-gated method.
+
+- [ ] Integrate pinned frozen E5, per-field train-fitted PCA-30, and structured
+  encoding with missing/unknown handling and stable field ordering.
+- [ ] Implement near-identity context gating and temporary correction losses.
+- [ ] Implement training, selection, checkpoint/resume, serialization, and a
+  clear prediction API with downstream learner and original structured data.
+- [ ] Add direct-target gated control; audit supervised-representation overfit
+  and design a valid cross-fitting/nested diagnostic with aligned feature spaces.
+- [ ] Test gradient freezing, dimensions, initialization, class ordering,
+  round-trip predictions, and end-to-end synthetic tasks.
+- [ ] Test, document, commit, push, and verify.
+
+Deliverables: modular source, training/inference entry points, artifact schema,
+unit/integration/leakage tests. Acceptance: small synthetic runs complete for
+all supported task types, inference works without teacher/head, invariants pass.
+
+## Phase 4 - Pilot experiments and decision gate
+
+**Status: Not started.**
+
+Objective: determine whether the method merits broader evaluation.
+
+- [ ] Pre-register representative classification/regression pilots and seeds.
+- [ ] Run aligned Joint Frozen, Joint TAR, direct-target gated, and residual-guided
+  conditions; measure final learner scores as well as correction-head behavior.
+- [ ] Save configurations, learning curves, runtime, memory, hardware, failures,
+  and machine-readable metrics; analyze stability and overfit diagnostics.
+- [ ] Report continue/adjust/stop recommendation to the user before scaling.
+- [ ] Test result aggregation, document, commit, push, and verify.
+
+Deliverables: reproducible pilot results and explicit decision report.
+Acceptance: completed and failed runs are distinguishable, comparisons are
+controlled, test scores did not drive tuning, and the decision gate is reported.
+
+## Phase 5 - Full evaluation and ablations
+
+**Status: Not started.**
+
+Objective: scientifically valid benchmark coverage within agreed course scope.
+
+- [ ] Freeze the evaluation plan and clarify all scope/metric decisions.
+- [ ] Run all applicable agreed datasets, baselines, seeds, and controlled ablations.
+- [ ] Report per-dataset AUROC/R2, deltas, variability, justified statistical
+  analysis with correct independence unit, compute cost, and negative findings.
+- [ ] Save lightweight metrics, tables/figures, manifests, and failure analysis.
+- [ ] Validate result completeness and provenance; document, commit, push, verify.
+
+Deliverables: machine-readable complete run ledger, paper-ready tables/figures,
+statistical analysis. Acceptance: agreed coverage is met or missing coverage is
+explicitly reported as incomplete; no unsupported significance claims.
+
+## Phase 6 - Option B (optional)
+
+**Status: Not started.**
+
+Objective: investigate isolated LoRA encoder adaptation only if justified.
+
+- [ ] Confirm promising Option A results and enough time after core deliverables.
+- [ ] Isolate LoRA implementation/configuration and preserve Option A reproduction.
+- [ ] Compare fairly with Option A and Joint TAR; test, document, commit, push.
+
+Deliverables: optional isolated extension and controlled results. Acceptance:
+core submission is secure, comparisons are valid, and Option A remains usable.
+Skipping this phase is allowed; do not let it delay Phase 7.
+
+## Phase 7 - Report and final deliverables
+
+**Status: Not started.**
+
+Objective: submit a complete, reproducible Track 1 project.
+
+- [ ] Prepare English NeurIPS LaTeX paper, <=4 pages excluding references and
+  appendices; appendices contain result tables/metrics only.
+- [ ] Cover title/abstract, introduction, related work, method, setup/results,
+  ablations, limitations, and conclusion; cite actual reused methods.
+- [ ] Prepare required Hugging Face weights/artifact inventory with provenance
+  and permissions; clarify treatment of unchanged public pretrained models.
+- [ ] Provide working inference and end-to-end training modes with exact commands,
+  pinned dependencies, seeds, hardware, and saved-artifact reproduction.
+- [ ] Test clean setup and artifact loading; final documentation/commit/push;
+  submit all deliverables individually via Moodle by October 26, 2026.
+
+Deliverables: paper, general-purpose source/lock, evaluation results, HF models,
+both operating modes, and reproducibility guide. Acceptance: all §2.3/§4 items
+are checked against the PDF; uploaded artifacts and commands actually work.
+The PDF does not specify an exact deadline time; confirm Moodle separately.
