@@ -1,0 +1,36 @@
+[project]
+name = "refutab"
+version = "0.1.0"
+description = "ReFuTab research infrastructure and historical MulTaBench baseline runner"
+requires-python = ">=3.11,<3.12"
+license = "MIT"
+dependencies = [
+  "accelerate==1.12.0",
+  "huggingface-hub==0.36.0",
+  "joblib==1.5.2",
+  "lightgbm==4.6.0",
+  "numpy==2.3.5",
+  "pandas==2.3.3",
+  "peft==0.18.0",
+  "pillow==11.3.0",
+  "psutil==7.0.0",
+  "scikit-learn==1.6.1",
+  "scipy==1.16.3",
+  "skrub==0.6.2",
+  "tabstar==1.1.15",
+  "torch==2.7.1+cpu",
+  "torchvision==0.22.1+cpu",
+  "transformers==4.57.3",
+]
+
+[tool.uv]
+package = false
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cpu" }
+torchvision = { index = "pytorch-cpu" }

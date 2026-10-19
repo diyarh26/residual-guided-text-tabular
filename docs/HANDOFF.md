@@ -4,9 +4,10 @@ Updated: October 19, 2026 (Asia/Jerusalem).
 
 ## Current phase and status
 
-**Phase 0 - Completed: documentation, provenance, checks, and public repository.**
-Phase 1 has not started. The full algorithm, baseline, and all experiments are
-unimplemented. This follow-up records the final training clarification only.
+**Phase 1 - In progress: source audit, environment, and baseline reproduction.**
+The user authorized Phase 1 on October 19, 2026. Phase 0 remains complete.
+Original-source baseline orchestration is prepared; no ReFuTab teacher/fusion
+implementation exists. Do not begin Phase 2 in this session.
 
 ## Latest user clarification
 
@@ -67,8 +68,8 @@ scores, checkpoints, failed ML experiments, or completed benchmark runs exist.
 - Public repository: https://github.com/diyarh26/residual-guided-text-tabular
 - Branch: `main`.
 - Latest verified commit at edit time:
-  `4d6c2e8c35d7064cedf48cfa3aa6897700a67f43`
-  (`docs: confirm datasets without image columns as evaluation scope`).
+  `fe2c3a3406c96e5fea17cbede6fe584e474d9a8f`
+  (`docs: confirm separate per-dataset training protocol`).
 - That commit is pushed and verified against `origin/main`. This clarification
   update follows it in a separate documentation commit; compare actual HEAD
   with the remote using the commands below for the final session tip.
@@ -128,10 +129,10 @@ git ls-remote origin refs/heads/main
   is arXiv:2605.10616. July 26 is tutor/user-provided, not a PDF publication date.
 - OOF teacher outputs do not make fusion embeddings OOF. Audit supervised-gate
   optimism with the planned nested diagnostic; do not mix unaligned fold spaces.
-- No experiment dependencies are locked yet. Do not install latest upstream or
-  run today's README against the historical source and call it reproduction.
+- Phase 1 CPU dependencies are locked in `uv.lock`; fresh `.venv` installation
+  and nine tests passed. Use `uv sync --locked`; do not install latest upstream.
+  First real baseline is pending at this pre-run infrastructure commit.
 - Preserve the original PDF locally; no redistribution permission is recorded.
   Do not commit datasets, tokens, model weights, or large embedding caches.
-- User originally requested Phase 0 first; it is complete. This follow-up confirms
-  the protocol only. Do not treat it as an instruction to start training,
-  expensive experiments, Option B, or major implementation.
+- User explicitly authorized Phase 1. Run only the small original baseline and
+  its checks; no full benchmark, new teacher/fusion algorithm, or Option B.

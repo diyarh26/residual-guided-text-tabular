@@ -32,7 +32,8 @@ may remain open if no dependent implementation is performed.
 
 ## Phase 1 - MulTaBench analysis and baseline reproduction
 
-**Status: Not started.**
+**Status: In progress.** Source/schema audits and runner are prepared; environment
+installation, runtime tests, and the first real baseline are in progress.
 
 Objective: reproduce the historical benchmark before introducing ReFuTab.
 
@@ -42,8 +43,8 @@ Confirmed training protocol: train separately per dataset/outer fold on training
 rows, use internal validation for selection, and keep test data untouched.
 
 - [ ] Validate leakage-safe split boundaries and historical multiclass metrics.
-- [ ] Confirm historical-source redistribution policy; retain original attribution.
-- [ ] Map E5/PCA/TAR, data schema, split source, validation, metrics, and integration
+- [x] Confirm historical-source redistribution policy; retain original attribution.
+- [x] Map E5/PCA/TAR, data schema, split source, validation, metrics, and integration
   points in the pinned source; Phase 0 inspection is preliminary analysis only.
 - [ ] Choose and pin compatible Python/ML dependencies and model/data revisions.
 - [ ] Add a small runnable baseline/smoke configuration and thin Colab runner.

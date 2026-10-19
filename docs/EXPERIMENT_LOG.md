@@ -21,6 +21,28 @@ whitespace and publication-boundary checks passed, and the initial GitHub push
 was verified. These checks do not evaluate a model. Details and source commit
 provenance are in [HANDOFF.md](HANDOFF.md). There is no ML environment lock yet.
 
+## October 19, 2026 - Phase 1 setup and preregistered smoke baseline
+
+User authorized Phase 1 after resolving dataset scope and separate per-dataset
+training. Audited all 40 historical metadata schemas: 20 without image columns
+are eligible. Prepared Kaggle Product Sentiment version 1 and pinned E5 revision
+`ffb93f3bd4047442299a41ebb6fa998a38507c52` with content hashes.
+
+Environment setup initially selected Joblib 1.6.0, which removed
+`joblib.externals.cloudpickle` required by Skrub 0.6.2. Two test-discovery attempts
+failed during imports before any model experiment. Pinning original Joblib
+1.5.2 resolved the incompatibility. Nine tests then passed, including original
+split/metric behavior, train-only PCA, unknown-category handling, frozen encoder
+inference, run safety, and fresh-clone bootstrap. A source review found and fixed
+a fresh `--no-checkout` bootstrap guard bug before a network-clean setup claim.
+
+Before any test score, fixed one CPU Joint Frozen LightGBM smoke configuration:
+Product Sentiment, fold 0, original 1,000-row outer training cap, PCA 30, original
+E5 prefix/pooling/tokenization and learner settings. Expected rows are 900 fit,
+100 validation, and 509 test. This is a reduced baseline reproduction, not a
+paper-table score or ReFuTab experiment. The executable code/config will be
+committed before its real run. No baseline score is available at this entry.
+
 ## Required entry for each later experiment
 
 Record run ID/time/status (planned/running/completed/failed/interrupted), exact

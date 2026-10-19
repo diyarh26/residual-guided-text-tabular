@@ -1,57 +1,94 @@
 # Colab execution workflow
 
-Status: documented workflow only. A thin runnable notebook, tested dependency
-lock, experiment command, and resume API will be added in Phase 1 and subsequent
-implementation phases. Phase 0 requires no GPU or training job.
+[phase1_baseline.ipynb](../notebooks/phase1_baseline.ipynb) is a thin runner for
+the original historical Joint Frozen LightGBM baseline on CPU. Its cells call
+repository source; no model, embedding, splitting, or metric logic lives in the
+notebook. The notebook has no saved outputs. Local notebook syntax checks do
+not establish that it has been executed successfully in Google Colab; actual
+execution outcomes must be recorded in [EXPERIMENT_LOG.md](EXPERIMENT_LOG.md).
 
 VS Code is the development workspace. GitHub is the code source. Colab is an
-execution environment, not the canonical source or sole artifact store.
+execution environment; Google Drive is the persistent output store for this
+runner. A Colab filesystem or notebook output alone is insufficient persistence.
 
-## Before every later Colab experiment
+## Run the CPU baseline
 
-1. Commit and push the intended source/configuration; choose the full 40-character
-   project commit, not a moving branch. Obtain the upstream SHA from its lock.
-2. Select hardware appropriate to the locked baseline/experiment. Record runtime
-   type, accelerator, memory, Python, CUDA, and dependency-lock fingerprint.
-3. Authenticate/mount Google Drive interactively or use another approved
-   persistent artifact store. Keep credentials out of code, notebook outputs,
-   logs, and Git. Do not put access tokens into clone URLs.
-4. Clone ReFuTab into Colab's temporary filesystem and detach at the recorded
-   project SHA. Verify `git rev-parse HEAD` and a clean working tree. A bootstrap
-   cell can use the following commands with a real recorded SHA:
+1. Commit, push, and review the intended source/configuration. Copy the full
+   lowercase 40-character ReFuTab commit into the notebook's `PROJECT_SHA`.
+   The default placeholder raises an exception before downloads or mounting
+   Drive. A branch name, short SHA, or moving `main` is not accepted.
+2. Open the notebook in Colab and select **Runtime > Change runtime type > CPU**.
+   The environment lock installs CPU Torch and the baseline explicitly uses CPU.
+   This notebook does not exercise a GPU, Joint TAR, or ReFuTab training.
+3. Run the configuration and interactive Google Drive mount cells. Use a private
+   Drive folder. The notebook generates a unique run ID and immediately creates
+   a persistent console log at
+   `/content/drive/MyDrive/ReFuTab/runs/_bootstrap/<run-id>.log`.
+   Do not embed credentials or tokens in cells, clone URLs, or outputs.
+4. Run setup. The notebook installs `uv==0.11.24` using the Colab kernel's pip,
+   clones the public repository into `/content/refutab`, checks out the selected
+   commit in detached mode, verifies the exact HEAD, and requires a clean tree.
+   If that directory already exists, setup fails without deleting it; use a
+   fresh runtime or explicitly move the old checkout before retrying.
+5. Install the commit's dependency lock, prepare the pinned source/data/model
+   inputs, then run tests. The source commands are:
 
    ```bash
-   git clone https://github.com/diyarh26/residual-guided-text-tabular.git /content/refutab
-   git -C /content/refutab checkout --detach <FULL_PROJECT_SHA>
-   git -C /content/refutab rev-parse HEAD
+   uv sync --locked --python 3.11
+   uv run --frozen python scripts/prepare_phase1.py
+   uv run --frozen python -m unittest discover -s tests
    ```
 
-5. Install from the environment lock belonging to that commit. Resolve upstream
-   using the pinned historical source and verify its SHA. Current `master` and
-   the latest published package are not substitutes. Run the commit's smoke test
-   before a long run.
-6. Give the run a unique ID; persist its manifest before fitting. The source
-   runner must take a configuration and explicit persistent output directory.
-   Do not start an experiment until its executable command exists and is tested.
+   Preparation fetches the historical upstream SHA from the project lock, the
+   configured pilot data revision, and the pinned frozen E5 snapshot. It must
+   verify inputs rather than substitute latest versions. The original upstream
+   checkout, data, and model cache stay outside tracked source. The notebook
+   checks the working tree again before fitting.
+6. Run the baseline cell. It calls this interface with the generated run ID:
 
-## Persistence and resumption
+   ```bash
+   uv run --frozen python scripts/run_baseline.py \
+     --config configs/phase1_frozen.json \
+     --run-id <unique-run-id> \
+     --output-root /content/drive/MyDrive/ReFuTab/runs
+   ```
 
-Use a private persistent folder such as
-`/content/drive/MyDrive/ReFuTab/runs/<run-id>/` for configs, logs, incremental
-metrics, split provenance, checkpoints, and final models. Never place private
-data in a shared/public folder by default. Stage large temporary files locally
-if useful, but periodically flush complete checkpoints and manifests to Drive.
-Verify that a saved artifact can be read back; mounting Drive alone is not a
-backup policy. Use atomic checkpoint replacement where supported and retain a
-previous valid checkpoint when transferring to remote storage.
+   The configuration fixes the dataset, training cap, fold, device, and other
+   settings. Keep the upstream implementation and pinned revisions intact.
+   Inspect the actual saved split sizes; a requested cap is not the number of
+   learner-fitting rows. Do not tune settings after inspecting test scores.
+7. Review the saved run status, metrics, class order, split provenance,
+   source/upstream/data/model revisions, environment, hardware, runtime, and
+   artifact paths. Read back the saved manifest and artifacts before treating
+   the run as persisted. Record the real Colab execution, limitations, and
+   actual runtime/cost; do not infer a successful reproduction from notebook
+   creation or a passing installation cell.
 
-Record a run as interrupted if the runtime disconnects. Resume only when its
-source SHA, data/model revisions, split IDs, config hash, feature/class order,
-and environment match. Restore optimizer/scheduler/RNG state; do not silently
-restart under the same run ID with different settings. If the chosen learner
-does not support resumption, report that limitation and rerun the incomplete
-stage with an explicit new attempt ID.
+The notebook streams installation, preparation, test, and baseline console
+output to the persistent bootstrap log. Nonzero command exits stop execution.
+Runner artifacts are created separately under
+`/content/drive/MyDrive/ReFuTab/runs/<run-id>/`; keeping the bootstrap log outside
+that directory lets the runner require a new, unused run directory.
 
-Return reviewed lightweight summaries and figures to GitHub with a descriptive
-commit; keep raw datasets, embedding caches, and checkpoints in their artifact
-store. Phase 1 must test these steps on one small baseline before scaling.
+## Persistence and retry limitations
+
+The runner saves a run manifest before fitting and retains failure records and
+any artifacts already written. Google Drive preserves those files across
+runtime resets; large input downloads and temporary caches in `/content` may
+need preparation again. Keep data, embeddings, fitted models, and raw run
+outputs in the private artifact store. Return only reviewed lightweight
+summaries and figures to GitHub with descriptive commits.
+
+The current LightGBM `fit` stage is not checkpoint-resumable. A disconnected
+runtime may leave an incomplete manifest or only the flushed console log;
+neither is evidence of completion. Retain the failed/interrupted attempt and
+retry the complete baseline with a **new run ID**. Do not overwrite an old run
+or describe a full restart as checkpoint resumption. Check the actual process
+and saved status after a browser disconnection, since disconnection alone does
+not prove the runtime stopped.
+
+Future resumable training must verify the same source SHA, data/model revisions,
+split IDs, configuration hash, feature/class order, and environment before
+restoring model, optimizer, scheduler, and random state. No such optimizer
+resume API is claimed by this Phase 1 notebook. GPU/TAR execution and ReFuTab
+training require their own later configuration, tests, and execution record.

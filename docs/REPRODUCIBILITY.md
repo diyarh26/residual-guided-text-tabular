@@ -1,9 +1,54 @@
 # Reproducibility
 
-Status: Phase 0 infrastructure only. No training/inference entry point or
-validated ML dependency lock exists yet. Do not treat proposed commands as
-reproduced experiments. Actual scores and failures belong in
-[EXPERIMENT_LOG.md](EXPERIMENT_LOG.md).
+Phase 1 adds a locked CPU environment and a runner for the original historical
+Joint Frozen baseline. The new ReFuTab algorithm is not implemented. Actual
+execution outcomes, including failures, belong in [EXPERIMENT_LOG.md](EXPERIMENT_LOG.md).
+
+## Run the historical CPU baseline
+
+The environment uses CPython 3.11 and `uv==0.11.24`. Core numerical/ML packages
+match the selected source's requirements, with CPU builds of Torch 2.7.1 and
+Torchvision 0.22.1. The hash-bearing `uv.lock` fixes the complete resolved
+dependency closure; it deliberately excludes unrelated learner ecosystems.
+The package manager installs into the ignored `.venv/`, leaving global packages
+alone. This is a CPU baseline environment; it does not validate GPU/TAR support.
+
+From a clean checkout of the intended full project SHA on Windows:
+
+```powershell
+py -3.11 -m pip install uv==0.11.24
+py -3.11 -m uv sync --locked
+py -3.11 -m uv run --frozen python scripts/prepare_phase1.py
+py -3.11 -m uv run --frozen python -m unittest discover -s tests -v
+py -3.11 -m uv run --frozen python scripts/run_baseline.py --config configs/phase1_frozen.json --run-id my-new-phase1-run --summary results/my-new-phase1-run.json
+```
+
+On Linux use the same `uv` commands after installing Python 3.11, or use the
+[thin Colab notebook](../notebooks/phase1_baseline.ipynb). A new run ID and
+summary path must be used for each attempt; existing outputs are never overwritten.
+Production runs reject tracked changes and untracked publishable source files.
+`--allow-dirty` exists only for explicitly recorded development failures/checks.
+
+Preparation verifies the unmodified historical source SHA, Kaggle pilot version 1
+and CSV/metadata hashes, and E5 snapshot
+`ffb93f3bd4047442299a41ebb6fa998a38507c52`. Source, data, and weights are fetched
+locally into ignored directories; they are not redistributed in this repository.
+The small configuration fixes a 1,000-row outer training cap before viewing any
+test score. The original sampler retains 509 test rows; the learner internally
+uses 900 fitting rows and 100 validation rows. This is a smoke reproduction,
+not a published full-benchmark score. See [source analysis](BASELINE_ANALYSIS.md)
+and [dataset provenance](DATASETS.md).
+
+Each run writes an initial `manifest.json`, logs, split IDs, PCA states, and
+predictions under `results/raw/<run-id>/`. Failures retain their traceback and
+failed status. `--output-root` can point to private persistent Drive storage.
+The optional reviewed JSON summary contains metrics, hashes, class order,
+environment/hardware, timings, sampled peak RSS, and relative artifact references;
+review it before committing. Raw IDs, text, predictions, and weights stay out of Git.
+
+The original CPU LightGBM fit is not checkpoint-resumable. A failed/interrupted
+stage requires a new attempt ID. The notebook has static validation separately
+from actual Colab execution; local success does not establish Colab execution.
 
 ## Reproduce the infrastructure checks
 
@@ -42,14 +87,14 @@ Do not run current README commands against this historical tree or use
 applicability and environment compatibility need review before reuse or copying.
 Never overwrite an existing checkout blindly.
 
-## Phase 1 environment gate
+## Environment provenance
 
-Before a baseline, record and validate a compatible Python version, exact
-dependencies and transitive lock, PyTorch/CUDA combination if used, upstream
-dependencies, hardware, and data/model revisions. A fresh environment must
-install from that lock and pass a smoke test. Resolve CLI-versus-paper settings
-explicitly, including what the source actually passes to TAR. No GPU package
-installation or large model download has occurred in Phase 0.
+Before every baseline, record exact dependencies, upstream SHA, hardware,
+data/model revisions, configuration, splits, and seeds. The first environment
+is a fresh `.venv` installed from `uv.lock`; runtime validation is recorded in
+the handoff/log. Package versions are embedded in run manifests. Resolve
+CLI-versus-paper settings explicitly; the unmodified frozen path is used here.
+GPU/CUDA compatibility and TAR need separate validation before later runs.
 
 ## Required experiment manifest (planned)
 

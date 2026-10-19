@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "condition": "joint_frozen",
+  "upstream_path": "third_party/MulTaBench",
+  "upstream_commit": "599bd6a5631c96f8aef297cc4cb6e4c197ae0dca",
+  "dataset_id": "MUL_TEXT_PRODUCT_SENTIMENT",
+  "dataset_slug": "multabench-product-sentiment",
+  "dataset_version": 1,
+  "dataset_path": "data/multabench-product-sentiment-v1/data.csv",
+  "metadata_path": "data/multabench-product-sentiment-v1/metadata.json",
+  "dataset_sha256": "8a75a9880a5a1a619b16622c7f8f257ff8d19fde9b02864bf0059d5b0a8c2bb7",
+  "metadata_sha256": "db78538f386c3eed11df6c9110fbd8de30c9f7c72311ff85ee6811fd75bfde13",
+  "model_identifier": "intfloat/e5-small-v2",
+  "model_revision": "ffb93f3bd4047442299a41ebb6fa998a38507c52",
+  "model_path": "artifacts/e5-small-v2",
+  "train_examples": 1000,
+  "fold": 0,
+  "pca_components": 30,
+  "device": "cpu",
+  "torch_threads": 4,
+  "seed": 42,
+  "output_root": "results/raw"
+}

@@ -1,0 +1,1994 @@
+{
+  "schema_version": 1,
+  "audited_date": "2026-10-19",
+  "upstream_sha": "599bd6a5631c96f8aef297cc4cb6e4c197ae0dca",
+  "benchmark_roster": "MulTaBenchDatasetID at pinned SHA; candidate enums excluded",
+  "scope_rule": "Include original curated benchmark schema only when image_col is null; never remove image columns to create eligibility.",
+  "schema_evidence": "Pinned curation definitions and immutable Kaggle dataset version 1 metadata; no migrated Hugging Face data used.",
+  "pilot_dataset_id": "MUL_TEXT_PRODUCT_SENTIMENT",
+  "eligible_datasets": [
+    {
+      "dataset_id": "BIN_TEXT_FAKE_JOB_POSTING",
+      "kaggle_ref": "chico89/multabench-fake-job-posting",
+      "kaggle_version": 1,
+      "image_col": null,
+      "metadata_sha256": "4543d454ae6faf856d33137278ad58553663d193a34a35740de969f9c4e652d8",
+      "metadata_url": "https://www.kaggle.com/api/v1/datasets/download/chico89/multabench-fake-job-posting/metadata.json?datasetVersionNumber=1",
+      "eligibility": "eligible_no_image_column",
+      "metadata_dataset_id": "BIN_TEXT_PROFESSIONAL_FAKE_JOB_POSTING",
+      "target": "fraudulent",
+      "task": "binary",
+      "classes_count": 2,
+      "rows": 12725,
+      "features_count": 5,
+      "release_created_utc": "2026-04-01T17:16:20.63Z",
+      "version_history_checked": true,
+      "source_url": "https://www.openml.org/search?type=data&id=46655",
+      "pinned_curation_url": "https://github.com/alanarazi7/MulTaBench/blob/599bd6a5631c96f8aef297cc4cb6e4c197ae0dca/multabench/benchmark/datasets/BIN_TEXT_FAKE_JOB_POSTING.py",
+      "declared_feature_dtypes": [
+        {
+          "name": "title",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "salary_range",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "description",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "required_experience",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "required_education",
+          "pandas_dtype_in_pinned_annotation": "object"
+        }
+      ],
+      "license": {
+        "curated_release_declaration": "Other (specified in description)",
+        "source": {
+          "status": "source_metadata_only",
+          "source_metadata_url": "https://www.openml.org/api/v1/json/data/46655",
+          "declared_license": "Kaggle",
+          "source_version": "1",
+          "original_data_url": "https://www.kaggle.com/shivamb/real-or-fake-fake-jobposting-prediction"
+        },
+        "redistribution": "not approved by this inventory; raw data remains ignored"
+      },
+      "review_flags": [],
+      "data_file_pin_status": "not_downloaded_or_hashed"
+    },
+    {
+      "dataset_id": "BIN_TEXT_JIGSAW_TOXICITY",
+      "kaggle_ref": "chico89/multabench-jigsaw-toxicity",
+      "kaggle_version": 1,
+      "image_col": null,
+      "metadata_sha256": "982ef528956e01422c3e7a943422202c39579f673c01ba302a7171cfb8dc66af",
+      "metadata_url": "https://www.kaggle.com/api/v1/datasets/download/chico89/multabench-jigsaw-toxicity/metadata.json?datasetVersionNumber=1",
+      "eligibility": "eligible_no_image_column",
+      "metadata_dataset_id": "BIN_TEXT_SOCIAL_JIGSAW_TOXICITY",
+      "target": "Is Toxic",
+      "task": "binary",
+      "classes_count": 2,
+      "rows": 100000,
+      "features_count": 31,
+      "release_created_utc": "2026-04-01T17:16:23.23Z",
+      "version_history_checked": true,
+      "source_url": "https://www.openml.org/search?type=data&id=46654",
+      "pinned_curation_url": "https://github.com/alanarazi7/MulTaBench/blob/599bd6a5631c96f8aef297cc4cb6e4c197ae0dca/multabench/benchmark/datasets/BIN_TEXT_JIGSAW_TOXICITY.py",
+      "declared_feature_dtypes": [
+        {
+          "name": "comment_text",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "asian",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "atheist",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "bisexual",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "black",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "buddhist",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "christian",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "female",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "heterosexual",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "hindu",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "homosexual_gay_or_lesbian",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "intellectual_or_learning_disability",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "jewish",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "latino",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "male",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "muslim",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "other_disability",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "other_gender",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "other_race_or_ethnicity",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "other_religion",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "other_sexual_orientation",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "physical_disability",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "psychiatric_or_mental_illness",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "transgender",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "white",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "created_date",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "funny",
+          "pandas_dtype_in_pinned_annotation": "int64"
+        },
+        {
+          "name": "wow",
+          "pandas_dtype_in_pinned_annotation": "int64"
+        },
+        {
+          "name": "sad",
+          "pandas_dtype_in_pinned_annotation": "int64"
+        },
+        {
+          "name": "likes",
+          "pandas_dtype_in_pinned_annotation": "int64"
+        },
+        {
+          "name": "disagree",
+          "pandas_dtype_in_pinned_annotation": "int64"
+        }
+      ],
+      "license": {
+        "curated_release_declaration": "Other (specified in description)",
+        "source": {
+          "status": "source_metadata_only",
+          "source_metadata_url": "https://www.openml.org/api/v1/json/data/46654",
+          "declared_license": "Kaggle",
+          "source_version": "1",
+          "original_data_url": "https://www.kaggle.com/c/jigsaw-unintended-bias-in-toxicity-classification"
+        },
+        "redistribution": "not approved by this inventory; raw data remains ignored"
+      },
+      "review_flags": [],
+      "data_file_pin_status": "not_downloaded_or_hashed"
+    },
+    {
+      "dataset_id": "BIN_TEXT_KICKSTARTER_FUNDING",
+      "kaggle_ref": "chico89/multabench-kickstarter-funding",
+      "kaggle_version": 1,
+      "image_col": null,
+      "metadata_sha256": "d4443dab3681016ab6d7a3d4c1b2a560aba9410016d7d8205bc56429a1b8f711",
+      "metadata_url": "https://www.kaggle.com/api/v1/datasets/download/chico89/multabench-kickstarter-funding/metadata.json?datasetVersionNumber=1",
+      "eligibility": "eligible_no_image_column",
+      "metadata_dataset_id": "BIN_TEXT_PROFESSIONAL_KICKSTARTER_FUNDING",
+      "target": "Funding Status",
+      "task": "binary",
+      "classes_count": 2,
+      "rows": 86502,
+      "features_count": 9,
+      "release_created_utc": "2026-04-01T17:16:21.227Z",
+      "version_history_checked": true,
+      "source_url": "https://www.openml.org/search?type=data&id=46668",
+      "pinned_curation_url": "https://github.com/alanarazi7/MulTaBench/blob/599bd6a5631c96f8aef297cc4cb6e4c197ae0dca/multabench/benchmark/datasets/BIN_TEXT_KICKSTARTER_FUNDING.py",
+      "declared_feature_dtypes": [
+        {
+          "name": "name",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "desc",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "goal",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "keywords",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "disable_communication",
+          "pandas_dtype_in_pinned_annotation": "bool"
+        },
+        {
+          "name": "country",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "currency",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "deadline",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "created_at",
+          "pandas_dtype_in_pinned_annotation": "object"
+        }
+      ],
+      "license": {
+        "curated_release_declaration": "Other (specified in description)",
+        "source": {
+          "status": "source_metadata_only",
+          "source_metadata_url": "https://www.openml.org/api/v1/json/data/46668",
+          "declared_license": "Kaggle",
+          "source_version": "1",
+          "original_data_url": "https://www.kaggle.com/codename007/funding-successful-projects"
+        },
+        "redistribution": "not approved by this inventory; raw data remains ignored"
+      },
+      "review_flags": [],
+      "data_file_pin_status": "not_downloaded_or_hashed"
+    },
+    {
+      "dataset_id": "MUL_TEXT_DATA_SCIENTIST_SALARY",
+      "kaggle_ref": "chico89/multabench-data-scientist-salary",
+      "kaggle_version": 1,
+      "image_col": null,
+      "metadata_sha256": "639a089e694ff5943a5ea7305db21ec08aac7266c29a0e9ec28c4b9ae2525c47",
+      "metadata_url": "https://www.kaggle.com/api/v1/datasets/download/chico89/multabench-data-scientist-salary/metadata.json?datasetVersionNumber=1",
+      "eligibility": "eligible_no_image_column",
+      "metadata_dataset_id": "MUL_TEXT_PROFESSIONAL_DATA_SCIENTIST_SALARY",
+      "target": "salary",
+      "task": "multiclass",
+      "classes_count": 6,
+      "rows": 15841,
+      "features_count": 6,
+      "release_created_utc": "2026-04-01T17:16:20.17Z",
+      "version_history_checked": true,
+      "source_url": "https://www.openml.org/search?type=data&id=46664",
+      "pinned_curation_url": "https://github.com/alanarazi7/MulTaBench/blob/599bd6a5631c96f8aef297cc4cb6e4c197ae0dca/multabench/benchmark/datasets/MUL_TEXT_DATA_SCIENTIST_SALARY.py",
+      "declared_feature_dtypes": [
+        {
+          "name": "experience",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "job_description",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "job_desig",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "job_type",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "key_skills",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "location",
+          "pandas_dtype_in_pinned_annotation": "object"
+        }
+      ],
+      "license": {
+        "curated_release_declaration": "Other (specified in description)",
+        "source": {
+          "status": "source_metadata_only",
+          "source_metadata_url": "https://www.openml.org/api/v1/json/data/46664",
+          "declared_license": "MachineHack",
+          "source_version": "1",
+          "original_data_url": "https://machinehack.com/hackathons/predict_the_data_scientists_salary_in_india_hackathon/overview"
+        },
+        "redistribution": "not approved by this inventory; raw data remains ignored"
+      },
+      "review_flags": [],
+      "data_file_pin_status": "not_downloaded_or_hashed"
+    },
+    {
+      "dataset_id": "MUL_TEXT_MICHELIN_RESTAURANTS",
+      "kaggle_ref": "chico89/multabench-michelin-restaurants",
+      "kaggle_version": 1,
+      "image_col": null,
+      "metadata_sha256": "0ff22a192e4652525e38eacb0bc4b2971da01caf23dfb69945fab8634c83c55f",
+      "metadata_url": "https://www.kaggle.com/api/v1/datasets/download/chico89/multabench-michelin-restaurants/metadata.json?datasetVersionNumber=1",
+      "eligibility": "eligible_no_image_column",
+      "metadata_dataset_id": "MUL_TEXT_FOOD_MICHELIN_GUIDE_RESTAURANTS",
+      "target": "Award",
+      "task": "multiclass",
+      "classes_count": 5,
+      "rows": 18843,
+      "features_count": 11,
+      "release_created_utc": "2026-04-01T17:16:22.2Z",
+      "version_history_checked": true,
+      "source_url": "https://www.kaggle.com/datasets/ngshiheng/michelin-guide-restaurants-2021",
+      "pinned_curation_url": "https://github.com/alanarazi7/MulTaBench/blob/599bd6a5631c96f8aef297cc4cb6e4c197ae0dca/multabench/benchmark/datasets/MUL_TEXT_MICHELIN_RESTAURANTS.py",
+      "declared_feature_dtypes": [
+        {
+          "name": "Name",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Address",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Location",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Price",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Cuisine",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Longitude",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "Latitude",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "PhoneNumber",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "GreenStar",
+          "pandas_dtype_in_pinned_annotation": "int64"
+        },
+        {
+          "name": "FacilitiesAndServices",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Description",
+          "pandas_dtype_in_pinned_annotation": "object"
+        }
+      ],
+      "license": {
+        "curated_release_declaration": "Other (specified in description)",
+        "source": {
+          "status": "source_metadata_only",
+          "source_metadata_url": "https://www.kaggle.com/api/v1/datasets/view/ngshiheng/michelin-guide-restaurants-2021",
+          "declared_license": "Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)",
+          "source_version_at_inspection": 104
+        },
+        "redistribution": "not approved by this inventory; raw data remains ignored"
+      },
+      "review_flags": [],
+      "data_file_pin_status": "not_downloaded_or_hashed"
+    },
+    {
+      "dataset_id": "MUL_TEXT_PRODUCT_SENTIMENT",
+      "kaggle_ref": "chico89/multabench-product-sentiment",
+      "kaggle_version": 1,
+      "image_col": null,
+      "metadata_sha256": "db78538f386c3eed11df6c9110fbd8de30c9f7c72311ff85ee6811fd75bfde13",
+      "metadata_url": "https://www.kaggle.com/api/v1/datasets/download/chico89/multabench-product-sentiment/metadata.json?datasetVersionNumber=1",
+      "eligibility": "eligible_no_image_column",
+      "metadata_dataset_id": "MUL_TEXT_CONSUMER_PRODUCT_SENTIMENT",
+      "target": "Sentiment",
+      "task": "multiclass",
+      "classes_count": 4,
+      "rows": 5091,
+      "features_count": 2,
+      "release_created_utc": "2026-04-01T17:16:19.353Z",
+      "version_history_checked": true,
+      "source_url": "https://www.openml.org/search?type=data&id=46651",
+      "pinned_curation_url": "https://github.com/alanarazi7/MulTaBench/blob/599bd6a5631c96f8aef297cc4cb6e4c197ae0dca/multabench/benchmark/datasets/MUL_TEXT_PRODUCT_SENTIMENT.py",
+      "declared_feature_dtypes": [
+        {
+          "name": "Product_Description",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Product_Type",
+          "pandas_dtype_in_pinned_annotation": "int64"
+        }
+      ],
+      "license": {
+        "curated_release_declaration": "Other (specified in description)",
+        "source": {
+          "status": "source_metadata_only",
+          "source_metadata_url": "https://www.openml.org/api/v1/json/data/46651",
+          "declared_license": "MachineHack prediction competition",
+          "source_version": "1",
+          "original_data_url": "https://machinehack.com/hackathons/product_sentiment_classification_weekend_hackathon_19/overview"
+        },
+        "redistribution": "not approved by this inventory; raw data remains ignored"
+      },
+      "review_flags": [
+        "4 identical full-row duplicates and 7 duplicate descriptions in v1; historical row-split reproduction does not guarantee duplicate-group isolation"
+      ],
+      "data_file_pin_status": "downloaded_sha256_verified",
+      "data_file": {
+        "relative_path": "data/multabench-product-sentiment-v1/data.csv",
+        "sha256": "8a75a9880a5a1a619b16622c7f8f257ff8d19fde9b02864bf0059d5b0a8c2bb7",
+        "bytes": 604118,
+        "url": "https://www.kaggle.com/api/v1/datasets/download/chico89/multabench-product-sentiment/data.csv?datasetVersionNumber=1"
+      },
+      "pilot_schema": {
+        "ordered_text_columns": [
+          "Product_Description"
+        ],
+        "ordered_structured_columns": [
+          "Product_Type"
+        ],
+        "structured_dtype_policy": "Preserve upstream pandas int64 interpretation; no forced categorical recoding in historical baseline.",
+        "forbidden_feature_columns": [
+          "Sentiment"
+        ],
+        "row_id_policy": "Persist zero-based original CSV row position outside features.",
+        "missing_counts": {
+          "Product_Description": 0,
+          "Product_Type": 0,
+          "Sentiment": 0
+        },
+        "class_counts": {
+          "Cannot Say": 97,
+          "Negative": 324,
+          "No Sentiment": 1653,
+          "Positive": 3017
+        },
+        "class_order_policy": "Fit and save upstream target encoder on permitted training data; counts here are provenance only."
+      }
+    },
+    {
+      "dataset_id": "MUL_TEXT_SPOTIFY_GENRES",
+      "kaggle_ref": "chico89/multabench-spotify-genres",
+      "kaggle_version": 1,
+      "image_col": null,
+      "metadata_sha256": "49211f8a65cbec1c9f66d233592852830c403ff0b877d4a03fe7514abee7056b",
+      "metadata_url": "https://www.kaggle.com/api/v1/datasets/download/chico89/multabench-spotify-genres/metadata.json?datasetVersionNumber=1",
+      "eligibility": "eligible_no_image_column",
+      "metadata_dataset_id": "MUL_TEXT_SOCIAL_SPOTIFY_GENRES",
+      "target": "track_genre",
+      "task": "multiclass",
+      "classes_count": 114,
+      "rows": 114000,
+      "features_count": 18,
+      "release_created_utc": "2026-04-01T17:16:20.257Z",
+      "version_history_checked": true,
+      "source_url": "https://www.kaggle.com/datasets/maharshipandya/-spotify-tracks-dataset",
+      "pinned_curation_url": "https://github.com/alanarazi7/MulTaBench/blob/599bd6a5631c96f8aef297cc4cb6e4c197ae0dca/multabench/benchmark/datasets/MUL_TEXT_SPOTIFY_GENRES.py",
+      "declared_feature_dtypes": [
+        {
+          "name": "artists",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "album_name",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "track_name",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "popularity",
+          "pandas_dtype_in_pinned_annotation": "int64"
+        },
+        {
+          "name": "duration_ms",
+          "pandas_dtype_in_pinned_annotation": "int64"
+        },
+        {
+          "name": "explicit",
+          "pandas_dtype_in_pinned_annotation": "bool"
+        },
+        {
+          "name": "danceability",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "energy",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "key",
+          "pandas_dtype_in_pinned_annotation": "int64"
+        },
+        {
+          "name": "loudness",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "mode",
+          "pandas_dtype_in_pinned_annotation": "int64"
+        },
+        {
+          "name": "speechiness",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "acousticness",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "instrumentalness",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "liveness",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "valence",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "tempo",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "time_signature",
+          "pandas_dtype_in_pinned_annotation": "int64"
+        }
+      ],
+      "license": {
+        "curated_release_declaration": "Other (specified in description)",
+        "source": {
+          "status": "source_metadata_only",
+          "source_metadata_url": "https://www.kaggle.com/api/v1/datasets/view/maharshipandya/-spotify-tracks-dataset",
+          "declared_license": "Database: Open Database, Contents: © Original Authors",
+          "source_version_at_inspection": 1
+        },
+        "redistribution": "not approved by this inventory; raw data remains ignored"
+      },
+      "review_flags": [
+        "114 classes; train cap and absent-class AUROC coverage must be verified"
+      ],
+      "data_file_pin_status": "not_downloaded_or_hashed"
+    },
+    {
+      "dataset_id": "MUL_TEXT_US_ACCIDENTS",
+      "kaggle_ref": "chico89/multabench-us-accidents",
+      "kaggle_version": 1,
+      "image_col": null,
+      "metadata_sha256": "948dca7188c1c21927ce67f1f46b087dac84309a1483f1d8173015c81339a672",
+      "metadata_url": "https://www.kaggle.com/api/v1/datasets/download/chico89/multabench-us-accidents/metadata.json?datasetVersionNumber=1",
+      "eligibility": "eligible_no_image_column",
+      "metadata_dataset_id": "MUL_TEXT_TRANSPORTATION_US_ACCIDENTS_MARCH23",
+      "target": "Severity",
+      "task": "multiclass",
+      "classes_count": 4,
+      "rows": 100001,
+      "features_count": 44,
+      "release_created_utc": "2026-04-01T17:16:20.64Z",
+      "version_history_checked": true,
+      "source_url": "https://www.kaggle.com/datasets/sobhanmoosavi/us-accidents",
+      "pinned_curation_url": "https://github.com/alanarazi7/MulTaBench/blob/599bd6a5631c96f8aef297cc4cb6e4c197ae0dca/multabench/benchmark/datasets/MUL_TEXT_US_ACCIDENTS.py",
+      "declared_feature_dtypes": [
+        {
+          "name": "Source",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Start_Time",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "End_Time",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Start_Lat",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "Start_Lng",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "End_Lat",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "End_Lng",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "Distance(mi)",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "Description",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Street",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "City",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "County",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "State",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Zipcode",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Country",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Timezone",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Airport_Code",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Weather_Timestamp",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Temperature(F)",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "Wind_Chill(F)",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "Humidity(%)",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "Pressure(in)",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "Visibility(mi)",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "Wind_Direction",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Wind_Speed(mph)",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "Precipitation(in)",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "Weather_Condition",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Amenity",
+          "pandas_dtype_in_pinned_annotation": "bool"
+        },
+        {
+          "name": "Bump",
+          "pandas_dtype_in_pinned_annotation": "bool"
+        },
+        {
+          "name": "Crossing",
+          "pandas_dtype_in_pinned_annotation": "bool"
+        },
+        {
+          "name": "Give_Way",
+          "pandas_dtype_in_pinned_annotation": "bool"
+        },
+        {
+          "name": "Junction",
+          "pandas_dtype_in_pinned_annotation": "bool"
+        },
+        {
+          "name": "No_Exit",
+          "pandas_dtype_in_pinned_annotation": "bool"
+        },
+        {
+          "name": "Railway",
+          "pandas_dtype_in_pinned_annotation": "bool"
+        },
+        {
+          "name": "Roundabout",
+          "pandas_dtype_in_pinned_annotation": "bool"
+        },
+        {
+          "name": "Station",
+          "pandas_dtype_in_pinned_annotation": "bool"
+        },
+        {
+          "name": "Stop",
+          "pandas_dtype_in_pinned_annotation": "bool"
+        },
+        {
+          "name": "Traffic_Calming",
+          "pandas_dtype_in_pinned_annotation": "bool"
+        },
+        {
+          "name": "Traffic_Signal",
+          "pandas_dtype_in_pinned_annotation": "bool"
+        },
+        {
+          "name": "Turning_Loop",
+          "pandas_dtype_in_pinned_annotation": "bool"
+        },
+        {
+          "name": "Sunrise_Sunset",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Civil_Twilight",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Nautical_Twilight",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Astronomical_Twilight",
+          "pandas_dtype_in_pinned_annotation": "object"
+        }
+      ],
+      "license": {
+        "curated_release_declaration": "Unknown",
+        "source": {
+          "status": "source_metadata_only",
+          "source_metadata_url": "https://www.kaggle.com/api/v1/datasets/view/sobhanmoosavi/us-accidents",
+          "declared_license": "CC BY-NC-SA 4.0",
+          "source_version_at_inspection": 13
+        },
+        "redistribution": "not approved by this inventory; raw data remains ignored"
+      },
+      "review_flags": [
+        "temporal/geographic dependence and post-event columns require task-timing audit"
+      ],
+      "data_file_pin_status": "not_downloaded_or_hashed"
+    },
+    {
+      "dataset_id": "MUL_TEXT_WINE_REVIEW",
+      "kaggle_ref": "chico89/multabench-wine-review",
+      "kaggle_version": 1,
+      "image_col": null,
+      "metadata_sha256": "6e3d2eb8f0f28a3f8d53a7f91c69ff0ea9e2ce7e79c57c70866b4e8ffc4094b3",
+      "metadata_url": "https://www.kaggle.com/api/v1/datasets/download/chico89/multabench-wine-review/metadata.json?datasetVersionNumber=1",
+      "eligibility": "eligible_no_image_column",
+      "metadata_dataset_id": "MUL_TEXT_FOOD_WINE_REVIEW",
+      "target": "variety",
+      "task": "multiclass",
+      "classes_count": 30,
+      "rows": 84123,
+      "features_count": 5,
+      "release_created_utc": "2026-04-01T17:16:24.633Z",
+      "version_history_checked": true,
+      "source_url": "https://www.openml.org/search?type=data&id=46653",
+      "pinned_curation_url": "https://github.com/alanarazi7/MulTaBench/blob/599bd6a5631c96f8aef297cc4cb6e4c197ae0dca/multabench/benchmark/datasets/MUL_TEXT_WINE_REVIEW.py",
+      "declared_feature_dtypes": [
+        {
+          "name": "country",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "description",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "points",
+          "pandas_dtype_in_pinned_annotation": "int64"
+        },
+        {
+          "name": "price",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "province",
+          "pandas_dtype_in_pinned_annotation": "object"
+        }
+      ],
+      "license": {
+        "curated_release_declaration": "Other (specified in description)",
+        "source": {
+          "status": "source_metadata_only",
+          "source_metadata_url": "https://www.openml.org/api/v1/json/data/46653",
+          "declared_license": "Kaggle and WineEnthusiast",
+          "source_version": "2",
+          "original_data_url": "https://www.kaggle.com/zynicide/wine-reviews"
+        },
+        "redistribution": "not approved by this inventory; raw data remains ignored"
+      },
+      "review_flags": [],
+      "data_file_pin_status": "not_downloaded_or_hashed"
+    },
+    {
+      "dataset_id": "MUL_TEXT_WOMEN_CLOTHING_REVIEW",
+      "kaggle_ref": "chico89/multabench-women-clothing-review",
+      "kaggle_version": 1,
+      "image_col": null,
+      "metadata_sha256": "b1c67237bd9757abf3bf197d7a395d0ca347069c22751458860ca5a079e433a3",
+      "metadata_url": "https://www.kaggle.com/api/v1/datasets/download/chico89/multabench-women-clothing-review/metadata.json?datasetVersionNumber=1",
+      "eligibility": "eligible_no_image_column",
+      "metadata_dataset_id": "MUL_TEXT_CONSUMER_WOMEN_ECOMMERCE_CLOTHING_REVIEW",
+      "target": "Rating",
+      "task": "multiclass",
+      "classes_count": 5,
+      "rows": 18788,
+      "features_count": 10,
+      "release_created_utc": "2026-04-01T17:16:21.12Z",
+      "version_history_checked": true,
+      "source_url": "https://www.openml.org/search?type=data&id=46659",
+      "pinned_curation_url": "https://github.com/alanarazi7/MulTaBench/blob/599bd6a5631c96f8aef297cc4cb6e4c197ae0dca/multabench/benchmark/datasets/MUL_TEXT_WOMEN_CLOTHING_REVIEW.py",
+      "declared_feature_dtypes": [
+        {
+          "name": "Unnamed  0",
+          "pandas_dtype_in_pinned_annotation": "int64"
+        },
+        {
+          "name": "Clothing ID",
+          "pandas_dtype_in_pinned_annotation": "int64"
+        },
+        {
+          "name": "Age",
+          "pandas_dtype_in_pinned_annotation": "int64"
+        },
+        {
+          "name": "Title",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Review Text",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Recommended IND",
+          "pandas_dtype_in_pinned_annotation": "int64"
+        },
+        {
+          "name": "Positive Feedback Count",
+          "pandas_dtype_in_pinned_annotation": "int64"
+        },
+        {
+          "name": "Division Name",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Department Name",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Class Name",
+          "pandas_dtype_in_pinned_annotation": "object"
+        }
+      ],
+      "license": {
+        "curated_release_declaration": "Other (specified in description)",
+        "source": {
+          "status": "source_metadata_only",
+          "source_metadata_url": "https://www.openml.org/api/v1/json/data/46659",
+          "declared_license": "Kaggle",
+          "source_version": "1",
+          "original_data_url": "https://www.kaggle.com/nicapotato/womens-ecommerce-clothing-reviews"
+        },
+        "redistribution": "not approved by this inventory; raw data remains ignored"
+      },
+      "review_flags": [
+        "probable_row_id_column: Unnamed  0; must resolve exclusion before downstream method evaluation"
+      ],
+      "data_file_pin_status": "not_downloaded_or_hashed"
+    },
+    {
+      "dataset_id": "REG_TEXT_BABIES_PRICES",
+      "kaggle_ref": "chico89/multabench-babies-prices",
+      "kaggle_version": 1,
+      "image_col": null,
+      "metadata_sha256": "4ddcf12a65a22f96ca0dbf92e2e93215b6dc26d626d3592a3dae11b048d0c178",
+      "metadata_url": "https://www.kaggle.com/api/v1/datasets/download/chico89/multabench-babies-prices/metadata.json?datasetVersionNumber=1",
+      "eligibility": "eligible_no_image_column",
+      "metadata_dataset_id": "REG_TEXT_CONSUMER_BABIES_R_US_PRICES",
+      "target": "price",
+      "task": "regression",
+      "classes_count": null,
+      "rows": 5085,
+      "features_count": 12,
+      "release_created_utc": "2026-04-01T17:16:19.13Z",
+      "version_history_checked": true,
+      "source_url": "http://pages.cs.wisc.edu/~anhai/data/784_data/baby_products/csv_files/babies_r_us.csv",
+      "pinned_curation_url": "https://github.com/alanarazi7/MulTaBench/blob/599bd6a5631c96f8aef297cc4cb6e4c197ae0dca/multabench/benchmark/datasets/REG_TEXT_BABIES_PRICES.py",
+      "declared_feature_dtypes": [
+        {
+          "name": "title",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "is_discounted",
+          "pandas_dtype_in_pinned_annotation": "int64"
+        },
+        {
+          "name": "category",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "company_struct",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "company_free",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "weight",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "length",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "width",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "height",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "fabrics",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "colors",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "materials",
+          "pandas_dtype_in_pinned_annotation": "object"
+        }
+      ],
+      "license": {
+        "curated_release_declaration": "Other (specified in description)",
+        "source": {
+          "status": "not_declared_in_pinned_source",
+          "source_url": "http://pages.cs.wisc.edu/~anhai/data/784_data/baby_products/csv_files/babies_r_us.csv"
+        },
+        "redistribution": "not approved by this inventory; raw data remains ignored"
+      },
+      "review_flags": [],
+      "data_file_pin_status": "not_downloaded_or_hashed"
+    },
+    {
+      "dataset_id": "REG_TEXT_BOOK_PRICE",
+      "kaggle_ref": "chico89/multabench-book-price",
+      "kaggle_version": 1,
+      "image_col": null,
+      "metadata_sha256": "488b36e92fbd6ed64c667e466a5db3b3d12a041b5efec8e7ba7f4a512fcfc1b4",
+      "metadata_url": "https://www.kaggle.com/api/v1/datasets/download/chico89/multabench-book-price/metadata.json?datasetVersionNumber=1",
+      "eligibility": "eligible_no_image_column",
+      "metadata_dataset_id": "REG_TEXT_CONSUMER_BOOK_PRICE_PREDICTION",
+      "target": "Price in USD",
+      "task": "regression",
+      "classes_count": null,
+      "rows": 4989,
+      "features_count": 8,
+      "release_created_utc": "2026-04-01T17:16:20.333Z",
+      "version_history_checked": true,
+      "source_url": "https://www.openml.org/search?type=data&id=46663",
+      "pinned_curation_url": "https://github.com/alanarazi7/MulTaBench/blob/599bd6a5631c96f8aef297cc4cb6e4c197ae0dca/multabench/benchmark/datasets/REG_TEXT_BOOK_PRICE.py",
+      "declared_feature_dtypes": [
+        {
+          "name": "Title",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Author",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Edition",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Reviews",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "Ratings",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "Synopsis",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Genre",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "BookCategory",
+          "pandas_dtype_in_pinned_annotation": "object"
+        }
+      ],
+      "license": {
+        "curated_release_declaration": "Other (specified in description)",
+        "source": {
+          "status": "source_metadata_only",
+          "source_metadata_url": "https://www.openml.org/api/v1/json/data/46663",
+          "declared_license": "Machinehack",
+          "source_version": "1",
+          "original_data_url": "https://machinehack.com/hackathons/predict_the_price_of_books/overview"
+        },
+        "redistribution": "not approved by this inventory; raw data remains ignored"
+      },
+      "review_flags": [],
+      "data_file_pin_status": "not_downloaded_or_hashed"
+    },
+    {
+      "dataset_id": "REG_TEXT_BOOK_READABILITY",
+      "kaggle_ref": "chico89/multabench-book-readability",
+      "kaggle_version": 1,
+      "image_col": null,
+      "metadata_sha256": "d50da294b2fcc52603777c26fa08f2780227b520b9a6c07f2715421d0499e999",
+      "metadata_url": "https://www.kaggle.com/api/v1/datasets/download/chico89/multabench-book-readability/metadata.json?datasetVersionNumber=1",
+      "eligibility": "eligible_no_image_column",
+      "metadata_dataset_id": "REG_TEXT_SOCIAL_BOOK_READABILITY_CLEAR",
+      "target": "New Dale Chall Readability Formula",
+      "task": "regression",
+      "classes_count": null,
+      "rows": 4724,
+      "features_count": 30,
+      "release_created_utc": "2026-04-01T17:16:19.583Z",
+      "version_history_checked": true,
+      "source_url": "https://www.kaggle.com/datasets/verracodeguacas/clear-corpus",
+      "pinned_curation_url": "https://github.com/alanarazi7/MulTaBench/blob/599bd6a5631c96f8aef297cc4cb6e4c197ae0dca/multabench/benchmark/datasets/REG_TEXT_BOOK_READABILITY.py",
+      "declared_feature_dtypes": [
+        {
+          "name": "Author",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Title",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Anthology",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "URL",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Source",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Pub Year",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "Category",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Location",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "License",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "MPAA Max",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "MPAA  #Max",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "MPAA #Avg",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "Excerpt",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Google WC",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "Joon WC v1",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "British WC",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "British Words",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Sentence Count v1",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "Sentence Count v2",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "Paragraphs",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "BT Easiness",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "BT s e",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "Flesch-Reading-Ease",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "Flesch-Kincaid-Grade-Level",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "Automated Readability Index",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "SMOG Readability",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "CAREC",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "CAREC_M",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "CARES",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "CML2RI",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        }
+      ],
+      "license": {
+        "curated_release_declaration": "Other (specified in description)",
+        "source": {
+          "status": "source_metadata_only",
+          "source_metadata_url": "https://www.kaggle.com/api/v1/datasets/view/verracodeguacas/clear-corpus",
+          "declared_license": "CC BY-SA 4.0",
+          "source_version_at_inspection": 3
+        },
+        "redistribution": "not approved by this inventory; raw data remains ignored"
+      },
+      "review_flags": [
+        "related readability formulas and target-derived metadata require feature audit before method evaluation"
+      ],
+      "data_file_pin_status": "not_downloaded_or_hashed"
+    },
+    {
+      "dataset_id": "REG_TEXT_MERCARI_MARKETPLACE",
+      "kaggle_ref": "chico89/multabench-mercari-marketplace",
+      "kaggle_version": 1,
+      "image_col": null,
+      "metadata_sha256": "5623f451a7c04e05dd452646220a5110b69351343136e53700b480f91897769e",
+      "metadata_url": "https://www.kaggle.com/api/v1/datasets/download/chico89/multabench-mercari-marketplace/metadata.json?datasetVersionNumber=1",
+      "eligibility": "eligible_no_image_column",
+      "metadata_dataset_id": "REG_TEXT_CONSUMER_MERCARI_ONLINE_MARKETPLACE",
+      "target": "log_price",
+      "task": "regression",
+      "classes_count": null,
+      "rows": 100000,
+      "features_count": 9,
+      "release_created_utc": "2026-04-01T17:16:21.133Z",
+      "version_history_checked": true,
+      "source_url": "https://www.openml.org/search?type=data&id=46660",
+      "pinned_curation_url": "https://github.com/alanarazi7/MulTaBench/blob/599bd6a5631c96f8aef297cc4cb6e4c197ae0dca/multabench/benchmark/datasets/REG_TEXT_MERCARI_MARKETPLACE.py",
+      "declared_feature_dtypes": [
+        {
+          "name": "name",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "item_condition_id",
+          "pandas_dtype_in_pinned_annotation": "int64"
+        },
+        {
+          "name": "category_name",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "brand_name",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "shipping",
+          "pandas_dtype_in_pinned_annotation": "int64"
+        },
+        {
+          "name": "item_description",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "cat1",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "cat2",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "cat3",
+          "pandas_dtype_in_pinned_annotation": "object"
+        }
+      ],
+      "license": {
+        "curated_release_declaration": "Other (specified in description)",
+        "source": {
+          "status": "source_metadata_only",
+          "source_metadata_url": "https://www.openml.org/api/v1/json/data/46660",
+          "declared_license": "Kaggle",
+          "source_version": "1",
+          "original_data_url": "https://www.kaggle.com/c/mercari-price-suggestion-challenge"
+        },
+        "redistribution": "not approved by this inventory; raw data remains ignored"
+      },
+      "review_flags": [],
+      "data_file_pin_status": "not_downloaded_or_hashed"
+    },
+    {
+      "dataset_id": "REG_TEXT_MONTGOMERY_SALARIES",
+      "kaggle_ref": "chico89/multabench-montgomery-salaries",
+      "kaggle_version": 1,
+      "image_col": null,
+      "metadata_sha256": "1aed1b3817933b5151da7e3574ab2c971409d7099c32045dbcd39c0d486181ab",
+      "metadata_url": "https://www.kaggle.com/api/v1/datasets/download/chico89/multabench-montgomery-salaries/metadata.json?datasetVersionNumber=1",
+      "eligibility": "eligible_no_image_column",
+      "metadata_dataset_id": "REG_TEXT_PROFESSIONAL_EMPLOYEE_SALARY_MONTGOMERY",
+      "target": "current_annual_salary",
+      "task": "regression",
+      "classes_count": null,
+      "rows": 9228,
+      "features_count": 11,
+      "release_created_utc": "2026-04-01T17:16:19.527Z",
+      "version_history_checked": true,
+      "source_url": "https://www.openml.org/search?type=data&id=42125",
+      "pinned_curation_url": "https://github.com/alanarazi7/MulTaBench/blob/599bd6a5631c96f8aef297cc4cb6e4c197ae0dca/multabench/benchmark/datasets/REG_TEXT_MONTGOMERY_SALARIES.py",
+      "declared_feature_dtypes": [
+        {
+          "name": "full_name",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "gender",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "2016_gross_pay_received",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "2016_overtime_pay",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "department",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "department_name",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "division",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "assignment_category",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "employee_position_title",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "underfilled_job_title",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "date_first_hired",
+          "pandas_dtype_in_pinned_annotation": "object"
+        }
+      ],
+      "license": {
+        "curated_release_declaration": "Other (specified in description)",
+        "source": {
+          "status": "source_metadata_only",
+          "source_metadata_url": "https://www.openml.org/api/v1/json/data/42125",
+          "declared_license": "Public Domain (CC0)",
+          "source_version": "14",
+          "original_data_url": "https://data.montgomerycountymd.gov/api/views/xj3h-s2i7/rows.csv?accessType=DOWNLOAD"
+        },
+        "redistribution": "not approved by this inventory; raw data remains ignored"
+      },
+      "review_flags": [
+        "personal identifiers and related pay fields require feature-purpose audit"
+      ],
+      "data_file_pin_status": "not_downloaded_or_hashed"
+    },
+    {
+      "dataset_id": "REG_TEXT_SCIMAGOJR_IMPACT",
+      "kaggle_ref": "chico89/multabench-scimagojr-impact",
+      "kaggle_version": 1,
+      "image_col": null,
+      "metadata_sha256": "98843b793f836439871839b6a1b64c99d7962f89987212863e9659e33d3ab8d6",
+      "metadata_url": "https://www.kaggle.com/api/v1/datasets/download/chico89/multabench-scimagojr-impact/metadata.json?datasetVersionNumber=1",
+      "eligibility": "eligible_no_image_column",
+      "metadata_dataset_id": "REG_TEXT_PROFESSIONAL_SCIMAGOJR_ACADEMIC_IMPACT",
+      "target": "H index",
+      "task": "regression",
+      "classes_count": null,
+      "rows": 31136,
+      "features_count": 22,
+      "release_created_utc": "2026-04-01T17:16:19.973Z",
+      "version_history_checked": true,
+      "source_url": "https://www.scimagojr.com/journalrank.php?out=xls",
+      "pinned_curation_url": "https://github.com/alanarazi7/MulTaBench/blob/599bd6a5631c96f8aef297cc4cb6e4c197ae0dca/multabench/benchmark/datasets/REG_TEXT_SCIMAGOJR_IMPACT.py",
+      "declared_feature_dtypes": [
+        {
+          "name": "Rank",
+          "pandas_dtype_in_pinned_annotation": "int64"
+        },
+        {
+          "name": "Title",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Type",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Issn",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "SJR",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "SJR Best Quartile",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Total Docs  (2024)",
+          "pandas_dtype_in_pinned_annotation": "int64"
+        },
+        {
+          "name": "Total Docs  (3years)",
+          "pandas_dtype_in_pinned_annotation": "int64"
+        },
+        {
+          "name": "Total Refs",
+          "pandas_dtype_in_pinned_annotation": "int64"
+        },
+        {
+          "name": "Total Citations (3years)",
+          "pandas_dtype_in_pinned_annotation": "int64"
+        },
+        {
+          "name": "Citable Docs  (3years)",
+          "pandas_dtype_in_pinned_annotation": "int64"
+        },
+        {
+          "name": "Citations / Doc  (2years)",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Ref  / Doc",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "%Female",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Overton",
+          "pandas_dtype_in_pinned_annotation": "int64"
+        },
+        {
+          "name": "SDG",
+          "pandas_dtype_in_pinned_annotation": "int64"
+        },
+        {
+          "name": "Country",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Region",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Publisher",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Coverage",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Categories",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Areas",
+          "pandas_dtype_in_pinned_annotation": "object"
+        }
+      ],
+      "license": {
+        "curated_release_declaration": "Other (specified in description)",
+        "source": {
+          "status": "not_declared_in_pinned_source",
+          "source_url": "https://www.scimagojr.com/journalrank.php?out=xls"
+        },
+        "redistribution": "not approved by this inventory; raw data remains ignored"
+      },
+      "review_flags": [
+        "Rank, impact metrics and identifiers require target-derived metadata audit"
+      ],
+      "data_file_pin_status": "not_downloaded_or_hashed"
+    },
+    {
+      "dataset_id": "REG_TEXT_ROTTEN_TOMATOES",
+      "kaggle_ref": "chico89/multabench-rotten-tomatoes",
+      "kaggle_version": 1,
+      "image_col": null,
+      "metadata_sha256": "8d492af42684543b85e5bd8187f371dbddddadaae3b50806266df2da529bd9a6",
+      "metadata_url": "https://www.kaggle.com/api/v1/datasets/download/chico89/multabench-rotten-tomatoes/metadata.json?datasetVersionNumber=1",
+      "eligibility": "eligible_no_image_column",
+      "metadata_dataset_id": "REG_TEXT_SOCIAL_MOVIES_ROTTEN_TOMATOES",
+      "target": "RatingValue",
+      "task": "regression",
+      "classes_count": null,
+      "rows": 7158,
+      "features_count": 15,
+      "release_created_utc": "2026-04-01T17:16:19.607Z",
+      "version_history_checked": true,
+      "source_url": "http://pages.cs.wisc.edu/~anhai/data/784_data/movies1/csv_files/rotten_tomatoes.csv",
+      "pinned_curation_url": "https://github.com/alanarazi7/MulTaBench/blob/599bd6a5631c96f8aef297cc4cb6e4c197ae0dca/multabench/benchmark/datasets/REG_TEXT_ROTTEN_TOMATOES.py",
+      "declared_feature_dtypes": [
+        {
+          "name": "Name",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Year",
+          "pandas_dtype_in_pinned_annotation": "int64"
+        },
+        {
+          "name": "Release Date",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Director",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Creator",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Actors",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Cast",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Language",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Country",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Duration",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "RatingCount",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "ReviewCount",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Genre",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Filming Locations",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Description",
+          "pandas_dtype_in_pinned_annotation": "object"
+        }
+      ],
+      "license": {
+        "curated_release_declaration": "Other (specified in description)",
+        "source": {
+          "status": "not_declared_in_pinned_source",
+          "source_url": "http://pages.cs.wisc.edu/~anhai/data/784_data/movies1/csv_files/rotten_tomatoes.csv"
+        },
+        "redistribution": "not approved by this inventory; raw data remains ignored"
+      },
+      "review_flags": [],
+      "data_file_pin_status": "not_downloaded_or_hashed"
+    },
+    {
+      "dataset_id": "REG_TEXT_VANCOUVER_SALARIES",
+      "kaggle_ref": "chico89/multabench-vancouver-salaries",
+      "kaggle_version": 1,
+      "image_col": null,
+      "metadata_sha256": "12e800985163992519a89cb11ddb8f479a0c1622ec4bac4c22c0095da9ca6342",
+      "metadata_url": "https://www.kaggle.com/api/v1/datasets/download/chico89/multabench-vancouver-salaries/metadata.json?datasetVersionNumber=1",
+      "eligibility": "eligible_no_image_column",
+      "metadata_dataset_id": "REG_TEXT_PROFESSIONAL_EMPLOYEE_RENUMERATION_VANCOUBER",
+      "target": "remuneration",
+      "task": "regression",
+      "classes_count": null,
+      "rows": 44574,
+      "features_count": 5,
+      "release_created_utc": "2026-04-01T17:16:20.78Z",
+      "version_history_checked": true,
+      "source_url": "https://opendata.vancouver.ca/api/records/1.0/download/?dataset=employee-remuneration-and-expenses-earning-over-75000&format=csv",
+      "pinned_curation_url": "https://github.com/alanarazi7/MulTaBench/blob/599bd6a5631c96f8aef297cc4cb6e4c197ae0dca/multabench/benchmark/datasets/REG_TEXT_VANCOUVER_SALARIES.py",
+      "declared_feature_dtypes": [
+        {
+          "name": "year",
+          "pandas_dtype_in_pinned_annotation": "int64"
+        },
+        {
+          "name": "name",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "department",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "title",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "expenses",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        }
+      ],
+      "license": {
+        "curated_release_declaration": "Other (specified in description)",
+        "source": {
+          "status": "not_declared_in_pinned_source",
+          "source_url": "https://opendata.vancouver.ca/api/records/1.0/download/?dataset=employee-remuneration-and-expenses-earning-over-75000&format=csv"
+        },
+        "redistribution": "not approved by this inventory; raw data remains ignored"
+      },
+      "review_flags": [
+        "personal identifier name requires feature-purpose audit"
+      ],
+      "data_file_pin_status": "not_downloaded_or_hashed"
+    },
+    {
+      "dataset_id": "REG_TEXT_VIDEO_GAMES_SALES",
+      "kaggle_ref": "chico89/multabench-video-games-sales",
+      "kaggle_version": 1,
+      "image_col": null,
+      "metadata_sha256": "f364bad35542e994be2731225edb21c45233d37c800d132775f8ca41dc40f744",
+      "metadata_url": "https://www.kaggle.com/api/v1/datasets/download/chico89/multabench-video-games-sales/metadata.json?datasetVersionNumber=1",
+      "eligibility": "eligible_no_image_column",
+      "metadata_dataset_id": "REG_TEXT_SOCIAL_VIDEO_GAMES_SALES",
+      "target": "Global_Sales",
+      "task": "regression",
+      "classes_count": null,
+      "rows": 16598,
+      "features_count": 5,
+      "release_created_utc": "2026-04-01T17:16:18.983Z",
+      "version_history_checked": true,
+      "source_url": "https://www.kaggle.com/datasets/gregorut/videogamesales",
+      "pinned_curation_url": "https://github.com/alanarazi7/MulTaBench/blob/599bd6a5631c96f8aef297cc4cb6e4c197ae0dca/multabench/benchmark/datasets/REG_TEXT_VIDEO_GAMES_SALES.py",
+      "declared_feature_dtypes": [
+        {
+          "name": "Name",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Platform",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Year",
+          "pandas_dtype_in_pinned_annotation": "float64"
+        },
+        {
+          "name": "Genre",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "Publisher",
+          "pandas_dtype_in_pinned_annotation": "object"
+        }
+      ],
+      "license": {
+        "curated_release_declaration": "Other (specified in description)",
+        "source": {
+          "status": "source_metadata_only",
+          "source_metadata_url": "https://www.kaggle.com/api/v1/datasets/view/gregorut/videogamesales",
+          "declared_license": "Unknown",
+          "source_version_at_inspection": 2
+        },
+        "redistribution": "not approved by this inventory; raw data remains ignored"
+      },
+      "review_flags": [],
+      "data_file_pin_status": "not_downloaded_or_hashed"
+    },
+    {
+      "dataset_id": "REG_TEXT_ZOMATO_RESTAURANTS",
+      "kaggle_ref": "chico89/multabench-zomato-restaurants",
+      "kaggle_version": 1,
+      "image_col": null,
+      "metadata_sha256": "1a8c71c2a2f393503364760d665c9c3c038a24c3bc33f6c48aca6516c8fd0a64",
+      "metadata_url": "https://www.kaggle.com/api/v1/datasets/download/chico89/multabench-zomato-restaurants/metadata.json?datasetVersionNumber=1",
+      "eligibility": "eligible_no_image_column",
+      "metadata_dataset_id": "REG_TEXT_FOOD_ZOMATO_RESTAURANTS",
+      "target": "rate",
+      "task": "regression",
+      "classes_count": null,
+      "rows": 41665,
+      "features_count": 15,
+      "release_created_utc": "2026-04-01T17:16:33.45Z",
+      "version_history_checked": true,
+      "source_url": "https://www.kaggle.com/datasets/himanshupoddar/zomato-bangalore-restaurants",
+      "pinned_curation_url": "https://github.com/alanarazi7/MulTaBench/blob/599bd6a5631c96f8aef297cc4cb6e4c197ae0dca/multabench/benchmark/datasets/REG_TEXT_ZOMATO_RESTAURANTS.py",
+      "declared_feature_dtypes": [
+        {
+          "name": "address",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "name",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "online_order",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "book_table",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "votes",
+          "pandas_dtype_in_pinned_annotation": "int64"
+        },
+        {
+          "name": "phone",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "location",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "rest_type",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "dish_liked",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "cuisines",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "approx cost(for two people)",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "reviews_list",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "menu_item",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "listed_in(type)",
+          "pandas_dtype_in_pinned_annotation": "object"
+        },
+        {
+          "name": "listed_in(city)",
+          "pandas_dtype_in_pinned_annotation": "object"
+        }
+      ],
+      "license": {
+        "curated_release_declaration": "Other (specified in description)",
+        "source": {
+          "status": "source_metadata_only",
+          "source_metadata_url": "https://www.kaggle.com/api/v1/datasets/view/himanshupoddar/zomato-bangalore-restaurants",
+          "declared_license": "Data files © Original Authors",
+          "source_version_at_inspection": 1
+        },
+        "redistribution": "not approved by this inventory; raw data remains ignored"
+      },
+      "review_flags": [],
+      "data_file_pin_status": "not_downloaded_or_hashed"
+    }
+  ],
+  "excluded_datasets": [
+    {
+      "dataset_id": "BIN_IMAGE_CELEB_ATTRACTIVENESS",
+      "kaggle_ref": "chico89/multabench-celeb-attractiveness",
+      "kaggle_version": 1,
+      "image_col": "image_id",
+      "metadata_sha256": "da74784a0defd3123e7541d60562fde66b3936b0b3c1158a14537d5edd99eadc",
+      "metadata_url": "https://www.kaggle.com/api/v1/datasets/download/chico89/multabench-celeb-attractiveness/metadata.json?datasetVersionNumber=1",
+      "eligibility": "excluded_image_column_present"
+    },
+    {
+      "dataset_id": "BIN_IMAGE_HATEFUL_MEME",
+      "kaggle_ref": "chico89/multabench-hateful-meme",
+      "kaggle_version": 1,
+      "image_col": "img",
+      "metadata_sha256": "44007251f6e43639742e7c1ff1b4ee72b56553614b50fac78fd279c72690ce4a",
+      "metadata_url": "https://www.kaggle.com/api/v1/datasets/download/chico89/multabench-hateful-meme/metadata.json?datasetVersionNumber=1",
+      "eligibility": "excluded_image_column_present"
+    },
+    {
+      "dataset_id": "BIN_IMAGE_MAMMOGRAPHY_CMMD",
+      "kaggle_ref": "chico89/multabench-mammography-cmmd",
+      "kaggle_version": 1,
+      "image_col": "Path",
+      "metadata_sha256": "ff8b9b401741cd39a884105b437cb8375518292c1bdd87332022f7796ad80680",
+      "metadata_url": "https://www.kaggle.com/api/v1/datasets/download/chico89/multabench-mammography-cmmd/metadata.json?datasetVersionNumber=1",
+      "eligibility": "excluded_image_column_present"
+    },
+    {
+      "dataset_id": "MUL_IMAGE_CBIS_DDSM",
+      "kaggle_ref": "chico89/multabench-cbis-ddsm",
+      "kaggle_version": 1,
+      "image_col": "image file path",
+      "metadata_sha256": "0028e1f9f0fc379319c5166b75db1e57f2cbdc8eaa126368d3d93aae3be93008",
+      "metadata_url": "https://www.kaggle.com/api/v1/datasets/download/chico89/multabench-cbis-ddsm/metadata.json?datasetVersionNumber=1",
+      "eligibility": "excluded_image_column_present"
+    },
+    {
+      "dataset_id": "MUL_IMAGE_CHEXPERT",
+      "kaggle_ref": "chico89/multabench-chexpert",
+      "kaggle_version": 1,
+      "image_col": "X-Ray Image",
+      "metadata_sha256": "8206e253738e2a2fa5fcdcc08f9463f91a9da5a0d4918c64fccc0f570bbd0ab8",
+      "metadata_url": "https://www.kaggle.com/api/v1/datasets/download/chico89/multabench-chexpert/metadata.json?datasetVersionNumber=1",
+      "eligibility": "excluded_image_column_present"
+    },
+    {
+      "dataset_id": "MUL_IMAGE_CSGO_SKIN_PRICE",
+      "kaggle_ref": "chico89/multabench-csgo-skin",
+      "kaggle_version": 1,
+      "image_col": "Image Path",
+      "metadata_sha256": "c484c8cdbfc65850cf697b812232278b52079d0b1e2c484f3d23c5e8ef6a31b9",
+      "metadata_url": "https://www.kaggle.com/api/v1/datasets/download/chico89/multabench-csgo-skin/metadata.json?datasetVersionNumber=1",
+      "eligibility": "excluded_image_column_present"
+    },
+    {
+      "dataset_id": "MUL_IMAGE_FLOWER_BOUQUETS",
+      "kaggle_ref": "chico89/multabench-flower-bouquets",
+      "kaggle_version": 1,
+      "image_col": "image_name",
+      "metadata_sha256": "491acbb20b545b29cbf8e342e84c441364163d5bea90bcc737776734ecf3f94f",
+      "metadata_url": "https://www.kaggle.com/api/v1/datasets/download/chico89/multabench-flower-bouquets/metadata.json?datasetVersionNumber=1",
+      "eligibility": "excluded_image_column_present"
+    },
+    {
+      "dataset_id": "MUL_IMAGE_GLAUCOMA_SMDG",
+      "kaggle_ref": "chico89/multabench-glaucoma-smdg",
+      "kaggle_version": 1,
+      "image_col": "fundus",
+      "metadata_sha256": "fca964a1ea80f158db6e2f83edc54f89026d120af962469ee491b454faa0f47c",
+      "metadata_url": "https://www.kaggle.com/api/v1/datasets/download/chico89/multabench-glaucoma-smdg/metadata.json?datasetVersionNumber=1",
+      "eligibility": "excluded_image_column_present"
+    },
+    {
+      "dataset_id": "MUL_IMAGE_HUBMAP_HPA",
+      "kaggle_ref": "chico89/multabench-hubmap-hpa",
+      "kaggle_version": 1,
+      "image_col": "biopsy",
+      "metadata_sha256": "8e1d898c11946737520cb953dc4c50b77366381e558ea55d65c4ba10a2864cd3",
+      "metadata_url": "https://www.kaggle.com/api/v1/datasets/download/chico89/multabench-hubmap-hpa/metadata.json?datasetVersionNumber=1",
+      "eligibility": "excluded_image_column_present"
+    },
+    {
+      "dataset_id": "MUL_IMAGE_JUSTIN_INSTAGRAM",
+      "kaggle_ref": "chico89/multabench-justin-instagram",
+      "kaggle_version": 1,
+      "image_col": "display_picture_url",
+      "metadata_sha256": "7fe6086579f8f57106cc608c36f414373facfd85408943bcd8a41aba42048a08",
+      "metadata_url": "https://www.kaggle.com/api/v1/datasets/download/chico89/multabench-justin-instagram/metadata.json?datasetVersionNumber=1",
+      "eligibility": "excluded_image_column_present"
+    },
+    {
+      "dataset_id": "MUL_IMAGE_PETFINDER",
+      "kaggle_ref": "chico89/multabench-petfinder",
+      "kaggle_version": 1,
+      "image_col": "Pet Image",
+      "metadata_sha256": "1308a13175c849c52850beebc7b951232420a839dce75d61f2ad110a79d62e97",
+      "metadata_url": "https://www.kaggle.com/api/v1/datasets/download/chico89/multabench-petfinder/metadata.json?datasetVersionNumber=1",
+      "eligibility": "excluded_image_column_present"
+    },
+    {
+      "dataset_id": "MUL_IMAGE_ZOOSCAN_ZOOPLANKTON",
+      "kaggle_ref": "chico89/multabench-zooscan-zooplankton",
+      "kaggle_version": 1,
+      "image_col": "object_image",
+      "metadata_sha256": "a8b2f2dad0c8e723eac9b4d2dd635b0062cdade2ccba38c98462d91c909d6055",
+      "metadata_url": "https://www.kaggle.com/api/v1/datasets/download/chico89/multabench-zooscan-zooplankton/metadata.json?datasetVersionNumber=1",
+      "eligibility": "excluded_image_column_present"
+    },
+    {
+      "dataset_id": "REG_IMAGE_AMAZON_BEST_SELLER",
+      "kaggle_ref": "chico89/multabench-amazon-bestseller",
+      "kaggle_version": 1,
+      "image_col": "photo_url",
+      "metadata_sha256": "51fa8d0b35d3fdbaa1d0976ac0090b6950cb8e77897f8914f02dacaa298de7e3",
+      "metadata_url": "https://www.kaggle.com/api/v1/datasets/download/chico89/multabench-amazon-bestseller/metadata.json?datasetVersionNumber=1",
+      "eligibility": "excluded_image_column_present"
+    },
+    {
+      "dataset_id": "REG_IMAGE_AMAZON_PACKAGES",
+      "kaggle_ref": "chico89/multabench-amazon-packages",
+      "kaggle_version": 1,
+      "image_col": "Amazon bin",
+      "metadata_sha256": "b4025d42205e62d103c665f7fb0af2b8db6194667c4353ad17058a32559cbfc3",
+      "metadata_url": "https://www.kaggle.com/api/v1/datasets/download/chico89/multabench-amazon-packages/metadata.json?datasetVersionNumber=1",
+      "eligibility": "excluded_image_column_present"
+    },
+    {
+      "dataset_id": "REG_IMAGE_HNM_FASHION",
+      "kaggle_ref": "chico89/multabench-hnm-fashion",
+      "kaggle_version": 1,
+      "image_col": "ProductPic",
+      "metadata_sha256": "f93e0e931c61ef7beeb943494b12ba7e7dfa13cd9d35f1eedfe88bab81f8fa8d",
+      "metadata_url": "https://www.kaggle.com/api/v1/datasets/download/chico89/multabench-hnm-fashion/metadata.json?datasetVersionNumber=1",
+      "eligibility": "excluded_image_column_present"
+    },
+    {
+      "dataset_id": "REG_IMAGE_KHAADI_CLOTHES",
+      "kaggle_ref": "chico89/multabench-khaadi-clothes",
+      "kaggle_version": 1,
+      "image_col": "img",
+      "metadata_sha256": "490a0c069323cb67435e956bcdc6aa3b861f3fc4a21bce304279100654ac7c4a",
+      "metadata_url": "https://www.kaggle.com/api/v1/datasets/download/chico89/multabench-khaadi-clothes/metadata.json?datasetVersionNumber=1",
+      "eligibility": "excluded_image_column_present"
+    },
+    {
+      "dataset_id": "REG_IMAGE_LETTERBOXD_MOVIES",
+      "kaggle_ref": "chico89/multabench-letterboxd-movies",
+      "kaggle_version": 1,
+      "image_col": "poster",
+      "metadata_sha256": "0b5858ac45454a15bd8c822d42b079ed28989d4a068c9e867749ffc2590a143a",
+      "metadata_url": "https://www.kaggle.com/api/v1/datasets/download/chico89/multabench-letterboxd-movies/metadata.json?datasetVersionNumber=1",
+      "eligibility": "excluded_image_column_present"
+    },
+    {
+      "dataset_id": "REG_IMAGE_MANGO_MASS",
+      "kaggle_ref": "chico89/multabench-mango-mass",
+      "kaggle_version": 1,
+      "image_col": "Fruit No",
+      "metadata_sha256": "afbf72a5254f4186ee7be4ed83f065e323baee0efc544375a85af78e598ec737",
+      "metadata_url": "https://www.kaggle.com/api/v1/datasets/download/chico89/multabench-mango-mass/metadata.json?datasetVersionNumber=1",
+      "eligibility": "excluded_image_column_present"
+    },
+    {
+      "dataset_id": "REG_IMAGE_MKPHOTO_BOTS",
+      "kaggle_ref": "chico89/multabench-mkphoto-bots",
+      "kaggle_version": 1,
+      "image_col": "image",
+      "metadata_sha256": "6de1834d469f4f793fc70611ccfb67b8c7b5f3cb4a7c9ec3d36537b3a4d2194c",
+      "metadata_url": "https://www.kaggle.com/api/v1/datasets/download/chico89/multabench-mkphoto-bots/metadata.json?datasetVersionNumber=1",
+      "eligibility": "excluded_image_column_present"
+    },
+    {
+      "dataset_id": "REG_IMAGE_PAINTING_PRICE",
+      "kaggle_ref": "chico89/multabench-painting-price",
+      "kaggle_version": 1,
+      "image_col": "image_url",
+      "metadata_sha256": "f3b21c1ec7996c574441a074e2e82bb5d404de834849e5562d69307e62677d6d",
+      "metadata_url": "https://www.kaggle.com/api/v1/datasets/download/chico89/multabench-painting-price/metadata.json?datasetVersionNumber=1",
+      "eligibility": "excluded_image_column_present"
+    }
+  ]
+}

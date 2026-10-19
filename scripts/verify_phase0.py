@@ -113,7 +113,7 @@ def main() -> int:
             print(f"FAIL: {error}", file=sys.stderr)
         return 1
     print("PASS: required files, local Markdown links, historical pin chronology, and publication exclusions")
-    print("Scope: infrastructure only; no ML, baseline, or algorithm leakage tests have run.")
+    print("Scope: infrastructure only; this command does not run ML or algorithm leakage tests.")
     return 0
 
 
