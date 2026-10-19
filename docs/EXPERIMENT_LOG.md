@@ -102,6 +102,32 @@ historical lock. No statistical improvement, ReFuTab, TAR, regression run, or
 full-benchmark coverage is established. No test-driven tuning or second run was
 performed. Phase 2 may now implement the general data interface and OOF teacher.
 
+## October 19, 2026 - Phase 2 implementation checks and fixed smoke configuration
+
+Implemented explicit dataset/schema and persisted split contracts plus a
+structured-only CatBoost 1.2.8 teacher. The final full suite passed **43 tests
+in 9.451 seconds**, including malformed-artifact guards. Infrastructure/link
+and whitespace checks also passed.
+Real tiny synthetic fits cover regression, binary and multiclass tasks, actual
+model-fit row IDs, fixed-fold own-label exclusion, held-out label/feature
+independence, category/missing handling, score conversion and checked save/load.
+These are software checks, not benchmark improvement results. Expected-error
+tests intentionally preserve failed manifests and reject overwritten artifacts.
+
+Test setup initially attempted teacher imports before CatBoost installation;
+locked environment installation resolved that dependency error. No Phase 2
+benchmark model run has failed or completed at this entry's creation.
+
+The configured pilot will use the exact Phase 1 Product Sentiment version-1
+partitions and upstream source, 900 training/100 validation/509 reserved test
+rows, with 3,582 excluded by the original reduced-cap sampling. The teacher
+receives only numeric `Product_Type`. Each of three OOF models trains on 600
+rows and predicts its excluded 300; a separate teacher trains on all 900 to
+predict 100 validation rows. Seed 42, 40 iterations, depth 4, learning rate 0.1,
+two CPU threads and native probabilities with clipping epsilon 1e-7 are fixed
+before inspecting diagnostics. No fitted calibration, early stopping,
+hyperparameter search, test prediction, or test scoring is included.
+
 ## Required entry for each later experiment
 
 Record run ID/time/status (planned/running/completed/failed/interrupted), exact

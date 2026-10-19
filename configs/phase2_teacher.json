@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "dataset_path": "data/multabench-product-sentiment-v1/data.csv",
+  "dataset_sha256": "8a75a9880a5a1a619b16622c7f8f257ff8d19fde9b02864bf0059d5b0a8c2bb7",
+  "metadata_path": "data/multabench-product-sentiment-v1/metadata.json",
+  "metadata_sha256": "db78538f386c3eed11df6c9110fbd8de30c9f7c72311ff85ee6811fd75bfde13",
+  "schema": {
+    "dataset_id": "MUL_TEXT_PRODUCT_SENTIMENT",
+    "task": "multiclass",
+    "target_column": "Sentiment",
+    "text_columns": ["Product_Description"],
+    "numerical_columns": ["Product_Type"],
+    "categorical_columns": [],
+    "forbidden_columns": ["Text_ID", "Unnamed: 0", "row_id", "fold_id", "teacher_prediction", "residual"]
+  },
+  "splits": {
+    "protocol": "historical_phase1",
+    "baseline_config": "configs/phase1_frozen.json",
+    "baseline_reference": "results/phase1_product_sentiment_frozen.json"
+  },
+  "teacher": {
+    "n_splits": 3,
+    "seed": 42,
+    "iterations": 40,
+    "depth": 4,
+    "learning_rate": 0.1,
+    "thread_count": 2,
+    "probability_clip": 1e-7
+  },
+  "output_root": "results/raw"
+}

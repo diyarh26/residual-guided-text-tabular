@@ -5,9 +5,12 @@ Updated: October 19, 2026 (Asia/Jerusalem).
 ## Current phase and status
 
 **Phase 1 - Completed: historical source analysis and one real baseline reproduction.**
-**Phase 2 - Not started.** Phase 0 remains complete. No ReFuTab teacher, fusion
-network, Joint TAR experiment, or full benchmark evaluation is implemented or
-claimed. Stop at the Phase 1 report; begin the next phase when authorized.
+**Phase 2 - In progress.** User authorized Phase 2 after the completed baseline.
+Dataset/split contracts and the structured-only OOF teacher are implemented.
+The final full suite passed 43 tests in 9.451 seconds, and infrastructure/link
+checks passed. A clean-source pilot teacher run and publication
+verification remain pending. Fusion, Joint TAR experiments, and full evaluation remain
+later-phase work. Do not begin Phase 3 in this session.
 
 Dataset scope and training protocol are settled: use only datasets whose
 original benchmark schema has no image column; train separate pipelines per
@@ -94,9 +97,9 @@ limitations before interpreting broader experiments.
 - Repository: https://github.com/diyarh26/residual-guided-text-tabular
 - Branch: `main`.
 - Latest verified pushed commit at edit time:
-  `3188a243064f6c0eb8624dd5eed4744ec4d3c037`
-  (`feat: add pinned historical baseline runner and reproducible CPU setup`).
-- The result summaries and completion documentation accompany this handoff in
+  `676a8c31099ad5744347d4792deca331d1e2d5ec`
+  (`experiments: record Phase 1 frozen baseline and verification`).
+- Phase 2 implementation and documentation accompany this handoff in
   a follow-up commit. The field above records the last verified commit at edit
   time; compare actual HEAD with the remote to identify the current session tip.
 - This field identifies the previously verified commit, avoiding a self-hash
@@ -114,7 +117,29 @@ git ls-remote origin refs/heads/main
 Do not rerun the recorded baseline merely to refresh documentation. Exact run
 and preparation commands are in [REPRODUCIBILITY.md](REPRODUCIBILITY.md).
 
-## Exact next steps: Phase 2
+## Phase 2 implementation and remaining checks
+
+Implemented APIs: `src/refutab/data.py` (explicit schema/owned tables),
+`splits.py` (saved ID partitions/fingerprints), `teacher.py` (three OOF CatBoost
+teachers plus an A-only validation teacher), and `teacher_runner.py` with thin
+`scripts/run_teacher.py`. General tasks support regression/binary/multiclass,
+multiple text fields, numerical/categorical structured fields, missing/unseen
+values, class mapping, finite correction offsets, and checked save/load.
+No E5 or fusion training occurs. API details are in [PHASE2.md](PHASE2.md).
+
+The locked environment adds CatBoost 1.2.8. `configs/phase2_teacher.json`
+fixes 40 iterations/depth 4/learning rate 0.1/two CPU threads/seed 42 before
+diagnostics. The runner reconstructs the exact Phase 1 assignments and uses
+only `Product_Type` as the teacher feature. It reserves all 509 test rows,
+makes no test predictions, and never scores the test. Four model fitting
+audits and full row IDs remain private; reviewed summaries contain hashes and
+OOF/validation diagnostics only. No calibration/early stopping/search is used.
+
+Remaining before Phase 2 completion: commit/push clean source, execute the single configured small teacher
+smoke, inspect/record its artifacts, finish documentation, commit/push and verify.
+Do not rerun the Phase 1 baseline. Do not begin Phase 3 in this session.
+
+Historical Phase 2 task checklist (implemented; final verification pending):
 
 1. Read AGENTS, this handoff, PROJECT_PLAN, COURSE_REQUIREMENTS, ARCHITECTURE,
    DATA_LEAKAGE, and the Phase 1 analysis. Preserve existing changes.

@@ -1,6 +1,12 @@
 # Proposed Option A architecture
 
-Status: design only. No ReFuTab model, training pipeline, or experiment has been implemented. Phase 1 must reproduce a pinned MulTaBench baseline before the new method is implemented. See [PROJECT_PLAN.md](PROJECT_PLAN.md) for phase gates and [DATA_LEAKAGE.md](DATA_LEAKAGE.md) for the evaluation protocol.
+Status: the explicit dataset/split contracts and structured-only three-fold
+OOF CatBoost teacher are implemented in Phase 2; see [PHASE2.md](PHASE2.md).
+Phase 1 reproduced one pinned original Joint Frozen baseline. The frozen
+encoder/PCA fusion integration, compact structured encoder, gate, correction
+head, and final learner below remain Phase 3 design. No ReFuTab improvement is
+claimed. See [PROJECT_PLAN.md](PROJECT_PLAN.md) for phase gates and
+[DATA_LEAKAGE.md](DATA_LEAKAGE.md) for the evaluation protocol.
 
 ## Question and comparison
 
@@ -10,15 +16,34 @@ The primary comparator is **Joint TAR**, because ReFuTab uses labels to train it
 
 ## Data contract and feature order
 
-A dataset schema declares the task, target, ordered text columns, numerical columns, categorical columns, and any split/group/time fields. It is dataset-specific configuration, not hardcoded algorithm logic. Targets, row identifiers, split markers, and target-derived fields must never enter either feature encoder. Classification uses a single saved class-to-index mapping.
+The implemented dataset schema declares the task, target, ordered text columns,
+numerical columns, categorical columns, optional ID, and explicit excluded or
+forbidden metadata. Every column needs a declared role; original image-column
+datasets are rejected. Targets, row identifiers, split markers, and
+target-derived fields cannot enter features. Schema declarations require a
+content/provenance audit; the contract cannot detect an undisclosed
+target-derived feature. Stable row IDs and complete outer/validation/excluded
+assignments are persisted. Group/time constraints require audited explicit
+assignments and a compatible OOF schedule; the generic generators do not infer
+or enforce them. Classification uses one saved training-derived class order.
 
 **Training interpretation resolved by the user on October 19, 2026:** train separately on each dataset's training split and leave its test split untouched. Keep fitted artifacts and target-trained weights separate for each dataset and outer evaluation fold. Fit preprocessing and models only on the permitted training partition; use an independent inner validation partition for selection. The full OOF teacher construction, final-refit boundaries, and supervised-representation diagnostics remain required by [DATA_LEAKAGE.md](DATA_LEAKAGE.md). This is the user's confirmed project interpretation, not a claim of separate course-staff confirmation.
 
-For row `i` and text field `j`, let `x_ij` be text, `u_i` the original structured features, and `c_j` a fixed column identity. Preserve the schema order through encoding, concatenation, serialization, and prediction. Define fixed handling for missing text and structured values before experiments; unseen categorical values must map to a reserved unknown category.
+For row `i` and text field `j`, let `x_ij` be text, `u_i` the original structured features, and `c_j` a fixed column identity. Preserve the schema order through encoding, concatenation, serialization, and prediction. Define fixed handling for missing text and structured values before fusion experiments; the planned fusion vocabulary maps unseen categories to a reserved unknown category. The implemented teacher instead uses stateless typed category tokens and native CatBoost hashing; its preprocessing is separate.
 
 ## Components
 
-1. **Structured teacher.** CatBoost receives only `u`. Use three-fold OOF predictions for every representation-training row. Each teacher and its learned preprocessing/calibration sees only its own fold-training data. A separate teacher fitted on the inner training partition provides validation offsets. Teacher choices and task-specific score conversion must follow [DATA_LEAKAGE.md](DATA_LEAKAGE.md).
+1. **Structured teacher (implemented).** CatBoost 1.2.8 receives only declared
+   `u` columns. Three OOF teachers fit their respective two-fold complements;
+   a fourth model fitted only on inner training provides validation offsets.
+   Numerical conversion and typed categorical tokenization are stateless.
+   CatBoost learns numerical borders, category statistics, and trees inside
+   each model's fitting partition; NaN uses native `nan_mode="Min"`, and unseen
+   category tokens use native hashing. Initial settings are 40 CPU iterations,
+   depth 4, learning rate 0.1, and seed 42. No calibration, early stopping,
+   `eval_set`, or search is fitted. Class order, excluded-row audits, models,
+   and aligned scores are saved and validated. See [PHASE2.md](PHASE2.md) for
+   the API, exact offsets, and current verification scope.
 2. **Frozen text encoder.** E5-small-v2 produces 384-dimensional embeddings. Freeze every encoder parameter, disable training-time dropout, and use inference/evaluation mode. Verify text prefixes, pooling, normalization, and batching against the pinned benchmark during Phase 1; save the chosen settings and exact model revision. No E5 fine-tuning occurs in Option A.
 3. **Per-field PCA.** Fit one PCA from 384 to 30 dimensions for each text column using the allowed training partition only. Apply that same fitted transformation to validation and test text in that field. Do not fit separate validation/test PCAs or mix column coordinate systems. If a fitting partition cannot support the required dimensionality, fail with a documented reason; do not silently change the method.
 4. **Compact structured representation.** A train-fitted preprocessing pipeline handles numerical imputation and scaling, categorical missing/unknown values, and compact categorical encoding. The starting proposal is train-median imputation plus standardization for numerics, a train-only category vocabulary with reserved missing/unknown entries, compact category embeddings, and a small projection producing `s_i`. Category embedding sizes and projection width must be specified and logged before implementation; avoid unbounded one-hot expansion. All trainable category embeddings belong to the structured encoder. This fusion input is separate from the original structured columns supplied to the final tabular learner.
@@ -43,7 +68,13 @@ Let `t_i` be the OOF teacher output for a training row and `h_i = H_phi(Z_i)`.
 | Binary classification | `t_i = log(p_i / (1 - p_i))`, after clipping `p_i` to `[epsilon, 1 - epsilon]` | `logit = t_i + h_i`; binary cross-entropy with logits |
 | Multiclass classification | A vector of clipped, renormalized class log-probabilities in the saved class order | `scores = t_i + h_i`; multiclass cross-entropy |
 
-Record the clipping epsilon and score conventions. Any probability calibration must be trained inside the teacher's allowed training data; calibration on the row being predicted would break OOF exclusion. Native teacher probabilities can be used with documented clipping/score handling when calibration is not fitted.
+The implemented teacher records `epsilon=1e-7` initially and clips to
+`[epsilon, 1-epsilon]`; multiclass probabilities are then row-renormalized
+before taking logs. Binary class index 1 is positive in the saved class order.
+No probability calibration is fitted. Any future calibration must stay inside
+the teacher's allowed training data; calibration on the row being predicted
+would break OOF exclusion. These offsets are implemented, while the combined
+correction losses in the table remain planned.
 
 The **standard gated fusion ablation** keeps E5, PCA, structured representation, gate, head capacity, splits, and comparable training budget aligned, but predicts the original target through the head without a teacher offset. Retrain its own final downstream learner. This isolates the residual objective from the benefit of supervised gating. Evaluate the final downstream predictions, not just the temporary head's loss.
 
@@ -96,4 +127,4 @@ The diagram shows component roles; validation, final refitting, and fold boundar
 
 A reproducible prediction bundle must include the schema and class mapping; E5 identifier/revision and encoding settings; per-column PCA state; structured preprocessing and optional encoder state; gate state/configuration; downstream model and its preprocessing; and compatible dependency versions. Training records also retain split IDs, seeds, teacher provenance, checkpoint selection, and source commit. Large artifacts belong in an appropriate artifact store, not Git.
 
-The official performance requirements are AUROC for classification and R-squared for regression (PDF Section 2.3, page 3). The user confirmed coverage is limited to benchmark datasets whose original schema has no image column and permitted separate training on each dataset's training split with untouched test data. Phase 1 must verify dataset eligibility against the pinned schema and validate historical multiclass AUROC handling. See [COURSE_REQUIREMENTS.md](COURSE_REQUIREMENTS.md). Independently fitted supervised fusion spaces also require the diagnostic in [DATA_LEAKAGE.md](DATA_LEAKAGE.md) before final claims. Option B/LoRA remains out of scope until Option A is evaluated and a later phase authorizes it.
+The official performance requirements are AUROC for classification and R-squared for regression (PDF Section 2.3, page 3). The user confirmed coverage is limited to benchmark datasets whose original schema has no image column and permitted separate training on each dataset's training split with untouched test data. Phase 1 verified the 20-dataset eligible roster and historical multiclass AUROC behavior; each additional CSV still needs pinning and a feature audit. See [COURSE_REQUIREMENTS.md](COURSE_REQUIREMENTS.md). Independently fitted supervised fusion spaces also require the diagnostic in [DATA_LEAKAGE.md](DATA_LEAKAGE.md) before final claims. Option B/LoRA remains out of scope until Option A is evaluated and a later phase authorizes it.

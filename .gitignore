@@ -44,6 +44,8 @@ mlruns/
 *.pth
 *.ckpt
 *.safetensors
+*.cbm
+catboost_info/
 *.pkl
 *.joblib
 *.npy

@@ -1,7 +1,8 @@
 # Decisions and unresolved questions
 
-Updated October 19, 2026. Decisions describe the research plan, not implemented
-functionality. Course requirements override preferences; conflicts remain open
+Updated October 19, 2026. Implementation status is tracked in PROJECT_PLAN and
+HANDOFF; decisions include both delivered and planned components. Course
+requirements override preferences; conflicts remain open
 until clarified. See [COURSE_REQUIREMENTS.md](COURSE_REQUIREMENTS.md).
 
 | ID | Decision | Reason / alternatives |
@@ -21,6 +22,10 @@ until clarified. See [COURSE_REQUIREMENTS.md](COURSE_REQUIREMENTS.md).
 | D013 | Invoke unchanged historical LightGBM/split/metric implementations from an external harness. | The full CLI eagerly imports unrelated learner ecosystems and requires WandB credentials. Original source stays in an ignored checkout; no upstream implementation is redistributed or changed. |
 | D014 | First baseline is CPU Joint Frozen, Product Sentiment v1, fold 0, cap 1,000. | Chosen before test scores to bound local computation; the original sampler yields 900 fit/100 validation/509 test rows. This smoke result cannot establish benchmark improvement or replace full evaluation. |
 | D015 | Lock a minimal compatible CPU dependency closure, including Joblib 1.5.2. | Core versions match the historical requirements. New Joblib 1.6.0 broke old Skrub imports during setup; the upstream-compatible pin resolves that observed failure. |
+| D016 | Phase 2 uses CatBoost 1.2.8 with a fixed CPU budget: 40 iterations, depth 4, learning rate 0.1, two threads, seed 42. | A small initial teacher configuration, fixed before its diagnostics; no tuning, early stopping, eval set, or fitted calibration. Native probabilities are clipped safely for correction offsets. |
+| D017 | Keep teacher preprocessing stateless before each fold-local CatBoost fit. | Numeric conversion/native missing values and typed categorical tokens need no external fitted vocabulary or scaler. Numeric borders, category statistics and trees are learned only on that teacher's fitting rows. Fusion preprocessing remains separate Phase 3 work. |
+| D018 | Reconstruct the pilot's original historical partitions and verify public Phase 1 fingerprints. | Avoids changing assignments or requiring private Phase 1 raw IDs. Preserve validation seed 41 and explicitly retain 3,582 reduced-cap exclusions. Generic data APIs also accept saved assignments or a separately named local random/stratified protocol; group/time constraints require supplied assignments. |
+| D019 | Save a training-only class order and native teacher artifacts with explicit row audits. | Typed labels remain distinct; binary class index 1 defines the positive offset. Three OOF models exclude their prediction rows; a fourth A-only teacher supplies validation offsets. Native CBM/JSON/NumPy persistence avoids pickle; raw IDs/models remain ignored. |
 
 ## Resolved requirements and technical follow-up
 
@@ -45,5 +50,6 @@ until clarified. See [COURSE_REQUIREMENTS.md](COURSE_REQUIREMENTS.md).
 User clarification during the Phase 0 follow-up resolved both dataset eligibility
 and separate per-dataset training. No further user answer is needed on these
 points; do not reopen them without new conflicting evidence.
-Other technical provenance checks will be handled by source inspection rather
-than treated as questions the user must answer. No implementation has started.
+Other technical provenance checks are handled by source inspection rather
+than treated as questions the user must answer. Phase 2 data/teacher components
+are implemented; Phase 3 fusion remains unstarted.

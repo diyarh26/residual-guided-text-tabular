@@ -1,6 +1,6 @@
 # Attribution and redistribution boundaries
 
-Original ReFuTab documentation and future original code are MIT licensed by
+Original ReFuTab documentation and original code are MIT licensed by
 Diyar Husayyan; see [LICENSE](LICENSE). That grant does not relicense external
 material, trained models, or datasets.
 
@@ -42,6 +42,21 @@ its table is downloaded only for the user's academic evaluation and is not
 redistributed here. See [dataset notices](docs/DATASETS.md).
 
 `pyproject.toml` and `uv.lock` record the selected dependency versions and
-artifact hashes. Dependencies keep their own licenses. Future CatBoost/other
-learner and model-artifact terms must be reviewed when added. Do not upload
-restricted data with model artifacts.
+artifact hashes. Dependencies keep their own licenses. Additional learner and
+model-artifact terms must be reviewed when added. Do not upload restricted
+data with model artifacts.
+
+## Phase 2 CatBoost
+
+The structured-only teacher uses **CatBoost 1.2.8**, installed as a dependency;
+its source is not copied into ReFuTab. The
+[official v1.2.8 license](https://github.com/catboost/catboost/blob/v1.2.8/LICENSE)
+declares **Apache License 2.0** and copyright **2017-2024 YANDEX LLC** (verified
+October 19, 2026). CatBoost and its included third-party components retain
+their own notices and license terms. ReFuTab's MIT license covers only the
+original interfaces, orchestration, and tests written here.
+
+Generated teacher models, full split IDs, predictions, and raw manifests remain
+in ignored private output directories. This dependency notice does not
+establish permission to redistribute a dataset or its derived artifacts;
+review the relevant dataset/model terms before any later upload.

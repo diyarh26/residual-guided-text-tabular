@@ -66,15 +66,16 @@ TAR, regression baseline, or full-benchmark result is claimed.
 
 ## Phase 2 - Data handling and leakage-safe teacher
 
-**Status: Not started.**
+**Status: In progress.** User authorized Phase 2; dataset/split contracts,
+structured-only OOF teacher, and leakage tests are being implemented.
 
 Objective: build a general data interface and trustworthy teacher signals.
 
-- [ ] Support arbitrary stable text/numerical/categorical schema, missing values,
+- [x] Support arbitrary stable text/numerical/categorical schema, missing values,
   regression, binary classification, and multiclass classification.
-- [ ] Persist outer/inner/OOF split IDs, seeds, class ordering, and feature schema.
-- [ ] Fit 3-fold OOF structured-only CatBoost with isolated fold preprocessing.
-- [ ] Separate internal validation and final evaluation; handle binary clipping,
+- [x] Persist outer/inner/OOF split IDs, seeds, class ordering, and feature schema.
+- [x] Fit 3-fold OOF structured-only CatBoost with isolated fold preprocessing.
+- [x] Separate internal validation and final evaluation; handle binary clipping,
   multiclass class coverage, and probability/calibration decisions train-only.
 - [ ] Add disjointness, fit-provenance, ID/target exclusion, alignment, and
   deterministic failure tests; test, document, commit, push, and verify.

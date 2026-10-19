@@ -1,7 +1,8 @@
 # Reproducibility
 
 Phase 1 adds a locked CPU environment and a runner for the original historical
-Joint Frozen baseline. The new ReFuTab algorithm is not implemented. Actual
+Joint Frozen baseline. Phase 2 adds data/split contracts and a structured-only
+OOF teacher; fusion and the full ReFuTab algorithm remain unimplemented. Actual
 execution outcomes, including failures, belong in [EXPERIMENT_LOG.md](EXPERIMENT_LOG.md).
 
 ## Run the historical CPU baseline
@@ -52,6 +53,48 @@ review it before committing. Raw IDs, text, predictions, and weights stay out of
 The original CPU LightGBM fit is not checkpoint-resumable. A failed/interrupted
 stage requires a new attempt ID. The notebook has static validation separately
 from actual Colab execution; local success does not establish Colab execution.
+
+## Run the structured-only OOF teacher (Phase 2)
+
+Check out the source commit recorded in the desired teacher summary. Install
+the locked Python 3.11 environment, then prepare the pinned source and pilot
+data; E5 weights are unnecessary for this stage:
+
+```powershell
+py -3.11 -m uv sync --locked
+py -3.11 -m uv run --frozen python scripts/prepare_phase1.py --skip-model
+py -3.11 -m uv run --frozen python -m unittest discover -s tests -v
+py -3.11 -m uv run --frozen python scripts/run_teacher.py --config configs/phase2_teacher.json --run-id my-new-phase2-run --summary results/my-new-phase2-run.json
+```
+
+Run from clean committed source and choose new run/summary names. The fixed
+CPU budget is three OOF teachers plus one validation teacher, each with 40
+iterations, depth 4, learning rate 0.1, seed 42 and two threads. This budget is
+an initial smoke configuration; no hyperparameter selection or calibrated
+probability fitting occurs. CatBoost 1.2.8 is pinned alongside the unchanged
+Phase 1 core package versions. The lock naturally differs from the archived
+Phase 1 environment; reproduce that run from its recorded source commit.
+
+The original source recreates the exact 900/100/509/3,582 training/validation/
+test/excluded partitions and verifies public Phase 1 fingerprints. Only the
+900 training structured rows and labels fit teachers; the separate all-training
+teacher predicts the 100 validation rows. No test predictions or scores are
+produced. Validation labels are used only for diagnostics after model fitting.
+All-label access is limited to original split stratification, table validation,
+and content fingerprinting, never teacher fitting or model selection.
+
+Private `results/raw/<run-id>/` contains `splits.json`, schema, run manifest,
+four native `.cbm` models, aligned OOF/validation predictions and offsets,
+three-fold assignments, row fit/prediction audits, class order, versions, and
+file checksums. Aggregate JSON summaries contain counts/hashes and OOF/validation
+diagnostics without raw IDs, data, predictions, or models. Save/load uses native
+CatBoost plus NumPy `allow_pickle=False`; altered model/array checksums fail.
+See [PHASE2.md](PHASE2.md) for the general API and explicit schema/split protocols.
+
+`--output-root` accepts a private persistent artifact directory. Individual
+teacher fits are not checkpoint-resumable; an interrupted run keeps its failed
+manifest/trace and needs a new attempt ID. The Phase 1 Colab notebook remains a
+baseline runner; no Phase 2 Colab execution is claimed.
 
 ## Reproduce the infrastructure checks
 

@@ -35,7 +35,10 @@ Product Sentiment smoke configuration achieved **macro OVR AUROC 0.83935**
 (900 fit / 100 validation / 509 test; one fold). See the
 [recorded result](results/phase1_product_sentiment_frozen.json) and
 [experiment log](docs/EXPERIMENT_LOG.md). ReFuTab and Joint TAR are not evaluated
-yet. The [project plan](docs/PROJECT_PLAN.md) keeps Phase 2 unstarted.
+yet. Phase 2 is in progress: the general dataset/split interface and structured-only
+3-fold CatBoost teacher pass the 43-test suite. The recorded teacher
+smoke run and final publication checks are pending. See the
+[Phase 2 API and safeguards](docs/PHASE2.md) and [project plan](docs/PROJECT_PLAN.md).
 
 The historical MulTaBench `master` pin is
 `599bd6a5631c96f8aef297cc4cb6e4c197ae0dca` (July 26, 2026).
@@ -46,7 +49,7 @@ Dataset scope is confirmed: use only benchmark datasets whose original schema
 has no image column. Datasets containing an image column are excluded.
 The user also confirmed separate training on each dataset's training split,
 with internal validation and an untouched test split. Both course clarifications
-are resolved; Phase 1 will validate split boundaries and historical multiclass
+are resolved; Phase 1 validated split boundaries and historical multiclass
 metrics. The PDF also has an incorrect
 MulTaBench arXiv identifier. These are recorded in
 [course requirements](docs/COURSE_REQUIREMENTS.md). The historical snapshot
@@ -92,14 +95,14 @@ Completed/failed executions and their exact provenance belong in
 ```text
 configs/                Locked pilot inputs and dataset inventory
 docs/                   Requirements, plan, architecture, decisions, handoff
-src/refutab/            Original baseline orchestration; fusion pending
-scripts/                Infrastructure, asset preparation, baseline entry points
-tests/                  Original protocol, fit-scope, and bootstrap checks
+src/refutab/            Baseline, data/splits, OOF teacher; fusion pending
+scripts/                Infrastructure, preparation, baseline/teacher entry points
+tests/                  Protocol, fit-scope, teacher/leakage, persistence checks
 notebooks/              Thin Colab CPU baseline runner
 third_party/            Upstream pin and attribution; checkout ignored
 data/                   Local datasets (ignored)
 artifacts/              Local model outputs (ignored)
-results/                Reviewed lightweight summaries; no results yet
+results/                Reviewed aggregate summaries; raw artifacts ignored
 reports/                Future paper, tables, and figures
 ```
 

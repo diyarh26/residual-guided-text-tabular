@@ -7,5 +7,11 @@ After locked setup and `scripts/prepare_phase1.py --skip-model`, run
 original split/metric behavior, training-only PCA and unknown categories, frozen
 E5 inference mode, and run safety. Deterministic tiny encoder substitutes occur
 only inside unit tests; the recorded baseline must use real pinned E5 weights.
-No network/model download is performed by the tests themselves. OOF teacher,
-fusion, serialization, and later integration tests belong to their future phases.
+No network/model download is performed by the tests themselves. Phase 2 adds
+real tiny CatBoost checks for regression, binary, and multiclass tasks;
+instrumented fitting exclusion, fixed-fold own-label perturbation, held-out
+label/feature independence, strict feature/row ordering, missing/unseen values,
+class/offset conventions, and checked save/load. Runner tests exercise real
+training with text/target/ID exclusion, preserved failures and overwrite
+protection, and exact historical split reconstruction without model evaluation.
+Fusion tests remain Phase 3 work.

@@ -1,8 +1,12 @@
-# Planned splitting and leakage safeguards
+# Splitting and leakage safeguards
 
-Status: the Phase 1 original frozen baseline has validated split disjointness,
+Status: Phase 1 validated the original frozen baseline's split disjointness,
 train-only PCA fitting, frozen E5 weights, and original multiclass metrics.
-Teacher OOF and supervised fusion stages below remain planned and unimplemented.
+Phase 2 implements audited dataset/split contracts and a structured-only
+three-fold OOF CatBoost teacher; its targeted leakage/serialization checks pass.
+The complete supervised fusion pipeline and nested diagnostic remain planned.
+See [PHASE2.md](PHASE2.md) for implemented APIs and
+[HANDOFF.md](HANDOFF.md) for final milestone verification and execution status.
 The authoritative academic wording and user clarifications are recorded in
 [COURSE_REQUIREMENTS.md](COURSE_REQUIREMENTS.md). The baseline's
 [result](../results/phase1_product_sentiment_frozen.json) and independent
@@ -21,9 +25,17 @@ The proposed sequence is:
 
 No held-out test labels or test features may be used to fit PCA, scaling, vocabulary/category mappings, calibration, encoders, teachers, gates, or downstream predictors. Frozen E5 may transform held-out text for prediction without fitting. Its external pretraining provenance must be reported; we cannot certify that public pretrained weights never encountered any benchmark text without evidence.
 
+The Phase 2 runner loads the pinned table for content verification and original
+split construction; all-label access for constructing splits is limited to
+stratification. Hashing data or recording IDs does not fit a predictor. Only
+declared structured training/validation views reach the teacher. It produces
+zero held-out test predictions and scores. Validation labels are excluded from
+teacher fitting and used only for coverage auditing and post-fit diagnostics;
+they do not select teacher iterations or other settings.
+
 **Training interpretation resolved by the user on October 19, 2026:** the user confirmed that training separately on each dataset's training split while keeping its test split untouched is acceptable ("no that is good to train separately"). This establishes the project's per-dataset supervised protocol; it is a user clarification, not a claim that course staff independently confirmed or rewrote PDF Section 2.2, page 3. Train-only fitting, independent inner validation, isolated dataset/outer-fold models, and all safeguards below remain required.
 
-## Three-fold teacher protocol
+## Three-fold teacher protocol (implemented)
 
 Partition `A` into three folds `F_1`, `F_2`, and `F_3`. For each `k`:
 
@@ -38,6 +50,31 @@ For validation offsets, fit a separate teacher on `A` only, with any learned cho
 
 Teacher preprocessing is distinct from the fusion preprocessing. A PCA or structured encoder fitted on all `A` for the fusion path must not accidentally be passed into a teacher whose allowed training set is only `A minus F_k`.
 
+The Phase 2 implementation uses CatBoost 1.2.8 with a fixed iteration/depth/rate
+budget, no `eval_set`, no early stopping, no search, and no calibration. Its
+numeric conversion and typed categorical/missing token conversion are
+stateless. Numerical borders, categorical statistics, and trees are learned
+independently inside each CatBoost model's fitting partition. Missing numerics
+use native `nan_mode="Min"`; unknown categories use native token hashing.
+No full-training category vocabulary, median, scale, or PCA is fitted and reused
+by the OOF teachers. A future fusion vocabulary with reserved missing/unknown
+entries remains separate Phase 3 work.
+
+The teacher saves class order derived solely from `A` labels, or validates an
+explicit order against exactly those classes. Typed classes remain distinct;
+do not assume labels are numerically or alphabetically sorted. Each class
+needs at least three training rows, and every OOF fitting complement must
+contain all classes. Binary offsets use clipped saved-index-1 logits;
+multiclass offsets use clipped, renormalized log-probabilities, initially with
+`epsilon=1e-7`. Regression stays in original target units. The score conventions,
+fold IDs, and full fitting/prediction row audits accompany the saved models.
+
+Split validation checks complete membership across train, validation, test,
+and explicit excluded rows, including reduced-cap exclusions. The generic
+local holdout and OOF generators do not infer groups or temporal constraints.
+For tasks requiring those constraints, provide audited explicit partitions
+and a compatible OOF schedule; row disjointness alone is insufficient.
+
 ## Feature and supervised-representation fitting
 
 | Component | Candidate-pipeline fitting data | Transformation of `V` / `B_test` |
@@ -45,11 +82,19 @@ Teacher preprocessing is distinct from the fusion preprocessing. A PCA or struct
 | E5-small-v2 | No fitting; exact pretrained revision frozen | Saved deterministic encoding procedure |
 | Per-text-column PCA to 30 dimensions | `A` text features only | Reuse the matching saved column PCA |
 | Fusion numerical/categorical preprocessing | `A` structured features only | Saved imputation/scales/categories; unknown category handling |
-| Three OOF teachers and teacher preprocessing | Respective `A minus F_k` only | Training OOF predictions only; separate `A`-fitted teacher for `V` |
+| Three OOF teachers and teacher preprocessing (implemented) | Respective `A minus F_k` only | Training OOF predictions only; separate `A`-fitted teacher for `V`; Phase 2 runner does not predict `B_test` |
 | Fusion gate, structured encoder, correction head | `A` features, targets, and fixed OOF offsets | Frozen gate/encoder; head may score `V` for selection, then is discarded before final inference |
 | Downstream learner and its preprocessing | `A` original structured columns, learned fused embeddings, original targets | Saved representation and downstream model |
 
-The table describes inner model selection. A locked final refit uses `B_train` in place of `A`; `B_test` remains transformation-only. Do not combine supervised artifacts from different datasets, evaluation folds, or incompatible schemas. Save feature order and reject missing, duplicated, or reordered inputs rather than silently misaligning fields.
+The table describes inner model selection for the planned full pipeline. Only
+the teacher row is implemented for Phase 2; Phase 1 separately tested the
+original frozen E5/PCA baseline. A locked final refit uses `B_train` in place of
+`A`; `B_test` remains transformation-only. Do not combine supervised artifacts
+from different datasets, evaluation folds, or incompatible schemas. Save
+feature order and reject missing, duplicated, or reordered model inputs rather
+than silently misaligning fields. The dataset view selects explicit named
+columns in declaration order; the teacher prediction API requires that exact
+saved order.
 
 Keep labels, identifiers, target-derived columns, teacher predictions, residuals, and split metadata outside the inference feature schema. OOF offsets are permitted only in the temporary correction loss. They must not become downstream input columns. Audited schema declarations and train/validation/test row-set checks are required for arbitrary datasets.
 
@@ -67,15 +112,44 @@ Before making final claims, run and record a **nested end-to-end fold diagnostic
 
 If a dedicated cross-fitted-embedding experiment is needed, specify and validate its coordinate alignment and deployment mapping first. Fold-specific PCAs have sign/rotation differences, and independently trained gates can transform coordinates differently. Naively stacking their OOF embeddings and then using one full-data gate at inference does not define a consistent representation. A common reference/explicit alignment method or a different complete-pipeline design needs a documented decision and tests before use. Do not silently substitute it for Option A.
 
-## Planned automated checks and audit artifacts
+## Implemented data and teacher checks
 
-These are future acceptance criteria for Phases 2 and 3, not completed tests:
+Targeted data/split and real-CatBoost tests check:
 
-- Assert disjoint outer/inner/fold row sets, including group constraints; reject feature schemas containing the label or declared forbidden fields. Persist dataset/split fingerprints and seeds.
-- Instrument teacher fitting, preprocessing, calibration, and tuning so each OOF row can be checked against all row sets influencing its predictor. Assert exactly one finite OOF prediction per row and stable class order.
-- Perturb held-out labels and features and verify fitted training artifacts stay unchanged when the training configuration and selected checkpoint are fixed. Test unseen categories, missing values, and text-column ordering. Keep selection tests separate, because changing validation labels can legitimately change model selection.
-- Verify E5 parameters receive no gradients and remain unchanged; verify teacher offsets are detached; verify only authorized modules update during correction training.
-- Verify initial identity gating, saved-versus-loaded prediction equivalence, and a final prediction path that needs neither teacher nor temporary head.
-- Record the nested diagnostic's protocol and results before interpreting final gains. Test any future cross-fitted alignment against deliberate coordinate permutations/sign changes before relying on it.
+- Declared feature exclusions, explicit roles, image scope, stable IDs/field
+  order, missing values, typed fingerprints, and complete persisted partitions.
+- Actual teacher fitting indices against saved audits; disjoint fit/prediction
+  row sets; exactly one aligned finite OOF prediction per training row; separate
+  validation-teacher fitting; and train-derived stable class probabilities.
+- Own-fold target perturbations with a fixed saved schedule, which leave that
+  fold's excluded-row predictions unchanged; validation-feature perturbations
+  and held-out-label perturbations leave fitted training outputs unchanged.
+- Missing/unseen categories, finite clipped offsets, typed class labels,
+  deterministic failures before fitting, feature-order rejection, in-sample
+  prediction protection, and model/score serialization with checksum failure
+  detection.
+
+These checks establish the tested data/teacher scope. They do not certify
+undisclosed feature provenance, group/time constraints, or a future fusion
+pipeline. Exact final check counts, full-suite results, and executed runs belong
+in [HANDOFF.md](HANDOFF.md) and [EXPERIMENT_LOG.md](EXPERIMENT_LOG.md).
+
+## Future fusion and evaluation checks
+
+The following remain required in their implementation/evaluation phases:
+
+- Verify ReFuTab E5 parameters receive no gradients and remain unchanged;
+  verify teacher offsets are detached and only authorized modules update
+  during correction training. Original frozen baseline checks do not establish
+  the behavior of a future fusion integration.
+- Check train-only fusion PCA/structured preprocessing, reserved missing/unknown
+  handling, text-field ordering, identity gate initialization, and final
+  saved-versus-loaded predictions without teacher or temporary head.
+- Repeat held-out perturbation checks for the complete fixed pipeline. Keep
+  model-selection checks separate, because changing validation labels may
+  legitimately change the chosen fusion checkpoint.
+- Record the nested diagnostic's protocol/results before interpreting final
+  gains. Test any future cross-fitted alignment against deliberate coordinate
+  permutations/sign changes before relying on it.
 
 Every run must save source commit, configuration, data/version references, split IDs, seeds, component fit scopes, class mapping, metric definitions, selected checkpoint, runtime/hardware, and failures. Large/raw data and checkpoints must stay outside Git. Scores are valid for reporting only when these checks pass, dataset eligibility is verified against the pinned schema, and the historical metric convention in [COURSE_REQUIREMENTS.md](COURSE_REQUIREMENTS.md) has been validated.
