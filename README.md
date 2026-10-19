@@ -39,8 +39,8 @@ The historical MulTaBench `master` pin is
 See [source provenance and discrepancies](docs/UPSTREAM.md) and the
 [machine-readable pin](third_party/multabench.lock.json).
 
-The user confirmed that photos are excluded. The exact dataset roster (text-tabular
-datasets only versus all tables with image columns removed) is being clarified.
+Dataset scope is confirmed: use only benchmark datasets whose original schema
+has no image column. Datasets containing an image column are excluded.
 Before dependent implementation, clarify the PDF's dataset-held-out wording
 and validate the multiclass metric. The PDF also has an incorrect
 MulTaBench arXiv identifier. These are recorded in

@@ -36,8 +36,10 @@ may remain open if no dependent implementation is performed.
 
 Objective: reproduce the historical benchmark before introducing ReFuTab.
 
-- [ ] Resolve/gate course leakage and metric questions; photos are excluded per
-  user clarification, with the precise non-image dataset roster still pending.
+Confirmed dataset scope: only benchmark datasets whose original schema has no
+image column. Enumerate and validate the eligible roster in Phase 1.
+
+- [ ] Resolve/gate course leakage and validate historical multiclass metrics.
 - [ ] Confirm historical-source redistribution policy; retain original attribution.
 - [ ] Map E5/PCA/TAR, data schema, split source, validation, metrics, and integration
   points in the pinned source; Phase 0 inspection is preliminary analysis only.

@@ -16,13 +16,13 @@ until clarified. See [COURSE_REQUIREMENTS.md](COURSE_REQUIREMENTS.md).
 | D008 | No fabricated ML lock, baseline command, or scores in infrastructure phase. | Phase 1 must establish a real compatible environment and run a baseline before algorithm implementation. |
 | D009 | Separate OOF teacher correctness from supervised-fusion overfit. | Teacher OOF does not make gate features OOF. Compare a nested diagnostic before final claims; independently fitted latent spaces cannot simply be concatenated across rows. |
 | D010 | Run local and clean-clone infrastructure checks; defer optional GitHub Actions configuration. | The authenticated OAuth token lists repo/read:org/gist scopes but no workflow scope. CI is not a Phase 0 user requirement; do not block the authorized repository setup on extra account permissions. |
-| D011 | Exclude photos from the project inputs. | User clarification on October 19, 2026: "we are suppposed to use the data set without the photos". The exact dataset roster is still being confirmed; this does not by itself choose between the text-tabular subset and all tables with image columns removed. |
+| D011 | Use only benchmark datasets whose original schema has no image column. | User clarified on October 19, 2026: "the data sets that dont have images column". Datasets containing an image column are excluded. Phase 1 will enumerate and validate the eligible roster against the pinned benchmark schema. |
 
 ## Questions that gate dependent work
 
-1. **Course dataset scope:** the user confirmed photos are excluded. Confirm
-   whether this means the official text-tabular subset or all benchmark tables
-   with image columns removed; do not assume an exact roster from that wording.
+1. **Dataset scope resolved:** the user confirmed datasets must have no image
+   column in their original schema. Enumerating the eligible datasets is Phase 1
+   verification work, not an outstanding question for the user.
 2. **Course leakage wording:** confirm whether "never seen" means unseen rows
    with per-dataset/fold fitting or an entirely held-out dataset. Ordinary
    per-dataset supervision is proposed, not asserted as course approval.
@@ -38,8 +38,8 @@ until clarified. See [COURSE_REQUIREMENTS.md](COURSE_REQUIREMENTS.md).
    the named MulTaBench paper and user's URL are arXiv:2605.10616. Record the
    mismatch explicitly; use the verified named source for research provenance.
 
-User clarification during the Phase 0 follow-up resolved exclusion of photos.
-Two concise follow-up questions cover the precise dataset roster and whether
-ordinary per-dataset training with untouched test splits is the intended rule.
+User clarification during the Phase 0 follow-up resolved dataset eligibility.
+The remaining course question is whether ordinary per-dataset training with
+untouched test splits is the intended rule.
 Other technical provenance checks will be handled by source inspection rather
 than treated as questions the user must answer. No implementation has started.

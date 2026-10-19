@@ -27,6 +27,10 @@ Hidden size 64 and dropout 0.1 are initial hyperparameters, not conclusions.
 Support multiple text columns and stable field/class ordering. See
 [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
+Dataset scope, confirmed by the user: use only benchmark datasets whose original
+schema has no image column. Exclude datasets containing an image column.
+Validate eligibility against the pinned benchmark schema during Phase 1.
+
 ## Workflow and scope gates
 
 - Work in numbered phases. Phase 0 is infrastructure only. Stop and report it
