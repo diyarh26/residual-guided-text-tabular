@@ -22,8 +22,10 @@ memory on a 14.56 GiB GPU. The user has only that GPU; TPU is not a drop-in
 replacement. A separately configured activation-checkpointing mode preserves
 FP32, batch 256 and all budgets. A full-size synthetic forward/backward capacity
 check runs before its fresh pilot. **158 tests passed in 30.679 seconds**,
-including native BERT/PEFT loss/gradient parity with dropout. Actual GPU
-capacity and the complete comparison remain unverified. Preserve the old run.
+including native BERT/PEFT loss/gradient parity with dropout. The next supplied
+log verifies a T4 capacity pass at 6.510 GiB peak allocated GPU memory and TAR
+training through epoch 9 in the fresh checkpointed run. The complete comparison
+remains in progress; raw Drive artifacts still require audit. Preserve the old run.
 Do not claim Phase 4 completed without real TAR/comparison evidence.
 
 Phase 3 source is now implemented in `features.py`, `fusion.py`,
@@ -129,11 +131,10 @@ limitations before interpreting broader experiments.
 - Repository: https://github.com/diyarh26/residual-guided-text-tabular
 - Branch: `main`.
 - Latest verified pushed commit at edit time:
-  `6e09955514caffa52050459377e5b4736dedca75`
-  (`feat: add explicit checkpointed TAR memory mode and GPU capacity guard`).
-- The prefilled notebook/update-cell handoff accompanies this handoff in
-  a follow-up commit. The field above records the last verified commit at edit
-  time; compare actual HEAD with the remote to identify the current session tip.
+  `9f241b1dd5e2838e588a227d172e2c34c8f5cdec`
+  (`docs: pin memory-saving GPU launcher and current-session update`).
+- The prefilled notebook/update-cell instructions were pushed in that commit.
+  Compare actual HEAD with the remote to identify the current session tip.
 - This field identifies the previously verified commit, avoiding a self-hash
   loop. Use `git log -1 --format="%H %s"` for the commit containing this handoff.
 
@@ -311,6 +312,20 @@ have not been independently audited. TAR failed in the first forward pass:
 768 MiB requested, 551.81 MiB free on a GPU reporting 14.56 GiB. See
 [phase4_colab_tar_oom.json](../results/phase4_colab_tar_oom.json).
 The user confirmed only the current GPU is available. No outer test was unlocked.
+
+The latest supplied log verifies source `6e09955514caffa52050459377e5b4736dedca75`
+and fresh run `phase4-checkpointed-20261020T145755Z-dd78ef55`. The full-size
+synthetic capacity check passed on Tesla T4 (6,989,661,184 bytes peak allocated).
+The first TAR stage reached epoch 9 / optimizer step 36; temporary-head internal
+validation loss fell from 1.276482 to 0.951114. These are progress diagnostics,
+not downstream results. The worker-count warning did not stop training. See
+[progress evidence](../results/phase4_colab_progress_epoch9.json). No complete
+TAR stage or outer-test evaluation is reported yet.
+
+**Next step: leave the currently running Colab cell running.** Do not launch
+another copy or change its settings. After completion, audit the final ledger,
+coverage and artifacts before reporting the pilot recommendation. The setup
+instructions below are for a future launch/continuation, not another job now.
 
 1. Use the explicit memory-saving variant described in
    [PHASE4_MEMORY.md](PHASE4_MEMORY.md). It keeps FP32/batch 256 and all budgets,

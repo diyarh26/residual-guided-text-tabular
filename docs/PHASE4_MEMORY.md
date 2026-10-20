@@ -49,8 +49,10 @@ new private `_bootstrap/*.capacity-*.json` file.
 If this capacity check fails, execution stops before pilot fitting. It never
 automatically changes batch size, sequence length, precision or other budgets.
 A pass is evidence for this workload, not a guarantee that every training stage
-will finish. Actual memory savings and end-to-end GPU success remain unverified
-until the user runs the check and comparison.
+will finish. The October 20 supplied log now verifies a Tesla T4 pass at
+6,989,661,184 bytes (6.510 GiB) peak allocated, followed by TAR training through
+epoch 9 / optimizer step 36. End-to-end completion remains pending. See the
+[progress record](../results/phase4_colab_progress_epoch9.json).
 
 The amended config/source gets a **fresh run ID**. Preserve the original run
 and all three completed conditions; do not merge their learned models or
@@ -81,7 +83,9 @@ data/model files in the existing checkout and old private outputs, tests capacit
 and starts a separate checkpointed pilot only if that check passes. Existing
 model arrays are not merged into it. Source/dataset integrity checks still run.
 The wrapper sets plotting/CUDA workspace variables for its children even when
-the existing notebook has the earlier helper. Actual GPU execution is pending.
+the existing notebook has the earlier helper. The user has executed this cell;
+capacity passed and TAR is running. Leave that job running without launching
+another copy. These commands remain instructions for future sessions.
 
 For a fresh runtime, the latest
 [Colab notebook](https://colab.research.google.com/github/diyarh26/residual-guided-text-tabular/blob/main/notebooks/phase4_pilot.ipynb)

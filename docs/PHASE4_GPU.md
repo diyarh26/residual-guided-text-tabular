@@ -5,7 +5,10 @@ complete according to the next supplied log. TAR then exhausted a 14.56 GiB GPU
 at batch 256/FP32. The user has only that GPU. The new
 [memory-saving execution mode](PHASE4_MEMORY.md) preserves training budgets and
 performs a full-size synthetic capacity check before a fresh comparison.
-Actual GPU capacity and end-to-end success of this amendment remain unverified.
+The next supplied log verifies a Tesla T4 capacity pass at 6.510 GiB peak allocated
+and TAR training through epoch 9 / step 36. End-to-end completion and artifact
+audit remain pending. Leave the current Colab cell running; see the
+[progress record](../results/phase4_colab_progress_epoch9.json).
 The launcher retains `MPLBACKEND=Agg` and `CUBLAS_WORKSPACE_CONFIG=:4096:8`.
 See troubleshooting below, the
 [setup failure](../results/phase4_colab_setup_failure.json), and

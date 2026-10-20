@@ -36,8 +36,9 @@ and 24 locked outer-test evaluations** across classification and regression.
 The full comparison requires a real GPU. Colab logs reached TAR after completing
 the first three conditions, then exhausted GPU memory. An explicit
 [memory-saving execution mode](docs/PHASE4_MEMORY.md) preserves the batch and
-training settings and checks capacity before a fresh run. Its actual GPU
-capacity and the full Phase 4 comparison remain unverified. See the [pilot protocol](docs/PHASE4.md) and
+training settings and checks capacity before a fresh run. The supplied log now
+verifies a Tesla T4 capacity pass at **6.51 GiB** peak allocated and TAR training
+through epoch 9. The full Phase 4 comparison remains in progress. See the [pilot protocol](docs/PHASE4.md) and
 [GPU handoff](docs/PHASE4_GPU.md). A bounded CPU subset can run nine Product
 Sentiment stages while keeping every outer test untouched. That subset has now
 completed and passed its [artifact audit](results/phase4_cpu_preflight_audit.json),
@@ -64,7 +65,7 @@ Its [result](results/phase1_product_sentiment_frozen.json) is preserved.
 Joint TAR and the full matched benchmark comparison remain unevaluated. The
 [project plan](docs/PROJECT_PLAN.md) keeps Phase 4 open until actual results and
 a recommendation are reported. CPU was sufficient for Phase 3; GPU/TAR
-execution has not been validated.
+capacity passed; complete TAR training and its artifact audit remain pending.
 
 The historical MulTaBench `master` pin is
 `599bd6a5631c96f8aef297cc4cb6e4c197ae0dca` (July 26, 2026).
@@ -118,8 +119,9 @@ implementation SHA, and follow the
 [GPU instructions](docs/PHASE4_GPU.md). The notebook installs a separate locked
 CUDA environment, verifies the actual device, saves outputs to private Drive,
 and waits for its explicit launch switch. A full-size capacity check tests the
-checkpointed FP32/batch-256 workload before pilot fitting. Its actual fit remains
-unverified until executed. No automatic batch-size change is applied.
+checkpointed FP32/batch-256 workload before pilot fitting. That capacity check
+has now passed on the user's T4; the complete pilot remains in progress.
+No automatic batch-size change is applied.
 CPU stages and GPU stages require separate run bindings.
 
 ## Reproduction and development

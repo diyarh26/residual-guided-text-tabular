@@ -127,15 +127,17 @@ checks; nested benchmark evaluation and improvement claims remain later work.
 **Status: In progress.** User authorized the needed work and asked to be told
 when GPU access is required. Two version-pinned datasets and matched pilot
 settings are registered; 152 tests and real split/feature preflights pass.
-Separate CUDA lock and Colab launcher are ready; real GPU/TAR execution remains pending.
+Separate CUDA lock and Colab launcher are ready; real GPU/TAR training is underway.
 The nine-stage Product Sentiment CPU preflight and saved-artifact audit passed;
 zero outer-test predictions. Grouped diagnostics show no consistent residual
 gain. Full comparison and decision remain incomplete; see HANDOFF.
 After the CUDA repair, Colab reached TAR with three conditions completed, then
 exhausted its 14.56 GiB GPU. A separately registered activation-checkpointing
 execution mode preserves all training budgets and adds a synthetic capacity
-check before a fresh run. Actual GPU capacity and the complete comparison
-remain unverified. The original run/configuration are preserved.
+check before a fresh run. The next supplied log verifies the capacity check
+passed on Tesla T4 at 6.510 GiB peak allocated, followed by TAR epoch 9 / step 36.
+The complete comparison and artifact audit remain pending. The original
+run/configuration are preserved; leave the current Colab job running.
 
 Objective: determine whether the method merits broader evaluation.
 

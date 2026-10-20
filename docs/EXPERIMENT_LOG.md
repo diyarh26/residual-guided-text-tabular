@@ -507,6 +507,36 @@ capacity step, all seven notebook checks passed again in **11.638 s**.
 The current-session update cell retains the existing GPU and local verified
 assets; the launcher creates a new comparison ID and keeps the OOM run intact.
 
+## October 20, 2026: T4 capacity passed; checkpointed TAR progressing
+
+Status: running, based on the user's supplied log; no independent raw-artifact
+readback. Source `6e09955514caffa52050459377e5b4736dedca75`, amended config
+`configs/phase4_pilot_checkpointed.json`, fresh run
+`phase4-checkpointed-20261020T145755Z-dd78ef55`. Command:
+`uv run --project environments/gpu --frozen python scripts/run_memory_pilot.py --output-root /content/drive/MyDrive/ReFuTab/runs`.
+Reviewed log-derived evidence: [phase4_colab_progress_epoch9.json](../results/phase4_colab_progress_epoch9.json).
+
+The full-size synthetic capacity check passed on Tesla T4 (15,637,086,208 bytes
+total), Torch 2.7.1+cu126 / CUDA 12.6. Peak allocated GPU memory was
+6,989,661,184 bytes (6.510 GiB); peak reserved was 7,142,899,712 bytes. Runtime
+was 5.7561 seconds. Batch 256, 512 tokens, FP32, twenty-output head and resident
+frozen E5 were retained; zero benchmark rows and zero optimizer updates. The
+capacity record persists privately under this run's `_bootstrap` prefix in Drive.
+
+The first three main conditions completed according to control flow. Product
+Sentiment fold-0 TAR then reached epoch 9 / optimizer step 36 of maximum 200,
+with 810 fitting/90 internal-validation rows inside the permitted A partition.
+Temporary-head internal validation loss fell from 1.2764817476 to 0.9511144757;
+its AUROC rose from 0.4344907100 to 0.5197369097. These do not establish final
+downstream performance or a method improvement. The four-worker versus two
+suggested CPUs warning was advisory; training continued and no crash appears.
+
+No TAR stage completion, 36-stage barrier completion or outer-test prediction
+is reported. Whole-run runtime/cost and artifact integrity remain unaudited.
+Leave the current cell running. No fitting, inference or GPU probe was repeated
+locally for this progress record. Documentation/publication checks and
+`git diff --check` passed; no software implementation changed.
+
 ## Required entry for each later experiment
 
 Record run ID/time/status (planned/running/completed/failed/interrupted), exact

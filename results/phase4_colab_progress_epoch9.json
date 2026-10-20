@@ -1,0 +1,133 @@
+{
+  "date": "2026-10-20",
+  "status": "GPU_capacity_passed_TAR_training_in_progress_at_report",
+  "source_commit": "6e09955514caffa52050459377e5b4736dedca75",
+  "run_id": "phase4-checkpointed-20261020T145755Z-dd78ef55",
+  "evidence_sha256": "6ce0202dc95ac75b484d50a7af976e01b967279b20ae35fa2472e8f357de8ea3",
+  "capacity_check": {
+    "kind": "synthetic_tar_capacity_check",
+    "status": "passed",
+    "benchmark_rows": 0,
+    "optimizer_updates": 0,
+    "batch_size": 256,
+    "sequence_length": 512,
+    "dtype": "float32",
+    "upstream_commit": "599bd6a5631c96f8aef297cc4cb6e4c197ae0dca",
+    "model_revision": "ffb93f3bd4047442299a41ebb6fa998a38507c52",
+    "torch": "2.7.1+cu126",
+    "cuda": "12.6",
+    "gpu": "Tesla T4",
+    "total_memory_bytes": 15637086208,
+    "cublas_workspace_config": ":4096:8",
+    "scope": "Full-length synthetic forward/backward with the frozen E5 encoder also resident, as in pilot. A pass does not guarantee the entire training run.",
+    "activation_checkpointing": {
+      "enabled": true,
+      "policy": "trainable_bert_blocks_v1",
+      "layers": [
+        9,
+        10,
+        11
+      ],
+      "use_reentrant": false,
+      "preserve_rng_state": true,
+      "batch_size_changed": false,
+      "precision_changed": false
+    },
+    "loss": 3.0245859622955322,
+    "trainable_parameters": 339476,
+    "seconds": 5.7561335159998634,
+    "cuda_peak_allocated_bytes": 6989661184,
+    "cuda_peak_reserved_bytes": 7142899712
+  },
+  "capacity_peak_allocated_GiB": 6.509629249572754,
+  "TAR_training": {
+    "dataset": "MUL_TEXT_PRODUCT_SENTIMENT",
+    "outer_fold": 0,
+    "latest_completed_epoch": 9,
+    "latest_completed_optimizer_steps": 36,
+    "maximum_planned_steps": 200,
+    "metrics_scope": "Temporary TAR head internal validation, not downstream or outer test",
+    "validation_history": [
+      {
+        "eval_auc": 0.4344907099906394,
+        "eval_loss": 1.2764817476272583,
+        "eval_runtime": 1.1413,
+        "eval_samples_per_second": 78.857,
+        "eval_steps_per_second": 0.876,
+        "epoch": 1.0
+      },
+      {
+        "eval_auc": 0.43507124932378516,
+        "eval_loss": 1.2020426988601685,
+        "eval_runtime": 1.1697,
+        "eval_samples_per_second": 76.941,
+        "eval_steps_per_second": 0.855,
+        "epoch": 2.0
+      },
+      {
+        "eval_auc": 0.4454625958382011,
+        "eval_loss": 1.128261923789978,
+        "eval_runtime": 1.2086,
+        "eval_samples_per_second": 74.467,
+        "eval_steps_per_second": 0.827,
+        "epoch": 3.0
+      },
+      {
+        "eval_auc": 0.45631288639427364,
+        "eval_loss": 1.06107759475708,
+        "eval_runtime": 1.2231,
+        "eval_samples_per_second": 73.586,
+        "eval_steps_per_second": 0.818,
+        "epoch": 4.0
+      },
+      {
+        "eval_auc": 0.46514813898432583,
+        "eval_loss": 1.007901906967163,
+        "eval_runtime": 1.2731,
+        "eval_samples_per_second": 70.691,
+        "eval_steps_per_second": 0.785,
+        "epoch": 5.0
+      },
+      {
+        "eval_auc": 0.4836446472166005,
+        "eval_loss": 0.975132167339325,
+        "eval_runtime": 1.232,
+        "eval_samples_per_second": 73.051,
+        "eval_steps_per_second": 0.812,
+        "epoch": 6.0
+      },
+      {
+        "eval_auc": 0.49406632065293554,
+        "eval_loss": 0.9610738158226013,
+        "eval_runtime": 1.2409,
+        "eval_samples_per_second": 72.53,
+        "eval_steps_per_second": 0.806,
+        "epoch": 7.0
+      },
+      {
+        "eval_auc": 0.5063848282464626,
+        "eval_loss": 0.9552786946296692,
+        "eval_runtime": 1.2307,
+        "eval_samples_per_second": 73.128,
+        "eval_steps_per_second": 0.813,
+        "epoch": 8.0
+      },
+      {
+        "eval_auc": 0.5197369097461224,
+        "eval_loss": 0.9511144757270813,
+        "eval_runtime": 1.2898,
+        "eval_samples_per_second": 69.78,
+        "eval_steps_per_second": 0.775,
+        "epoch": 9.0
+      }
+    ],
+    "full_TAR_stage_complete": false
+  },
+  "previous_three_stages_completed_by_control_flow": true,
+  "raw_models_predictions_ledgers_independently_audited": false,
+  "outer_test_predictions": 0,
+  "all_stage_barrier_complete": false,
+  "phase4_complete": false,
+  "warning": "DataLoader requested four worker processes versus two suggested; training continued through epoch 9.",
+  "interpretation": "Memory-saving capacity check passed on this T4 and training progressed through reported epoch; no complete comparison or improvement claim."
+}
