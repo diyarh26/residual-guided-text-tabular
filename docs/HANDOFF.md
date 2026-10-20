@@ -16,7 +16,11 @@ benchmark pilots and full evaluation remain later-phase work.
 **Phase 4 - In progress.** The user authorized the needed work and asked to be
 told when GPU resources are needed. The nine-stage CPU preflight and artifact
 audit passed after recovering a Windows checkpoint-file error. The next actual
-comparison needs a CUDA GPU; the Colab launcher is prepared and source-pinned.
+comparison needs a CUDA GPU. A user-supplied Colab log confirms successful
+preparation but five test-module import errors from the inherited Matplotlib
+inline backend. The notebook subprocess helper now sets `MPLBACKEND=Agg`;
+the issue and fix were reproduced locally and six notebook checks pass.
+The user's Colab retry and actual pilot fitting remain unverified.
 Do not claim Phase 4 completed without real TAR/comparison evidence.
 
 Phase 3 source is now implemented in `features.py`, `fusion.py`,
@@ -122,9 +126,9 @@ limitations before interpreting broader experiments.
 - Repository: https://github.com/diyarh26/residual-guided-text-tabular
 - Branch: `main`.
 - Latest verified pushed commit at edit time:
-  `c1e7ec1cdbb79fbc2f000a060616a5e73e11c0d1`
-  (`feat: prepare registered pilot comparisons and resumable GPU launcher`).
-- Phase 4 CPU evidence and GPU handoff accompany this handoff in
+  `9242f6176a55c0141a97adac72ad8662a722629b`
+  (`experiments: verify Phase 4 CPU preflight and prepare GPU handoff`).
+- The Colab backend repair accompanies this handoff in
   a follow-up commit. The field above records the last verified commit at edit
   time; compare actual HEAD with the remote to identify the current session tip.
 - This field identifies the previously verified commit, avoiding a self-hash
@@ -249,14 +253,15 @@ a gain recommendation with missing TAR or incomplete diagnostic coverage.
 grouped split/OOF audits, safe caches/continuation, and aggregate reporting.
 **152 tests passed in 25.723 seconds on October 20.** Both real tables pass all 12 main/nested
 feature-role and split preflights. Separate Linux CUDA locks and the thin
-`notebooks/phase4_pilot.ipynb` launcher are prepared; actual GPU/Colab execution
-has not occurred. Full execution instructions are in [PHASE4.md](PHASE4.md)
+`notebooks/phase4_pilot.ipynb` launcher are prepared; the full GPU/TAR pilot
+has not executed in reviewed evidence. Colab setup is recorded below.
+Full execution instructions are in [PHASE4.md](PHASE4.md)
 and [PHASE4_GPU.md](PHASE4_GPU.md).
 
 The CPU preflight is now recorded in
 [phase4_cpu_preflight.json](../results/phase4_cpu_preflight.json) and its
 [audit](../results/phase4_cpu_preflight_audit.json). Clean source was the pushed
-commit above. Main Product Sentiment fold-0 frozen/direct/residual and all six
+commit `c1e7ec1cdbb79fbc2f000a060616a5e73e11c0d1`. Main Product Sentiment fold-0 frozen/direct/residual and all six
 grouped direct/residual diagnostics completed: **9/36 stages; zero outer-test
 predictions**. All 509 outer-test rows remained excluded from fitting.
 
@@ -282,15 +287,30 @@ were 1.0. These are internal exploratory diagnostics, with no consistent gain
 and visible training optimism. No redesign followed. Missing GPU/TAR, regression
 fits and remaining outer coverage block a complete pilot recommendation.
 
-1. Tell the user the next comparison needs one CUDA GPU and provide the
+The user has now reached Colab preparation. Two pasted attachments contain the
+same log for bootstrap `phase4-colab-20261020T140148Z-67a87c90`. Pinned source,
+both datasets and all six E5 assets prepared successfully. The suite reported
+126 discovered checks and five import errors sharing one Matplotlib backend
+cause; the full suite was not successfully discovered/run. Hardware details and
+the project `rev-parse` output were not in the supplied excerpt. The failure
+record is [phase4_colab_setup_failure.json](../results/phase4_colab_setup_failure.json).
+
+1. In the existing notebook, add `import os` and
+   `os.environ["MPLBACKEND"] = "Agg"` at the top of the failed preparation/tests
+   cell and rerun that cell. This preserves the source pin, Drive mount, run ID,
+   downloaded assets and clean source checkout. After all checks pass, run the
+   final launch cell. The published helper fixes subprocess environments for
+   future sessions. Do not describe the retry or real GPU fitting as successful
+   before reviewing its actual output.
+2. For a fresh session use the
    [Colab launcher](https://colab.research.google.com/github/diyarh26/residual-guided-text-tabular/blob/main/notebooks/phase4_pilot.ipynb).
    The source pin is prefilled with `c1e7ec1cdbb79fbc2f000a060616a5e73e11c0d1`.
    Select a GPU runtime, run setup, then set `LAUNCH_PILOT = True` in its launch
-   cell. Actual GPU/Colab execution remains unvalidated.
-2. Run the fresh registered GPU plan when that resource is available. Do not
+   cell. Real GPU pilot execution remains unvalidated.
+3. Run the fresh registered GPU plan when setup passes. Do not
    merge CPU models or pass the CPU directory as a GPU continuation. Preserve
    real OOM/failures without automatically changing the registered budgets.
-3. Audit full artifacts and coverage, report the pilot recommendation, then
+4. Audit full artifacts and coverage, report the pilot recommendation, then
    decide whether full evaluation is warranted. Phase 4 remains in progress;
    do not proceed silently to Phase 5 or Option B.
 

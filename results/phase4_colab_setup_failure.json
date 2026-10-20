@@ -1,0 +1,60 @@
+{
+  "status": "reported_colab_setup_failed_local_fix_verified",
+  "date": "2026-10-20",
+  "bootstrap_id": "phase4-colab-20261020T140148Z-67a87c90",
+  "evidence": {
+    "provided_copies": 2,
+    "distinct_logs": 1,
+    "sha256": "5500f0b36b81aae61c9d2bcf0dbfc0521ae1fe30b26fded543673e193621e698"
+  },
+  "notebook_requested_project_commit": "c1e7ec1cdbb79fbc2f000a060616a5e73e11c0d1",
+  "actual_project_head_in_excerpt": false,
+  "hardware_details_in_excerpt": false,
+  "verified_upstream_commit": "599bd6a5631c96f8aef297cc4cb6e4c197ae0dca",
+  "verified_e5_revision": "ffb93f3bd4047442299a41ebb6fa998a38507c52",
+  "verified_datasets": [
+    "MUL_TEXT_PRODUCT_SENTIMENT",
+    "REG_TEXT_VIDEO_GAMES_SALES"
+  ],
+  "reported_python": "3.11.15 Linux x86_64",
+  "test_command": "uv run --project environments/gpu --frozen python -m unittest discover -s tests -v",
+  "reported_test_result": {
+    "status": "failed",
+    "discovered_tests": 126,
+    "import_errors": 5,
+    "seconds": 8.803,
+    "full_suite_discovered": false
+  },
+  "failed_modules": [
+    "test_downstream",
+    "test_fusion_runner",
+    "test_phase1",
+    "test_pilot",
+    "test_pipeline"
+  ],
+  "root_error": {
+    "type": "ValueError",
+    "setting": "MPLBACKEND",
+    "value": "module://matplotlib_inline.backend_inline",
+    "import_chain": [
+      "lightgbm",
+      "matplotlib"
+    ]
+  },
+  "local_validation": {
+    "inherited_setting_reproduced_error": true,
+    "Agg_backend_imported_matplotlib_and_lightgbm": true,
+    "notebook_tests_passed": 6,
+    "seconds": 2.133,
+    "device": "cpu"
+  },
+  "repair": {
+    "subprocess_MPLBACKEND": "Agg",
+    "parent_environment_preserved": true,
+    "source_model_data_lock_training_settings_unchanged": true
+  },
+  "colab_retry_verified": false,
+  "pilot_training_verified": false,
+  "outer_test_evaluation_verified": false,
+  "runtime_memory_service_cost": "Not reported for GPU pilot; setup failure is not a pilot result."
+}

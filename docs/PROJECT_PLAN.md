@@ -131,6 +131,9 @@ Separate CUDA lock and Colab launcher are ready; real GPU/TAR execution remains 
 The nine-stage Product Sentiment CPU preflight and saved-artifact audit passed;
 zero outer-test predictions. Grouped diagnostics show no consistent residual
 gain. Full comparison and decision remain incomplete; see HANDOFF.
+The first reported Colab setup prepared inputs but failed five test imports
+because of an inherited plotting backend. The notebook repair passes six local
+checks; Colab retry and actual GPU fitting remain unverified.
 
 Objective: determine whether the method merits broader evaluation.
 

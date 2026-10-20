@@ -6,7 +6,9 @@ import ast
 from contextlib import redirect_stdout
 import io
 import json
+import os
 from pathlib import Path
+import subprocess
 import sys
 import tempfile
 import tomllib
@@ -69,6 +71,7 @@ class Phase4NotebookTests(unittest.TestCase):
             log = Path(directory) / "persistent.log"
             namespace = {
                 "BOOTSTRAP_LOG": log,
+                "os": os,
                 "shlex": __import__("shlex"),
                 "subprocess": SimpleNamespace(Popen=lambda *args, **kwargs: FailingProcess(), PIPE=-1, STDOUT=-2),
             }
@@ -83,6 +86,24 @@ class Phase4NotebookTests(unittest.TestCase):
         self.assertLess(source.index('drive.mount("/content/drive")'), source.index('"uv==0.11.24"'))
         self.assertIn('BOOTSTRAP_LOG.open("x"', source)
         self.assertIn('"--output-root", str(RUNS_ROOT)', source)
+
+    def test_subprocess_overrides_colab_inline_backend_and_preserves_kernel_environment(self):
+        helper = next(node for source in self.cells for node in ast.parse(source).body
+                      if isinstance(node, ast.FunctionDef) and node.name == "run")
+        with tempfile.TemporaryDirectory(prefix="refutab-colab-backend-") as directory:
+            log = Path(directory) / "persistent.log"
+            namespace = {"BOOTSTRAP_LOG": log, "os": os, "shlex": __import__("shlex"), "subprocess": subprocess}
+            exec(compile(ast.Module(body=[helper], type_ignores=[]), "notebook_helper", "exec"), namespace)
+            inherited = "module://matplotlib_inline.backend_inline"
+            with patch.dict(os.environ, {"MPLBACKEND": inherited, "REFUTAB_BACKEND_FIXTURE": "retained"}):
+                with redirect_stdout(io.StringIO()):
+                    output = namespace["run"]([sys.executable, "-c",
+                        "import os,matplotlib,lightgbm; "
+                        "print(matplotlib.get_backend()); "
+                        "print(os.environ['REFUTAB_BACKEND_FIXTURE'])"])
+                self.assertEqual(os.environ["MPLBACKEND"], inherited)
+            self.assertEqual(output.lower().splitlines(), ["agg", "retained"])
+            self.assertIn("subprocess_MPLBACKEND=Agg\n", log.read_text(encoding="utf-8"))
 
     def test_gpu_preflight_rejects_cpu_before_asset_preparation(self):
         value = next(node.value for source in self.cells for node in ast.parse(source).body

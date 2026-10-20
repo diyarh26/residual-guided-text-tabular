@@ -372,6 +372,44 @@ Final October 20 verification passed **152 tests in 25.723 seconds**, including
 the prefilled-SHA and malformed-SHA guards. CPU lock, infrastructure/local-link,
 publication-boundary and whitespace checks also passed.
 
+## Phase 4 Colab preparation failure and backend repair — October 20, 2026
+
+Status: setup/test failure reported by the user; local fix verified; Colab retry
+and pilot training pending. The two supplied attachments are byte-identical
+copies of one log, not two independent failures. Evidence and normalized details
+are in [phase4_colab_setup_failure.json](../results/phase4_colab_setup_failure.json).
+Bootstrap ID: `phase4-colab-20261020T140148Z-67a87c90`.
+The notebook requests project source
+`c1e7ec1cdbb79fbc2f000a060616a5e73e11c0d1`; the supplied excerpt omits actual
+project-HEAD and hardware output, so neither is independently verified here.
+
+The log confirms successful preparation of historical source
+`599bd6a5631c96f8aef297cc4cb6e4c197ae0dca`, both versioned no-image dataset
+CSVs/metadata with matching hashes, and all six frozen E5 files at revision
+`ffb93f3bd4047442299a41ebb6fa998a38507c52`. The isolated Python executable
+was 3.11.15 on Linux. The GPU environment's test command reported **126 tests
+in 8.803 s, failed with five import errors**. These whole-module import failures
+prevented discovery of the full expected suite; do not count 126 as a full pass.
+No registered pilot fitting or outer-test evaluation appears in this log.
+
+Every failed module imported LightGBM, whose Matplotlib import inherited
+`MPLBACKEND=module://matplotlib_inline.backend_inline` from Colab. That backend
+is unavailable in the isolated environment. A local subprocess reproduced the
+same `ValueError`; setting `MPLBACKEND=Agg` made Matplotlib/LightGBM import
+successfully. The notebook helper now uses a copied child environment with
+`MPLBACKEND=Agg` and logs that setting. It leaves the parent kernel and other
+environment variables intact. Source pin, model/data/configuration, dependencies
+and scientific training budgets are unchanged.
+
+All **six notebook checks passed in 2.133 s**, including a real subprocess
+regression test with the inherited Colab setting, successful dependency imports,
+and preserved parent environment. No GPU or benchmark model was trained locally.
+Existing Colab sessions can add `import os` and `os.environ["MPLBACKEND"] = "Agg"`
+above the failed preparation/tests cell and rerun that cell, reusing verified
+inputs and the current source checkout. Training remains behind the test/launch
+guards. Actual Colab retry success, hardware, training runtime/memory and service
+cost remain unreported; keep the failed bootstrap log in private Drive.
+
 ## Required entry for each later experiment
 
 Record run ID/time/status (planned/running/completed/failed/interrupted), exact

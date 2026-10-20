@@ -1,9 +1,11 @@
 # Phase 4 GPU execution
 
-Status: the separate dependency lock and thin Colab entry point are prepared.
-They have not been installed or executed in Colab, and no GPU training result
-is claimed. Local tests inspect the lock, notebook guards, CPU rejection and
-durable failure logging without using a GPU.
+Status: a user-supplied October 20 Colab log confirms installation of the isolated
+environment and successful source/data/model preparation. Test discovery then
+failed on an inherited Matplotlib inline-backend setting. The notebook now uses
+`MPLBACKEND=Agg` in subprocesses; local reproduction and six notebook checks pass.
+The Colab retry and real GPU/TAR training remain unverified. See troubleshooting
+below and [the setup-failure record](../results/phase4_colab_setup_failure.json).
 
 Phase 4 compares Joint Frozen, Joint TAR, direct-target gated fusion and
 residual-guided fusion on the committed pilot protocol. Joint TAR is the
@@ -104,6 +106,31 @@ package-build and embedding binding. It never unlocks the registered outer tests
 Start a **new complete GPU run** for the matched comparison rather than passing
 that CPU directory to `--resume-run`. Completed CPU stages are not merged with
 GPU stages or used to choose which registered methods to report.
+
+## Colab plotting-backend error
+
+If the preparation/tests cell reports
+`ValueError: Key backend: 'module://matplotlib_inline.backend_inline'`,
+Colab's kernel setting has reached the isolated Python environment. LightGBM
+imports Matplotlib, and the kernel's inline backend is unavailable there.
+The notebook's subprocess helper now sets `MPLBACKEND=Agg` in a copied child
+environment, preserving the kernel's own setting and other variables, including
+GPU selection. This follows [Matplotlib's backend configuration](https://matplotlib.org/stable/users/explain/figure/backends.html).
+It changes plotting configuration without changing the model, data or lock.
+
+For an already-open notebook using the earlier helper, add these lines at the
+top of the failed preparation/tests cell and rerun that cell:
+
+```python
+import os
+os.environ["MPLBACKEND"] = "Agg"
+```
+
+This setting also reaches later training subprocesses in that current session.
+Keep the existing source pin, runtime, Drive mount and run ID. Existing verified
+inputs are reused. After the cell prints the preparation/device/tests success
+message, run the final launch cell with `LAUNCH_PILOT = True`. The supplied
+failure occurred before pilot fitting; it is not a completed GPU comparison.
 
 ## Interruption and retry boundaries
 
