@@ -205,7 +205,8 @@ def train_method(method, table, case, encoder, config, directory, context, previ
             representation = fit_tar_representation(
                 train_x, schema.text_columns, pd.Series(encode_targets(train_y, schema.task, classes), index=train_x.index), task=schema.task,
                 train_ids=split.train_ids, device=config["device"], local_model_path=encoder.config.model_path,
-                output_directory=directory / "tar", training_context=context, resume_checkpoint=checkpoint, seed=42)
+                output_directory=directory / "tar", training_context=context, resume_checkpoint=checkpoint, seed=42,
+                activation_checkpointing=config.get("tar_execution", {}).get("activation_checkpointing", False))
         # Canonical persisted PCA layout is used before downstream fitting too.
         representation = TarRepresentation.load(directory / "tar/representation", local_model_path=encoder.config.model_path,
                                                   device=config["device"])
@@ -299,6 +300,10 @@ def run_pilot(root: Path, config_path: Path, *, run_id=None, output_root=None, r
     config = json.loads(config_path.read_text(encoding="utf-8"))
     if config.get("schema_version") != 1 or config["methods"] != list(METHODS):
         raise ValueError("Pilot requires the registered four methods and format")
+    execution = config.get("tar_execution", {})
+    if (not isinstance(execution, dict) or set(execution) - {"activation_checkpointing"}
+            or any(type(value) is not bool for value in execution.values())):
+        raise ValueError("tar_execution accepts only an explicit activation_checkpointing boolean")
     selected = list(METHODS if methods is None else methods)
     if not selected or len(set(selected)) != len(selected) or set(selected) - set(METHODS):
         raise ValueError("Select only unique preregistered methods")

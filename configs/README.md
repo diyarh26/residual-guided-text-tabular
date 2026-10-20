@@ -20,3 +20,9 @@ hashes and data audits. `phase4_pilot.json` registers four matched methods,
 three historical outer holdouts per dataset, grouped nested diagnostics and
 the descriptive decision rule before new pilot scores. Neither configuration
 claims the required GPU comparisons have executed.
+
+`phase4_pilot_checkpointed.json` is an execution-only amendment after an observed
+TAR OOM on the user's 14.56 GiB GPU. All original training budgets are unchanged;
+explicit activation checkpointing trades recomputation for saved activations.
+Use a fresh run and the synthetic capacity check in
+[PHASE4_MEMORY.md](../docs/PHASE4_MEMORY.md), preserving the original config/run.

@@ -1,6 +1,7 @@
 """CPU-only TAR adapter tests; Trainer/model fixtures do not establish GPU execution."""
 
 from contextlib import ExitStack, contextmanager, redirect_stdout
+import copy
 import io
 import json
 import os
@@ -380,6 +381,70 @@ class TarAdapterTests(unittest.TestCase):
             (directory / "added_tokens.json").write_text('{}')
             with self.assertRaisesRegex(ValueError, "unverified"):
                 tar._verify_assets(directory)
+
+    def test_activation_checkpointing_preserves_dropout_loss_gradients_and_reduces_saved_tensors(self):
+        from peft import LoraConfig, get_peft_model
+        from transformers import BertConfig, BertModel
+        previous_threads = torch.get_num_threads()
+        try:
+            torch.set_num_threads(2)
+            with torch.random.fork_rng():
+                torch.manual_seed(42)
+                backbone = get_peft_model(BertModel(BertConfig(vocab_size=50, hidden_size=32,
+                    intermediate_size=64, num_hidden_layers=3, num_attention_heads=4,
+                    hidden_dropout_prob=.1, attention_probs_dropout_prob=.1)),
+                    LoraConfig(r=4, lora_alpha=8, lora_dropout=.1,
+                               target_modules=self.fine._get_lora_target_modules([2]), bias="none"))
+                reference = self.fine.E5ForTuning(backbone=backbone, d_model=32, d_output=3)
+                with torch.no_grad():
+                    for name, parameter in reference.named_parameters():
+                        if "lora_B" in name:
+                            parameter.normal_(0, .01)
+                candidate = copy.deepcopy(reference)
+                audit = tar._enable_activation_checkpointing(candidate.backbone)
+                self.assertEqual(audit["layers"], [2])
+                self.assertFalse(candidate.backbone.get_input_embeddings()(torch.ones((1, 2), dtype=torch.long)).requires_grad)
+                inputs = {"input_ids": torch.arange(60).reshape(5, 12) % 50,
+                          "attention_mask": torch.ones((5, 12), dtype=torch.long),
+                          "labels": torch.tensor([0, 1, 2, 0, 1])}
+                results = []
+                for model in (reference, candidate):
+                    sizes = []
+                    model.train()
+                    torch.manual_seed(123)
+                    with torch.autograd.graph.saved_tensors_hooks(
+                            lambda value: (sizes.append(value.numel() * value.element_size()) or value), lambda value: value):
+                        output = model(**inputs)
+                        output["loss"].backward()
+                    gradients = {name: value.grad.detach().clone() for name, value in model.named_parameters() if value.requires_grad}
+                    self.assertTrue(all(value.grad is None for value in model.parameters() if not value.requires_grad))
+                    results.append((output["loss"], gradients, sum(sizes)))
+                torch.testing.assert_close(results[0][0], results[1][0], rtol=0, atol=0)
+                for name, gradient in results[0][1].items():
+                    torch.testing.assert_close(gradient, results[1][1][name], rtol=0, atol=0)
+                self.assertLess(results[1][2], results[0][2])
+        finally:
+            torch.set_num_threads(previous_threads)
+
+    def test_activation_checkpointing_changes_checkpoint_context(self):
+        with tempfile.TemporaryDirectory() as temporary, self.source_fixture():
+            old, new = Path(temporary) / "old", Path(temporary) / "new"
+            FixtureTrainer.fail = True
+            with self.assertRaises(torch.OutOfMemoryError):
+                self.fit(old)
+            with self.assertRaisesRegex(ValueError, "context|provenance"):
+                self.fit(new, resume_checkpoint=old / "hf/checkpoint-1", activation_checkpointing=True)
+
+    def test_activation_checkpointing_is_applied_by_trainer_without_changing_source_budget(self):
+        with tempfile.TemporaryDirectory() as temporary, self.source_fixture(), \
+             patch.object(tar, "_enable_activation_checkpointing", return_value={"enabled": True, "layers": [9, 10, 11]}) as configure:
+            representation = self.fit(Path(temporary) / "run", activation_checkpointing=True)
+            configure.assert_called_once()
+            audit = representation.metadata()["provenance"]["audit"]
+            self.assertEqual(audit["activation_checkpointing"]["layers"], [9, 10, 11])
+            context = json.loads((Path(temporary) / "run/training_context.json").read_text())
+            self.assertTrue(context["activation_checkpointing"])
+            self.assertEqual(context["training_kwargs"], tar.TAR_TRAIN_KWARGS)
 
     def test_unexpected_loader_identifier_is_rejected_and_patch_restored(self):
         import transformers

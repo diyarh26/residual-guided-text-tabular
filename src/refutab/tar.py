@@ -185,11 +185,34 @@ def _copy_resume(checkpoint: Path, output: Path, context: dict[str, Any]) -> Pat
     return result
 
 
+def _enable_activation_checkpointing(backbone: Any) -> dict[str, Any]:
+    """Recompute trainable BERT blocks without changing weights, loss or batches."""
+    base = backbone.get_base_model()
+    if getattr(base.config, "model_type", None) != "bert":
+        raise ValueError("The registered activation-checkpoint mode requires the pinned BERT encoder")
+    before = {name: parameter.requires_grad for name, parameter in backbone.named_parameters()}
+    backbone.gradient_checkpointing_enable(gradient_checkpointing_kwargs={
+        "use_reentrant": False, "preserve_rng_state": True})
+    active = []
+    for index, layer in enumerate(base.encoder.layer):
+        # Frozen preceding blocks have no trainable inputs/parameters in this
+        # E5 setup. Their normal forward already avoids retaining a graph.
+        enabled = any(parameter.requires_grad for parameter in layer.parameters())
+        layer.gradient_checkpointing = enabled
+        if enabled:
+            active.append(index)
+    if not active or before != {name: parameter.requires_grad for name, parameter in backbone.named_parameters()}:
+        raise ValueError("Activation checkpointing changed the trainable parameter scope")
+    return {"enabled": True, "policy": "trainable_bert_blocks_v1", "layers": active,
+            "use_reentrant": False, "preserve_rng_state": True,
+            "batch_size_changed": False, "precision_changed": False}
+
+
 @contextmanager
 def _runtime_scope(text_module: Any, fine_module: Any, split_module: Any, *,
                    local_model_path: Path, output_directory: Path,
                    context: dict[str, Any], audit: dict[str, Any],
-                   resume_checkpoint: Path | None):
+                   resume_checkpoint: Path | None, activation_checkpointing: bool = False):
     """Restore all process bindings on success, OOM, or any source failure."""
     import transformers
     original_model_loader = transformers.AutoModel.from_pretrained
@@ -266,6 +289,8 @@ def _runtime_scope(text_module: Any, fine_module: Any, split_module: Any, *,
             kwargs["callbacks"] = callbacks
             audit["training_arguments"] = training_args.to_dict()
             super().__init__(*args, **kwargs)
+            if activation_checkpointing:
+                audit["activation_checkpointing"] = _enable_activation_checkpointing(self.model.backbone)
 
         def train(self, *args: Any, **kwargs: Any):
             if args or "resume_from_checkpoint" in kwargs:
@@ -449,7 +474,7 @@ def fit_tar_representation(train_features: pd.DataFrame, text_columns: Sequence[
                            output_directory: str | Path,
                            training_context: Mapping[str, Any],
                            resume_checkpoint: str | Path | None = None,
-                           seed: int = 42) -> TarRepresentation:
+                           seed: int = 42, activation_checkpointing: bool = False) -> TarRepresentation:
     """Fit one source TAR backbone/PCA using only caller-authorized fitting rows.
 
     ``targets`` must already be globally encoded class indices, or regression
@@ -457,6 +482,8 @@ def fit_tar_representation(train_features: pd.DataFrame, text_columns: Sequence[
     Training is GPU-only at the exact historical budget; OOM propagates.
     """
     fields = _columns(text_columns, "text_columns")
+    if type(activation_checkpointing) is not bool:
+        raise ValueError("activation_checkpointing must be an explicit boolean")
     ids = normalize_row_ids(train_ids, context="TAR fitting row IDs")
     if (not isinstance(train_features, pd.DataFrame) or train_features.columns.has_duplicates
             or not fields or set(fields) - set(train_features.columns)
@@ -489,7 +516,8 @@ def fit_tar_representation(train_features: pd.DataFrame, text_columns: Sequence[
                                "text_features_sha256": _hash([[_typed_cell(value) for value in row]
                                                               for row in train_features.loc[:, list(fields)].itertuples(index=False, name=None)]),
                                "targets_sha256": _hash([_typed_cell(value) for value in targets.tolist()]),
-                               "training_kwargs": TAR_TRAIN_KWARGS}))
+                               "training_kwargs": TAR_TRAIN_KWARGS,
+                               "activation_checkpointing": activation_checkpointing}))
     output = Path(output_directory).resolve()
     resume = Path(resume_checkpoint).resolve() if resume_checkpoint is not None else None
     if resume:
@@ -515,7 +543,8 @@ def fit_tar_representation(train_features: pd.DataFrame, text_columns: Sequence[
     try:
         with _runtime_scope(text_module, fine_module, split_module,
                             local_model_path=local, output_directory=output,
-                            context=context, audit=audit, resume_checkpoint=resume):
+                            context=context, audit=audit, resume_checkpoint=resume,
+                            activation_checkpointing=activation_checkpointing):
             wrappers = text_module.fit_text_encoders_tuned(
                 x=train_features.copy(deep=True), text_features_list=list(fields),
                 device=selected_device, y=targets.copy(deep=True),

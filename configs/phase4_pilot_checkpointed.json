@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "preregistered_date": "2026-10-20",
+  "datasets_manifest": "configs/phase4_datasets.json",
+  "methods": [
+    "frozen",
+    "direct",
+    "residual",
+    "tar"
+  ],
+  "outer_folds": [
+    0,
+    1,
+    2
+  ],
+  "train_examples": 1000,
+  "device": "cuda:0",
+  "encoder": {
+    "model_path": "artifacts/e5-small-v2",
+    "identifier": "intfloat/e5-small-v2",
+    "revision": "ffb93f3bd4047442299a41ebb6fa998a38507c52",
+    "max_length": 512,
+    "batch_size": 32,
+    "device": "cuda:0"
+  },
+  "pipeline": {
+    "training": {
+      "objective": "residual",
+      "epochs": 10,
+      "batch_size": 32,
+      "lr": 0.001,
+      "weight_decay": 0.0001,
+      "seed": 42,
+      "patience": 3,
+      "device": "cuda:0",
+      "threads": 2
+    },
+    "hidden_dim": 64,
+    "dropout": 0.1,
+    "category_embedding_dim": 8,
+    "structured_dim": 16,
+    "downstream_estimators": 100,
+    "downstream_threads": 2
+  },
+  "teacher": {
+    "n_splits": 3,
+    "seed": 42,
+    "iterations": 40,
+    "depth": 4,
+    "learning_rate": 0.1,
+    "thread_count": 2,
+    "probability_clip": 1e-07
+  },
+  "diagnostics": {
+    "enabled": true,
+    "outer_fold": 0,
+    "n_splits": 3,
+    "seed": 42,
+    "validation_fraction": 0.1,
+    "methods": [
+      "direct",
+      "residual"
+    ],
+    "group_columns": {
+      "MUL_TEXT_PRODUCT_SENTIMENT": [
+        "Product_Description"
+      ],
+      "REG_TEXT_VIDEO_GAMES_SALES": [
+        "Name"
+      ]
+    }
+  },
+  "evaluation": {
+    "outer_test_barrier": "all_preregistered_main_and_diagnostic_models_completed",
+    "final_refit": false,
+    "primary_classification": "macro one-vs-rest AUROC",
+    "primary_regression": "R2",
+    "statistical_claims": "descriptive paired differences only; overlapping repeated holdouts are not independent samples"
+  },
+  "decision_rule": {
+    "id": "phase4_descriptive_continue_v1",
+    "complete_coverage": "36 fitted stages and 24 outer-test prediction calls, with valid scores",
+    "continue_unchanged_requires": [
+      "positive mean outer residual-minus-direct on both datasets",
+      "positive mean outer residual-minus-TAR on both datasets",
+      "at least two of three positive outer residual-minus-direct folds per dataset",
+      "positive mean grouped nested-D residual-minus-direct on both datasets"
+    ],
+    "otherwise_if_complete": "analyze_failures_and_overfit_before_scaling",
+    "if_incomplete": "await_required_comparisons",
+    "automatic_redesign": false
+  },
+  "prior_visibility": "Phase 1 Product Sentiment fold0 frozen test score and Phase 2 teacher OOF/validation diagnostics were already observed. These pilots are exploratory, not a new blind confirmatory test. Dataset choice is based on schema/compute, not new method scores.",
+  "output_root": "results/raw",
+  "parent_config": "configs/phase4_pilot.json",
+  "execution_amendment": "Following observed TAR CUDA OOM on a 14.56 GiB GPU, enable non-reentrant activation checkpointing on trainable BERT blocks, preserving dropout RNG, FP32, batch 256 and all training budgets. No outer test scores observed; use a fresh run and preserve the original failure.",
+  "tar_execution": {
+    "activation_checkpointing": true
+  }
+}

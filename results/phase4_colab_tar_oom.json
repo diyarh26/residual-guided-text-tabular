@@ -1,0 +1,68 @@
+{
+  "date": "2026-10-20",
+  "status": "reported_TAR_OOM_memory_amendment_pending_GPU_check",
+  "run_id": "phase4-colab-20261020T140148Z-67a87c90",
+  "source_commit": "c1e7ec1cdbb79fbc2f000a060616a5e73e11c0d1",
+  "evidence_sha256": "adb804821403fa98caf1569c7e367f045d168c09dc60ed86dc5a93e205609a87",
+  "completed_stages_by_control_flow": [
+    "MUL_TEXT_PRODUCT_SENTIMENT__fold0__frozen",
+    "MUL_TEXT_PRODUCT_SENTIMENT__fold0__direct",
+    "MUL_TEXT_PRODUCT_SENTIMENT__fold0__residual"
+  ],
+  "raw_completed_artifacts_independently_audited": false,
+  "failed_stage": "MUL_TEXT_PRODUCT_SENTIMENT__fold0__tar",
+  "failure_type": "torch.OutOfMemoryError",
+  "gpu_memory": {
+    "total_capacity_GiB": 14.56,
+    "free_MiB": 551.81,
+    "requested_allocation_MiB": 768.0,
+    "process_in_use_GiB": 14.02,
+    "pytorch_allocated_GiB": 13.33,
+    "pytorch_reserved_unallocated_MiB": 525.19,
+    "values_rounded_as_reported": true,
+    "gpu_name_in_excerpt": false
+  },
+  "reported_TAR": {
+    "fitting_rows": 810,
+    "internal_validation_rows": 90,
+    "batch_size": 256,
+    "max_epochs": 50,
+    "steps_per_epoch": 4,
+    "planned_steps": 200,
+    "last_adapted_layers": [
+      9,
+      10,
+      11
+    ],
+    "lora_rank": 16,
+    "trainable_parameters_including_head": 333316,
+    "frozen_parameters": 33360000,
+    "optimizer_updates_completed": 0
+  },
+  "nonfatal_warning": "DataLoader requested four workers; suggested maximum two. Fatal error was GPU allocation.",
+  "outer_test_predictions": 0,
+  "user_available_resources": "Only current GPU",
+  "execution_amendment": {
+    "config": "configs/phase4_pilot_checkpointed.json",
+    "activation_checkpointing": "non-reentrant, trainable BERT blocks, dropout RNG preserved",
+    "FP32_and_batch256_and_all_training_budgets_unchanged": true,
+    "fresh_run_required": true,
+    "original_artifacts_preserved": true
+  },
+  "capacity_check": {
+    "benchmark_rows": 0,
+    "optimizer_updates": 0,
+    "synthetic_batch_size": 256,
+    "synthetic_sequence_length": 512,
+    "frozen_encoder_also_resident": true,
+    "actual_GPU_pass_verified": false
+  },
+  "local_validation": {
+    "tests_passed": 158,
+    "seconds": 30.679,
+    "native_BERT_PEFT_dropout_loss_and_gradient_parity": "exact CPU equality",
+    "saved_intermediate_tensors_reduced": true,
+    "actual_GPU_memory_reduction_measured": false
+  },
+  "full_phase4_complete": false
+}

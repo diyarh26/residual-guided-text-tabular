@@ -31,6 +31,13 @@ def git_stub(root, *args):
 
 
 class PilotTests(unittest.TestCase):
+    def test_checkpointed_variant_keeps_all_registered_training_budgets(self):
+        original = json.loads((ROOT / "configs/phase4_pilot.json").read_text(encoding="utf-8"))
+        variant = json.loads((ROOT / "configs/phase4_pilot_checkpointed.json").read_text(encoding="utf-8"))
+        self.assertEqual({key: value for key, value in variant.items() if key in original and key != "preregistered_date"},
+                         {key: value for key, value in original.items() if key != "preregistered_date"})
+        self.assertEqual(variant["tar_execution"], {"activation_checkpointing": True})
+
     def fixture(self, root):
         table, split = make_synthetic("regression")
         config = json.loads((ROOT / "configs/phase4_pilot.json").read_text(encoding="utf-8"))

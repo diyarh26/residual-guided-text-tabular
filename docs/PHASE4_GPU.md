@@ -1,12 +1,13 @@
 # Phase 4 GPU execution
 
-Status: user-supplied October 20 logs confirm preparation, then a frozen-stage
-completion followed by failure at direct fusion's first deterministic CUDA
-linear operation. The notebook now sets both `MPLBACKEND=Agg` and
-`CUBLAS_WORKSPACE_CONFIG=:4096:8` in subprocesses. Seven local notebook checks
-pass; the updated GPU preflight tests deterministic matrix multiplication and
-linear backward. Actual CUDA retry success, TAR and the full comparison remain
-unverified. See troubleshooting below, the
+Status: the deterministic CUDA repair allowed direct and residual fitting to
+complete according to the next supplied log. TAR then exhausted a 14.56 GiB GPU
+at batch 256/FP32. The user has only that GPU. The new
+[memory-saving execution mode](PHASE4_MEMORY.md) preserves training budgets and
+performs a full-size synthetic capacity check before a fresh comparison.
+Actual GPU capacity and end-to-end success of this amendment remain unverified.
+The launcher retains `MPLBACKEND=Agg` and `CUBLAS_WORKSPACE_CONFIG=:4096:8`.
+See troubleshooting below, the
 [setup failure](../results/phase4_colab_setup_failure.json), and
 [CUDA failure](../results/phase4_colab_cuda_failure.json).
 

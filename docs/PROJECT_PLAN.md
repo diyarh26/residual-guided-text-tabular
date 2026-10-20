@@ -131,10 +131,11 @@ Separate CUDA lock and Colab launcher are ready; real GPU/TAR execution remains 
 The nine-stage Product Sentiment CPU preflight and saved-artifact audit passed;
 zero outer-test predictions. Grouped diagnostics show no consistent residual
 gain. Full comparison and decision remain incomplete; see HANDOFF.
-The Colab logs show setup and a completed frozen stage, then direct-fusion
-failure before its first optimizer update because a deterministic cuBLAS workspace
-setting was missing. The launcher/preflight repair passes seven local checks;
-CUDA retry, TAR and the complete comparison remain unverified.
+After the CUDA repair, Colab reached TAR with three conditions completed, then
+exhausted its 14.56 GiB GPU. A separately registered activation-checkpointing
+execution mode preserves all training budgets and adds a synthetic capacity
+check before a fresh run. Actual GPU capacity and the complete comparison
+remain unverified. The original run/configuration are preserved.
 
 Objective: determine whether the method merits broader evaluation.
 

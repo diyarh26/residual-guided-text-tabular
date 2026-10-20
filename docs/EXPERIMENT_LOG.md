@@ -454,6 +454,55 @@ is a ledger continuation and a direct-stage restart, not an optimizer resume.
 Retain both failure and correction in provenance; actual CUDA retry success and
 full pilot completion remain unverified.
 
+## Phase 4 TAR GPU OOM and memory execution amendment — October 20, 2026
+
+The next supplied log continued the same clean-source `c1e7ec1` GPU run.
+Its control flow completed direct and residual after frozen, then TAR failed
+at 0/200 optimizer steps in a first forward pass. The detailed
+[record](../results/phase4_colab_tar_oom.json) hashes the attachment and reports
+GPU capacity 14.56 GiB, allocated 13.33 GiB, reserved/unallocated 525.19 MiB,
+free 551.81 MiB, and a failed 768 MiB allocation. Whole-stage time, cost and
+private artifacts have not been independently retrieved. No test barrier opened.
+
+The original source TAR split used 810 fitting/90 validation examples inside
+the 900 permitted A rows. Settings remained batch 256, FP32, max 512 tokens,
+rank 16, last three layers, 50 epochs maximum (four steps per epoch). Reported
+trainable/frozen parameter counts were 333,316/33,360,000. The four DataLoader
+workers versus two suggested CPUs warning preceded the GPU allocation failure;
+it was not the terminating error. No TAR optimizer update completed.
+
+The user has only the current GPU. An explicit execution amendment is registered
+in `configs/phase4_pilot_checkpointed.json`, retaining every original training
+budget. The original file is preserved. The adapter enables non-reentrant
+activation checkpointing with preserved RNG on trainable BERT blocks, leaving
+preceding frozen blocks on their ordinary forward path. Native CPU BERT/PEFT
+tests with dropout verify exact loss and gradient equality, unchanged frozen
+parameter scope and fewer retained intermediate tensors. Context binds the
+execution flag and rejects cross-mode training checkpoints. The historical
+upstream files are unmodified; this is an execution change, not new objectives
+or hyperparameter selection from scores.
+
+`scripts/run_memory_pilot.py` first runs a real-weight, synthetic full-size
+forward/backward capacity check (batch 256, 512 tokens, FP32, twenty-output head,
+and the frozen encoder also resident). It uses zero benchmark rows and performs
+zero optimizer updates. Capacity metadata/failures persist privately before any
+fresh pilot starts. No automatic batch reduction, mixed precision or allocator
+heuristic is applied. If the check fails the wrapper stops. Actual GPU fit and
+memory reduction remain unverified on local CPU-only hardware.
+
+The explicit amended source/config requires a fresh run; the first three short
+conditions repeat under one binding. The previous run, learned models, failures
+and metrics are preserved, not merged or overwritten. Full 36-stage coverage and
+the same decision gate are still required before broader evaluation.
+
+**158 tests passed in 30.679 seconds**, including two gradient-checkpoint parity/
+context checks, trainer integration and unchanged-budget config validation.
+An initial test edit misplaced an existing assertion, producing a `NameError`;
+its placement was corrected before the passing full suite. Script syntax and
+wrapper argument checks passed. No new benchmark fit or actual GPU memory probe
+was run locally. Execution instructions and limitations are in
+[PHASE4_MEMORY.md](PHASE4_MEMORY.md).
+
 ## Required entry for each later experiment
 
 Record run ID/time/status (planned/running/completed/failed/interrupted), exact
