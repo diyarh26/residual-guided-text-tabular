@@ -66,8 +66,24 @@ name; the pilot retains prior attempts and validates all completed artifacts.
 
 ## Current Colab session
 
-The implementation source SHA and exact update cell are provided after the
-reviewed commit is pushed. Keep the existing GPU runtime and verified local
-assets. Fetch and check out that exact source, then call the wrapper above.
-This avoids changing the original checkout's historical upstream files or
-deleting the failed run. Actual GPU execution remains pending.
+Keep the existing GPU runtime and verified local assets. Add one new cell at
+the bottom of the current notebook and run this reviewed update:
+
+```python
+MEMORY_FIX_SHA = "6e09955514caffa52050459377e5b4736dedca75"
+run(["git", "fetch", "origin", MEMORY_FIX_SHA], cwd=PROJECT_DIR)
+run(["git", "checkout", "--detach", MEMORY_FIX_SHA], cwd=PROJECT_DIR)
+run(UV_PYTHON + ["scripts/run_memory_pilot.py", "--output-root", str(RUNS_ROOT)], cwd=PROJECT_DIR)
+```
+
+Use this new cell rather than the original launch cell. It preserves verified
+data/model files in the existing checkout and old private outputs, tests capacity,
+and starts a separate checkpointed pilot only if that check passes. Existing
+model arrays are not merged into it. Source/dataset integrity checks still run.
+The wrapper sets plotting/CUDA workspace variables for its children even when
+the existing notebook has the earlier helper. Actual GPU execution is pending.
+
+For a fresh runtime, the latest
+[Colab notebook](https://colab.research.google.com/github/diyarh26/residual-guided-text-tabular/blob/main/notebooks/phase4_pilot.ipynb)
+prefills this immutable source and the amended config, with the same capacity
+check included in preparation. It retains the explicit launch switch.

@@ -117,9 +117,10 @@ for the complete comparison. Select a GPU runtime, keep the prefilled reviewed
 implementation SHA, and follow the
 [GPU instructions](docs/PHASE4_GPU.md). The notebook installs a separate locked
 CUDA environment, verifies the actual device, saves outputs to private Drive,
-and waits for its explicit launch switch. A T4 is a first device to try; whether
-the original FP32 TAR batch of 256 fits is unverified. No automatic batch-size
-change is applied. CPU stages and GPU stages require separate run bindings.
+and waits for its explicit launch switch. A full-size capacity check tests the
+checkpointed FP32/batch-256 workload before pilot fitting. Its actual fit remains
+unverified until executed. No automatic batch-size change is applied.
+CPU stages and GPU stages require separate run bindings.
 
 ## Reproduction and development
 

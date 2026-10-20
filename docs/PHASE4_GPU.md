@@ -55,7 +55,7 @@ it did not install them or validate CUDA at runtime.
 
 1. [Open phase4_pilot.ipynb in Colab](https://colab.research.google.com/github/diyarh26/residual-guided-text-tabular/blob/main/notebooks/phase4_pilot.ipynb), choose a
    GPU runtime. `PROJECT_SHA` is already pinned to the reviewed, pushed pilot
-   implementation `c1e7ec1cdbb79fbc2f000a060616a5e73e11c0d1`.
+   implementation `6e09955514caffa52050459377e5b4736dedca75`.
    Keep this pin for the registered run; malformed values fail before external work.
 2. Run setup cells in order. Mount your private Drive interactively. Before
    installation or preparation, the notebook creates a unique bootstrap log
@@ -72,7 +72,9 @@ it did not install them or validate CUDA at runtime.
    and an actual operation are verified before preparation.
 5. Preparation verifies pinned upstream/data/model assets, then prepares the
    additional pilot inputs. Tests and a final clean-tree check must pass before
-   fitting. Source commands, run from the repository root, are:
+   fitting. The preparation cell also runs the full-size synthetic TAR capacity
+   check documented in [PHASE4_MEMORY.md](PHASE4_MEMORY.md); failure stops before
+   pilot training. Source commands, run from the repository root, are:
 
    ```bash
    uv sync --project environments/gpu --locked --python 3.11
@@ -89,7 +91,7 @@ it did not install them or validate CUDA at runtime.
 
    ```bash
    CUDA_VISIBLE_DEVICES=0 CUBLAS_WORKSPACE_CONFIG=:4096:8 MPLBACKEND=Agg uv run --project environments/gpu --frozen python scripts/run_pilot.py \
-     --config configs/phase4_pilot.json --run-id <unique-run-id> \
+     --config configs/phase4_pilot_checkpointed.json --run-id <unique-run-id> \
      --output-root /content/drive/MyDrive/ReFuTab/runs
    ```
 
@@ -192,7 +194,7 @@ Continue the same pilot ledger using:
 
 ```bash
 CUDA_VISIBLE_DEVICES=0 CUBLAS_WORKSPACE_CONFIG=:4096:8 MPLBACKEND=Agg uv run --project environments/gpu --frozen python scripts/run_pilot.py \
-  --config configs/phase4_pilot.json \
+  --config configs/phase4_pilot_checkpointed.json \
   --resume-run /content/drive/MyDrive/ReFuTab/runs/<prior-run-id>
 ```
 

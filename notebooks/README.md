@@ -5,7 +5,11 @@ registered matched pilot. [Open it in Google Colab](https://colab.research.googl
 select a GPU runtime. The reviewed/pushed `PROJECT_SHA` is prefilled; malformed
 values fail before external work. Setup uses the separate Linux/Python
 3.11 CUDA lock, verifies a real device and CUDA operation, prepares pinned
-inputs and runs tests. Bootstrap logs, hardware records and raw outputs remain
+inputs and runs tests. The default checkpointed execution mode preserves the
+original TAR budgets and checks full-size synthetic GPU capacity before fitting.
+Existing sessions can use the update cell in
+[PHASE4_MEMORY.md](../docs/PHASE4_MEMORY.md), preserving earlier runs.
+Bootstrap logs, hardware records and raw outputs remain
 in private Google Drive from the start. The launch cell ships with
 `LAUNCH_PILOT = False`; enable it explicitly when ready to run the fixed plan.
 

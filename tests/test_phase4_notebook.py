@@ -36,6 +36,7 @@ class Phase4NotebookTests(unittest.TestCase):
         with redirect_stdout(io.StringIO()):
             exec(self.cells[0], settings)
         self.assertRegex(settings["PROJECT_SHA"], r"^[0-9a-f]{40}$")
+        self.assertTrue(json.loads((ROOT / settings["PILOT_CONFIG"]).read_text(encoding="utf-8"))["tar_execution"]["activation_checkpointing"])
         invalid = self.cells[0].replace(settings["PROJECT_SHA"], "INVALID_PROJECT_SHA", 1)
         with self.assertRaisesRegex(ValueError, "40-character"):
             exec(invalid, {})
@@ -48,6 +49,7 @@ class Phase4NotebookTests(unittest.TestCase):
         self.assertIn('"status", "--porcelain"', source)
         self.assertIn('"--project", "environments/gpu", "--locked"', source)
         self.assertIn('"scripts/run_pilot.py"', source)
+        self.assertIn('"scripts/check_tar_memory.py"', source)
         self.assertNotIn("--allow-dirty", source)
 
     def test_bootstrap_log_flushes_and_preserves_subprocess_failure(self):
@@ -152,6 +154,7 @@ class Phase4NotebookTests(unittest.TestCase):
 
             namespace = {"Path": Path, "PROJECT_SHA": "a" * 40, "PROJECT_DIR": Path(directory) / "source",
                          "RUNS_ROOT": runs, "RUN_ID": "new-pilot", "UV_PYTHON": ["uv", "run", "python"],
+                         "PILOT_CONFIG": "configs/phase4_pilot_checkpointed.json",
                          "BOOTSTRAP_LOG": Path(directory) / "bootstrap.log", "HARDWARE_RECORD": Path(directory) / "hardware.json",
                          "run": run, "RESUME_RUN": None}
             with redirect_stdout(io.StringIO()):

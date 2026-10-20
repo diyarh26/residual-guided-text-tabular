@@ -502,6 +502,10 @@ its placement was corrected before the passing full suite. Script syntax and
 wrapper argument checks passed. No new benchmark fit or actual GPU memory probe
 was run locally. Execution instructions and limitations are in
 [PHASE4_MEMORY.md](PHASE4_MEMORY.md).
+After pinning the notebook to the pushed memory implementation and adding its
+capacity step, all seven notebook checks passed again in **11.638 s**.
+The current-session update cell retains the existing GPU and local verified
+assets; the launcher creates a new comparison ID and keeps the OOM run intact.
 
 ## Required entry for each later experiment
 

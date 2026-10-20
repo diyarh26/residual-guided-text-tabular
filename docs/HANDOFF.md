@@ -129,9 +129,9 @@ limitations before interpreting broader experiments.
 - Repository: https://github.com/diyarh26/residual-guided-text-tabular
 - Branch: `main`.
 - Latest verified pushed commit at edit time:
-  `c023c440550edfdb5ce5042f546dcc4f75fb723b`
-  (`fix: configure deterministic cuBLAS before GPU subprocess startup`).
-- The explicit memory-saving execution amendment accompanies this handoff in
+  `6e09955514caffa52050459377e5b4736dedca75`
+  (`feat: add explicit checkpointed TAR memory mode and GPU capacity guard`).
+- The prefilled notebook/update-cell handoff accompanies this handoff in
   a follow-up commit. The field above records the last verified commit at edit
   time; compare actual HEAD with the remote to identify the current session tip.
 - This field identifies the previously verified commit, avoiding a self-hash
