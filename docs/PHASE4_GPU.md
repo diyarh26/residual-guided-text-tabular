@@ -1,11 +1,14 @@
 # Phase 4 GPU execution
 
-Status: a user-supplied October 20 Colab log confirms installation of the isolated
-environment and successful source/data/model preparation. Test discovery then
-failed on an inherited Matplotlib inline-backend setting. The notebook now uses
-`MPLBACKEND=Agg` in subprocesses; local reproduction and six notebook checks pass.
-The Colab retry and real GPU/TAR training remain unverified. See troubleshooting
-below and [the setup-failure record](../results/phase4_colab_setup_failure.json).
+Status: user-supplied October 20 logs confirm preparation, then a frozen-stage
+completion followed by failure at direct fusion's first deterministic CUDA
+linear operation. The notebook now sets both `MPLBACKEND=Agg` and
+`CUBLAS_WORKSPACE_CONFIG=:4096:8` in subprocesses. Seven local notebook checks
+pass; the updated GPU preflight tests deterministic matrix multiplication and
+linear backward. Actual CUDA retry success, TAR and the full comparison remain
+unverified. See troubleshooting below, the
+[setup failure](../results/phase4_colab_setup_failure.json), and
+[CUDA failure](../results/phase4_colab_cuda_failure.json).
 
 Phase 4 compares Joint Frozen, Joint TAR, direct-target gated fusion and
 residual-guided fusion on the committed pilot protocol. Joint TAR is the
@@ -62,7 +65,7 @@ it did not install them or validate CUDA at runtime.
    a clean tree. An existing checkout causes failure without deleting it.
 4. The separate lock installs into `environments/gpu/.venv`. Hardware preflight
    runs `nvidia-smi`, checks exact Torch builds and CUDA availability, exercises
-   CUDA matrix multiplication, and writes a private hardware JSON beside the
+   deterministic CUDA matrix multiplication and linear backward, and writes a private hardware JSON beside the
    bootstrap log. CPU fallback is disabled. The original TAR environment
    variable selects GPU 0 only after `nvidia-smi` succeeds; CUDA availability
    and an actual operation are verified before preparation.
@@ -84,7 +87,7 @@ it did not install them or validate CUDA at runtime.
    The launch command is:
 
    ```bash
-   CUDA_VISIBLE_DEVICES=0 uv run --project environments/gpu --frozen python scripts/run_pilot.py \
+   CUDA_VISIBLE_DEVICES=0 CUBLAS_WORKSPACE_CONFIG=:4096:8 MPLBACKEND=Agg uv run --project environments/gpu --frozen python scripts/run_pilot.py \
      --config configs/phase4_pilot.json --run-id <unique-run-id> \
      --output-root /content/drive/MyDrive/ReFuTab/runs
    ```
@@ -97,7 +100,8 @@ it did not install them or validate CUDA at runtime.
 The notebook contains orchestration only; model, split, metric and audit logic
 remain in source modules. The local CPU environment remains suitable for tests
 and bounded frozen-encoder checks. Joint TAR requires the real GPU preflight.
-In a standalone shell, `CUDA_VISIBLE_DEVICES=0` must be set before Python starts;
+In a standalone shell, set `CUDA_VISIBLE_DEVICES=0`,
+`CUBLAS_WORKSPACE_CONFIG=:4096:8` and `MPLBACKEND=Agg` before Python starts;
 the notebook sets it after `nvidia-smi` succeeds and verifies actual CUDA work.
 Neither setting the variable nor passing preflight establishes TAR fit capacity.
 
@@ -132,6 +136,35 @@ inputs are reused. After the cell prints the preparation/device/tests success
 message, run the final launch cell with `LAUNCH_PILOT = True`. The supplied
 failure occurred before pilot fitting; it is not a completed GPU comparison.
 
+## Deterministic CUDA workspace error
+
+Fusion intentionally enables deterministic PyTorch algorithms. On CUDA 10.2 or
+newer, relevant matrix operations also require a cuBLAS workspace setting before
+the Python process starts. The launcher uses `CUBLAS_WORKSPACE_CONFIG=:4096:8`,
+as documented by [PyTorch 2.7](https://docs.pytorch.org/docs/2.7/notes/randomness.html)
+and [NVIDIA](https://docs.nvidia.com/cuda/cublas/index.html#results-reproducibility).
+The original preflight tested CUDA with deterministic mode off, so it missed this
+requirement. The updated preflight enables it and exercises linear backward too.
+Both runtime settings are recorded in the bootstrap log/hardware evidence.
+
+For the reported run, add the following at the top of the existing launch cell,
+keep `LAUNCH_PILOT = True`, and run only that cell:
+
+```python
+import os
+os.environ["MPLBACKEND"] = "Agg"
+os.environ["CUBLAS_WORKSPACE_CONFIG"] = ":4096:8"
+RESUME_RUN = "/content/drive/MyDrive/ReFuTab/runs/phase4-colab-20261020T140148Z-67a87c90"
+```
+
+Keep the current source pin/runtime. The next pilot subprocess starts with the
+workspace setting. The ledger validates and reuses the completed frozen stage,
+preserves the failed direct attempt, and creates a new direct attempt. That
+stage failed before its first optimizer update and has no completed epoch to
+resume. Model budgets and deterministic mode remain unchanged; report the
+missing runtime setting and its correction alongside the run artifacts.
+Actual completion after this repair remains to be verified in Colab.
+
 ## Interruption and retry boundaries
 
 Drive retains flushed logs, manifests and artifacts already written. `/content`
@@ -157,7 +190,7 @@ fitted preprocessing and supervised encoders are never shared across folds.
 Continue the same pilot ledger using:
 
 ```bash
-CUDA_VISIBLE_DEVICES=0 uv run --project environments/gpu --frozen python scripts/run_pilot.py \
+CUDA_VISIBLE_DEVICES=0 CUBLAS_WORKSPACE_CONFIG=:4096:8 MPLBACKEND=Agg uv run --project environments/gpu --frozen python scripts/run_pilot.py \
   --config configs/phase4_pilot.json \
   --resume-run /content/drive/MyDrive/ReFuTab/runs/<prior-run-id>
 ```

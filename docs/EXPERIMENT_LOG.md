@@ -410,6 +410,50 @@ inputs and the current source checkout. Training remains behind the test/launch
 guards. Actual Colab retry success, hardware, training runtime/memory and service
 cost remain unreported; keep the failed bootstrap log in private Drive.
 
+## Phase 4 first GPU pilot failure — October 20, 2026
+
+Status: GPU pilot began, one frozen stage completed according to control flow,
+direct fusion failed before its first optimizer update. Supplied launch output
+verifies clean project HEAD `c1e7ec1cdbb79fbc2f000a060616a5e73e11c0d1` and
+run ID `phase4-colab-20261020T140148Z-67a87c90`, with private output under Drive.
+The [failure record](../results/phase4_colab_cuda_failure.json) hashes the supplied
+log; raw manifests, metrics, hardware and artifact checksums remain to be read
+from Drive. No GPU model, time, peak memory or service-cost value is invented.
+
+Command: `uv run --project environments/gpu --frozen python scripts/run_pilot.py
+--config configs/phase4_pilot.json --run-id phase4-colab-20261020T140148Z-67a87c90
+--output-root /content/drive/MyDrive/ReFuTab/runs`.
+After encoding 1,000 Product Sentiment benchmark-training rows, execution reached
+the direct stage, which follows durable completion of the frozen stage in this
+source. Direct fusion failed in its first structured-projection `F.linear`:
+deterministic CUDA algorithms require `CUBLAS_WORKSPACE_CONFIG=:4096:8` or
+`:16:8`. No direct epoch or optimizer update completed. TAR and diagnostics had
+not started; the 36-stage barrier still excludes all outer-test evaluation.
+
+The launcher now supplies `CUBLAS_WORKSPACE_CONFIG=:4096:8` before starting every
+child Python process, retaining deterministic mode, prior `MPLBACKEND=Agg`,
+source pin, data/model/dependency pins and training budgets. It records the
+setting in the bootstrap log. The GPU preflight now enables deterministic mode
+and checks matrix multiplication plus linear forward/backward, recording the
+results and workspace value in the hardware JSON. The earlier non-deterministic
+matrix check did not test the failing condition.
+
+All **seven local notebook checks passed in 2.167 s**, including real child
+environment propagation/preserved kernel settings and a guard against missing
+workspace configuration before CUDA operations. The actual deterministic CUDA
+operations could not be verified on local CPU hardware. NVIDIA and PyTorch 2.7
+document this setting; references and exact recovery code are in
+[PHASE4_GPU.md](PHASE4_GPU.md).
+
+Current-session recovery: set `os.environ["CUBLAS_WORKSPACE_CONFIG"] = ":4096:8"`
+and `os.environ["MPLBACKEND"] = "Agg"` in the notebook kernel, set `RESUME_RUN` to
+the existing private run directory, then rerun only the launch cell. The same
+source/lock/splits are retained. Continuation validates/reuses frozen, preserves
+direct attempt 1 and starts attempt 2 with the required runtime setting. This
+is a ledger continuation and a direct-stage restart, not an optimizer resume.
+Retain both failure and correction in provenance; actual CUDA retry success and
+full pilot completion remain unverified.
+
 ## Required entry for each later experiment
 
 Record run ID/time/status (planned/running/completed/failed/interrupted), exact

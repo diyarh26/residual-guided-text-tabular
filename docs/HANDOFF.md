@@ -16,11 +16,14 @@ benchmark pilots and full evaluation remain later-phase work.
 **Phase 4 - In progress.** The user authorized the needed work and asked to be
 told when GPU resources are needed. The nine-stage CPU preflight and artifact
 audit passed after recovering a Windows checkpoint-file error. The next actual
-comparison needs a CUDA GPU. A user-supplied Colab log confirms successful
-preparation but five test-module import errors from the inherited Matplotlib
-inline backend. The notebook subprocess helper now sets `MPLBACKEND=Agg`;
-the issue and fix were reproduced locally and six notebook checks pass.
-The user's Colab retry and actual pilot fitting remain unverified.
+comparison needs a CUDA GPU. User-supplied Colab output now shows the frozen
+stage completed, followed by a direct-fusion error at its first forward pass:
+deterministic CUDA matrix multiplication lacked `CUBLAS_WORKSPACE_CONFIG`.
+The launcher now sets `:4096:8` alongside the prior `MPLBACKEND=Agg` fix, and
+the GPU preflight exercises deterministic matrix multiplication/linear backward.
+Seven local notebook checks pass; the actual CUDA repair, TAR and full comparison
+remain unverified. Resume the current ledger and preserve the completed frozen
+and failed direct artifacts.
 Do not claim Phase 4 completed without real TAR/comparison evidence.
 
 Phase 3 source is now implemented in `features.py`, `fusion.py`,
@@ -126,9 +129,9 @@ limitations before interpreting broader experiments.
 - Repository: https://github.com/diyarh26/residual-guided-text-tabular
 - Branch: `main`.
 - Latest verified pushed commit at edit time:
-  `9242f6176a55c0141a97adac72ad8662a722629b`
-  (`experiments: verify Phase 4 CPU preflight and prepare GPU handoff`).
-- The Colab backend repair accompanies this handoff in
+  `89b6145d3a41d23ff9f80c86a8c821c63bddc7d9`
+  (`fix: isolate Colab subprocess plotting backend`).
+- The deterministic CUDA workspace repair accompanies this handoff in
   a follow-up commit. The field above records the last verified commit at edit
   time; compare actual HEAD with the remote to identify the current session tip.
 - This field identifies the previously verified commit, avoiding a self-hash
@@ -295,22 +298,37 @@ cause; the full suite was not successfully discovered/run. Hardware details and
 the project `rev-parse` output were not in the supplied excerpt. The failure
 record is [phase4_colab_setup_failure.json](../results/phase4_colab_setup_failure.json).
 
-1. In the existing notebook, add `import os` and
+The next supplied log verifies clean project HEAD
+`c1e7ec1cdbb79fbc2f000a060616a5e73e11c0d1` and launch of that same run ID.
+Control flow reached `Fitting ...__direct`, which follows frozen-stage completion,
+then failed at the first linear forward operation with the deterministic cuBLAS
+workspace error. Raw Drive artifacts/hardware have not been independently read.
+The follow-up record is [phase4_colab_cuda_failure.json](../results/phase4_colab_cuda_failure.json).
+
+1. Add `import os`, `os.environ["CUBLAS_WORKSPACE_CONFIG"] = ":4096:8"`,
+   `os.environ["MPLBACKEND"] = "Agg"`, and
+   `RESUME_RUN = "/content/drive/MyDrive/ReFuTab/runs/phase4-colab-20261020T140148Z-67a87c90"`
+   at the top of the current launch cell. Keep `LAUNCH_PILOT = True` and rerun
+   only that cell. The source/config/locked package environment remain the same.
+   The runner verifies/reuses frozen and creates direct attempt 2, preserving
+   attempt 1; no direct optimizer update or completed epoch preceded this failure.
+   Actual Colab continuation success still needs review. Keep deterministic mode.
+2. If the earlier setup error recurs in another session, add `import os` and
    `os.environ["MPLBACKEND"] = "Agg"` at the top of the failed preparation/tests
    cell and rerun that cell. This preserves the source pin, Drive mount, run ID,
    downloaded assets and clean source checkout. After all checks pass, run the
    final launch cell. The published helper fixes subprocess environments for
    future sessions. Do not describe the retry or real GPU fitting as successful
    before reviewing its actual output.
-2. For a fresh session use the
+3. For a fresh session use the
    [Colab launcher](https://colab.research.google.com/github/diyarh26/residual-guided-text-tabular/blob/main/notebooks/phase4_pilot.ipynb).
    The source pin is prefilled with `c1e7ec1cdbb79fbc2f000a060616a5e73e11c0d1`.
    Select a GPU runtime, run setup, then set `LAUNCH_PILOT = True` in its launch
    cell. Real GPU pilot execution remains unvalidated.
-3. Run the fresh registered GPU plan when setup passes. Do not
+4. Run the registered GPU plan when setup passes. Do not
    merge CPU models or pass the CPU directory as a GPU continuation. Preserve
    real OOM/failures without automatically changing the registered budgets.
-4. Audit full artifacts and coverage, report the pilot recommendation, then
+5. Audit full artifacts and coverage, report the pilot recommendation, then
    decide whether full evaluation is warranted. Phase 4 remains in progress;
    do not proceed silently to Phase 5 or Option B.
 

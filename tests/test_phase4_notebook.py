@@ -95,15 +95,32 @@ class Phase4NotebookTests(unittest.TestCase):
             namespace = {"BOOTSTRAP_LOG": log, "os": os, "shlex": __import__("shlex"), "subprocess": subprocess}
             exec(compile(ast.Module(body=[helper], type_ignores=[]), "notebook_helper", "exec"), namespace)
             inherited = "module://matplotlib_inline.backend_inline"
-            with patch.dict(os.environ, {"MPLBACKEND": inherited, "REFUTAB_BACKEND_FIXTURE": "retained"}):
+            with patch.dict(os.environ, {"MPLBACKEND": inherited, "REFUTAB_BACKEND_FIXTURE": "retained",
+                                         "CUBLAS_WORKSPACE_CONFIG": ":16:8"}):
                 with redirect_stdout(io.StringIO()):
                     output = namespace["run"]([sys.executable, "-c",
                         "import os,matplotlib,lightgbm; "
                         "print(matplotlib.get_backend()); "
-                        "print(os.environ['REFUTAB_BACKEND_FIXTURE'])"])
+                        "print(os.environ['REFUTAB_BACKEND_FIXTURE']); "
+                        "print(os.environ['CUBLAS_WORKSPACE_CONFIG'])"])
                 self.assertEqual(os.environ["MPLBACKEND"], inherited)
-            self.assertEqual(output.lower().splitlines(), ["agg", "retained"])
+                self.assertEqual(os.environ["CUBLAS_WORKSPACE_CONFIG"], ":16:8")
+            self.assertEqual(output.lower().splitlines(), ["agg", "retained", ":4096:8"])
             self.assertIn("subprocess_MPLBACKEND=Agg\n", log.read_text(encoding="utf-8"))
+            self.assertIn("subprocess_CUBLAS_WORKSPACE_CONFIG=:4096:8\n", log.read_text(encoding="utf-8"))
+
+    def test_gpu_preflight_rejects_missing_workspace_before_cuda_work(self):
+        value = next(node.value for source in self.cells for node in ast.parse(source).body
+                     if isinstance(node, ast.Assign) and any(isinstance(target, ast.Name) and target.id == "GPU_PREFLIGHT" for target in node.targets))
+        preflight = ast.literal_eval(value)
+        cuda = SimpleNamespace(is_available=lambda: True)
+        torch = SimpleNamespace(__version__="2.7.1+cu126", version=SimpleNamespace(cuda="12.6"), cuda=cuda)
+        torchvision = SimpleNamespace(__version__="0.22.1+cu126")
+        with patch.dict(sys.modules, {"torch": torch, "torchvision": torchvision, "psutil": SimpleNamespace()}), \
+             patch.object(sys, "platform", "linux"), patch("platform.machine", return_value="x86_64"), \
+             patch.dict(os.environ, {"CUBLAS_WORKSPACE_CONFIG": ""}):
+            with self.assertRaisesRegex(RuntimeError, "CUBLAS_WORKSPACE_CONFIG=:4096:8"):
+                exec(preflight, {})
 
     def test_gpu_preflight_rejects_cpu_before_asset_preparation(self):
         value = next(node.value for source in self.cells for node in ast.parse(source).body

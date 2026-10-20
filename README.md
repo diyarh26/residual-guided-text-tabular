@@ -33,8 +33,10 @@ gated fusion as additional controls. Option B (LoRA) is deferred.
 diagnostics, frozen-text cache, TAR runtime adapter and descriptive result
 aggregation are implemented. The registered plan contains **36 fitting stages
 and 24 locked outer-test evaluations** across classification and regression.
-The full comparison requires a real GPU; no GPU/TAR run or Phase 4 completion
-is claimed. See the [pilot protocol](docs/PHASE4.md) and
+The full comparison requires a real GPU. Supplied Colab logs show a completed
+frozen stage followed by a deterministic CUDA setup error in direct fusion;
+the launcher repair and continuation steps are documented. TAR and the full
+Phase 4 comparison remain incomplete. See the [pilot protocol](docs/PHASE4.md) and
 [GPU handoff](docs/PHASE4_GPU.md). A bounded CPU subset can run nine Product
 Sentiment stages while keeping every outer test untouched. That subset has now
 completed and passed its [artifact audit](results/phase4_cpu_preflight_audit.json),

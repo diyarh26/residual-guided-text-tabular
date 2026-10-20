@@ -1,0 +1,50 @@
+{
+  "date": "2026-10-20",
+  "status": "reported_gpu_pilot_failed_workspace_fix_pending_gpu_verification",
+  "run_id": "phase4-colab-20261020T140148Z-67a87c90",
+  "source_commit": "c1e7ec1cdbb79fbc2f000a060616a5e73e11c0d1",
+  "source_head_and_clean_status_in_log": true,
+  "evidence_sha256": "d4ab11798aa0cbd17cc637b800407bc7dd519acb1c6ca4bf46462b6fb54b92a8",
+  "reported_command": "uv run --project environments/gpu --frozen python scripts/run_pilot.py --config configs/phase4_pilot.json --run-id phase4-colab-20261020T140148Z-67a87c90 --output-root /content/drive/MyDrive/ReFuTab/runs",
+  "progress": {
+    "dataset": "MUL_TEXT_PRODUCT_SENTIMENT",
+    "outer_fold": 0,
+    "encoded_benchmark_training_rows": 1000,
+    "frozen_stage": "completed_based_on_next_stage_control_flow; raw artifacts not yet independently verified",
+    "direct_stage": "failed_at_first_structured_projection_forward",
+    "direct_optimizer_updates_completed": 0,
+    "direct_epochs_completed": 0,
+    "TAR_started": false
+  },
+  "root_error": {
+    "type": "RuntimeError",
+    "reason": "deterministic CUDA matrix multiplication requires cuBLAS workspace configuration",
+    "operation": "torch.nn.Linear / torch.nn.functional.linear",
+    "required_environment_before_python": "CUBLAS_WORKSPACE_CONFIG=:4096:8"
+  },
+  "raw_artifacts_independently_audited": false,
+  "hardware_runtime_peak_memory_cost_in_excerpt": false,
+  "outer_test_predictions": 0,
+  "outer_test_exclusion_evidence": "pinned source all-stage barrier; run stopped in second of 36 stages",
+  "repair": {
+    "subprocess_workspace_config": ":4096:8",
+    "deterministic_algorithms_remain_enabled": true,
+    "gpu_preflight_checks_deterministic_matmul_and_linear_backward": true,
+    "model_training_budgets_and_source_pin_unchanged": true
+  },
+  "continuation": {
+    "use_existing_run": true,
+    "keep_completed_frozen_stage": true,
+    "preserve_failed_direct_attempt": true,
+    "direct_stage_new_attempt_restart": true,
+    "direct_optimizer_resume": false
+  },
+  "local_validation": {
+    "notebook_checks_passed": 7,
+    "seconds": 2.167,
+    "actual_cuda_fix_verified": false,
+    "device": "cpu"
+  },
+  "gpu_retry_complete": false,
+  "full_phase4_complete": false
+}
