@@ -1,5 +1,10 @@
 # Phase 4: memory-saving TAR execution
 
+**October 21 status:** the amended run finished all 36 fits and 24 outer
+evaluations on Tesla T4. See [reviewed findings](PHASE4_RESULTS.md). Do not
+restart it. The capacity check and epoch-9 notes below describe earlier progress;
+full independent saved-artifact verification remains open.
+
 The October 20 Colab run completed the frozen, direct and residual stages
 according to its control flow, then TAR exhausted a GPU reporting 14.56 GiB.
 The first forward pass requested another 768 MiB with 551.81 MiB free. The
@@ -84,8 +89,8 @@ and starts a separate checkpointed pilot only if that check passes. Existing
 model arrays are not merged into it. Source/dataset integrity checks still run.
 The wrapper sets plotting/CUDA workspace variables for its children even when
 the existing notebook has the earlier helper. The user has executed this cell;
-capacity passed and TAR is running. Leave that job running without launching
-another copy. These commands remain instructions for future sessions.
+capacity passed and TAR subsequently completed. Do not launch another copy of
+the finished pilot. These commands remain instructions for future sessions.
 
 For a fresh runtime, the latest
 [Colab notebook](https://colab.research.google.com/github/diyarh26/residual-guided-text-tabular/blob/main/notebooks/phase4_pilot.ipynb)

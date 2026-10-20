@@ -1,6 +1,6 @@
 # Project handoff
 
-Updated: October 20, 2026 (Asia/Jerusalem).
+Updated: October 21, 2026 (Asia/Jerusalem).
 
 ## Current phase and status
 
@@ -13,20 +13,20 @@ serialization checks passing; no outer test predictions or scores were made.
 asked to be told if GPU resources are needed. CPU was sufficient: the bounded
 real-E5 synthetic smoke and standalone CSV inference passed. Joint TAR,
 benchmark pilots and full evaluation remain later-phase work.
-**Phase 4 - In progress.** The user authorized the needed work and asked to be
-told when GPU resources are needed. The nine-stage CPU preflight and artifact
-audit passed after recovering a Windows checkpoint-file error. The next actual
-comparison needs a CUDA GPU. After the deterministic CUDA fix, the supplied
-Colab log reached TAR with frozen/direct/residual completed, then ran out of
-memory on a 14.56 GiB GPU. The user has only that GPU; TPU is not a drop-in
-replacement. A separately configured activation-checkpointing mode preserves
-FP32, batch 256 and all budgets. A full-size synthetic forward/backward capacity
-check runs before its fresh pilot. **158 tests passed in 30.679 seconds**,
-including native BERT/PEFT loss/gradient parity with dropout. The next supplied
-log verifies a T4 capacity pass at 6.510 GiB peak allocated GPU memory and TAR
-training through epoch 9 in the fresh checkpointed run. The complete comparison
-remains in progress; raw Drive artifacts still require audit. Preserve the old run.
-Do not claim Phase 4 completed without real TAR/comparison evidence.
+**Phase 4 - In progress: GPU execution complete; final verification open.**
+The checkpointed Tesla T4 run completed all **36 fits and 24 outer evaluations**
+on October 20. Drive access was restored on October 21; direct readback and
+209 metadata/aggregation checks confirm stage-manifest hashes, provenance,
+coverage, paired metrics and the evaluation barrier's chronology. All six TAR
+stages completed. See [reviewed findings](PHASE4_RESULTS.md) and the
+[result](../results/phase4_gpu_pilot_review.json).
+TAR had the highest mean on both tasks. Residual fusion showed no consistent
+gain over direct fusion and trailed TAR on both means; grouped diagnostics
+were weaker for residual. The registered recommendation is
+`analyze_failures_and_overfit_before_scaling`. Do not restart the completed run,
+launch Phase 5/Option B, or tune on its test scores. Full saved-model/teacher/
+prediction artifact readback and targeted overfit analysis remain before final
+Phase 4 verification. No additional GPU fitting is required for that review.
 
 Phase 3 source is now implemented in `features.py`, `fusion.py`,
 `downstream.py`, `pipeline.py`, `synthetic.py` and `fusion_runner.py`, with
@@ -131,9 +131,9 @@ limitations before interpreting broader experiments.
 - Repository: https://github.com/diyarh26/residual-guided-text-tabular
 - Branch: `main`.
 - Latest verified pushed commit at edit time:
-  `9f241b1dd5e2838e588a227d172e2c34c8f5cdec`
-  (`docs: pin memory-saving GPU launcher and current-session update`).
-- The prefilled notebook/update-cell instructions were pushed in that commit.
+  `1432de5eaa37bb502d9e3a5f13cda83a8f4a606b`
+  (`docs: record T4 capacity pass and TAR epoch-nine progress`).
+- The checkpointed notebook/update instructions were pushed earlier.
   Compare actual HEAD with the remote to identify the current session tip.
 - This field identifies the previously verified commit, avoiding a self-hash
   loop. Use `git log -1 --format="%H %s"` for the commit containing this handoff.
@@ -322,10 +322,12 @@ not downstream results. The worker-count warning did not stop training. See
 [progress evidence](../results/phase4_colab_progress_epoch9.json). No complete
 TAR stage or outer-test evaluation is reported yet.
 
-**Next step: leave the currently running Colab cell running.** Do not launch
-another copy or change its settings. After completion, audit the final ledger,
-coverage and artifacts before reporting the pilot recommendation. The setup
-instructions below are for a future launch/continuation, not another job now.
+**October 21 update: the run finished; do not resume or repeat it.** The
+user's diagnostic and subsequent direct Drive readback confirm completion.
+The [results review](PHASE4_RESULTS.md) supersedes the epoch-9 progress report.
+Remaining work is independent saved-artifact verification and failure/overfit
+analysis. The setup instructions below are historical/future recovery guidance,
+not instructions to launch another job now.
 
 1. Use the explicit memory-saving variant described in
    [PHASE4_MEMORY.md](PHASE4_MEMORY.md). It keeps FP32/batch 256 and all budgets,
@@ -348,7 +350,8 @@ instructions below are for a future launch/continuation, not another job now.
 
 - Joint TAR remains the primary comparison for supervised ReFuTab; original
   source calls, local-model redirection, save/load and continuation have CPU
-  fixture coverage, while real GPU training remains unvalidated. No full
+  fixture coverage, and six actual GPU TAR stages now completed. Independent
+  full saved-artifact readback remains open. No full
   evaluation or Option B is authorized by completion of this smoke run.
 - The historical snapshot has no license file; preserve the ignored checkout
   and provenance policy in [UPSTREAM.md](UPSTREAM.md). Do not publish its source,

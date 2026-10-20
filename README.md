@@ -29,23 +29,20 @@ gated fusion as additional controls. Option B (LoRA) is deferred.
 
 ## Current status
 
-**Phase 4 is in progress:** the matched pilot runner, grouped complete-pipeline
-diagnostics, frozen-text cache, TAR runtime adapter and descriptive result
-aggregation are implemented. The registered plan contains **36 fitting stages
-and 24 locked outer-test evaluations** across classification and regression.
-The full comparison requires a real GPU. Colab logs reached TAR after completing
-the first three conditions, then exhausted GPU memory. An explicit
-[memory-saving execution mode](docs/PHASE4_MEMORY.md) preserves the batch and
-training settings and checks capacity before a fresh run. The supplied log now
-verifies a Tesla T4 capacity pass at **6.51 GiB** peak allocated and TAR training
-through epoch 9. The full Phase 4 comparison remains in progress. See the [pilot protocol](docs/PHASE4.md) and
-[GPU handoff](docs/PHASE4_GPU.md). A bounded CPU subset can run nine Product
-Sentiment stages while keeping every outer test untouched. That subset has now
-completed and passed its [artifact audit](results/phase4_cpu_preflight_audit.json),
-including recovery from a Windows checkpoint-file error. Its grouped diagnostics
-do not show a consistent residual-over-direct gain. It cannot establish the
-complete comparison or support an improvement recommendation; see the
-[CPU summary](results/phase4_cpu_preflight.json).
+**Phase 4 GPU execution completed:** all **36 fitting stages and 24 outer-test
+evaluations**, including six Joint TAR conditions, finished on Tesla T4 using
+the registered checkpointed execution mode. A direct Drive review passed 209
+metadata/aggregation checks. **TAR had the highest mean on both tasks; residual
+fusion did not show a consistent advantage over direct fusion.** Grouped
+diagnostics were weaker for residual. The registered recommendation is to
+analyse failures and overfitting before scaling. See the
+[results report](docs/PHASE4_RESULTS.md) and
+[reviewed metrics](results/phase4_gpu_pilot_review.json).
+Phase 4 remains open for independent saved-model/teacher/prediction verification
+and targeted analysis. Do not repeat the finished run or begin full evaluation
+from this result. The earlier CPU preflight and original failure records are
+preserved; see the [pilot protocol](docs/PHASE4.md) and
+[GPU handoff](docs/PHASE4_GPU.md).
 
 **Phase 3 completed:** Option A fusion, the direct-target control, checkpoint
 continuation and teacher/head-free inference, with **86 passing tests**. A real
@@ -62,10 +59,10 @@ produced 900 OOF/100 validation predictions and no test predictions or scores.
 Phase 1 reproduced original Joint Frozen LightGBM on that dataset: macro OVR
 AUROC **0.83935** on 509 test rows, one fold with 900 fitting/100 validation rows.
 Its [result](results/phase1_product_sentiment_frozen.json) is preserved.
-Joint TAR and the full matched benchmark comparison remain unevaluated. The
-[project plan](docs/PROJECT_PLAN.md) keeps Phase 4 open until actual results and
-a recommendation are reported. CPU was sufficient for Phase 3; GPU/TAR
-capacity passed; complete TAR training and its artifact audit remain pending.
+The registered two-dataset GPU pilot now includes Joint TAR; broader benchmark
+evaluation has not started. The [project plan](docs/PROJECT_PLAN.md) keeps Phase 4
+open for remaining artifact verification and analysis. CPU was sufficient for
+Phase 3; the completed Phase 4 comparison used a T4 GPU.
 
 The historical MulTaBench `master` pin is
 `599bd6a5631c96f8aef297cc4cb6e4c197ae0dca` (July 26, 2026).
@@ -120,7 +117,8 @@ implementation SHA, and follow the
 CUDA environment, verifies the actual device, saves outputs to private Drive,
 and waits for its explicit launch switch. A full-size capacity check tests the
 checkpointed FP32/batch-256 workload before pilot fitting. That capacity check
-has now passed on the user's T4; the complete pilot remains in progress.
+passed on the user's T4, and the registered pilot has completed. Preserve that
+run; the notebook remains available for reproduction, not an automatic rerun.
 No automatic batch-size change is applied.
 CPU stages and GPU stages require separate run bindings.
 

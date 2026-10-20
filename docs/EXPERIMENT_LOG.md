@@ -537,6 +537,51 @@ Leave the current cell running. No fitting, inference or GPU probe was repeated
 locally for this progress record. Documentation/publication checks and
 `git diff --check` passed; no software implementation changed.
 
+## October 21, 2026: completed GPU pilot retrieved and reviewed
+
+The user reported the completed 36-stage/24-test ledger after refreshing Colab.
+Missing unsaved notebook cells did not erase the private run. Initial Drive
+access attempts failed with transport/authentication errors; after the user
+reconnected, direct Drive retrieval succeeded. No training was restarted.
+
+Run `phase4-checkpointed-20261020T145755Z-dd78ef55`, clean source
+`6e09955514caffa52050459377e5b4736dedca75`, checkpointed registered config,
+Tesla T4 / CUDA 12.6 / Torch 2.7.1+cu126, completed 36 fits and 24 evaluations.
+The execution history records October 20 14:58:15.310274 to 17:34:04.937298 UTC:
+9,349.609612 seconds plus 3.922097 seconds setup, sampled peak host process RSS
+1,876,746,240 bytes. Provider charge is unmeasured. The original failures remain
+separate. Source, environment, config/lock/split/dataset hashes, fold metrics,
+runtime and limits are in the [reviewed result](../results/phase4_gpu_pilot_review.json).
+Raw Drive summaries/manifests and 84 stage/evaluation metadata files are retained
+privately under ignored `results/raw/phase4-drive-review/`; tensors/weights and
+arrays remain private in Drive. Public findings: [PHASE4_RESULTS.md](PHASE4_RESULTS.md).
+
+The read-only review passed 209 checks: aggregation exactly recomputed, 36
+stage-manifest hashes, global/stage/result consistency, source/config/lock and
+split bindings, 24 evaluation request/result bindings, and chronology. Last fit
+17:29:35.726372 UTC preceded the first Drive request creation at 17:29:36.735 UTC.
+The first local config-byte check failed because Windows checkout CRLF differed
+from Linux LF; content was identical after newline conversion. Checking the
+immutable source Git blob then matched the recorded config hash exactly. Lock
+hashes were also checked against the run's source Git blobs. No source, budgets
+or results were changed. **11 aggregation tests passed in 0.019 seconds**;
+documentation/publication and whitespace checks passed. No model fit or new
+prediction was performed locally.
+
+Mean final outer AUROC: frozen 0.843411, direct 0.848097, residual 0.847469,
+TAR 0.875176. Mean outer R2: frozen 0.202742, direct 0.134632, residual 0.149319,
+TAR 0.227602. Residual-minus-direct had only 1/3 positive outer folds on each
+task; residual-minus-TAR means were -0.027707 AUROC and -0.078283 R2. Grouped-D
+residual-minus-direct means were -0.017958 AUROC and -0.064301 R2, with substantial
+train-minus-D gaps. These are descriptive overlapping-holdout results, not
+significance or all-benchmark claims. They do not establish consistent residual
+complementarity or prove that leakage caused weak generalization.
+
+The unchanged registered rule recommends
+`analyze_failures_and_overfit_before_scaling`. Phase 4 stays open for independent
+full model/teacher/prediction-array readback and targeted overfit analysis.
+No Phase 5/Option B, test-score tuning, additional training or redesign began.
+
 ## Required entry for each later experiment
 
 Record run ID/time/status (planned/running/completed/failed/interrupted), exact

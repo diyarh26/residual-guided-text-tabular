@@ -1,14 +1,13 @@
 # Phase 4 GPU execution
 
-Status: the deterministic CUDA repair allowed direct and residual fitting to
-complete according to the next supplied log. TAR then exhausted a 14.56 GiB GPU
-at batch 256/FP32. The user has only that GPU. The new
-[memory-saving execution mode](PHASE4_MEMORY.md) preserves training budgets and
-performs a full-size synthetic capacity check before a fresh comparison.
-The next supplied log verifies a Tesla T4 capacity pass at 6.510 GiB peak allocated
-and TAR training through epoch 9 / step 36. End-to-end completion and artifact
-audit remain pending. Leave the current Colab cell running; see the
-[progress record](../results/phase4_colab_progress_epoch9.json).
+Status as of October 21: the checkpointed T4 run completed all 36 fits and 24
+outer evaluations. Direct Drive readback and 209 metadata/aggregation checks
+passed; the [results review](PHASE4_RESULTS.md) recommends failure/overfit
+analysis before scaling. Full independent saved-model/teacher/prediction audit
+remains open. **Do not relaunch or resume the completed run.** The instructions
+below remain for reproduction and interruption recovery. Earlier CUDA/OOM
+failures are preserved; the [memory-saving mode](PHASE4_MEMORY.md) retains all
+registered training budgets.
 The launcher retains `MPLBACKEND=Agg` and `CUBLAS_WORKSPACE_CONFIG=:4096:8`.
 See troubleshooting below, the
 [setup failure](../results/phase4_colab_setup_failure.json), and

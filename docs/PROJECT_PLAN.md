@@ -1,6 +1,6 @@
 # Project plan
 
-Last updated: October 20, 2026 (Asia/Jerusalem). Deadline: October 26, 2026.
+Last updated: October 21, 2026 (Asia/Jerusalem). Deadline: October 26, 2026.
 Phases follow the user's order; Phase 7 report notes may be prepared alongside
 evaluation, but no untested result may be written as a finding. Option B is
 optional and lowest priority. Status values: Not started / In progress /
@@ -124,29 +124,24 @@ checks; nested benchmark evaluation and improvement claims remain later work.
 
 ## Phase 4 - Pilot experiments and decision gate
 
-**Status: In progress.** User authorized the needed work and asked to be told
-when GPU access is required. Two version-pinned datasets and matched pilot
-settings are registered; 152 tests and real split/feature preflights pass.
-Separate CUDA lock and Colab launcher are ready; real GPU/TAR training is underway.
-The nine-stage Product Sentiment CPU preflight and saved-artifact audit passed;
-zero outer-test predictions. Grouped diagnostics show no consistent residual
-gain. Full comparison and decision remain incomplete; see HANDOFF.
-After the CUDA repair, Colab reached TAR with three conditions completed, then
-exhausted its 14.56 GiB GPU. A separately registered activation-checkpointing
-execution mode preserves all training budgets and adds a synthetic capacity
-check before a fresh run. The next supplied log verifies the capacity check
-passed on Tesla T4 at 6.510 GiB peak allocated, followed by TAR epoch 9 / step 36.
-The complete comparison and artifact audit remain pending. The original
-run/configuration are preserved; leave the current Colab job running.
+**Status: In progress; registered GPU execution complete.** The checkpointed
+T4 run completed all 36 stages and 24 outer evaluations, including all six TAR
+conditions. October 21 Drive readback passed 209 metadata/aggregation checks;
+eleven report tests passed. TAR had the highest mean on both datasets; residual
+gains over direct were inconsistent and grouped diagnostics were weaker.
+The recommendation is `analyze_failures_and_overfit_before_scaling`; see
+[PHASE4_RESULTS.md](PHASE4_RESULTS.md). Full independent saved-model/teacher/
+prediction verification and targeted overfit analysis remain open. Preserve
+the completed run and original failures. Do not repeat training or start Phase 5.
 
 Objective: determine whether the method merits broader evaluation.
 
 - [x] Pre-register representative classification/regression pilots and seeds.
-- [ ] Run aligned Joint Frozen, Joint TAR, direct-target gated, and residual-guided
+- [x] Run aligned Joint Frozen, Joint TAR, direct-target gated, and residual-guided
   conditions; measure final learner scores as well as correction-head behavior.
 - [ ] Save configurations, learning curves, runtime, memory, hardware, failures,
   and machine-readable metrics; analyze stability and overfit diagnostics.
-- [ ] Report continue/adjust/stop recommendation to the user before scaling.
+- [x] Report continue/adjust/stop recommendation to the user before scaling.
 - [ ] Test result aggregation, document, commit, push, and verify.
 
 Deliverables: reproducible pilot results and explicit decision report.

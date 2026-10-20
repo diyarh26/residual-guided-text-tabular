@@ -175,6 +175,15 @@ weights, embeddings, data or unrestricted failure logs.
 
 ## Descriptive recommendation
 
+The complete checkpointed GPU pilot now has all 36 stages and 24 outer-test
+evaluations. Its [October 21 review](PHASE4_RESULTS.md) and
+[reviewed metrics](../results/phase4_gpu_pilot_review.json) report TAR as the
+highest-mean method on both datasets, inconsistent residual-versus-direct
+differences, and weaker grouped residual diagnostics. The registered decision
+is `analyze_failures_and_overfit_before_scaling`. Independent saved-artifact
+verification and targeted analysis remain; no full evaluation or redesign
+follows automatically. The following CPU notes are historical evidence.
+
 The [recorded CPU subset](../results/phase4_cpu_preflight.json) completed nine
 Product Sentiment stages with zero outer-test predictions; its
 [saved-artifact audit](../results/phase4_cpu_preflight_audit.json) passed.
