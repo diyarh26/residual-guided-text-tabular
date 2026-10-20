@@ -1,0 +1,110 @@
+{
+  "run_id": "phase4-product-sentiment-cpu-preflight",
+  "audit_date": "2026-10-20",
+  "status": "passed",
+  "source": {
+    "allow_dirty": false,
+    "commit": "c1e7ec1cdbb79fbc2f000a060616a5e73e11c0d1",
+    "upstream_commit": "599bd6a5631c96f8aef297cc4cb6e4c197ae0dca",
+    "working_tree_dirty": false
+  },
+  "binding_sha256": "27e77643ee90a37c8c40b03c192ff4b30b120bc09c905f50ca8277803f086913",
+  "raw_manifest_sha256": "962fb6be43f0553ef4d2eb85e0fc0166eb335417cdbe18f836431e673f9fb4f2",
+  "raw_summary_sha256": "c573a3fd7d1e36542314faebd8631b02fe162f5d878fc49c6a978761634f10fb",
+  "completed_stages": 9,
+  "planned_stages": 36,
+  "outer_test_predictions": 0,
+  "reserved_outer_test_rows": 509,
+  "verified_completed_stage_files": 142,
+  "recomputed_saved_prediction_metrics": 24,
+  "teacher_models_audited": 16,
+  "all_saved_splits_reconstructed": 12,
+  "model_asset_hashes_unchanged": true,
+  "checks": {
+    "A_only_PCA_structured_downstream": true,
+    "teacher_OOF_exclusion_and_coverage": true,
+    "grouped_A_V_D_and_nested_teacher_isolation": true,
+    "prediction_shape_order_metrics": true,
+    "complete_stage_exact_inventories": true,
+    "outer_test_barrier_held": true
+  },
+  "recovery": {
+    "reason": "Windows WinError 5 blocked atomic checkpoint replacement in the OneDrive folder; exact locking cause is unconfirmed.",
+    "original_failed_attempt_preserved": true,
+    "byte_verified_transfer_files": 48,
+    "storage": "%LOCALAPPDATA%/ReFuTab/runs/phase4-product-sentiment-cpu-preflight",
+    "completed_frozen_direct_reused": true,
+    "residual_new_attempt_index": 2,
+    "residual_checkpoint_epoch_before": 3,
+    "residual_checkpoint_epoch_after": 10
+  },
+  "stages": [
+    {
+      "job": "MUL_TEXT_PRODUCT_SENTIMENT__fold0__diagnostic0__direct",
+      "attempt_index": 1,
+      "fitting_rows": 599,
+      "best_epoch": 10,
+      "completed_epoch": 10
+    },
+    {
+      "job": "MUL_TEXT_PRODUCT_SENTIMENT__fold0__diagnostic0__residual",
+      "attempt_index": 1,
+      "fitting_rows": 599,
+      "best_epoch": 10,
+      "completed_epoch": 10
+    },
+    {
+      "job": "MUL_TEXT_PRODUCT_SENTIMENT__fold0__diagnostic1__direct",
+      "attempt_index": 1,
+      "fitting_rows": 600,
+      "best_epoch": 10,
+      "completed_epoch": 10
+    },
+    {
+      "job": "MUL_TEXT_PRODUCT_SENTIMENT__fold0__diagnostic1__residual",
+      "attempt_index": 1,
+      "fitting_rows": 600,
+      "best_epoch": 10,
+      "completed_epoch": 10
+    },
+    {
+      "job": "MUL_TEXT_PRODUCT_SENTIMENT__fold0__diagnostic2__direct",
+      "attempt_index": 1,
+      "fitting_rows": 600,
+      "best_epoch": 10,
+      "completed_epoch": 10
+    },
+    {
+      "job": "MUL_TEXT_PRODUCT_SENTIMENT__fold0__diagnostic2__residual",
+      "attempt_index": 1,
+      "fitting_rows": 600,
+      "best_epoch": 10,
+      "completed_epoch": 10
+    },
+    {
+      "job": "MUL_TEXT_PRODUCT_SENTIMENT__fold0__direct",
+      "attempt_index": 1,
+      "fitting_rows": 900,
+      "best_epoch": 10,
+      "completed_epoch": 10
+    },
+    {
+      "job": "MUL_TEXT_PRODUCT_SENTIMENT__fold0__frozen",
+      "attempt_index": 1,
+      "fitting_rows": 900,
+      "best_epoch": null,
+      "completed_epoch": null
+    },
+    {
+      "job": "MUL_TEXT_PRODUCT_SENTIMENT__fold0__residual",
+      "attempt_index": 2,
+      "fitting_rows": 900,
+      "best_epoch": 10,
+      "completed_epoch": 10
+    }
+  ],
+  "limitations": [
+    "This audits saved artifacts and metrics without new fitting or inference.",
+    "No real GPU/TAR execution, regression fitting or full outer comparison is claimed."
+  ]
+}

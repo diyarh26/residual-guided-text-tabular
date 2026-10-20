@@ -1,6 +1,6 @@
 # Project plan
 
-Last updated: October 19, 2026 (Asia/Jerusalem). Deadline: October 26, 2026.
+Last updated: October 20, 2026 (Asia/Jerusalem). Deadline: October 26, 2026.
 Phases follow the user's order; Phase 7 report notes may be prepared alongside
 evaluation, but no untested result may be written as a finding. Option B is
 optional and lowest priority. Status values: Not started / In progress /
@@ -128,6 +128,9 @@ checks; nested benchmark evaluation and improvement claims remain later work.
 when GPU access is required. Two version-pinned datasets and matched pilot
 settings are registered; 152 tests and real split/feature preflights pass.
 Separate CUDA lock and Colab launcher are ready; real GPU/TAR execution remains pending.
+The nine-stage Product Sentiment CPU preflight and saved-artifact audit passed;
+zero outer-test predictions. Grouped diagnostics show no consistent residual
+gain. Full comparison and decision remain incomplete; see HANDOFF.
 
 Objective: determine whether the method merits broader evaluation.
 

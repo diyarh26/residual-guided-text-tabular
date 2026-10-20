@@ -180,7 +180,7 @@ preparation remains `scripts/prepare_phase1.py`.
 The bounded local CPU preflight command is:
 
 ```powershell
-uv run --frozen python scripts/run_pilot.py --run-id phase4-product-sentiment-cpu-preflight --methods frozen direct residual --dataset MUL_TEXT_PRODUCT_SENTIMENT --fold 0 --device cpu
+uv run --frozen python scripts/run_pilot.py --run-id my-new-cpu-preflight --output-root "$env:LOCALAPPDATA/ReFuTab/runs" --methods frozen direct residual --dataset MUL_TEXT_PRODUCT_SENTIMENT --fold 0 --device cpu
 ```
 
 This runs nine of 36 stages (main plus three grouped direct/residual diagnostics)
@@ -192,6 +192,14 @@ verifies completed artifacts, and retains earlier failed attempts. Whole
 execution duration/RSS includes frozen encoder loading and cache prefetch;
 stage durations alone omit the shared prefetch work. GPU execution and memory
 capacity remain unvalidated until the real run.
+
+The recorded CPU run hit `WinError 5` replacing a checkpoint in OneDrive.
+Its original failure is preserved. A byte-verified copy of all 48 original files
+was continued outside OneDrive, retaining the source/configuration and prior
+attempts. For Windows runs, prefer the nonsynchronized output root above.
+The recorded continuation directory is
+`%LOCALAPPDATA%/ReFuTab/runs/phase4-product-sentiment-cpu-preflight/`.
+Do not run it again to refresh documentation or overwrite any recorded run.
 
 ## Historical upstream source
 

@@ -302,6 +302,76 @@ versions. No GPU wheel was installed locally and no CUDA/Colab run is claimed.
 The recorded CPU preflight will follow a clean-source commit; it will not
 include TAR or unlock the outer tests. See [PHASE4.md](PHASE4.md).
 
+## Phase 4 CPU preflight and recovery — October 19–20, 2026
+
+Run `phase4-product-sentiment-cpu-preflight`, source
+`c1e7ec1cdbb79fbc2f000a060616a5e73e11c0d1` (clean and pushed), pinned upstream
+`599bd6a5631c96f8aef297cc4cb6e4c197ae0dca`. Configuration SHA-256
+`df6294fb90f8cb9dd72a2db52fb690eaa3752fb6b87a3d7a50ec7a39166d26cf`.
+The registered config, dataset/model revisions, environment and split fingerprints
+are in the reviewed [summary](../results/phase4_cpu_preflight.json); its
+[readback audit](../results/phase4_cpu_preflight_audit.json) records provenance
+and checks. This completes the CPU subset, **not Phase 4**.
+
+Original command:
+
+```powershell
+.venv/Scripts/python.exe scripts/run_pilot.py --config configs/phase4_pilot.json --run-id phase4-product-sentiment-cpu-preflight --methods frozen direct residual --dataset MUL_TEXT_PRODUCT_SENTIMENT --fold 0 --device cpu
+```
+
+The October 19 attempt encoded only the 1,000 benchmark-training rows with real
+pinned frozen E5, completed frozen/direct stages, then failed during residual
+checkpoint replacement with Windows `PermissionError: WinError 5`. Exact locking
+cause is unconfirmed. All original 48 files and failed-attempt records remain
+untouched under ignored `results/raw/phase4-product-sentiment-cpu-preflight/`.
+On October 20, a byte-verified copy was made outside OneDrive and continued:
+
+```powershell
+$pilotResume = Join-Path $env:LOCALAPPDATA 'ReFuTab\runs\phase4-product-sentiment-cpu-preflight'
+.venv/Scripts/python.exe scripts/run_pilot.py --config configs/phase4_pilot.json --resume-run $pilotResume --methods frozen direct residual --dataset MUL_TEXT_PRODUCT_SENTIMENT --fold 0 --device cpu
+```
+
+Completed frozen/direct artifacts were verified and reused. Residual attempt 2
+continued the saved epoch-3 optimizer/RNG state through epoch 10; old attempt 1
+was preserved. All six grouped nested stages then completed. Each of eight
+neural stages selected epoch 10 of the unchanged 10-epoch budget. There was no
+model tuning or algorithm change after results.
+
+| Condition | Main validation macro OVR AUROC | Main validation log loss |
+| --- | ---: | ---: |
+| Matched frozen adapter | 0.8166533713344859 | 0.95678180680636 |
+| Direct gated | 0.8057462756561723 | 0.9669574899101643 |
+| Residual gated | 0.800067021857754 | 0.9725217634341133 |
+
+The three grouped D residual-minus-direct AUROC differences were
+**-0.0244157, +0.0082152, -0.0106366**: mean **-0.0089457**, sample SD
+**0.0163810**, one positive fold out of three. All downstream training AUROCs
+were 1.0. These internal diagnostics show training optimism and no consistent
+residual gain; they are not test scores or independent-sample evidence.
+The fixed gate remains `await_required_comparisons`: TAR, regression and other
+outer conditions are missing. No redesign or broader evaluation followed.
+
+Completed **9/36 registered stages**, **zero new outer-test predictions/scores**.
+The 509 main outer-test rows remained excluded from every fit and diagnostic.
+The audit verified 142 completed-stage files, 16 teacher fits, 24 metric sets
+recomputed from saved predictions, all 12 split fingerprints, grouped A/V/D and
+nested OOF isolation, train-only PCA/structured/downstream fitting, and unchanged
+six E5 assets. The audit performed no new model fitting or prediction.
+
+Measured execution: **286.691709 s** initially plus **39.081796 s** on continuation
+(sum **325.773505 s**); setup adds 4.235228 s and 3.364589 s, respectively.
+These exclude interpreter/import startup and the overnight interruption.
+Sampled process peak RSS: **999,112,704 bytes** initially; **658,583,552 bytes**
+on continuation. Existing Intel CPU, two Torch threads, no GPU. Script records
+service cost as unmeasured; no paid external compute was used.
+
+The GPU notebook now prefills the reviewed implementation SHA while retaining
+`LAUNCH_PILOT = False`. Actual CUDA/Colab/TAR execution remains unvalidated.
+Start a fresh full GPU run; never merge CPU models into its comparison.
+Final October 20 verification passed **152 tests in 25.723 seconds**, including
+the prefilled-SHA and malformed-SHA guards. CPU lock, infrastructure/local-link,
+publication-boundary and whitespace checks also passed.
+
 ## Required entry for each later experiment
 
 Record run ID/time/status (planned/running/completed/failed/interrupted), exact

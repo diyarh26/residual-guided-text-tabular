@@ -2,8 +2,8 @@
 
 [phase4_pilot.ipynb](phase4_pilot.ipynb) is the current GPU handoff for the
 registered matched pilot. [Open it in Google Colab](https://colab.research.google.com/github/diyarh26/residual-guided-text-tabular/blob/main/notebooks/phase4_pilot.ipynb),
-select a GPU runtime and set the full reviewed/pushed `PROJECT_SHA`. The shipped
-placeholder fails before external work. Setup uses the separate Linux/Python
+select a GPU runtime. The reviewed/pushed `PROJECT_SHA` is prefilled; malformed
+values fail before external work. Setup uses the separate Linux/Python
 3.11 CUDA lock, verifies a real device and CUDA operation, prepares pinned
 inputs and runs tests. Bootstrap logs, hardware records and raw outputs remain
 in private Google Drive from the start. The launch cell ships with

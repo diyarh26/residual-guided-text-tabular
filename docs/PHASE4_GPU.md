@@ -48,8 +48,9 @@ it did not install them or validate CUDA at runtime.
 ## Colab steps
 
 1. [Open phase4_pilot.ipynb in Colab](https://colab.research.google.com/github/diyarh26/residual-guided-text-tabular/blob/main/notebooks/phase4_pilot.ipynb), choose a
-   GPU runtime, and set `PROJECT_SHA` to the full 40-character reviewed and
-   pushed ReFuTab commit. The shipped placeholder fails before external work.
+   GPU runtime. `PROJECT_SHA` is already pinned to the reviewed, pushed pilot
+   implementation `c1e7ec1cdbb79fbc2f000a060616a5e73e11c0d1`.
+   Keep this pin for the registered run; malformed values fail before external work.
 2. Run setup cells in order. Mount your private Drive interactively. Before
    installation or preparation, the notebook creates a unique bootstrap log
    under `MyDrive/ReFuTab/runs/_bootstrap/`. Console output and exit codes flush

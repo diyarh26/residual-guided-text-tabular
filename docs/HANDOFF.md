@@ -1,6 +1,6 @@
 # Project handoff
 
-Updated: October 19, 2026 (Asia/Jerusalem).
+Updated: October 20, 2026 (Asia/Jerusalem).
 
 ## Current phase and status
 
@@ -14,8 +14,9 @@ asked to be told if GPU resources are needed. CPU was sufficient: the bounded
 real-E5 synthetic smoke and standalone CSV inference passed. Joint TAR,
 benchmark pilots and full evaluation remain later-phase work.
 **Phase 4 - In progress.** The user authorized the needed work and asked to be
-told when GPU resources are needed. Prepare the locked comparisons and grouped
-nested diagnostics, run bounded CPU checks, and provide a concrete GPU launcher.
+told when GPU resources are needed. The nine-stage CPU preflight and artifact
+audit passed after recovering a Windows checkpoint-file error. The next actual
+comparison needs a CUDA GPU; the Colab launcher is prepared and source-pinned.
 Do not claim Phase 4 completed without real TAR/comparison evidence.
 
 Phase 3 source is now implemented in `features.py`, `fusion.py`,
@@ -121,9 +122,9 @@ limitations before interpreting broader experiments.
 - Repository: https://github.com/diyarh26/residual-guided-text-tabular
 - Branch: `main`.
 - Latest verified pushed commit at edit time:
-  `2f9947eb1bd0a6ddad6548b47edc5eca60f5c5f8`
-  (`experiments: record Phase 3 real-E5 smoke and inference verification`).
-- Phase 4 preparation accompanies this handoff in
+  `c1e7ec1cdbb79fbc2f000a060616a5e73e11c0d1`
+  (`feat: prepare registered pilot comparisons and resumable GPU launcher`).
+- Phase 4 CPU evidence and GPU handoff accompany this handoff in
   a follow-up commit. The field above records the last verified commit at edit
   time; compare actual HEAD with the remote to identify the current session tip.
 - This field identifies the previously verified commit, avoiding a self-hash
@@ -246,18 +247,49 @@ a gain recommendation with missing TAR or incomplete diagnostic coverage.
 `pilot.py`, `pilot_protocol.py`, `pilot_features.py`, `tar.py` and
 `pilot_report.py` implement the runner, source-compatible representations,
 grouped split/OOF audits, safe caches/continuation, and aggregate reporting.
-**152 tests passed in 32.508 seconds.** Both real tables pass all 12 main/nested
+**152 tests passed in 25.723 seconds on October 20.** Both real tables pass all 12 main/nested
 feature-role and split preflights. Separate Linux CUDA locks and the thin
 `notebooks/phase4_pilot.ipynb` launcher are prepared; actual GPU/Colab execution
 has not occurred. Full execution instructions are in [PHASE4.md](PHASE4.md)
 and [PHASE4_GPU.md](PHASE4_GPU.md).
 
-1. Commit/push this registered implementation before recording the bounded
-   Product Sentiment fold-0 CPU preflight (nine stages; zero outer tests).
-   Save reviewed evidence; do not mix these CPU models into the CUDA comparison.
-2. Tell the user the full comparison now needs one CUDA GPU, and provide the
-   Colab link and immutable source SHA. Run the fresh registered GPU plan when
-   that resource is available; preserve actual OOM/failures without auto-tuning.
+The CPU preflight is now recorded in
+[phase4_cpu_preflight.json](../results/phase4_cpu_preflight.json) and its
+[audit](../results/phase4_cpu_preflight_audit.json). Clean source was the pushed
+commit above. Main Product Sentiment fold-0 frozen/direct/residual and all six
+grouped direct/residual diagnostics completed: **9/36 stages; zero outer-test
+predictions**. All 509 outer-test rows remained excluded from fitting.
+
+The first execution on October 19 failed with Windows `WinError 5` during an
+atomic checkpoint replacement inside OneDrive; the locking cause is unconfirmed.
+On October 20, all 48 original files were copied and byte-verified outside
+OneDrive. The original failure remains untouched. Completed frozen/direct stages
+were reused; residual attempt 2 resumed epoch 3 and completed epoch 10, followed
+by the six diagnostics. No model settings changed. Raw recovery artifacts are at
+`%LOCALAPPDATA%/ReFuTab/runs/phase4-product-sentiment-cpu-preflight/`; the original
+failed run stays at `results/raw/phase4-product-sentiment-cpu-preflight/`.
+
+The audit verified 142 completed-stage files, 16 teacher fitting scopes, 24
+saved-prediction metric sets, all 12 split fingerprints and unchanged six E5
+assets. It performed no new fitting or inference. Total measured execution was
+286.692 s initially plus 39.082 s on continuation, excluding setup/import and
+the overnight interruption; maximum sampled process RSS was 999,112,704 bytes.
+
+Validation AUROC: frozen 0.816653, direct 0.805746, residual 0.800067. On grouped
+diagnostic D, residual-minus-direct differences were -0.024416, +0.008215,
+-0.010637 (mean -0.008946, sample SD 0.016381); all downstream training AUROCs
+were 1.0. These are internal exploratory diagnostics, with no consistent gain
+and visible training optimism. No redesign followed. Missing GPU/TAR, regression
+fits and remaining outer coverage block a complete pilot recommendation.
+
+1. Tell the user the next comparison needs one CUDA GPU and provide the
+   [Colab launcher](https://colab.research.google.com/github/diyarh26/residual-guided-text-tabular/blob/main/notebooks/phase4_pilot.ipynb).
+   The source pin is prefilled with `c1e7ec1cdbb79fbc2f000a060616a5e73e11c0d1`.
+   Select a GPU runtime, run setup, then set `LAUNCH_PILOT = True` in its launch
+   cell. Actual GPU/Colab execution remains unvalidated.
+2. Run the fresh registered GPU plan when that resource is available. Do not
+   merge CPU models or pass the CPU directory as a GPU continuation. Preserve
+   real OOM/failures without automatically changing the registered budgets.
 3. Audit full artifacts and coverage, report the pilot recommendation, then
    decide whether full evaluation is warranted. Phase 4 remains in progress;
    do not proceed silently to Phase 5 or Option B.

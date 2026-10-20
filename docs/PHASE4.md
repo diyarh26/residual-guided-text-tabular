@@ -149,7 +149,8 @@ py -3.11 -m uv run --frozen python scripts/run_pilot.py --config configs/phase4_
 For the complete GPU run, open the
 [Colab notebook](https://colab.research.google.com/github/diyarh26/residual-guided-text-tabular/blob/main/notebooks/phase4_pilot.ipynb),
 set the full reviewed project SHA and follow [PHASE4_GPU.md](PHASE4_GPU.md).
-The default placeholder and explicit launch guard prevent implicit training.
+The immutable source pin is prefilled; its format check and the explicit launch
+guard prevent implicit training.
 The source command uses the separate locked GPU environment and durable Drive
 output:
 
@@ -173,6 +174,15 @@ limits. Publish only reviewed aggregate summaries, never full row IDs, model
 weights, embeddings, data or unrestricted failure logs.
 
 ## Descriptive recommendation
+
+The [recorded CPU subset](../results/phase4_cpu_preflight.json) completed nine
+Product Sentiment stages with zero outer-test predictions; its
+[saved-artifact audit](../results/phase4_cpu_preflight_audit.json) passed.
+Residual-minus-direct grouped-D AUROC averaged -0.008946 with only one positive
+fold out of three. This does not establish useful residual complementarity.
+The full coverage gate remains incomplete and the registered method is unchanged.
+The original Windows checkpoint-file failure and nonsynchronized recovery are
+documented in [EXPERIMENT_LOG.md](EXPERIMENT_LOG.md).
 
 `pilot_report.aggregate_pilot` validates coverage, statuses, finite task metrics,
 paired row alignment and the test barrier. It reports AUROC and R² separately,

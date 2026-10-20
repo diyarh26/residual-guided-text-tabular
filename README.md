@@ -36,8 +36,12 @@ and 24 locked outer-test evaluations** across classification and regression.
 The full comparison requires a real GPU; no GPU/TAR run or Phase 4 completion
 is claimed. See the [pilot protocol](docs/PHASE4.md) and
 [GPU handoff](docs/PHASE4_GPU.md). A bounded CPU subset can run nine Product
-Sentiment stages while keeping every outer test untouched; it cannot establish
-the complete comparison or support an improvement recommendation.
+Sentiment stages while keeping every outer test untouched. That subset has now
+completed and passed its [artifact audit](results/phase4_cpu_preflight_audit.json),
+including recovery from a Windows checkpoint-file error. Its grouped diagnostics
+do not show a consistent residual-over-direct gain. It cannot establish the
+complete comparison or support an improvement recommendation; see the
+[CPU summary](results/phase4_cpu_preflight.json).
 
 **Phase 3 completed:** Option A fusion, the direct-target control, checkpoint
 continuation and teacher/head-free inference, with **86 passing tests**. A real
@@ -106,8 +110,8 @@ py -3.11 -m uv run --frozen python scripts/run_teacher.py --run-id my-new-teache
 For Phase 4, prepare the two immutable pilot tables with
 `uv run --frozen python scripts/prepare_phase4.py`. Use the
 [GPU pilot notebook in Colab](https://colab.research.google.com/github/diyarh26/residual-guided-text-tabular/blob/main/notebooks/phase4_pilot.ipynb)
-for the complete comparison. Select a GPU runtime, set `PROJECT_SHA` to the full
-reviewed and pushed implementation commit, and follow the
+for the complete comparison. Select a GPU runtime, keep the prefilled reviewed
+implementation SHA, and follow the
 [GPU instructions](docs/PHASE4_GPU.md). The notebook installs a separate locked
 CUDA environment, verifies the actual device, saves outputs to private Drive,
 and waits for its explicit launch switch. A T4 is a first device to try; whether

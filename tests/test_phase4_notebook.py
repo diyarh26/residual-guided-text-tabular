@@ -30,8 +30,13 @@ class Phase4NotebookTests(unittest.TestCase):
             if cell["cell_type"] == "code":
                 self.assertIsNone(cell["execution_count"])
                 self.assertEqual(cell["outputs"], [])
+        settings = {}
+        with redirect_stdout(io.StringIO()):
+            exec(self.cells[0], settings)
+        self.assertRegex(settings["PROJECT_SHA"], r"^[0-9a-f]{40}$")
+        invalid = self.cells[0].replace(settings["PROJECT_SHA"], "INVALID_PROJECT_SHA", 1)
         with self.assertRaisesRegex(ValueError, "40-character"):
-            exec(self.cells[0], {})
+            exec(invalid, {})
         # The shipped launch cell must fail before any training subprocess.
         with self.assertRaisesRegex(RuntimeError, "Set LAUNCH_PILOT = True"):
             exec(self.cells[-1], {})

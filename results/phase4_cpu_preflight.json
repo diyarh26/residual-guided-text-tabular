@@ -1,0 +1,1414 @@
+{
+  "aggregation": {
+    "coverage": {
+      "complete": false,
+      "completed_stages": 9,
+      "expected_outer_tests": 24,
+      "expected_stages": 36,
+      "failed_stages": [],
+      "invalid_stage_jobs": [],
+      "missing_outer_test_jobs": [
+        "MUL_TEXT_PRODUCT_SENTIMENT__fold0__direct",
+        "MUL_TEXT_PRODUCT_SENTIMENT__fold0__frozen",
+        "MUL_TEXT_PRODUCT_SENTIMENT__fold0__residual",
+        "MUL_TEXT_PRODUCT_SENTIMENT__fold0__tar",
+        "MUL_TEXT_PRODUCT_SENTIMENT__fold1__direct",
+        "MUL_TEXT_PRODUCT_SENTIMENT__fold1__frozen",
+        "MUL_TEXT_PRODUCT_SENTIMENT__fold1__residual",
+        "MUL_TEXT_PRODUCT_SENTIMENT__fold1__tar",
+        "MUL_TEXT_PRODUCT_SENTIMENT__fold2__direct",
+        "MUL_TEXT_PRODUCT_SENTIMENT__fold2__frozen",
+        "MUL_TEXT_PRODUCT_SENTIMENT__fold2__residual",
+        "MUL_TEXT_PRODUCT_SENTIMENT__fold2__tar",
+        "REG_TEXT_VIDEO_GAMES_SALES__fold0__direct",
+        "REG_TEXT_VIDEO_GAMES_SALES__fold0__frozen",
+        "REG_TEXT_VIDEO_GAMES_SALES__fold0__residual",
+        "REG_TEXT_VIDEO_GAMES_SALES__fold0__tar",
+        "REG_TEXT_VIDEO_GAMES_SALES__fold1__direct",
+        "REG_TEXT_VIDEO_GAMES_SALES__fold1__frozen",
+        "REG_TEXT_VIDEO_GAMES_SALES__fold1__residual",
+        "REG_TEXT_VIDEO_GAMES_SALES__fold1__tar",
+        "REG_TEXT_VIDEO_GAMES_SALES__fold2__direct",
+        "REG_TEXT_VIDEO_GAMES_SALES__fold2__frozen",
+        "REG_TEXT_VIDEO_GAMES_SALES__fold2__residual",
+        "REG_TEXT_VIDEO_GAMES_SALES__fold2__tar"
+      ],
+      "missing_stage_jobs": [
+        "MUL_TEXT_PRODUCT_SENTIMENT__fold0__tar",
+        "MUL_TEXT_PRODUCT_SENTIMENT__fold1__direct",
+        "MUL_TEXT_PRODUCT_SENTIMENT__fold1__frozen",
+        "MUL_TEXT_PRODUCT_SENTIMENT__fold1__residual",
+        "MUL_TEXT_PRODUCT_SENTIMENT__fold1__tar",
+        "MUL_TEXT_PRODUCT_SENTIMENT__fold2__direct",
+        "MUL_TEXT_PRODUCT_SENTIMENT__fold2__frozen",
+        "MUL_TEXT_PRODUCT_SENTIMENT__fold2__residual",
+        "MUL_TEXT_PRODUCT_SENTIMENT__fold2__tar",
+        "REG_TEXT_VIDEO_GAMES_SALES__fold0__diagnostic0__direct",
+        "REG_TEXT_VIDEO_GAMES_SALES__fold0__diagnostic0__residual",
+        "REG_TEXT_VIDEO_GAMES_SALES__fold0__diagnostic1__direct",
+        "REG_TEXT_VIDEO_GAMES_SALES__fold0__diagnostic1__residual",
+        "REG_TEXT_VIDEO_GAMES_SALES__fold0__diagnostic2__direct",
+        "REG_TEXT_VIDEO_GAMES_SALES__fold0__diagnostic2__residual",
+        "REG_TEXT_VIDEO_GAMES_SALES__fold0__direct",
+        "REG_TEXT_VIDEO_GAMES_SALES__fold0__frozen",
+        "REG_TEXT_VIDEO_GAMES_SALES__fold0__residual",
+        "REG_TEXT_VIDEO_GAMES_SALES__fold0__tar",
+        "REG_TEXT_VIDEO_GAMES_SALES__fold1__direct",
+        "REG_TEXT_VIDEO_GAMES_SALES__fold1__frozen",
+        "REG_TEXT_VIDEO_GAMES_SALES__fold1__residual",
+        "REG_TEXT_VIDEO_GAMES_SALES__fold1__tar",
+        "REG_TEXT_VIDEO_GAMES_SALES__fold2__direct",
+        "REG_TEXT_VIDEO_GAMES_SALES__fold2__frozen",
+        "REG_TEXT_VIDEO_GAMES_SALES__fold2__residual",
+        "REG_TEXT_VIDEO_GAMES_SALES__fold2__tar"
+      ],
+      "pending_gpu": true,
+      "registered_design_covered": true,
+      "required_TAR": {
+        "expected_stages": 6,
+        "missing_stage_jobs": [
+          "MUL_TEXT_PRODUCT_SENTIMENT__fold0__tar",
+          "MUL_TEXT_PRODUCT_SENTIMENT__fold1__tar",
+          "MUL_TEXT_PRODUCT_SENTIMENT__fold2__tar",
+          "REG_TEXT_VIDEO_GAMES_SALES__fold0__tar",
+          "REG_TEXT_VIDEO_GAMES_SALES__fold1__tar",
+          "REG_TEXT_VIDEO_GAMES_SALES__fold2__tar"
+        ],
+        "status": "pending_gpu",
+        "valid_completed_stages": 0,
+        "valid_outer_tests": 0
+      },
+      "test_barrier_satisfied": false,
+      "valid_completed_stages": 9,
+      "valid_outer_tests": 0
+    },
+    "datasets": {
+      "MUL_TEXT_PRODUCT_SENTIMENT": {
+        "grouped_diagnostic": {
+          "by_fold": [
+            {
+              "case": "MUL_TEXT_PRODUCT_SENTIMENT__fold0__diagnostic0",
+              "diagnostic_fold": 0,
+              "methods": {
+                "direct": {
+                  "diagnostic": 0.8436137689639607,
+                  "train": 1.0,
+                  "train_minus_diagnostic": 0.15638623103603932
+                },
+                "residual": {
+                  "diagnostic": 0.819198072995969,
+                  "train": 1.0,
+                  "train_minus_diagnostic": 0.18080192700403097
+                }
+              },
+              "outer_fold": 0
+            },
+            {
+              "case": "MUL_TEXT_PRODUCT_SENTIMENT__fold0__diagnostic1",
+              "diagnostic_fold": 1,
+              "methods": {
+                "direct": {
+                  "diagnostic": 0.9031146482632243,
+                  "train": 1.0,
+                  "train_minus_diagnostic": 0.0968853517367757
+                },
+                "residual": {
+                  "diagnostic": 0.9113298210457422,
+                  "train": 1.0,
+                  "train_minus_diagnostic": 0.08867017895425777
+                }
+              },
+              "outer_fold": 0
+            },
+            {
+              "case": "MUL_TEXT_PRODUCT_SENTIMENT__fold0__diagnostic2",
+              "diagnostic_fold": 2,
+              "methods": {
+                "direct": {
+                  "diagnostic": 0.8377556526020166,
+                  "train": 1.0,
+                  "train_minus_diagnostic": 0.16224434739798343
+                },
+                "residual": {
+                  "diagnostic": 0.8271190645021305,
+                  "train": 1.0,
+                  "train_minus_diagnostic": 0.17288093549786954
+                }
+              },
+              "outer_fold": 0
+            }
+          ],
+          "methods": {
+            "direct": {
+              "diagnostic": {
+                "mean": 0.8614946899430672,
+                "n": 3,
+                "std": 0.03616275818789588,
+                "std_ddof": 1
+              },
+              "train_minus_diagnostic": {
+                "mean": 0.1385053100569328,
+                "n": 3,
+                "std": 0.03616275818789588,
+                "std_ddof": 1
+              }
+            },
+            "residual": {
+              "diagnostic": {
+                "mean": 0.8525489861812805,
+                "n": 3,
+                "std": 0.051059528367705304,
+                "std_ddof": 1
+              },
+              "train_minus_diagnostic": {
+                "mean": 0.14745101381871945,
+                "n": 3,
+                "std": 0.051059528367705304,
+                "std_ddof": 1
+              }
+            }
+          },
+          "paired_residual_minus_direct": {
+            "mean": -0.008945703761786605,
+            "n": 3,
+            "pairs": [
+              {
+                "comparator": 0.8436137689639607,
+                "difference": -0.024415695967991646,
+                "fold": 0,
+                "residual": 0.819198072995969
+              },
+              {
+                "comparator": 0.9031146482632243,
+                "difference": 0.008215172782517932,
+                "fold": 1,
+                "residual": 0.9113298210457422
+              },
+              {
+                "comparator": 0.8377556526020166,
+                "difference": -0.010636588099886102,
+                "fold": 2,
+                "residual": 0.8271190645021305
+              }
+            ],
+            "positive_folds": 1,
+            "std": 0.016381016947578934,
+            "std_ddof": 1,
+            "unpaired_comparator_folds": [],
+            "unpaired_residual_folds": []
+          }
+        },
+        "outer_test": {
+          "by_fold": [
+            {
+              "case": "MUL_TEXT_PRODUCT_SENTIMENT__fold0",
+              "methods": {},
+              "outer_fold": 0
+            },
+            {
+              "case": "MUL_TEXT_PRODUCT_SENTIMENT__fold1",
+              "methods": {},
+              "outer_fold": 1
+            },
+            {
+              "case": "MUL_TEXT_PRODUCT_SENTIMENT__fold2",
+              "methods": {},
+              "outer_fold": 2
+            }
+          ],
+          "methods": {
+            "direct": {
+              "folds": [],
+              "mean": null,
+              "n": 0,
+              "std": null,
+              "std_ddof": 1
+            },
+            "frozen": {
+              "folds": [],
+              "mean": null,
+              "n": 0,
+              "std": null,
+              "std_ddof": 1
+            },
+            "residual": {
+              "folds": [],
+              "mean": null,
+              "n": 0,
+              "std": null,
+              "std_ddof": 1
+            },
+            "tar": {
+              "folds": [],
+              "mean": null,
+              "n": 0,
+              "std": null,
+              "std_ddof": 1
+            }
+          },
+          "paired_residual_minus": {
+            "direct": {
+              "mean": null,
+              "n": 0,
+              "pairs": [],
+              "positive_folds": 0,
+              "std": null,
+              "std_ddof": 1,
+              "unpaired_comparator_folds": [],
+              "unpaired_residual_folds": []
+            },
+            "frozen": {
+              "mean": null,
+              "n": 0,
+              "pairs": [],
+              "positive_folds": 0,
+              "std": null,
+              "std_ddof": 1,
+              "unpaired_comparator_folds": [],
+              "unpaired_residual_folds": []
+            },
+            "tar": {
+              "mean": null,
+              "n": 0,
+              "pairs": [],
+              "positive_folds": 0,
+              "std": null,
+              "std_ddof": 1,
+              "unpaired_comparator_folds": [],
+              "unpaired_residual_folds": []
+            }
+          }
+        },
+        "primary_metric": "auc",
+        "task": "multiclass"
+      },
+      "REG_TEXT_VIDEO_GAMES_SALES": {
+        "grouped_diagnostic": {
+          "by_fold": [
+            {
+              "case": "REG_TEXT_VIDEO_GAMES_SALES__fold0__diagnostic0",
+              "diagnostic_fold": 0,
+              "methods": {},
+              "outer_fold": 0
+            },
+            {
+              "case": "REG_TEXT_VIDEO_GAMES_SALES__fold0__diagnostic1",
+              "diagnostic_fold": 1,
+              "methods": {},
+              "outer_fold": 0
+            },
+            {
+              "case": "REG_TEXT_VIDEO_GAMES_SALES__fold0__diagnostic2",
+              "diagnostic_fold": 2,
+              "methods": {},
+              "outer_fold": 0
+            }
+          ],
+          "methods": {
+            "direct": {
+              "diagnostic": {
+                "mean": null,
+                "n": 0,
+                "std": null,
+                "std_ddof": 1
+              },
+              "train_minus_diagnostic": {
+                "mean": null,
+                "n": 0,
+                "std": null,
+                "std_ddof": 1
+              }
+            },
+            "residual": {
+              "diagnostic": {
+                "mean": null,
+                "n": 0,
+                "std": null,
+                "std_ddof": 1
+              },
+              "train_minus_diagnostic": {
+                "mean": null,
+                "n": 0,
+                "std": null,
+                "std_ddof": 1
+              }
+            }
+          },
+          "paired_residual_minus_direct": {
+            "mean": null,
+            "n": 0,
+            "pairs": [],
+            "positive_folds": 0,
+            "std": null,
+            "std_ddof": 1,
+            "unpaired_comparator_folds": [],
+            "unpaired_residual_folds": []
+          }
+        },
+        "outer_test": {
+          "by_fold": [
+            {
+              "case": "REG_TEXT_VIDEO_GAMES_SALES__fold0",
+              "methods": {},
+              "outer_fold": 0
+            },
+            {
+              "case": "REG_TEXT_VIDEO_GAMES_SALES__fold1",
+              "methods": {},
+              "outer_fold": 1
+            },
+            {
+              "case": "REG_TEXT_VIDEO_GAMES_SALES__fold2",
+              "methods": {},
+              "outer_fold": 2
+            }
+          ],
+          "methods": {
+            "direct": {
+              "folds": [],
+              "mean": null,
+              "n": 0,
+              "std": null,
+              "std_ddof": 1
+            },
+            "frozen": {
+              "folds": [],
+              "mean": null,
+              "n": 0,
+              "std": null,
+              "std_ddof": 1
+            },
+            "residual": {
+              "folds": [],
+              "mean": null,
+              "n": 0,
+              "std": null,
+              "std_ddof": 1
+            },
+            "tar": {
+              "folds": [],
+              "mean": null,
+              "n": 0,
+              "std": null,
+              "std_ddof": 1
+            }
+          },
+          "paired_residual_minus": {
+            "direct": {
+              "mean": null,
+              "n": 0,
+              "pairs": [],
+              "positive_folds": 0,
+              "std": null,
+              "std_ddof": 1,
+              "unpaired_comparator_folds": [],
+              "unpaired_residual_folds": []
+            },
+            "frozen": {
+              "mean": null,
+              "n": 0,
+              "pairs": [],
+              "positive_folds": 0,
+              "std": null,
+              "std_ddof": 1,
+              "unpaired_comparator_folds": [],
+              "unpaired_residual_folds": []
+            },
+            "tar": {
+              "mean": null,
+              "n": 0,
+              "pairs": [],
+              "positive_folds": 0,
+              "std": null,
+              "std_ddof": 1,
+              "unpaired_comparator_folds": [],
+              "unpaired_residual_folds": []
+            }
+          }
+        },
+        "primary_metric": "r2",
+        "task": "regression"
+      }
+    },
+    "decision": {
+      "automatic_redesign": false,
+      "criteria_by_dataset": {
+        "MUL_TEXT_PRODUCT_SENTIMENT": {
+          "at_least_two_positive_outer_vs_direct": null,
+          "positive_mean_nested_vs_direct": false,
+          "positive_mean_outer_vs_direct": null,
+          "positive_mean_outer_vs_tar": null
+        },
+        "REG_TEXT_VIDEO_GAMES_SALES": {
+          "at_least_two_positive_outer_vs_direct": null,
+          "positive_mean_nested_vs_direct": null,
+          "positive_mean_outer_vs_direct": null,
+          "positive_mean_outer_vs_tar": null
+        }
+      },
+      "eligible_for_continue_decision": false,
+      "reason": "Required comparisons or valid outer-test/diagnostic coverage are incomplete; no gain recommendation is supported.",
+      "recommendation": "await_required_comparisons",
+      "rule": "phase4_descriptive_continue_v1"
+    },
+    "format_version": 1,
+    "issues": [],
+    "limitations": [
+      "Three repeated outer holdouts overlap; means and sample standard deviations are descriptive.",
+      "Two pilot datasets do not support an all-benchmark improvement or significance claim.",
+      "AUROC and R2 remain separate; no cross-task average or p-value is computed.",
+      "Nested D gains and train-minus-D gaps concern complete grouped pipelines, not cross-fitted latent embeddings."
+    ],
+    "run_id": "phase4-product-sentiment-cpu-preflight",
+    "status": "incomplete"
+  },
+  "binding_sha256": "27e77643ee90a37c8c40b03c192ff4b30b120bc09c905f50ca8277803f086913",
+  "cases": {
+    "MUL_TEXT_PRODUCT_SENTIMENT__fold0": {
+      "dataset_id": "MUL_TEXT_PRODUCT_SENTIMENT",
+      "diagnostic_fold": null,
+      "group_overlap": {
+        "train_test": 0,
+        "train_validation": 0,
+        "validation_test": 0
+      },
+      "outer_fold": 0,
+      "partitions": {
+        "excluded": 3582,
+        "test": 509,
+        "train": 900,
+        "validation": 100
+      },
+      "schema_audit": {
+        "categorical": [],
+        "fitting_rows": 900,
+        "numerical": [
+          "Product_Type"
+        ],
+        "text": [
+          "Product_Description"
+        ]
+      },
+      "scope": "main",
+      "task": "multiclass"
+    },
+    "MUL_TEXT_PRODUCT_SENTIMENT__fold0__diagnostic0": {
+      "dataset_id": "MUL_TEXT_PRODUCT_SENTIMENT",
+      "diagnostic_fold": 0,
+      "group_overlap": {
+        "train_test": 0,
+        "train_validation": 0,
+        "validation_test": 0
+      },
+      "outer_fold": 0,
+      "partitions": {
+        "excluded": 4091,
+        "test": 334,
+        "train": 599,
+        "validation": 67
+      },
+      "schema_audit": {
+        "categorical": [],
+        "fitting_rows": 599,
+        "numerical": [
+          "Product_Type"
+        ],
+        "text": [
+          "Product_Description"
+        ]
+      },
+      "scope": "diagnostic",
+      "task": "multiclass"
+    },
+    "MUL_TEXT_PRODUCT_SENTIMENT__fold0__diagnostic1": {
+      "dataset_id": "MUL_TEXT_PRODUCT_SENTIMENT",
+      "diagnostic_fold": 1,
+      "group_overlap": {
+        "train_test": 0,
+        "train_validation": 0,
+        "validation_test": 0
+      },
+      "outer_fold": 0,
+      "partitions": {
+        "excluded": 4091,
+        "test": 333,
+        "train": 600,
+        "validation": 67
+      },
+      "schema_audit": {
+        "categorical": [],
+        "fitting_rows": 600,
+        "numerical": [
+          "Product_Type"
+        ],
+        "text": [
+          "Product_Description"
+        ]
+      },
+      "scope": "diagnostic",
+      "task": "multiclass"
+    },
+    "MUL_TEXT_PRODUCT_SENTIMENT__fold0__diagnostic2": {
+      "dataset_id": "MUL_TEXT_PRODUCT_SENTIMENT",
+      "diagnostic_fold": 2,
+      "group_overlap": {
+        "train_test": 0,
+        "train_validation": 0,
+        "validation_test": 0
+      },
+      "outer_fold": 0,
+      "partitions": {
+        "excluded": 4091,
+        "test": 333,
+        "train": 600,
+        "validation": 67
+      },
+      "schema_audit": {
+        "categorical": [],
+        "fitting_rows": 600,
+        "numerical": [
+          "Product_Type"
+        ],
+        "text": [
+          "Product_Description"
+        ]
+      },
+      "scope": "diagnostic",
+      "task": "multiclass"
+    },
+    "MUL_TEXT_PRODUCT_SENTIMENT__fold1": {
+      "dataset_id": "MUL_TEXT_PRODUCT_SENTIMENT",
+      "diagnostic_fold": null,
+      "group_overlap": {
+        "train_test": 0,
+        "train_validation": 0,
+        "validation_test": 0
+      },
+      "outer_fold": 1,
+      "partitions": {
+        "excluded": 3582,
+        "test": 509,
+        "train": 900,
+        "validation": 100
+      },
+      "schema_audit": {
+        "categorical": [],
+        "fitting_rows": 900,
+        "numerical": [
+          "Product_Type"
+        ],
+        "text": [
+          "Product_Description"
+        ]
+      },
+      "scope": "main",
+      "task": "multiclass"
+    },
+    "MUL_TEXT_PRODUCT_SENTIMENT__fold2": {
+      "dataset_id": "MUL_TEXT_PRODUCT_SENTIMENT",
+      "diagnostic_fold": null,
+      "group_overlap": {
+        "train_test": 0,
+        "train_validation": 0,
+        "validation_test": 0
+      },
+      "outer_fold": 2,
+      "partitions": {
+        "excluded": 3582,
+        "test": 509,
+        "train": 900,
+        "validation": 100
+      },
+      "schema_audit": {
+        "categorical": [],
+        "fitting_rows": 900,
+        "numerical": [
+          "Product_Type"
+        ],
+        "text": [
+          "Product_Description"
+        ]
+      },
+      "scope": "main",
+      "task": "multiclass"
+    },
+    "REG_TEXT_VIDEO_GAMES_SALES__fold0": {
+      "dataset_id": "REG_TEXT_VIDEO_GAMES_SALES",
+      "diagnostic_fold": null,
+      "group_overlap": {
+        "train_test": 72,
+        "train_validation": 3,
+        "validation_test": 6
+      },
+      "outer_fold": 0,
+      "partitions": {
+        "excluded": 13939,
+        "test": 1659,
+        "train": 900,
+        "validation": 100
+      },
+      "schema_audit": {
+        "categorical": [
+          "Genre",
+          "Platform"
+        ],
+        "fitting_rows": 900,
+        "numerical": [
+          "Year"
+        ],
+        "text": [
+          "Name",
+          "Publisher"
+        ]
+      },
+      "scope": "main",
+      "task": "regression"
+    },
+    "REG_TEXT_VIDEO_GAMES_SALES__fold0__diagnostic0": {
+      "dataset_id": "REG_TEXT_VIDEO_GAMES_SALES",
+      "diagnostic_fold": 0,
+      "group_overlap": {
+        "train_test": 0,
+        "train_validation": 0,
+        "validation_test": 0
+      },
+      "outer_fold": 0,
+      "partitions": {
+        "excluded": 15598,
+        "test": 335,
+        "train": 600,
+        "validation": 65
+      },
+      "schema_audit": {
+        "categorical": [
+          "Genre",
+          "Platform"
+        ],
+        "fitting_rows": 600,
+        "numerical": [
+          "Year"
+        ],
+        "text": [
+          "Name",
+          "Publisher"
+        ]
+      },
+      "scope": "diagnostic",
+      "task": "regression"
+    },
+    "REG_TEXT_VIDEO_GAMES_SALES__fold0__diagnostic1": {
+      "dataset_id": "REG_TEXT_VIDEO_GAMES_SALES",
+      "diagnostic_fold": 1,
+      "group_overlap": {
+        "train_test": 0,
+        "train_validation": 0,
+        "validation_test": 0
+      },
+      "outer_fold": 0,
+      "partitions": {
+        "excluded": 15598,
+        "test": 332,
+        "train": 601,
+        "validation": 67
+      },
+      "schema_audit": {
+        "categorical": [
+          "Genre",
+          "Platform"
+        ],
+        "fitting_rows": 601,
+        "numerical": [
+          "Year"
+        ],
+        "text": [
+          "Name",
+          "Publisher"
+        ]
+      },
+      "scope": "diagnostic",
+      "task": "regression"
+    },
+    "REG_TEXT_VIDEO_GAMES_SALES__fold0__diagnostic2": {
+      "dataset_id": "REG_TEXT_VIDEO_GAMES_SALES",
+      "diagnostic_fold": 2,
+      "group_overlap": {
+        "train_test": 0,
+        "train_validation": 0,
+        "validation_test": 0
+      },
+      "outer_fold": 0,
+      "partitions": {
+        "excluded": 15598,
+        "test": 333,
+        "train": 601,
+        "validation": 66
+      },
+      "schema_audit": {
+        "categorical": [
+          "Genre",
+          "Platform"
+        ],
+        "fitting_rows": 601,
+        "numerical": [
+          "Year"
+        ],
+        "text": [
+          "Name",
+          "Publisher"
+        ]
+      },
+      "scope": "diagnostic",
+      "task": "regression"
+    },
+    "REG_TEXT_VIDEO_GAMES_SALES__fold1": {
+      "dataset_id": "REG_TEXT_VIDEO_GAMES_SALES",
+      "diagnostic_fold": null,
+      "group_overlap": {
+        "train_test": 78,
+        "train_validation": 4,
+        "validation_test": 9
+      },
+      "outer_fold": 1,
+      "partitions": {
+        "excluded": 13939,
+        "test": 1659,
+        "train": 900,
+        "validation": 100
+      },
+      "schema_audit": {
+        "categorical": [
+          "Genre",
+          "Platform"
+        ],
+        "fitting_rows": 900,
+        "numerical": [
+          "Year"
+        ],
+        "text": [
+          "Name",
+          "Publisher"
+        ]
+      },
+      "scope": "main",
+      "task": "regression"
+    },
+    "REG_TEXT_VIDEO_GAMES_SALES__fold2": {
+      "dataset_id": "REG_TEXT_VIDEO_GAMES_SALES",
+      "diagnostic_fold": null,
+      "group_overlap": {
+        "train_test": 83,
+        "train_validation": 2,
+        "validation_test": 11
+      },
+      "outer_fold": 2,
+      "partitions": {
+        "excluded": 13939,
+        "test": 1659,
+        "train": 900,
+        "validation": 100
+      },
+      "schema_audit": {
+        "categorical": [
+          "Genre",
+          "Platform"
+        ],
+        "fitting_rows": 900,
+        "numerical": [
+          "Year"
+        ],
+        "text": [
+          "Name",
+          "Publisher"
+        ]
+      },
+      "scope": "main",
+      "task": "regression"
+    }
+  },
+  "completed_stages": 9,
+  "cost": {
+    "basis": "Record actual provider charge after execution",
+    "provider_service_charge_usd": null
+  },
+  "environment": {
+    "device": "cpu",
+    "packages": {
+      "accelerate": "1.12.0",
+      "catboost": "1.2.8",
+      "lightgbm": "4.6.0",
+      "numpy": "2.3.5",
+      "pandas": "2.3.3",
+      "peft": "0.18.0",
+      "scikit-learn": "1.6.1",
+      "tabstar": "1.1.15",
+      "torch": "2.7.1+cpu",
+      "transformers": "4.57.3"
+    },
+    "platform": "Windows-10-10.0.26200-SP0",
+    "python": "3.11.3 (tags/v3.11.3:f3909b8, Apr  4 2023, 23:49:59) [MSC v.1934 64 bit (AMD64)]"
+  },
+  "execution_history": [
+    {
+      "completed_utc": "2026-10-19T20:46:32.350787+00:00",
+      "measurement_scope": "execution includes encoder loading/cache prefetch, stages, artifact verification and outer evaluation; setup precedes RSS sampling",
+      "sampled_peak_rss_bytes": 999112704,
+      "seconds": 286.69170909999957,
+      "setup_seconds": 4.235228000001371,
+      "started_utc": "2026-10-19T20:41:45.654908+00:00",
+      "status": "failed"
+    },
+    {
+      "completed_utc": "2026-10-20T13:27:23.596326+00:00",
+      "measurement_scope": "execution includes encoder loading/cache prefetch, stages, artifact verification and outer evaluation; setup precedes RSS sampling",
+      "sampled_peak_rss_bytes": 658583552,
+      "seconds": 39.081796000002214,
+      "setup_seconds": 3.364588600001298,
+      "started_utc": "2026-10-20T13:26:44.513726+00:00",
+      "status": "incomplete"
+    }
+  ],
+  "failure": null,
+  "format_version": 1,
+  "hardware": {
+    "cpu": "Intel64 Family 6 Model 140 Stepping 1, GenuineIntel",
+    "gpu": null,
+    "logical_cpus": 8,
+    "ram_bytes": 16859500544
+  },
+  "limitations": [
+    "Exploratory matched-adapter pilot; original Phase 1 result is separate.",
+    "Overlapping repeated holdouts support descriptive differences, not independent-sample significance.",
+    "Grouped nested diagnostics estimate the complete unseen-row pipeline; no latent-coordinate stacking."
+  ],
+  "outer_tests": {},
+  "plan_sha256": "df6294fb90f8cb9dd72a2db52fb690eaa3752fb6b87a3d7a50ec7a39166d26cf",
+  "planned_stages": 36,
+  "run_id": "phase4-product-sentiment-cpu-preflight",
+  "source": {
+    "allow_dirty": false,
+    "commit": "c1e7ec1cdbb79fbc2f000a060616a5e73e11c0d1",
+    "upstream_commit": "599bd6a5631c96f8aef297cc4cb6e4c197ae0dca",
+    "working_tree_dirty": false
+  },
+  "stages": {
+    "MUL_TEXT_PRODUCT_SENTIMENT__fold0__diagnostic0__direct": {
+      "attempt": "attempts/MUL_TEXT_PRODUCT_SENTIMENT__fold0__diagnostic0__direct__attempt1",
+      "manifest_sha256": "c83a8240d1d77361c91bba36e8a62884f18859f80cecd04cf80c7990e5667bbb",
+      "runtime": {
+        "cuda_peak_allocated_bytes": null,
+        "sampled_peak_rss_bytes": 655880192,
+        "seconds": 2.4322706000020844
+      },
+      "scores": {
+        "diagnostic": {
+          "in_sample": false,
+          "metrics": {
+            "all_classes_present": true,
+            "auc": 0.8436137689639607,
+            "auc_convention": "macro OVR: all classes",
+            "logloss": 1.1004177966771642,
+            "present_class_indices": [
+              0,
+              1,
+              2,
+              3
+            ]
+          },
+          "row_ids_sha256": "9109c3af76b84c6e69478d26382a9abca32b9def2c5126ba3f382fdadbb9836a",
+          "rows": 334
+        },
+        "train": {
+          "in_sample": true,
+          "metrics": {
+            "all_classes_present": true,
+            "auc": 1.0,
+            "auc_convention": "macro OVR: all classes",
+            "logloss": 0.00021203067598044237,
+            "present_class_indices": [
+              0,
+              1,
+              2,
+              3
+            ]
+          },
+          "row_ids_sha256": "97246e8eef9355cb6811c9ec24be32e196fb24c558ba526e14262dfd6912ff67",
+          "rows": 599
+        },
+        "validation": {
+          "in_sample": false,
+          "metrics": {
+            "all_classes_present": true,
+            "auc": 0.8010522899694993,
+            "auc_convention": "macro OVR: all classes",
+            "logloss": 1.05175273836009,
+            "present_class_indices": [
+              0,
+              1,
+              2,
+              3
+            ]
+          },
+          "row_ids_sha256": "ea5303cc99f8848bd648899bf0f8887931a568f235655b081312bd0dfbbf25d0",
+          "rows": 67
+        }
+      },
+      "status": "completed"
+    },
+    "MUL_TEXT_PRODUCT_SENTIMENT__fold0__diagnostic0__residual": {
+      "attempt": "attempts/MUL_TEXT_PRODUCT_SENTIMENT__fold0__diagnostic0__residual__attempt1",
+      "manifest_sha256": "00a958ff16957b766ab15913021448184bb8d461e2146329f8af6b7690ff735a",
+      "runtime": {
+        "cuda_peak_allocated_bytes": null,
+        "sampled_peak_rss_bytes": 657907712,
+        "seconds": 2.4170998000008694
+      },
+      "scores": {
+        "diagnostic": {
+          "in_sample": false,
+          "metrics": {
+            "all_classes_present": true,
+            "auc": 0.819198072995969,
+            "auc_convention": "macro OVR: all classes",
+            "logloss": 1.1107277786182799,
+            "present_class_indices": [
+              0,
+              1,
+              2,
+              3
+            ]
+          },
+          "row_ids_sha256": "9109c3af76b84c6e69478d26382a9abca32b9def2c5126ba3f382fdadbb9836a",
+          "rows": 334
+        },
+        "train": {
+          "in_sample": true,
+          "metrics": {
+            "all_classes_present": true,
+            "auc": 1.0,
+            "auc_convention": "macro OVR: all classes",
+            "logloss": 0.00022372484308679226,
+            "present_class_indices": [
+              0,
+              1,
+              2,
+              3
+            ]
+          },
+          "row_ids_sha256": "97246e8eef9355cb6811c9ec24be32e196fb24c558ba526e14262dfd6912ff67",
+          "rows": 599
+        },
+        "validation": {
+          "in_sample": false,
+          "metrics": {
+            "all_classes_present": true,
+            "auc": 0.808623262317081,
+            "auc_convention": "macro OVR: all classes",
+            "logloss": 1.0675663977538103,
+            "present_class_indices": [
+              0,
+              1,
+              2,
+              3
+            ]
+          },
+          "row_ids_sha256": "ea5303cc99f8848bd648899bf0f8887931a568f235655b081312bd0dfbbf25d0",
+          "rows": 67
+        }
+      },
+      "status": "completed"
+    },
+    "MUL_TEXT_PRODUCT_SENTIMENT__fold0__diagnostic1__direct": {
+      "attempt": "attempts/MUL_TEXT_PRODUCT_SENTIMENT__fold0__diagnostic1__direct__attempt1",
+      "manifest_sha256": "454fde6ebdc4fd73642fa1b3b092f0e8d7019556e98166064aca2eecb9d6a679",
+      "runtime": {
+        "cuda_peak_allocated_bytes": null,
+        "sampled_peak_rss_bytes": 657965056,
+        "seconds": 2.148883999998361
+      },
+      "scores": {
+        "diagnostic": {
+          "in_sample": false,
+          "metrics": {
+            "all_classes_present": true,
+            "auc": 0.9031146482632243,
+            "auc_convention": "macro OVR: all classes",
+            "logloss": 0.7284576717636205,
+            "present_class_indices": [
+              0,
+              1,
+              2,
+              3
+            ]
+          },
+          "row_ids_sha256": "60f18743425cfc0d15edeeee10d7dc80dce9df2b6779848f7ea2b49d747a81eb",
+          "rows": 333
+        },
+        "train": {
+          "in_sample": true,
+          "metrics": {
+            "all_classes_present": true,
+            "auc": 1.0,
+            "auc_convention": "macro OVR: all classes",
+            "logloss": 0.00036454522999071216,
+            "present_class_indices": [
+              0,
+              1,
+              2,
+              3
+            ]
+          },
+          "row_ids_sha256": "80f68d3ca6138148f3e968e9de46b7293b8735696df040ab78792a71df55e9b3",
+          "rows": 600
+        },
+        "validation": {
+          "in_sample": false,
+          "metrics": {
+            "all_classes_present": true,
+            "auc": 0.8629587804776916,
+            "auc_convention": "macro OVR: all classes",
+            "logloss": 0.7102894065161812,
+            "present_class_indices": [
+              0,
+              1,
+              2,
+              3
+            ]
+          },
+          "row_ids_sha256": "cc4152b619efb094f3ca8c2ba2f3286fea70092d54a6969220a07c14b63997c0",
+          "rows": 67
+        }
+      },
+      "status": "completed"
+    },
+    "MUL_TEXT_PRODUCT_SENTIMENT__fold0__diagnostic1__residual": {
+      "attempt": "attempts/MUL_TEXT_PRODUCT_SENTIMENT__fold0__diagnostic1__residual__attempt1",
+      "manifest_sha256": "e49a5349fe886ecd30650ecedaa299e13a124a2cd6e84b6d2a95d226b159d82e",
+      "runtime": {
+        "cuda_peak_allocated_bytes": null,
+        "sampled_peak_rss_bytes": 657559552,
+        "seconds": 2.7599427000022843
+      },
+      "scores": {
+        "diagnostic": {
+          "in_sample": false,
+          "metrics": {
+            "all_classes_present": true,
+            "auc": 0.9113298210457422,
+            "auc_convention": "macro OVR: all classes",
+            "logloss": 0.7109211549545845,
+            "present_class_indices": [
+              0,
+              1,
+              2,
+              3
+            ]
+          },
+          "row_ids_sha256": "60f18743425cfc0d15edeeee10d7dc80dce9df2b6779848f7ea2b49d747a81eb",
+          "rows": 333
+        },
+        "train": {
+          "in_sample": true,
+          "metrics": {
+            "all_classes_present": true,
+            "auc": 1.0,
+            "auc_convention": "macro OVR: all classes",
+            "logloss": 0.0003508590693071603,
+            "present_class_indices": [
+              0,
+              1,
+              2,
+              3
+            ]
+          },
+          "row_ids_sha256": "80f68d3ca6138148f3e968e9de46b7293b8735696df040ab78792a71df55e9b3",
+          "rows": 600
+        },
+        "validation": {
+          "in_sample": false,
+          "metrics": {
+            "all_classes_present": true,
+            "auc": 0.8830453905710268,
+            "auc_convention": "macro OVR: all classes",
+            "logloss": 0.694041387570697,
+            "present_class_indices": [
+              0,
+              1,
+              2,
+              3
+            ]
+          },
+          "row_ids_sha256": "cc4152b619efb094f3ca8c2ba2f3286fea70092d54a6969220a07c14b63997c0",
+          "rows": 67
+        }
+      },
+      "status": "completed"
+    },
+    "MUL_TEXT_PRODUCT_SENTIMENT__fold0__diagnostic2__direct": {
+      "attempt": "attempts/MUL_TEXT_PRODUCT_SENTIMENT__fold0__diagnostic2__direct__attempt1",
+      "manifest_sha256": "b7da5b65b1e097d43f63cd036923f44e605428dcfd7fdc7fdae0f6338ec27c19",
+      "runtime": {
+        "cuda_peak_allocated_bytes": null,
+        "sampled_peak_rss_bytes": 657993728,
+        "seconds": 2.306382200000371
+      },
+      "scores": {
+        "diagnostic": {
+          "in_sample": false,
+          "metrics": {
+            "all_classes_present": true,
+            "auc": 0.8377556526020166,
+            "auc_convention": "macro OVR: all classes",
+            "logloss": 0.9606409619430961,
+            "present_class_indices": [
+              0,
+              1,
+              2,
+              3
+            ]
+          },
+          "row_ids_sha256": "93078e303609a15e3314d5999d4452fc278530368bca01c1cb647dbe7e7b0765",
+          "rows": 333
+        },
+        "train": {
+          "in_sample": true,
+          "metrics": {
+            "all_classes_present": true,
+            "auc": 1.0,
+            "auc_convention": "macro OVR: all classes",
+            "logloss": 0.00034101588119407204,
+            "present_class_indices": [
+              0,
+              1,
+              2,
+              3
+            ]
+          },
+          "row_ids_sha256": "55f12c4fa43586294f3de1372ec605bc266fe766b45d75abce76df280c879399",
+          "rows": 600
+        },
+        "validation": {
+          "in_sample": false,
+          "metrics": {
+            "all_classes_present": true,
+            "auc": 0.8561179833238656,
+            "auc_convention": "macro OVR: all classes",
+            "logloss": 0.9630286583998756,
+            "present_class_indices": [
+              0,
+              1,
+              2,
+              3
+            ]
+          },
+          "row_ids_sha256": "3c704a636bfd85b5035c520fb4401cb210f244c51646b84d48ed81a7af6a7b77",
+          "rows": 67
+        }
+      },
+      "status": "completed"
+    },
+    "MUL_TEXT_PRODUCT_SENTIMENT__fold0__diagnostic2__residual": {
+      "attempt": "attempts/MUL_TEXT_PRODUCT_SENTIMENT__fold0__diagnostic2__residual__attempt1",
+      "manifest_sha256": "8facbde4212b9406f15af92d94c214c31a5e85154144d8c04cc99575412420f0",
+      "runtime": {
+        "cuda_peak_allocated_bytes": null,
+        "sampled_peak_rss_bytes": 658583552,
+        "seconds": 2.4547306999993452
+      },
+      "scores": {
+        "diagnostic": {
+          "in_sample": false,
+          "metrics": {
+            "all_classes_present": true,
+            "auc": 0.8271190645021305,
+            "auc_convention": "macro OVR: all classes",
+            "logloss": 0.9400546077343195,
+            "present_class_indices": [
+              0,
+              1,
+              2,
+              3
+            ]
+          },
+          "row_ids_sha256": "93078e303609a15e3314d5999d4452fc278530368bca01c1cb647dbe7e7b0765",
+          "rows": 333
+        },
+        "train": {
+          "in_sample": true,
+          "metrics": {
+            "all_classes_present": true,
+            "auc": 1.0,
+            "auc_convention": "macro OVR: all classes",
+            "logloss": 0.00034993203533627596,
+            "present_class_indices": [
+              0,
+              1,
+              2,
+              3
+            ]
+          },
+          "row_ids_sha256": "55f12c4fa43586294f3de1372ec605bc266fe766b45d75abce76df280c879399",
+          "rows": 600
+        },
+        "validation": {
+          "in_sample": false,
+          "metrics": {
+            "all_classes_present": true,
+            "auc": 0.8722472788649259,
+            "auc_convention": "macro OVR: all classes",
+            "logloss": 0.8459338387383949,
+            "present_class_indices": [
+              0,
+              1,
+              2,
+              3
+            ]
+          },
+          "row_ids_sha256": "3c704a636bfd85b5035c520fb4401cb210f244c51646b84d48ed81a7af6a7b77",
+          "rows": 67
+        }
+      },
+      "status": "completed"
+    },
+    "MUL_TEXT_PRODUCT_SENTIMENT__fold0__direct": {
+      "attempt": "attempts/MUL_TEXT_PRODUCT_SENTIMENT__fold0__direct__attempt1",
+      "manifest_sha256": "d4a350a579c241e55c2f79e84e84db32717d4844c9c6aba5ac3ab4e7c599c433",
+      "runtime": {
+        "cuda_peak_allocated_bytes": null,
+        "sampled_peak_rss_bytes": 762875904,
+        "seconds": 3.61915190000218
+      },
+      "scores": {
+        "train": {
+          "in_sample": true,
+          "metrics": {
+            "all_classes_present": true,
+            "auc": 1.0,
+            "auc_convention": "macro OVR: all classes",
+            "logloss": 0.0002671262692055675,
+            "present_class_indices": [
+              0,
+              1,
+              2,
+              3
+            ]
+          },
+          "row_ids_sha256": "1f8c0797da9297072b6f5163517f0bf46253307b8a869f88c3b497ca6d46a6ad",
+          "rows": 900
+        },
+        "validation": {
+          "in_sample": false,
+          "metrics": {
+            "all_classes_present": true,
+            "auc": 0.8057462756561723,
+            "auc_convention": "macro OVR: all classes",
+            "logloss": 0.9669574899101643,
+            "present_class_indices": [
+              0,
+              1,
+              2,
+              3
+            ]
+          },
+          "row_ids_sha256": "f7a4bf9da6ca7dcd2dfa78a6c956be339401e1f13b36e7aecf53d69fec9ae7e9",
+          "rows": 100
+        }
+      },
+      "status": "completed"
+    },
+    "MUL_TEXT_PRODUCT_SENTIMENT__fold0__frozen": {
+      "attempt": "attempts/MUL_TEXT_PRODUCT_SENTIMENT__fold0__frozen__attempt1",
+      "manifest_sha256": "cc6675aef87b18ffbe25c75bbfefd6dfdbb010a099d116aea406e4c808ab44ef",
+      "runtime": {
+        "cuda_peak_allocated_bytes": null,
+        "sampled_peak_rss_bytes": 762785792,
+        "seconds": 4.240428999997675
+      },
+      "scores": {
+        "train": {
+          "in_sample": true,
+          "metrics": {
+            "all_classes_present": true,
+            "auc": 1.0,
+            "auc_convention": "macro OVR: all classes",
+            "logloss": 0.00026026461452062787,
+            "present_class_indices": [
+              0,
+              1,
+              2,
+              3
+            ]
+          },
+          "row_ids_sha256": "1f8c0797da9297072b6f5163517f0bf46253307b8a869f88c3b497ca6d46a6ad",
+          "rows": 900
+        },
+        "validation": {
+          "in_sample": false,
+          "metrics": {
+            "all_classes_present": true,
+            "auc": 0.8166533713344859,
+            "auc_convention": "macro OVR: all classes",
+            "logloss": 0.95678180680636,
+            "present_class_indices": [
+              0,
+              1,
+              2,
+              3
+            ]
+          },
+          "row_ids_sha256": "f7a4bf9da6ca7dcd2dfa78a6c956be339401e1f13b36e7aecf53d69fec9ae7e9",
+          "rows": 100
+        }
+      },
+      "status": "completed"
+    },
+    "MUL_TEXT_PRODUCT_SENTIMENT__fold0__residual": {
+      "attempt": "attempts/MUL_TEXT_PRODUCT_SENTIMENT__fold0__residual__attempt2",
+      "manifest_sha256": "7b1786f4706e821acbe9e5925c393d22f21cae9e4fda68f32f0dbf90bee3976b",
+      "runtime": {
+        "cuda_peak_allocated_bytes": null,
+        "sampled_peak_rss_bytes": 655376384,
+        "seconds": 2.832090599997173
+      },
+      "scores": {
+        "train": {
+          "in_sample": true,
+          "metrics": {
+            "all_classes_present": true,
+            "auc": 1.0,
+            "auc_convention": "macro OVR: all classes",
+            "logloss": 0.00025070535466613396,
+            "present_class_indices": [
+              0,
+              1,
+              2,
+              3
+            ]
+          },
+          "row_ids_sha256": "1f8c0797da9297072b6f5163517f0bf46253307b8a869f88c3b497ca6d46a6ad",
+          "rows": 900
+        },
+        "validation": {
+          "in_sample": false,
+          "metrics": {
+            "all_classes_present": true,
+            "auc": 0.800067021857754,
+            "auc_convention": "macro OVR: all classes",
+            "logloss": 0.9725217634341133,
+            "present_class_indices": [
+              0,
+              1,
+              2,
+              3
+            ]
+          },
+          "row_ids_sha256": "f7a4bf9da6ca7dcd2dfa78a6c956be339401e1f13b36e7aecf53d69fec9ae7e9",
+          "rows": 100
+        }
+      },
+      "status": "completed"
+    }
+  },
+  "status": "incomplete",
+  "test_barrier_satisfied": false,
+  "test_predictions": 0
+}
