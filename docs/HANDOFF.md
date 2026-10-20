@@ -28,6 +28,20 @@ launch Phase 5/Option B, or tune on its test scores. Full saved-model/teacher/
 prediction artifact readback and targeted overfit analysis remain before final
 Phase 4 verification. No additional GPU fitting is required for that review.
 
+**Research discussion prepared for October 22.** The user asked for at least
+five creative new directions to discuss after sleeping, then pointed to the
+course PDF. [Seven researched proposals](RESEARCH_IDEAS_2026-10-21.md) now cover
+conditional innovation subspaces, matched-context differences, metadata-query
+token pooling, multi-teacher residual agreement, tree-readable codes,
+held-out-solver feature learning, and conditional negative-control interactions.
+The PDF hash was rechecked and all eight existing renders inspected. The note
+distinguishes measured pilot evidence, proposed mechanisms and prior-work
+collisions, including recent TILE. It ranks I1/I5/I3 first for discussion.
+No candidate has verified global novelty or measured gains. No architecture was
+selected or implemented and no training ran. Next conversation: discuss the
+current method/results and shortlist; keep the Phase 4 artifact audit open and
+do not treat this research note as authorization to launch all seven ideas.
+
 Phase 3 source is now implemented in `features.py`, `fusion.py`,
 `downstream.py`, `pipeline.py`, `synthetic.py` and `fusion_runner.py`, with
 thin training and CSV prediction scripts. **86 tests passed in 18.730 s**,
@@ -131,8 +145,8 @@ limitations before interpreting broader experiments.
 - Repository: https://github.com/diyarh26/residual-guided-text-tabular
 - Branch: `main`.
 - Latest verified pushed commit at edit time:
-  `1432de5eaa37bb502d9e3a5f13cda83a8f4a606b`
-  (`docs: record T4 capacity pass and TAR epoch-nine progress`).
+  `90af9757598aaf8f92d63b4234e159f8e9f368c6`
+  (`docs: review completed GPU pilot and record mixed findings`).
 - The checkpointed notebook/update instructions were pushed earlier.
   Compare actual HEAD with the remote to identify the current session tip.
 - This field identifies the previously verified commit, avoiding a self-hash

@@ -134,6 +134,13 @@ The recommendation is `analyze_failures_and_overfit_before_scaling`; see
 prediction verification and targeted overfit analysis remain open. Preserve
 the completed run and original failures. Do not repeat training or start Phase 5.
 
+Research-only addition authorized October 21: a
+[seven-idea discussion note](RESEARCH_IDEAS_2026-10-21.md) is prepared for October
+22 after literature and course-PDF review. Each proposal has a mechanism,
+closest work, novelty limits, falsifiable probe, compute needs and failure
+conditions. This does not select a redesign, complete Phase 4 verification or
+start a later implementation phase. Discuss the shortlist before any new fit.
+
 Objective: determine whether the method merits broader evaluation.
 
 - [x] Pre-register representative classification/regression pilots and seeds.

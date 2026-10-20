@@ -44,6 +44,10 @@ from this result. The earlier CPU preflight and original failure records are
 preserved; see the [pilot protocol](docs/PHASE4.md) and
 [GPU handoff](docs/PHASE4_GPU.md).
 
+A [research shortlist for the next discussion](docs/RESEARCH_IDEAS_2026-10-21.md)
+contains seven untested directions with prior work, novelty limits and proposed
+mechanism checks. It does not change the registered method or reported results.
+
 **Phase 3 completed:** Option A fusion, the direct-target control, checkpoint
 continuation and teacher/head-free inference, with **86 passing tests**. A real
 frozen-E5 synthetic smoke completed on CPU in **47.23 seconds**, with no test

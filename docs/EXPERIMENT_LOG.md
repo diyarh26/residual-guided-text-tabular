@@ -582,6 +582,33 @@ The unchanged registered rule recommends
 full model/teacher/prediction-array readback and targeted overfit analysis.
 No Phase 5/Option B, test-score tuning, additional training or redesign began.
 
+## October 21, 2026: research mission; no new experiment
+
+The user requested at least five creative directions for discussion the next
+day and pointed to the local project-requirements PDF. Prepared
+[seven research proposals](RESEARCH_IDEAS_2026-10-21.md) using primary-paper
+searches, relevant method/ablation sections, and explicit closest-work checks.
+The local PDF SHA-256 matched the authoritative reviewed file; all eight
+existing page renders were inspected again. The PDF and intermediates remain
+ignored. No requirements or confirmed dataset/training rules changed.
+
+The shortlist addresses conditional compression, pairwise supervision,
+contextual token readout, teacher-family disagreement, tree-compatible codes,
+bilevel generalization and conditional interaction screening. It includes
+sources, proposed objectives, ablations, disproof conditions, compute needs,
+partition/deployment risks and a practical discussion ranking. Prior work means
+none can yet be called globally novel or superior; no benchmark result was
+invented. Two initially guessed paper identifiers resolved to unrelated titles
+and were excluded from the research evidence after checking the primary pages.
+
+This was documentation/research only: **zero new fits, predictions, GPU jobs
+or paid API calls**. The current method, configuration, source pin and observed
+negative/mixed results are preserved. No candidate was selected or implemented.
+Phase 4 remains open for independent artifact verification and overfit analysis.
+Documentation/publication and whitespace checks passed; no ML tests were rerun
+for these documentation-only changes. All source and result limitations are
+carried into the research note for the next discussion.
+
 ## Required entry for each later experiment
 
 Record run ID/time/status (planned/running/completed/failed/interrupted), exact
