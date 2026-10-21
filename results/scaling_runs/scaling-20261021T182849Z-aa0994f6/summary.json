@@ -1,7 +1,7 @@
 {
   "comparisons": {},
   "completed_assessments": 0,
-  "completed_fits": 11,
+  "completed_fits": 15,
   "config_sha256": "cfe7a47d48a08b29680308ee33b6cc0c0834591855241889bb51d300c5723537",
   "cost": {
     "basis": "Record actual provider charge after execution",
@@ -498,8 +498,140 @@
       "status": "completed"
     },
     "MUL_TEXT_PRODUCT_SENTIMENT__fold0__sizeall__tar": {
-      "artifact_bytes": null,
+      "artifact_bytes": 142946418,
       "attempt_index": 2,
+      "optimization": {
+        "best_model_checkpoint": "/content/drive/MyDrive/ReFuTab/standalone_scaling/scaling-20261021T182849Z-aa0994f6/attempts/MUL_TEXT_PRODUCT_SENTIMENT__fold0__sizeall__tar__attempt2/tar/hf/checkpoint-408",
+        "completed_epochs": 37.0,
+        "optimizer_steps_including_resumed_history": 444
+      },
+      "runtime": {
+        "cuda_peak_allocated_bytes": 7260717568,
+        "sampled_peak_rss_bytes": 1668886528,
+        "seconds": 2202.261814466
+      },
+      "scores": {
+        "train": {
+          "metrics": {
+            "all_classes_present": true,
+            "auc": 0.999999348618271,
+            "logloss": 0.0033378442661210787
+          },
+          "rows": 3298
+        },
+        "validation": {
+          "metrics": {
+            "all_classes_present": true,
+            "auc": 0.905518581120421,
+            "logloss": 0.62360635202374
+          },
+          "rows": 366
+        }
+      },
+      "status": "completed"
+    },
+    "MUL_TEXT_PRODUCT_SENTIMENT__fold1__size900__direct": {
+      "artifact_bytes": 1710860,
+      "attempt_index": 1,
+      "optimization": {
+        "best_epoch": 10,
+        "completed_epochs": 10,
+        "optimizer_steps_including_resumed_history": 290,
+        "steps_per_epoch": 29
+      },
+      "runtime": {
+        "cuda_peak_allocated_bytes": 201982976,
+        "sampled_peak_rss_bytes": 1710776320,
+        "seconds": 8.568844571999762
+      },
+      "scores": {
+        "train": {
+          "metrics": {
+            "all_classes_present": true,
+            "auc": 1.0,
+            "logloss": 9.629478526291643e-05
+          },
+          "rows": 900
+        },
+        "validation": {
+          "metrics": {
+            "all_classes_present": true,
+            "auc": 0.8085228131244255,
+            "logloss": 1.0283846497791673
+          },
+          "rows": 367
+        }
+      },
+      "status": "completed"
+    },
+    "MUL_TEXT_PRODUCT_SENTIMENT__fold1__size900__frozen": {
+      "artifact_bytes": 1477429,
+      "attempt_index": 1,
+      "optimization": {
+        "optimizer_steps_including_resumed_history": 0
+      },
+      "runtime": {
+        "cuda_peak_allocated_bytes": 536609280,
+        "sampled_peak_rss_bytes": 1673900032,
+        "seconds": 16.991311398999642
+      },
+      "scores": {
+        "train": {
+          "metrics": {
+            "all_classes_present": true,
+            "auc": 1.0,
+            "logloss": 9.676081457385531e-05
+          },
+          "rows": 900
+        },
+        "validation": {
+          "metrics": {
+            "all_classes_present": true,
+            "auc": 0.7936980135802426,
+            "logloss": 1.0534892186871407
+          },
+          "rows": 367
+        }
+      },
+      "status": "completed"
+    },
+    "MUL_TEXT_PRODUCT_SENTIMENT__fold1__size900__residual": {
+      "artifact_bytes": 1905385,
+      "attempt_index": 1,
+      "optimization": {
+        "best_epoch": 10,
+        "completed_epochs": 10,
+        "optimizer_steps_including_resumed_history": 290,
+        "steps_per_epoch": 29
+      },
+      "runtime": {
+        "cuda_peak_allocated_bytes": 201982976,
+        "sampled_peak_rss_bytes": 1728823296,
+        "seconds": 9.036423216999538
+      },
+      "scores": {
+        "train": {
+          "metrics": {
+            "all_classes_present": true,
+            "auc": 1.0,
+            "logloss": 9.864180196715282e-05
+          },
+          "rows": 900
+        },
+        "validation": {
+          "metrics": {
+            "all_classes_present": true,
+            "auc": 0.8071308034282951,
+            "logloss": 1.0359376679301648
+          },
+          "rows": 367
+        }
+      },
+      "status": "completed"
+    },
+    "MUL_TEXT_PRODUCT_SENTIMENT__fold1__size900__tar": {
+      "artifact_bytes": null,
+      "attempt_index": 1,
       "optimization": null,
       "runtime": null,
       "scores": {},
