@@ -769,6 +769,8 @@ The standalone preflight also passed all 18 real-data cases with zero fitting
 or predictions and no `--prior-run` argument. Evidence is private under
 `results/raw/standalone-preflight-20261021.json` (development source c12d73f,
 dirty working tree recorded); this is split readiness, not a GPU result.
+Implementation `4971335afe78c4ddfbb6d10a3170d23c350d58b2` was pushed and matched remote main;
+the notebook now pins that exact tested source.
 
 ### Required entry for each later experiment
 

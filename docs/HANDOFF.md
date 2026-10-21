@@ -21,7 +21,8 @@ from local preparation. All **181 local tests passed in 59.809 s**, including
 fresh fitting without old artifacts, safe scalar exports, GitHub API fixture
 updates/deduplication and supervised subprocess failure reporting. The notebook
 has no saved outputs and all cells compile; actual GPU/live GitHub publication
-await the user's runtime and credentials.
+await the user's runtime and credentials. The run-all notebook pins verified source
+`4971335afe78c4ddfbb6d10a3170d23c350d58b2`.
 
 **Drive change troubleshooting:** user switched runtime/account and mounted
 another Drive; scaling cell 5 could not find the completed pilot's manifest.
@@ -205,8 +206,8 @@ limitations before interpreting broader experiments.
 - Repository: https://github.com/diyarh26/residual-guided-text-tabular
 - Branch: `main`.
 - Latest verified pushed commit at edit time:
-  `c12d73f9e39678c8e4f4962a43481fe53b1904a0`
-  (`chore: pin CPU audit transfer instructions to verified helper`).
+  `4971335afe78c4ddfbb6d10a3170d23c350d58b2`
+  (`feat: add fresh-Drive run-all notebook with automatic GitHub result saves`).
 - The checkpointed notebook/update instructions were pushed earlier.
   Compare actual HEAD with the remote to identify the current session tip.
 - This field identifies the previously verified commit, avoiding a self-hash
