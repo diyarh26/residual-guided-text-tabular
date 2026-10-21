@@ -507,5 +507,5 @@
     }
   },
   "status": "running",
-  "supervisor_status": "interrupted"
+  "supervisor_status": "preparing"
 }
