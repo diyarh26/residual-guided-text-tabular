@@ -499,7 +499,7 @@
     },
     "MUL_TEXT_PRODUCT_SENTIMENT__fold0__sizeall__tar": {
       "artifact_bytes": null,
-      "attempt_index": 1,
+      "attempt_index": 2,
       "optimization": null,
       "runtime": null,
       "scores": {},
@@ -507,5 +507,5 @@
     }
   },
   "status": "running",
-  "supervisor_status": "preparing"
+  "supervisor_status": "running"
 }
