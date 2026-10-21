@@ -48,7 +48,7 @@ class PilotArtifactAuditTests(unittest.TestCase):
                 job = name + "__" + method
                 attempt = directory / "attempts" / job
                 attempt.mkdir(parents=True)
-                record = {"status": "completed", "context": {"pilot_binding_sha256": state["binding_sha256"], "split_fingerprint": split.fingerprint()},
+                record = {"status": "completed", "method": method, "context": {"pilot_binding_sha256": state["binding_sha256"], "split_fingerprint": split.fingerprint()},
                           "model": {"class_order": classes, "fit_ids_sha256": p.row_ids_sha256(split.train_ids)}, "scores": {}}
                 pipeline = method in {"direct", "residual"}
                 relatives = ["bundle/downstream/metadata.json", "bundle/pca/metadata.json", "bundle/structured/metadata.json"] if pipeline else ["downstream/metadata.json", "representation/metadata.json" if method == "frozen" else "tar/representation/metadata.json"]
@@ -83,6 +83,7 @@ class PilotArtifactAuditTests(unittest.TestCase):
                     result = p._prediction_score(table, ids, prediction, classes)
                     result.update(prediction_sha256=p.sha256_file(output / "test_predictions.npy"), stage_manifest_sha256=state["stages"][job]["manifest_sha256"])
                     state["outer_tests"][job] = result
+                    p._write(output / "result.json", result)
                     p._write(output / "request.json", {"binding_sha256": state["binding_sha256"], "stage_manifest_sha256": result["stage_manifest_sha256"], "class_order": classes})
         p._write(directory / "manifest.json", state)
         p._write(root / "review.json", {"binding_sha256": state["binding_sha256"]})

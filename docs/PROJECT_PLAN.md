@@ -157,6 +157,9 @@ model fitting. The new Colab setup requires a targeted prior-artifact audit
 and capacity check before launch. GPU scaling has not run. Keep
 all assessment rows fixed across the three sample sizes and evaluate zero old
 outer tests in this development curve. The model architecture remains unchanged.
+Account/Drive migration is supported by the standalone CPU audit-transfer
+helper; it preserves the audit requirement and original run. See
+[restoration instructions](DRIVE_AUDIT_TRANSFER.md).
 
 - [x] Pre-register representative classification/regression pilots and seeds.
 - [x] Run aligned Joint Frozen, Joint TAR, direct-target gated, and residual-guided

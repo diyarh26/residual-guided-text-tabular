@@ -1,5 +1,11 @@
 # Colab runners
 
+[phase4_transfer_audit.ipynb](phase4_transfer_audit.ipynb) packages the completed
+pilot's private audit inputs using CPU and the original Drive account. Use it
+when the scaling runtime mounts another Drive; see
+[transfer/restore steps](../docs/DRIVE_AUDIT_TRANSFER.md). This is a file transfer,
+with no training or model downloads.
+
 Use [phase4_scaling.ipynb](phase4_scaling.ipynb) for the new controlled scaling
 experiment. Save a copy in Drive, select GPU, run setup (including prior saved
 artifact audit), then explicitly enable `LAUNCH_SCALING`. See

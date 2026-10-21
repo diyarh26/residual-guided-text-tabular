@@ -701,6 +701,36 @@ only after the tested implementation commit is pushed and remotely verified.
 Implementation `f75cac6d8caa934d2f68d900420b438f890741c3` was pushed and matched remote main;
 the separate notebook pin update uses that exact source. No training was launched.
 
+## October 21, 2026: another Drive cannot find the prior manifest
+
+The user reports scaling cell 5 failing to find `manifest.json` after moving
+to another computer/account/Drive. Source inspection confirms that the default
+`PRIOR_RUN` path refers to the completed run on the original Drive; that Drive
+is still accessible. The exact traceback/current GPU were not supplied, and
+this is not evidence of a failed new fitting stage. No real transfer or new
+GPU training was performed in this session.
+
+Added a standalone standard-library `audit_transfer.py` helper and a two-cell
+CPU Colab transfer notebook. The private archive contains only the original
+files consumed by the targeted audit (including actual teacher bundles and
+saved predictions), with original paths/bytes and payload hashes. Neural
+weights, Trainer checkpoints and frozen caches are omitted; the archive is
+not a full backup. Restore verifies hashes and inventory before writing,
+rejects escaping paths and refuses to overwrite a run directory. The existing
+normal artifact audit remains mandatory; packaging does not certify success.
+The training source/configuration and scaling notebook pin are unchanged.
+
+The complete saved-artifact fixture passes the same 108-score/12-teacher/
+96-component audit before and after transfer, with no model inference. The
+initial targeted selection passed 5 tests in 12.030 s (including imported audit
+fixtures); discovery imports were then adjusted to avoid duplicate tests and a
+notebook check added. Final locked CPU suite: **174 tests passed in 55.308 s**,
+exit 0. Locked sync, notebook compilation, infrastructure/local-link checks,
+whitespace and private-file ignore checks passed. No network or actual Colab
+transfer was exercised by these tests. [Restore instructions](DRIVE_AUDIT_TRANSFER.md)
+rerun only the interrupted audit after transfer, preserving the already-created
+capacity evidence and the prepared runtime.
+
 ### Required entry for each later experiment
 
 Record run ID/time/status (planned/running/completed/failed/interrupted), exact

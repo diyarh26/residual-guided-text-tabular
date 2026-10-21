@@ -40,3 +40,8 @@ binding, durable attempt/assessment recovery and corruption rejection. A full
 saved-artifact fixture audits 108 score sets, 12 teacher bundles and 96 fit
 scopes without new inference. Frozen copies substitute for TAR only when
 testing the ledger barrier; they do not validate GPU TAR training.
+
+The stdlib private audit transfer checks exact post-transfer audit equivalence,
+excluded neural checkpoints/caches, payload corruption, unsafe paths, missing
+manifests and overwrite protection. The CPU transfer notebook compiles without
+ML dependencies or a launch command; these tests do not perform a real transfer.

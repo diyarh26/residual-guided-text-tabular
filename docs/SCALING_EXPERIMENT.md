@@ -191,6 +191,7 @@ executed in Colab.
 
 1. Select GPU, run settings and mount Drive. `PRIOR_RUN` points to the completed
    checkpointed pilot in `MyDrive/ReFuTab/runs`; correct the path if it was moved.
+   If using another Drive, first [transfer its audit inputs](DRIVE_AUDIT_TRANSFER.md).
 2. Run source/environment setup and preparation. These verify assets, run tests,
    check synthetic TAR GPU capacity, validate all 18 nested cases, then audit
    108 saved prediction score sets, 12 teacher bundles and 96 component fit

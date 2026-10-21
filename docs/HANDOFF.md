@@ -4,6 +4,19 @@ Updated: October 21, 2026 (Asia/Jerusalem).
 
 ## Current phase and status
 
+**Drive change troubleshooting:** user switched runtime/account and mounted
+another Drive; scaling cell 5 could not find the completed pilot's manifest.
+The original Drive remains accessible. A standalone stdlib audit-transfer
+helper and two-cell CPU notebook now package only the read-only audit inputs,
+preserving original paths/bytes and omitting large neural checkpoints/caches.
+See [transfer and restore steps](DRIVE_AUDIT_TRANSFER.md). No real transfer or
+scaling launch has been performed by this session. Keep the training pin and
+current prepared runtime; after restoring inputs rerun only the audit, since
+the earlier capacity evidence file already exists. The actual prior artifact
+audit remains pending until it runs against these files. All 174 local tests
+passed in 55.308 s, including exact audit equivalence before/after the small
+transfer, corruption/path checks, overwrite protection and notebook syntax.
+
 **Latest user direction, October 21:** prioritize successful algorithm development
 over the October 26 deadline and report preparation. Controlled scaling is the
 next proposed Phase 4 investigation before deciding whether to redesign.
@@ -172,8 +185,8 @@ limitations before interpreting broader experiments.
 - Repository: https://github.com/diyarh26/residual-guided-text-tabular
 - Branch: `main`.
 - Latest verified pushed commit at edit time:
-  `f75cac6d8caa934d2f68d900420b438f890741c3`
-  (`feat: prepare controlled scaling with fixed grouped holdouts and audit gates`).
+  `af7f82e4d8f076314dfde45d8b99a89af26ceb40`
+  (`chore: pin scaling Colab notebook to verified implementation`).
 - The checkpointed notebook/update instructions were pushed earlier.
   Compare actual HEAD with the remote to identify the current session tip.
 - This field identifies the previously verified commit, avoiding a self-hash
