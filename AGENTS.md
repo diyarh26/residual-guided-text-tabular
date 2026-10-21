@@ -13,6 +13,11 @@ its requirements are authoritative and its redistribution is not established.
 ## Objective and fixed research direction
 
 Technion NLP 097215, Track 1 (Algorithm), due October 26, 2026 via Moodle.
+User priority update, October 21: focus on developing a successful algorithm;
+do not let the deadline or academic report preparation drive current research
+choices. Defer report writing. Preserve experiment logs, reproducibility and
+leakage safeguards. Controlled scaling is the next Phase 4 investigation;
+see docs/SCALING_EXPERIMENT.md for its design/readiness limits.
 Investigate whether residual-guided, context-aware text fusion learns predictive
 information complementary to structured columns. Improvement is a hypothesis,
 not a result. Joint TAR is the primary baseline because the gate uses labels.

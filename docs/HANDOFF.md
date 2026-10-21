@@ -4,6 +4,18 @@ Updated: October 21, 2026 (Asia/Jerusalem).
 
 ## Current phase and status
 
+**Latest user direction, October 21:** prioritize successful algorithm development
+over the October 26 deadline and report preparation. Controlled scaling is the
+next proposed Phase 4 investigation before deciding whether to redesign.
+[SCALING_EXPERIMENT.md](SCALING_EXPERIMENT.md) specifies nested 900/2,700/largest
+fitting sets, fixed grouped V/D, four methods and three paired replicates (72
+pipelines). A non-fitting six-case preview found largest A sizes 3,297-3,298 for
+sentiment and 10,736-10,756 for sales; no models or predictions ran. The old cap
+cannot simply be increased because historical sampling can change test IDs.
+The dedicated scaling runner/nested subset tests and prior artifact audit remain
+next work; **training is not launched and the design is not yet executable**.
+This follow-up does not adopt a new architecture or start full evaluation.
+
 **Phase 1 - Completed: historical source analysis and one real baseline reproduction.**
 **Phase 2 - Completed: data contracts and leakage-safe teacher.**
 The Phase 2 full suite passed 43 tests in 9.451 seconds, and infrastructure/link
@@ -148,8 +160,8 @@ limitations before interpreting broader experiments.
 - Repository: https://github.com/diyarh26/residual-guided-text-tabular
 - Branch: `main`.
 - Latest verified pushed commit at edit time:
-  `73e43018ad84e640958e87a9f3cbf133238832cc`
-  (`docs: research seven post-pilot algorithm directions for discussion`).
+  `9078c951ecdce30e69f56b4b6bdb90bebad8ba97`
+  (`docs: export complete pilot scores and dataset details`).
 - The checkpointed notebook/update instructions were pushed earlier.
   Compare actual HEAD with the remote to identify the current session tip.
 - This field identifies the previously verified commit, avoiding a self-hash

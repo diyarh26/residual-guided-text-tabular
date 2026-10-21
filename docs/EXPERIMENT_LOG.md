@@ -627,6 +627,33 @@ evaluation of the other 18 eligible tasks. Documentation/publication and
 whitespace checks passed. The current algorithm and research shortlist were
 unchanged.
 
+## October 21, 2026: scaling design and non-fitting feasibility preview
+
+The user deprioritized the deadline/reports and proposed controlled scaling
+before an architecture decision. Prepared [the design](SCALING_EXPERIMENT.md),
+with fixed grouped V/D and reserved old outer tests, nested target A sizes
+900/2,700/largest, four methods and three paired replicates. This is a proposed
+72-pipeline development study; the runner/nested-size tests are not implemented
+and no new training or outer-test scoring was launched.
+
+Read-only source analysis found the old historical cap changes the initial
+sample before the test/validation splits, so naive cap changes cannot define a
+controlled learning curve. A CPU non-fitting preview from clean source
+`9078c951ecdce30e69f56b4b6bdb90bebad8ba97` reconstructed the three old outer-test
+anchors, restored other available training rows, and used prespecified grouped
+20% D / 10%-of-remaining V splits. All six cases selected candidate zero and
+passed A/V/D group disjointness, class-coverage and largest-size teacher-fold
+feasibility checks. Largest A counts: sentiment 3298/3297/3298; sales
+10756/10753/10736. These are split counts, not model results. Smaller nested
+samples remain unvalidated. Full preview and dataset fingerprints persist under
+ignored `results/raw/scaling-split-preview-20261021.json`.
+
+The preview performed **zero fits, predictions or outer-test evaluations**.
+Documentation/publication and whitespace checks passed; no ML implementation
+changed. Existing results and source pin remain intact. Targeted prior-artifact
+audit and tested scaling implementation precede an expensive GPU launch. No
+training runtime, GPU capacity or method improvement is claimed by planning.
+
 ## Required entry for each later experiment
 
 Record run ID/time/status (planned/running/completed/failed/interrupted), exact

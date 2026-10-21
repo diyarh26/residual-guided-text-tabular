@@ -1,6 +1,10 @@
 # Project plan
 
 Last updated: October 21, 2026 (Asia/Jerusalem). Deadline: October 26, 2026.
+The user explicitly deprioritized the deadline and academic report preparation
+on October 21: current work prioritizes algorithm quality and controlled
+experiments. The deadline remains a course fact, not the current research
+scheduling constraint. Experiment records and verification remain required.
 Phases follow the user's order; Phase 7 report notes may be prepared alongside
 evaluation, but no untested result may be written as a finding. Option B is
 optional and lowest priority. Status values: Not started / In progress /
@@ -145,6 +149,12 @@ conditions. This does not select a redesign, complete Phase 4 verification or
 start a later implementation phase. Discuss the shortlist before any new fit.
 
 Objective: determine whether the method merits broader evaluation.
+
+Next development investigation: [controlled scaling](SCALING_EXPERIMENT.md).
+A six-case non-fitting preview validates feasible largest grouped splits;
+the dedicated nested-size runner and its tests are not yet implemented. Keep
+all assessment rows fixed across the three sample sizes and evaluate zero old
+outer tests in this development curve. The model architecture remains unchanged.
 
 - [x] Pre-register representative classification/regression pilots and seeds.
 - [x] Run aligned Joint Frozen, Joint TAR, direct-target gated, and residual-guided

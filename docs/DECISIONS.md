@@ -1,6 +1,6 @@
 # Decisions and unresolved questions
 
-Updated October 19, 2026. Implementation status is tracked in PROJECT_PLAN and
+Updated October 21, 2026. Implementation status is tracked in PROJECT_PLAN and
 HANDOFF; decisions include both delivered and planned components. Course
 requirements override preferences; conflicts remain open
 until clarified. See [COURSE_REQUIREMENTS.md](COURSE_REQUIREMENTS.md).
@@ -39,6 +39,18 @@ until clarified. See [COURSE_REQUIREMENTS.md](COURSE_REQUIREMENTS.md).
 | D030 | After the reported TAR OOM, prepare an explicit activation-checkpointing execution variant on the only available GPU. | Preserve FP32/batch 256 and every training budget; recompute trainable blocks with preserved dropout RNG. Keep original config/run, use a fresh binding, and require a synthetic full-size capacity check before new fitting. CPU gradient parity does not prove GPU capacity. |
 
 ## Resolved requirements and technical follow-up
+
+October 21 priority/experiment updates:
+
+- **D031:** The user explicitly prioritizes developing a successful algorithm
+  over the deadline or report preparation. Defer academic writing; preserve
+  reproducibility records and course requirements as reference.
+- **D032:** Prepare controlled scaling before choosing a redesign. The design
+  in [SCALING_EXPERIMENT.md](SCALING_EXPERIMENT.md) anchors the old outer-test IDs,
+  fixes grouped validation/assessment partitions and uses nested sample sizes
+  under one recipe. It requires a new runner; changing the historical cap alone
+  would confound sample size with assessment changes. The feasible split preview
+  is not model execution. The plan changes neither Option A nor the upstream pin.
 
 1. **Dataset scope resolved:** the user confirmed datasets must have no image
    column in their original schema. Enumerating the eligible datasets is Phase 1
