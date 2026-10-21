@@ -53,3 +53,15 @@ MUL_TEXT_PRODUCT_SENTIMENT,0,all,frozen,train,3298,logloss,0.004162506539916874
 MUL_TEXT_PRODUCT_SENTIMENT,0,all,frozen,validation,366,all_classes_present,True
 MUL_TEXT_PRODUCT_SENTIMENT,0,all,frozen,validation,366,auc,0.8701900359149102
 MUL_TEXT_PRODUCT_SENTIMENT,0,all,frozen,validation,366,logloss,0.6243143983205943
+MUL_TEXT_PRODUCT_SENTIMENT,0,all,direct,train,3298,all_classes_present,True
+MUL_TEXT_PRODUCT_SENTIMENT,0,all,direct,train,3298,auc,0.999999348618271
+MUL_TEXT_PRODUCT_SENTIMENT,0,all,direct,train,3298,logloss,0.0041950716618570204
+MUL_TEXT_PRODUCT_SENTIMENT,0,all,direct,validation,366,all_classes_present,True
+MUL_TEXT_PRODUCT_SENTIMENT,0,all,direct,validation,366,auc,0.8855907463817895
+MUL_TEXT_PRODUCT_SENTIMENT,0,all,direct,validation,366,logloss,0.6069711579411642
+MUL_TEXT_PRODUCT_SENTIMENT,0,all,residual,train,3298,all_classes_present,True
+MUL_TEXT_PRODUCT_SENTIMENT,0,all,residual,train,3298,auc,0.999999348618271
+MUL_TEXT_PRODUCT_SENTIMENT,0,all,residual,train,3298,logloss,0.004130460833635694
+MUL_TEXT_PRODUCT_SENTIMENT,0,all,residual,validation,366,all_classes_present,True
+MUL_TEXT_PRODUCT_SENTIMENT,0,all,residual,validation,366,auc,0.8626765488048799
+MUL_TEXT_PRODUCT_SENTIMENT,0,all,residual,validation,366,logloss,0.6624430496416669
