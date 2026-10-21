@@ -1,6 +1,7 @@
 {
+  "comparisons": {},
   "completed_assessments": 0,
-  "completed_fits": 0,
+  "completed_fits": 3,
   "config_sha256": "cfe7a47d48a08b29680308ee33b6cc0c0834591855241889bb51d300c5723537",
   "cost": {
     "basis": "Record actual provider charge after execution",
@@ -133,7 +134,106 @@
     "REG_TEXT_VIDEO_GAMES_SALES__fold2__sizeall": "0ce4d2e0bea966ef1c03a466a92c497eddb28c0ca28357894776aabe5cbed5e5"
   },
   "stages": {
+    "MUL_TEXT_PRODUCT_SENTIMENT__fold0__size900__direct": {
+      "artifact_bytes": 1727026,
+      "attempt_index": 1,
+      "optimization": {
+        "best_epoch": 10,
+        "completed_epochs": 10,
+        "optimizer_steps_including_resumed_history": 290,
+        "steps_per_epoch": 29
+      },
+      "runtime": {
+        "cuda_peak_allocated_bytes": 201981440,
+        "sampled_peak_rss_bytes": 1626529792,
+        "seconds": 8.53034629800004
+      },
+      "scores": {
+        "train": {
+          "metrics": {
+            "all_classes_present": true,
+            "auc": 1.0,
+            "logloss": 0.000149441186263792
+          },
+          "rows": 900
+        },
+        "validation": {
+          "metrics": {
+            "all_classes_present": true,
+            "auc": 0.87002323126,
+            "logloss": 0.8238403203104446
+          },
+          "rows": 366
+        }
+      },
+      "status": "completed"
+    },
     "MUL_TEXT_PRODUCT_SENTIMENT__fold0__size900__frozen": {
+      "artifact_bytes": 1488943,
+      "attempt_index": 1,
+      "optimization": {
+        "optimizer_steps_including_resumed_history": 0
+      },
+      "runtime": {
+        "cuda_peak_allocated_bytes": 503054848,
+        "sampled_peak_rss_bytes": 1385062400,
+        "seconds": 24.785132572999828
+      },
+      "scores": {
+        "train": {
+          "metrics": {
+            "all_classes_present": true,
+            "auc": 1.0,
+            "logloss": 0.00015472451828574783
+          },
+          "rows": 900
+        },
+        "validation": {
+          "metrics": {
+            "all_classes_present": true,
+            "auc": 0.872582625729227,
+            "logloss": 0.8248208490115322
+          },
+          "rows": 366
+        }
+      },
+      "status": "completed"
+    },
+    "MUL_TEXT_PRODUCT_SENTIMENT__fold0__size900__residual": {
+      "artifact_bytes": 1909581,
+      "attempt_index": 1,
+      "optimization": {
+        "best_epoch": 10,
+        "completed_epochs": 10,
+        "optimizer_steps_including_resumed_history": 290,
+        "steps_per_epoch": 29
+      },
+      "runtime": {
+        "cuda_peak_allocated_bytes": 201981440,
+        "sampled_peak_rss_bytes": 1635385344,
+        "seconds": 8.954490110999814
+      },
+      "scores": {
+        "train": {
+          "metrics": {
+            "all_classes_present": true,
+            "auc": 1.0,
+            "logloss": 0.00015917723328227987
+          },
+          "rows": 900
+        },
+        "validation": {
+          "metrics": {
+            "all_classes_present": true,
+            "auc": 0.8863522646004948,
+            "logloss": 0.7733894641138684
+          },
+          "rows": 366
+        }
+      },
+      "status": "completed"
+    },
+    "MUL_TEXT_PRODUCT_SENTIMENT__fold0__size900__tar": {
       "artifact_bytes": null,
       "attempt_index": 1,
       "optimization": null,
