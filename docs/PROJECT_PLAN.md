@@ -133,6 +133,9 @@ The recommendation is `analyze_failures_and_overfit_before_scaling`; see
 [PHASE4_RESULTS.md](PHASE4_RESULTS.md). Full independent saved-model/teacher/
 prediction verification and targeted overfit analysis remain open. Preserve
 the completed run and original failures. Do not repeat training or start Phase 5.
+The [results report](PHASE4_RESULTS.md) includes both datasets' schemas/sample
+sizes and all holdouts; [108 saved score sets](../results/phase4_all_scores.csv)
+are exported for review. This export adds no training or evaluation.
 
 Research-only addition authorized October 21: a
 [seven-idea discussion note](RESEARCH_IDEAS_2026-10-21.md) is prepared for October

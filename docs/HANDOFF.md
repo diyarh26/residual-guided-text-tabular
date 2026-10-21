@@ -20,6 +20,9 @@ on October 20. Drive access was restored on October 21; direct readback and
 coverage, paired metrics and the evaluation barrier's chronology. All six TAR
 stages completed. See [reviewed findings](PHASE4_RESULTS.md) and the
 [result](../results/phase4_gpu_pilot_review.json).
+The [complete score CSV](../results/phase4_all_scores.csv) exports all 108 saved
+train/validation/grouped-D/outer-test score sets, without row IDs or predictions.
+The results report now includes dataset schemas, sample sizes and all holdouts.
 TAR had the highest mean on both tasks. Residual fusion showed no consistent
 gain over direct fusion and trailed TAR on both means; grouped diagnostics
 were weaker for residual. The registered recommendation is
@@ -145,8 +148,8 @@ limitations before interpreting broader experiments.
 - Repository: https://github.com/diyarh26/residual-guided-text-tabular
 - Branch: `main`.
 - Latest verified pushed commit at edit time:
-  `90af9757598aaf8f92d63b4234e159f8e9f368c6`
-  (`docs: review completed GPU pilot and record mixed findings`).
+  `73e43018ad84e640958e87a9f3cbf133238832cc`
+  (`docs: research seven post-pilot algorithm directions for discussion`).
 - The checkpointed notebook/update instructions were pushed earlier.
   Compare actual HEAD with the remote to identify the current session tip.
 - This field identifies the previously verified commit, avoiding a self-hash

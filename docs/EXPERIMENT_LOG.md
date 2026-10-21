@@ -609,6 +609,24 @@ Documentation/publication and whitespace checks passed; no ML tests were rerun
 for these documentation-only changes. All source and result limitations are
 carried into the research note for the next discussion.
 
+## October 21, 2026: full score export and dataset summary
+
+At the user's request for full results and datasets used, exported all 108
+recorded score sets from the previously retrieved completed GPU summary to
+[phase4_all_scores.csv](../results/phase4_all_scores.csv): 36 training, 36 internal
+validation, 12 grouped diagnostic and 24 outer-test sets. The CSV retains
+dataset/task/fold/method/partition/counts and all scalar task metrics, omitting
+raw IDs, labels and prediction arrays. Export count, role counts and unique
+score keys passed readback checks. No fitting, inference or metric recomputation
+was performed; the independent artifact-audit limitation remains unchanged.
+
+Expanded [PHASE4_RESULTS.md](PHASE4_RESULTS.md) with both version-1 datasets,
+actual feature roles, full versus used sample counts, all main holdout results
+and all diagnostic-fold scores. This remains a two-dataset capped pilot, not
+evaluation of the other 18 eligible tasks. Documentation/publication and
+whitespace checks passed. The current algorithm and research shortlist were
+unchanged.
+
 ## Required entry for each later experiment
 
 Record run ID/time/status (planned/running/completed/failed/interrupted), exact
