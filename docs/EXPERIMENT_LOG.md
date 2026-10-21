@@ -698,6 +698,8 @@ passed **170 tests in 155.304 s**, exit code 0. Infrastructure/link, staged
 whitespace, ignored private-file coverage and credential-pattern checks passed.
 Notebook cells compile and contain no saved outputs. The source pin is filled
 only after the tested implementation commit is pushed and remotely verified.
+Implementation `f75cac6d8caa934d2f68d900420b438f890741c3` was pushed and matched remote main;
+the separate notebook pin update uses that exact source. No training was launched.
 
 ### Required entry for each later experiment
 

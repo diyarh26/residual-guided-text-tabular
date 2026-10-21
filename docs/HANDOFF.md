@@ -19,7 +19,9 @@ real-data preflight passes all 18 size-specific cases without fitting or
 predictions. Six original Drive split JSONs match every local ordered row
 assignment; only a source-byte metadata hash differs with line endings, handled
 by explicit portable anchor checks. The new `notebooks/phase4_scaling.ipynb`
-keeps the old run intact. **GPU scaling has not started.** Its setup must pass
+keeps the old run intact and pins verified source
+`f75cac6d8caa934d2f68d900420b438f890741c3`.
+**GPU scaling has not started.** Its setup must pass
 the targeted saved-prediction/teacher/component-scope audit against the mounted
 completed pilot plus TAR memory capacity before enabling `LAUNCH_SCALING`.
 The audit is implemented and fixture-tested, not yet passed on all real saved
@@ -170,8 +172,8 @@ limitations before interpreting broader experiments.
 - Repository: https://github.com/diyarh26/residual-guided-text-tabular
 - Branch: `main`.
 - Latest verified pushed commit at edit time:
-  `cf6b3887a4d1ffa31235e6f4a453d7e4bb4fa2ec`
-  (`docs: prioritize algorithm development and design controlled scaling`).
+  `f75cac6d8caa934d2f68d900420b438f890741c3`
+  (`feat: prepare controlled scaling with fixed grouped holdouts and audit gates`).
 - The checkpointed notebook/update instructions were pushed earlier.
   Compare actual HEAD with the remote to identify the current session tip.
 - This field identifies the previously verified commit, avoiding a self-hash
