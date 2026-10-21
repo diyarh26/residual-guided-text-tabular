@@ -1,7 +1,7 @@
 {
   "comparisons": {},
   "completed_assessments": 0,
-  "completed_fits": 19,
+  "completed_fits": 20,
   "config_sha256": "cfe7a47d48a08b29680308ee33b6cc0c0834591855241889bb51d300c5723537",
   "cost": {
     "basis": "Record actual provider charge after execution",
@@ -630,12 +630,37 @@
       "status": "completed"
     },
     "MUL_TEXT_PRODUCT_SENTIMENT__fold1__size2700__tar": {
-      "artifact_bytes": null,
+      "artifact_bytes": 142894726,
       "attempt_index": 1,
-      "optimization": null,
-      "runtime": null,
-      "scores": {},
-      "status": "running"
+      "optimization": {
+        "best_model_checkpoint": "/content/drive/MyDrive/ReFuTab/standalone_scaling/scaling-20261021T182849Z-aa0994f6/attempts/MUL_TEXT_PRODUCT_SENTIMENT__fold1__size2700__tar__attempt1/tar/hf/checkpoint-300",
+        "completed_epochs": 33.0,
+        "optimizer_steps_including_resumed_history": 330
+      },
+      "runtime": {
+        "cuda_peak_allocated_bytes": 7261241856,
+        "sampled_peak_rss_bytes": 1784164352,
+        "seconds": 1790.5952692270002
+      },
+      "scores": {
+        "train": {
+          "metrics": {
+            "all_classes_present": true,
+            "auc": 1.0,
+            "logloss": 0.001393298503516373
+          },
+          "rows": 2700
+        },
+        "validation": {
+          "metrics": {
+            "all_classes_present": true,
+            "auc": 0.8332297516857539,
+            "logloss": 0.724783023481372
+          },
+          "rows": 367
+        }
+      },
+      "status": "completed"
     },
     "MUL_TEXT_PRODUCT_SENTIMENT__fold1__size900__direct": {
       "artifact_bytes": 1710860,
@@ -768,6 +793,14 @@
         }
       },
       "status": "completed"
+    },
+    "MUL_TEXT_PRODUCT_SENTIMENT__fold1__sizeall__frozen": {
+      "artifact_bytes": null,
+      "attempt_index": 1,
+      "optimization": null,
+      "runtime": null,
+      "scores": {},
+      "status": "running"
     }
   },
   "status": "running",
