@@ -1,0 +1,11 @@
+{
+  "completed_assessments": 0,
+  "completed_fits": 0,
+  "old_outer_test_predictions": 0,
+  "planned_fits": 72,
+  "prior_pilot_audit": "deferred_separate_review",
+  "run_id": "scaling-20261021T182849Z-aa0994f6",
+  "source_commit": "4971335afe78c4ddfbb6d10a3170d23c350d58b2",
+  "stages": {},
+  "status": "preparing"
+}
