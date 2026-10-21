@@ -1,7 +1,7 @@
 {
   "comparisons": {},
   "completed_assessments": 0,
-  "completed_fits": 9,
+  "completed_fits": 11,
   "config_sha256": "cfe7a47d48a08b29680308ee33b6cc0c0834591855241889bb51d300c5723537",
   "cost": {
     "basis": "Record actual provider charge after execution",
@@ -399,12 +399,38 @@
       "status": "completed"
     },
     "MUL_TEXT_PRODUCT_SENTIMENT__fold0__sizeall__direct": {
-      "artifact_bytes": null,
+      "artifact_bytes": 1931427,
       "attempt_index": 1,
-      "optimization": null,
-      "runtime": null,
-      "scores": {},
-      "status": "running"
+      "optimization": {
+        "best_epoch": 10,
+        "completed_epochs": 10,
+        "optimizer_steps_including_resumed_history": 1040,
+        "steps_per_epoch": 104
+      },
+      "runtime": {
+        "cuda_peak_allocated_bytes": 201981440,
+        "sampled_peak_rss_bytes": 1778929664,
+        "seconds": 13.841420012000526
+      },
+      "scores": {
+        "train": {
+          "metrics": {
+            "all_classes_present": true,
+            "auc": 0.999999348618271,
+            "logloss": 0.0041950716618570204
+          },
+          "rows": 3298
+        },
+        "validation": {
+          "metrics": {
+            "all_classes_present": true,
+            "auc": 0.8855907463817895,
+            "logloss": 0.6069711579411642
+          },
+          "rows": 366
+        }
+      },
+      "status": "completed"
     },
     "MUL_TEXT_PRODUCT_SENTIMENT__fold0__sizeall__frozen": {
       "artifact_bytes": 1607258,
@@ -436,6 +462,48 @@
         }
       },
       "status": "completed"
+    },
+    "MUL_TEXT_PRODUCT_SENTIMENT__fold0__sizeall__residual": {
+      "artifact_bytes": 2279906,
+      "attempt_index": 1,
+      "optimization": {
+        "best_epoch": 10,
+        "completed_epochs": 10,
+        "optimizer_steps_including_resumed_history": 1040,
+        "steps_per_epoch": 104
+      },
+      "runtime": {
+        "cuda_peak_allocated_bytes": 201981440,
+        "sampled_peak_rss_bytes": 1780232192,
+        "seconds": 15.213263947000087
+      },
+      "scores": {
+        "train": {
+          "metrics": {
+            "all_classes_present": true,
+            "auc": 0.999999348618271,
+            "logloss": 0.004130460833635694
+          },
+          "rows": 3298
+        },
+        "validation": {
+          "metrics": {
+            "all_classes_present": true,
+            "auc": 0.8626765488048799,
+            "logloss": 0.6624430496416669
+          },
+          "rows": 366
+        }
+      },
+      "status": "completed"
+    },
+    "MUL_TEXT_PRODUCT_SENTIMENT__fold0__sizeall__tar": {
+      "artifact_bytes": null,
+      "attempt_index": 1,
+      "optimization": null,
+      "runtime": null,
+      "scores": {},
+      "status": "running"
     }
   },
   "status": "running",
