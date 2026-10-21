@@ -18,6 +18,12 @@ do not let the deadline or academic report preparation drive current research
 choices. Defer report writing. Preserve experiment logs, reproducibility and
 leakage safeguards. Controlled scaling is the next Phase 4 investigation;
 see docs/SCALING_EXPERIMENT.md for its design/readiness limits.
+Latest execution direction: provide one run-all notebook for a fresh computer
+and Drive, with results automatically saved to GitHub. Use
+`notebooks/ReFuTab_Run_All.ipynb` and `configs/phase4_scaling_standalone.json`.
+The old pilot artifact audit remains a separate pending review and is explicitly
+deferred in this fresh run's provenance; do not require a file transfer. Keep
+all training-side leakage checks, fixed recipes and assessment barriers.
 Investigate whether residual-guided, context-aware text fusion learns predictive
 information complementary to structured columns. Improvement is a hypothesis,
 not a result. Joint TAR is the primary baseline because the gate uses labels.

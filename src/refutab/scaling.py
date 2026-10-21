@@ -99,7 +99,12 @@ def run_scaling(root: Path, config_path: Path, *, run_id=None, output_root=None,
     effective["encoder"]["device"] = effective["pipeline"]["training"]["device"] = effective["device"]
     if "tar" in selected and not effective["device"].startswith("cuda"):
         raise ValueError("TAR scaling needs a CUDA GPU")
-    if not prior_audit or prior_audit.get("status") != "passed" or prior_audit.get("run_id") != config["prior_run_id"]:
+    policy = config.get("prior_audit_policy", "required")
+    if policy == "deferred_separate_review" and prior_audit is None:
+        prior_audit = {"status": "deferred", "reason": "Independent fresh scaling run; prior pilot review remains open"}
+    elif policy != "required" and policy != "deferred_separate_review":
+        raise ValueError("Unknown prior artifact audit policy")
+    elif not prior_audit or prior_audit.get("status") != "passed" or prior_audit.get("run_id") != config["prior_run_id"]:
         raise ValueError("A passed targeted prior-pilot artifact audit is required before scaling fits")
     source = p._git(root, "rev-parse", "HEAD")
     if p._git(root, "status", "--porcelain", "--untracked-files=all"):

@@ -51,6 +51,14 @@ October 21 priority/experiment updates:
   under one recipe. It requires a new runner; changing the historical cap alone
   would confound sample size with assessment changes. The feasible split preview
   is not model execution. The plan changes neither Option A nor the upstream pin.
+- **D033:** User explicitly requests one notebook that runs on another computer
+  and Drive and saves results to GitHub, without the previous transfer workflow.
+  Provide the standalone configuration with prior artifact audit explicitly
+  deferred to separate review, never represented as passed. New fitting uses
+  independently reconstructed/publicly hash-verified splits and all existing
+  leakage checks. Run all starts fitting after setup/authentication. Publish only
+  reviewed scalar JSON/CSV exports to a per-run branch; raw artifacts remain in
+  Drive. Tokens stay in memory and out of training arguments/artifacts.
 
 1. **Dataset scope resolved:** the user confirmed datasets must have no image
    column in their original schema. Enumerating the eligible datasets is Phase 1

@@ -1,5 +1,13 @@
 # Colab runners
 
+**Current handoff:** [ReFuTab_Run_All.ipynb](ReFuTab_Run_All.ipynb) runs the
+complete scaling experiment from a fresh computer/Drive. Select GPU and Run all;
+authorize Drive and provide a repository-write GitHub token when prompted.
+There is no launch-variable edit, old manifest requirement or transfer step.
+It checkpoints private models to Drive and pushes scalar JSON/CSV results to a
+per-run GitHub branch during execution. Local tests cover it; no actual new
+Colab GPU run has yet been performed.
+
 [phase4_transfer_audit.ipynb](phase4_transfer_audit.ipynb) packages the completed
 pilot's private audit inputs using CPU and the original Drive account. Use it
 when the scaling runtime mounts another Drive; see

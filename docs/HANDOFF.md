@@ -4,6 +4,25 @@ Updated: October 21, 2026 (Asia/Jerusalem).
 
 ## Current phase and status
 
+**Latest user instruction supersedes the transfer workflow below:** provide one
+fully runnable notebook for another computer/Drive, with results saved to GitHub.
+Current handoff is `notebooks/ReFuTab_Run_All.ipynb`: select GPU and Run all;
+authorize Drive and enter a GitHub repository-write token through hidden input.
+No old run, transfer or launch-variable edit is required. The standalone config
+explicitly records the previous pilot audit as deferred to separate review;
+it never claims that audit passed. All new data/split/grouped teacher/train-only
+checks, fixed recipes and all-fit D barrier remain in place. Private checkpoints
+and logs stay in the new Drive, with automatic compatible resumption using a
+persisted session pointer. The supervisor pushes scalar JSON/CSV exports to
+`results/<run-id>` branch in the existing repository during/following execution,
+verifies write access before fitting, retries transient uploads and reports
+final failures honestly. No new real GPU run or live result upload has occurred
+from local preparation. All **181 local tests passed in 59.809 s**, including
+fresh fitting without old artifacts, safe scalar exports, GitHub API fixture
+updates/deduplication and supervised subprocess failure reporting. The notebook
+has no saved outputs and all cells compile; actual GPU/live GitHub publication
+await the user's runtime and credentials.
+
 **Drive change troubleshooting:** user switched runtime/account and mounted
 another Drive; scaling cell 5 could not find the completed pilot's manifest.
 The original Drive remains accessible. A standalone stdlib audit-transfer
@@ -34,9 +53,10 @@ assignment; only a source-byte metadata hash differs with line endings, handled
 by explicit portable anchor checks. The new `notebooks/phase4_scaling.ipynb`
 keeps the old run intact and pins verified source
 `f75cac6d8caa934d2f68d900420b438f890741c3`.
-**GPU scaling has not started.** Its setup must pass
+**GPU scaling has not started.** The older guarded notebook's setup must pass
 the targeted saved-prediction/teacher/component-scope audit against the mounted
 completed pilot plus TAR memory capacity before enabling `LAUNCH_SCALING`.
+That prior-run dependency does not apply to the latest run-all notebook.
 The audit is implemented and fixture-tested, not yet passed on all real saved
 prediction/teacher files; broader neural-weight readback remains open.
 This follow-up does not adopt a new architecture or start full evaluation.
@@ -185,8 +205,8 @@ limitations before interpreting broader experiments.
 - Repository: https://github.com/diyarh26/residual-guided-text-tabular
 - Branch: `main`.
 - Latest verified pushed commit at edit time:
-  `b6a34226d88664c50db42647e312598e5bf59017`
-  (`fix: support portable prior-pilot audit inputs across Drive accounts`).
+  `c12d73f9e39678c8e4f4962a43481fe53b1904a0`
+  (`chore: pin CPU audit transfer instructions to verified helper`).
 - The checkpointed notebook/update instructions were pushed earlier.
   Compare actual HEAD with the remote to identify the current session tip.
 - This field identifies the previously verified commit, avoiding a self-hash

@@ -29,12 +29,20 @@ gated fusion as additional controls. Option B (LoRA) is deferred.
 
 ## Current status
 
+**Run on another computer:** open
+[ReFuTab_Run_All.ipynb in Colab](https://colab.research.google.com/github/diyarh26/residual-guided-text-tabular/blob/main/notebooks/ReFuTab_Run_All.ipynb),
+select GPU and **Run all**. Mount the Drive you want to use and enter a GitHub
+token with repository Contents write permission when prompted. Setup, fresh
+training, resumption and scalar-result uploads are automatic. No previous run
+folder is required. Results go to a per-run `results/<run-id>` GitHub branch;
+checkpoints remain private in Drive. The earlier pilot audit stays pending.
+
 **Next: controlled scaling.** The separate
 [scaling notebook](notebooks/phase4_scaling.ipynb) prepares nested
 900/2,700/largest fitting sets with fixed grouped validation/assessment, four
 methods and three replicates (72 fits). The real-data split preflight passes;
-GPU scaling has not started. Setup must pass the saved-pilot artifact audit
-before launch. See [execution steps](docs/SCALING_EXPERIMENT.md).
+GPU scaling has not started. The current run-all workflow records the earlier
+pilot audit as separately deferred. See [execution steps](docs/SCALING_EXPERIMENT.md).
 
 **Phase 4 GPU execution completed:** all **36 fitting stages and 24 outer-test
 evaluations**, including six Joint TAR conditions, finished on Tesla T4 using

@@ -733,6 +733,43 @@ capacity evidence and the prepared runtime. The helper implementation
 `b6a34226d88664c50db42647e312598e5bf59017` was pushed and remotely verified; the transfer
 notebook and restore cell pin that exact utility source.
 
+## October 21, 2026: one fresh-Drive run-all notebook and GitHub results
+
+The user explicitly rejected further transfer steps and requested one complete
+notebook runnable on another computer, saving results to GitHub. Added
+`notebooks/ReFuTab_Run_All.ipynb`: GPU + Run all, hidden GitHub token input,
+current-Drive mount, pinned setup/assets/device/capacity checks, automatic
+72-stage launch, session-pointer resumption and incremental GitHub publication.
+It never requests the prior run or a manifest transfer. Source/configuration
+remains fixed; the separately named standalone config explicitly records the
+prior audit as deferred, not passed. The old guarded configuration still
+requires its audit. No model recipe, split assignment or leakage rule changed.
+
+`scaling_publish.py` exports only scalar score/provenance/runtime/optimization
+fields and CSV metrics, excluding raw IDs/predictions, exception messages,
+teacher/neural weights, logs and credentials. Serial GitHub Contents API writes
+go to branch `results/<run-id>`, with payload deduplication and response blob
+hash checks. The supervisor validates a real write before expensive training,
+streams console to Drive, retries uploads during execution and reports final
+publication failures honestly. Tokens stay in kernel memory, outside command
+arguments and training environments. The GitHub Contents API permissions and
+serial create/update behavior were checked against official documentation.
+
+Initial 6 focused tests passed in 3.280 s; an unclosed stdout warning was fixed
+with explicit stream closure and a subprocess-failure test added. Final full
+locked CPU suite: **181 tests passed in 59.809 s**, exit 0. This includes real
+tiny frozen fits with no old manifest and explicit deferred provenance,
+unchanged recipe checks, notebook wiring, export privacy markers, mocked
+GitHub updates/deduplication and real success/failure subprocess supervision.
+Locked sync and infrastructure/local-link checks passed. No real scaling GPU
+training, authenticated result upload, actual GPU memory pass or improvement
+is claimed by these local tests. The new source is pinned in the notebook only
+after its implementation commit is pushed and remotely verified.
+The standalone preflight also passed all 18 real-data cases with zero fitting
+or predictions and no `--prior-run` argument. Evidence is private under
+`results/raw/standalone-preflight-20261021.json` (development source c12d73f,
+dirty working tree recorded); this is split readiness, not a GPU result.
+
 ### Required entry for each later experiment
 
 Record run ID/time/status (planned/running/completed/failed/interrupted), exact

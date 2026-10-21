@@ -2,7 +2,27 @@
 
 Prepared October 21, 2026. Status: **dedicated runner and nested-subset checks
 implemented; real-data split preflight passes. GPU execution has not started.
-The prior saved-artifact audit must pass against mounted Drive before launch.**
+The new standalone execution defers the prior artifact review separately.**
+
+Latest user direction supersedes the earlier transfer prerequisite: use
+[ReFuTab_Run_All.ipynb](../notebooks/ReFuTab_Run_All.ipynb) on a fresh Drive,
+select GPU and Run all. No old manifest is required. The explicitly named
+`phase4_scaling_standalone.json` preserves all recipe/split settings and records
+`prior_audit_policy: deferred_separate_review`. This does not declare the earlier
+pilot audited or complete Phase 4. Current-run data/split/teacher/fit/inventory
+checks and the all-fit D barrier are unchanged. The older notebook/transfer
+instructions below are retained for provenance, not required by this handoff.
+
+The run-all notebook requests a GitHub token through hidden input, verifies a
+real repository write before training, then serially updates only scalar
+`summary.json` and `scores.csv` in `results/scaling_runs/<run-id>` on branch
+`results/<run-id>`. Raw IDs, predictions, checkpoints, console logs and tokens
+are excluded from GitHub exports. API failure retries during execution; private
+exports/checkpoints stay in Drive. Final upload failures are reported rather
+than claimed successful. A Drive session pointer reuses the run ID for compatible
+resumption when the same pinned notebook is rerun. Full GPU execution and live
+GitHub publication still require the user's runtime/authentication; local tests
+do not establish those external outcomes.
 The user now prioritizes developing a successful algorithm over the October 26
 deadline or academic report preparation. The date and course requirements remain
 historical facts, not an experiment scheduling constraint. This is a Phase 4

@@ -151,10 +151,16 @@ start a later implementation phase. Discuss the shortlist before any new fit.
 Objective: determine whether the method merits broader evaluation.
 
 Next development investigation: [controlled scaling](SCALING_EXPERIMENT.md).
+The user's latest request is one fresh-Drive run-all notebook with automatic
+GitHub results, now implemented in `ReFuTab_Run_All.ipynb`. The standalone
+configuration explicitly defers prior-pilot artifact review; it preserves all
+model/split/leakage checks and needs no transfer. Earlier audit-transfer and
+default-off notebook instructions remain historical alternatives.
 A dedicated scaling runner, grouped nested sampling, persistent attempts and
 assessment barrier are implemented; all 18 real-data split cases pass without
-model fitting. The new Colab setup requires a targeted prior-artifact audit
-and capacity check before launch. GPU scaling has not run. Keep
+model fitting. The older guarded Colab setup requires a prior-artifact audit;
+the current standalone notebook defers that review while retaining its GPU
+capacity check. GPU scaling has not run. Keep
 all assessment rows fixed across the three sample sizes and evaluate zero old
 outer tests in this development curve. The model architecture remains unchanged.
 Account/Drive migration is supported by the standalone CPU audit-transfer

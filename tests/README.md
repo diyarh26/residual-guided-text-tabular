@@ -45,3 +45,11 @@ The stdlib private audit transfer checks exact post-transfer audit equivalence,
 excluded neural checkpoints/caches, payload corruption, unsafe paths, missing
 manifests and overwrite protection. The CPU transfer notebook compiles without
 ML dependencies or a launch command; these tests do not perform a real transfer.
+
+Run-all checks cover the explicit fresh-Drive/deferred-prior-review policy,
+unchanged split/model recipes, automatic launch/resume notebook wiring, real
+tiny fitting without old files, scalar-only export/privacy filtering, serial
+GitHub create/update/deduplication with returned blob hashes, write-access
+validation before fitting, real subprocess logging and published failure status.
+GitHub API calls are mocked in local tests; live authenticated publication and
+the actual full Colab GPU run are not claimed by those checks.
