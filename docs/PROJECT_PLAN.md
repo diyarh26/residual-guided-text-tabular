@@ -151,8 +151,10 @@ start a later implementation phase. Discuss the shortlist before any new fit.
 Objective: determine whether the method merits broader evaluation.
 
 Next development investigation: [controlled scaling](SCALING_EXPERIMENT.md).
-A six-case non-fitting preview validates feasible largest grouped splits;
-the dedicated nested-size runner and its tests are not yet implemented. Keep
+A dedicated scaling runner, grouped nested sampling, persistent attempts and
+assessment barrier are implemented; all 18 real-data split cases pass without
+model fitting. The new Colab setup requires a targeted prior-artifact audit
+and capacity check before launch. GPU scaling has not run. Keep
 all assessment rows fixed across the three sample sizes and evaluate zero old
 outer tests in this development curve. The model architecture remains unchanged.
 

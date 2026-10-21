@@ -168,7 +168,7 @@ def train_method(method, table, case, encoder, config, directory, context, previ
     if method in {"direct", "residual"}:
         training = replace(training, training=replace(training.training, objective=method))
         teacher = None
-        if method == "residual" and case["scope"] == "diagnostic":
+        if method == "residual" and (case["scope"] == "diagnostic" or case.get("teacher_grouped", False)):
             schedule = teacher_fold_ids(table, split.train_ids, case["group_columns"], seed=42)
             teacher = fit_oof_teacher(table.structured(split.train_ids), train_y,
                                       categorical_columns=schema.categorical_columns, train_ids=split.train_ids,

@@ -12,8 +12,18 @@ fitting sets, fixed grouped V/D, four methods and three paired replicates (72
 pipelines). A non-fitting six-case preview found largest A sizes 3,297-3,298 for
 sentiment and 10,736-10,756 for sales; no models or predictions ran. The old cap
 cannot simply be increased because historical sampling can change test IDs.
-The dedicated scaling runner/nested subset tests and prior artifact audit remain
-next work; **training is not launched and the design is not yet executable**.
+The dedicated scaling runner, nested subsets, persisted attempts and all-fit
+assessment barrier are implemented, with 170 passing tests (155.304 s final
+run after adding optimizer-step accounting). The
+real-data preflight passes all 18 size-specific cases without fitting or
+predictions. Six original Drive split JSONs match every local ordered row
+assignment; only a source-byte metadata hash differs with line endings, handled
+by explicit portable anchor checks. The new `notebooks/phase4_scaling.ipynb`
+keeps the old run intact. **GPU scaling has not started.** Its setup must pass
+the targeted saved-prediction/teacher/component-scope audit against the mounted
+completed pilot plus TAR memory capacity before enabling `LAUNCH_SCALING`.
+The audit is implemented and fixture-tested, not yet passed on all real saved
+prediction/teacher files; broader neural-weight readback remains open.
 This follow-up does not adopt a new architecture or start full evaluation.
 
 **Phase 1 - Completed: historical source analysis and one real baseline reproduction.**
@@ -160,8 +170,8 @@ limitations before interpreting broader experiments.
 - Repository: https://github.com/diyarh26/residual-guided-text-tabular
 - Branch: `main`.
 - Latest verified pushed commit at edit time:
-  `9078c951ecdce30e69f56b4b6bdb90bebad8ba97`
-  (`docs: export complete pilot scores and dataset details`).
+  `cf6b3887a4d1ffa31235e6f4a453d7e4bb4fa2ec`
+  (`docs: prioritize algorithm development and design controlled scaling`).
 - The checkpointed notebook/update instructions were pushed earlier.
   Compare actual HEAD with the remote to identify the current session tip.
 - This field identifies the previously verified commit, avoiding a self-hash

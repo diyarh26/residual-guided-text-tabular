@@ -1,7 +1,8 @@
 # Phase 4: controlled scaling experiment design
 
-Prepared October 21, 2026. Status: **design and non-fitting feasibility preview
-only; scaling runner, nested-subset tests and GPU execution are not complete.**
+Prepared October 21, 2026. Status: **dedicated runner and nested-subset checks
+implemented; real-data split preflight passes. GPU execution has not started.
+The prior saved-artifact audit must pass against mounted Drive before launch.**
 The user now prioritizes developing a successful algorithm over the October 26
 deadline or academic report preparation. The date and course requirements remain
 historical facts, not an experiment scheduling constraint. This is a Phase 4
@@ -81,8 +82,13 @@ each size. Partial sampling of a group inside A is permitted; A/V/D group
 separation and grouped teacher folds remain mandatory. Never split a group
 between teacher training and its held-out teacher fold. Missing classes or an
 infeasible sample cause a visible preflight failure, not silent skipping or
-score-directed resampling. The exact nested sampling algorithm still needs
-implementation and testing; the largest-size preview does not validate it.
+score-directed resampling. The initial design left sampling implementation
+open. The implemented algorithm
+shuffles each typed class with one seeded RNG, emits one row per class, then
+merges remaining queues by fractional within-class position (ties by typed
+class order). Regression uses one seeded permutation. Seed is `42 + fold`.
+Every requested prefix must pass class coverage and three grouped OOF folds;
+there is no retry of failed sampling orders. All 18 real-data prefixes passed.
 
 At every point fit Frozen, Direct, Residual and TAR on matched rows. PCA,
 structured preprocessing, teachers, gates, TAR, and downstream learner are
@@ -158,8 +164,8 @@ data; additional untouched dataset/test evidence is needed for broader claims.
 
 ## Execution prerequisites and current next step
 
-Prepare and test the dedicated nested split/scaling runner; preserve the old
-pilot runner and report assumptions. In parallel, finish the targeted saved
+The dedicated nested split/scaling runner and tests are implemented; preserve
+the old pilot runner and report assumptions. Finish the targeted saved
 prediction and teacher-fit-scope audit from the completed pilot before a long
 new GPU launch. Tests must cover fixed V/D/outer exclusions across sizes,
 nestedness, class ordering, train-only fitting, teacher groups, changed-held-out-
@@ -172,3 +178,52 @@ authorized by this plan. GPU access will be needed for TAR; no GPU job is runnin
 from this planning work. Implementation readiness and an explicit user-facing
 launch command must precede that execution. Reports for academic submission
 are deferred; experiment records and checks remain necessary.
+
+## Implemented execution and next action
+
+Use the separate [scaling notebook](../notebooks/phase4_scaling.ipynb), opened
+from the repository in Colab, and **File > Save a copy in Drive** before edits.
+The old six-cell pilot notebook remains for the completed run; do not relaunch
+it. The new notebook has its own checkout `/content/refutab-scaling`, a reviewed
+immutable source pin, the same GPU lock, durable logs and a default-off
+`LAUNCH_SCALING` switch. This new notebook has only been checked locally, not
+executed in Colab.
+
+1. Select GPU, run settings and mount Drive. `PRIOR_RUN` points to the completed
+   checkpointed pilot in `MyDrive/ReFuTab/runs`; correct the path if it was moved.
+2. Run source/environment setup and preparation. These verify assets, run tests,
+   check synthetic TAR GPU capacity, validate all 18 nested cases, then audit
+   108 saved prediction score sets, 12 teacher bundles and 96 component fit
+   scopes from the prior run. No new predictor is fitted by this artifact audit.
+   It does not load all neural weights or complete the broader Phase 4 audit.
+   A missing/corrupt artifact visibly stops setup; preserve the error for review.
+3. After setup passes, set `LAUNCH_SCALING = True` in the last cell and run it.
+   This starts the 72 fits. The first D prediction waits until **all 72** fits
+   finish. Outputs stay in a new Drive run; old outer-test predictions are zero.
+4. Save the printed scaling directory. For interruption recovery use the same
+   notebook pin/environment and set `RESUME_RUN` to that directory. Failed and
+   interrupted attempts remain; completed compatible stages are verified/reused.
+   A changed source/config/data/device/environment requires a separate run.
+
+The preflight-only command from a prepared checkout is:
+
+```bash
+uv run --project environments/gpu --frozen python scripts/run_scaling.py \
+  --prior-run /content/drive/MyDrive/ReFuTab/runs/phase4-checkpointed-20261020T145755Z-dd78ef55 \
+  --output /content/drive/MyDrive/ReFuTab/runs/_bootstrap/scaling-preflight-UNIQUE.json
+```
+
+The launch adds `--launch --run-id <unique-id> --output-root <private-runs>`.
+Resume instead adds `--launch --resume-run <existing-scaling-directory>`.
+Keep `MPLBACKEND=Agg CUBLAS_WORKSPACE_CONFIG=:4096:8 CUDA_VISIBLE_DEVICES=0`
+and pass the notebook's capacity check before launch. No paid allocation is
+created by these commands. GPU workload capacity/runtime remains unmeasured.
+
+Historical split portability: six original split JSONs were read from Drive,
+verified against the reviewed pilot fingerprints, and compared with the local
+reconstruction. Every ordered row assignment matched; only the sampling source
+byte hash differed with checkout line endings. The public
+[anchor evidence](../results/phase4_anchor_rows.json) contains hashes/counts and
+historical metadata, with no row IDs. Preflight compares every ordered partition
+hash and the full fingerprint after substituting only those two source-byte
+metadata fields; immutable upstream/version checks still run independently.

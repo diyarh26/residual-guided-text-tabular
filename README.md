@@ -29,6 +29,13 @@ gated fusion as additional controls. Option B (LoRA) is deferred.
 
 ## Current status
 
+**Next: controlled scaling.** The separate
+[scaling notebook](notebooks/phase4_scaling.ipynb) prepares nested
+900/2,700/largest fitting sets with fixed grouped validation/assessment, four
+methods and three replicates (72 fits). The real-data split preflight passes;
+GPU scaling has not started. Setup must pass the saved-pilot artifact audit
+before launch. See [execution steps](docs/SCALING_EXPERIMENT.md).
+
 **Phase 4 GPU execution completed:** all **36 fitting stages and 24 outer-test
 evaluations**, including six Joint TAR conditions, finished on Tesla T4 using
 the registered checkpointed execution mode. A direct Drive review passed 209

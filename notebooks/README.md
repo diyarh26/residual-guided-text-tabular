@@ -1,5 +1,11 @@
 # Colab runners
 
+Use [phase4_scaling.ipynb](phase4_scaling.ipynb) for the new controlled scaling
+experiment. Save a copy in Drive, select GPU, run setup (including prior saved
+artifact audit), then explicitly enable `LAUNCH_SCALING`. See
+[the exact workflow](../docs/SCALING_EXPERIMENT.md). Its local checks passed;
+it has not been executed in Colab. Preserve the completed pilot below.
+
 [phase4_pilot.ipynb](phase4_pilot.ipynb) is the current GPU handoff for the
 registered matched pilot. [Open it in Google Colab](https://colab.research.google.com/github/diyarh26/residual-guided-text-tabular/blob/main/notebooks/phase4_pilot.ipynb),
 select a GPU runtime. The reviewed/pushed `PROJECT_SHA` is prefilled; malformed
@@ -21,7 +27,8 @@ start a new full GPU run after CPU preparation. `RESUME_RUN` supports verified
 continuation of the same source/config/device/environment run, preserving old
 attempts. See [pilot protocol](../docs/PHASE4.md) and
 [GPU execution and retry guide](../docs/PHASE4_GPU.md). Neither notebook has
-been executed in Colab, and no real GPU/TAR execution is claimed.
+been executed by the local notebook checks; the later actual checkpointed T4
+pilot completed and is documented in [the results](../docs/PHASE4_RESULTS.md).
 
 [phase1_baseline.ipynb](phase1_baseline.ipynb) is a thin CPU runner for the
 historical Joint Frozen LightGBM baseline. Open it in Google Colab, select a CPU

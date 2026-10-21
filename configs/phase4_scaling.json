@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "preregistered_date": "2026-10-21",
+  "datasets_manifest": "configs/phase4_datasets.json",
+  "methods": [
+    "frozen",
+    "direct",
+    "residual",
+    "tar"
+  ],
+  "outer_folds": [
+    0,
+    1,
+    2
+  ],
+  "device": "cuda:0",
+  "encoder": {
+    "model_path": "artifacts/e5-small-v2",
+    "identifier": "intfloat/e5-small-v2",
+    "revision": "ffb93f3bd4047442299a41ebb6fa998a38507c52",
+    "max_length": 512,
+    "batch_size": 32,
+    "device": "cuda:0"
+  },
+  "pipeline": {
+    "training": {
+      "objective": "residual",
+      "epochs": 10,
+      "batch_size": 32,
+      "lr": 0.001,
+      "weight_decay": 0.0001,
+      "seed": 42,
+      "patience": 3,
+      "device": "cuda:0",
+      "threads": 2
+    },
+    "hidden_dim": 64,
+    "dropout": 0.1,
+    "category_embedding_dim": 8,
+    "structured_dim": 16,
+    "downstream_estimators": 100,
+    "downstream_threads": 2
+  },
+  "teacher": {
+    "n_splits": 3,
+    "seed": 42,
+    "iterations": 40,
+    "depth": 4,
+    "learning_rate": 0.1,
+    "thread_count": 2,
+    "probability_clip": 1e-07
+  },
+  "output_root": "results/raw",
+  "tar_execution": {
+    "activation_checkpointing": true
+  },
+  "protocol": "controlled_scaling_v1",
+  "sizes": [
+    900,
+    2700,
+    "all"
+  ],
+  "anchor_review": "results/phase4_gpu_pilot_review.json",
+  "group_columns": {
+    "MUL_TEXT_PRODUCT_SENTIMENT": [
+      "Product_Description"
+    ],
+    "REG_TEXT_VIDEO_GAMES_SALES": [
+      "Name"
+    ]
+  },
+  "assessment_barrier": "all_72_fits_completed",
+  "outer_test_predictions": 0,
+  "decision_rule": {
+    "largest_residual_minus_direct_mean_positive": true,
+    "minimum_positive_replicates": 2,
+    "tar_comparison": "separate stronger criterion",
+    "automatic_redesign": false
+  },
+  "prior_visibility": "Development experiment following observed pilot; D is not a new blind test.",
+  "anchor_rows": "results/phase4_anchor_rows.json",
+  "prior_run_id": "phase4-checkpointed-20261020T145755Z-dd78ef55"
+}

@@ -32,3 +32,11 @@ barrier, preserved failures/new continuation attempts, artifact inventories,
 and recovery of durable test predictions. Report tests block decisions with
 incomplete/nonfinite/misaligned comparisons. Notebook tests exercise the SHA
 and launch guards. These tests do not claim actual CUDA/Colab execution.
+
+Controlled scaling tests cover deterministic nested class-stratified prefixes,
+fixed grouped V/D and old-test exclusions, grouped OOF feasibility, held-out
+label invariance, real tiny gate/teacher/PCA/downstream fitting, strict run
+binding, durable attempt/assessment recovery and corruption rejection. A full
+saved-artifact fixture audits 108 score sets, 12 teacher bundles and 96 fit
+scopes without new inference. Frozen copies substitute for TAR only when
+testing the ledger barrier; they do not validate GPU TAR training.

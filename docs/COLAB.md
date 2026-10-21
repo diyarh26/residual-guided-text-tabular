@@ -1,5 +1,11 @@
 # Colab execution workflow
 
+For the next controlled scaling experiment, use the separate
+[scaling notebook](../notebooks/phase4_scaling.ipynb) and follow
+[its launch steps](SCALING_EXPERIMENT.md). Save a copy in Drive. The previous
+pilot completed; the reproduction instructions below do not authorize rerunning
+it. The scaling setup audits its saved artifacts before any new fitting.
+
 For the current Phase 4 comparison, use
 [phase4_pilot.ipynb in Colab](https://colab.research.google.com/github/diyarh26/residual-guided-text-tabular/blob/main/notebooks/phase4_pilot.ipynb)
 and read [PHASE4_GPU.md](PHASE4_GPU.md). It uses the separate Linux CUDA lock,

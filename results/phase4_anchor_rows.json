@@ -1,0 +1,210 @@
+{
+  "source_review": "results/phase4_gpu_pilot_review.json",
+  "run_id": "phase4-checkpointed-20261020T145755Z-dd78ef55",
+  "anchors": {
+    "MUL_TEXT_PRODUCT_SENTIMENT__fold0": {
+      "fingerprint": "a86f4128a8a09323e1276be8b81151332ec311a57606faa358567ac71d987c1b",
+      "metadata": {
+        "outer_fold": 0,
+        "outer_seed": 42,
+        "phase1_assignments_verified": true,
+        "protocol": "historical_benchmark_v1",
+        "sampled_ordered_ids_sha256": "ff69208ccd5ebb10aed13c322ee5535b8c923b835f618f803723500b6cdb09c5",
+        "sampling_source_sha256": "765d70a397f9dd8d5d0f8b172654aa1880efad32bf8f838603483e62ad52e55c",
+        "splitting_source_sha256": "397ef61a98c447fb1488b26e866fd34d598590766c187002fba6f461f485a0ac",
+        "tabstar": "1.1.15",
+        "train_examples": 1000,
+        "upstream_commit": "599bd6a5631c96f8aef297cc4cb6e4c197ae0dca",
+        "validation_seed": 41
+      },
+      "partitions": {
+        "train": {
+          "rows": 900,
+          "row_ids_sha256": "1f8c0797da9297072b6f5163517f0bf46253307b8a869f88c3b497ca6d46a6ad"
+        },
+        "validation": {
+          "rows": 100,
+          "row_ids_sha256": "f7a4bf9da6ca7dcd2dfa78a6c956be339401e1f13b36e7aecf53d69fec9ae7e9"
+        },
+        "test": {
+          "rows": 509,
+          "row_ids_sha256": "e214974932daa1c30caffd696b09169d8b236a49b90c2e63fc52f9428032eb8d"
+        },
+        "excluded": {
+          "rows": 3582,
+          "row_ids_sha256": "63c2943bb09431eff4634944c9c1c321722d9acf5c1724aa0882ac1e6d9d48c4"
+        }
+      }
+    },
+    "MUL_TEXT_PRODUCT_SENTIMENT__fold1": {
+      "fingerprint": "4785749367534e996102bd74cf24c505d135a27d88f66091390158fcac21cb31",
+      "metadata": {
+        "outer_fold": 1,
+        "outer_seed": 43,
+        "phase1_assignments_verified": false,
+        "protocol": "historical_benchmark_v1",
+        "sampled_ordered_ids_sha256": "43fd83445909cc43944ea5aa716c168353b8d912a37a4444ca67b3536fa83422",
+        "sampling_source_sha256": "765d70a397f9dd8d5d0f8b172654aa1880efad32bf8f838603483e62ad52e55c",
+        "splitting_source_sha256": "397ef61a98c447fb1488b26e866fd34d598590766c187002fba6f461f485a0ac",
+        "tabstar": "1.1.15",
+        "train_examples": 1000,
+        "upstream_commit": "599bd6a5631c96f8aef297cc4cb6e4c197ae0dca",
+        "validation_seed": 41
+      },
+      "partitions": {
+        "train": {
+          "rows": 900,
+          "row_ids_sha256": "2c25466aae116a15eff4d7bc719b234a678de7cbee90b7aa7798fe70b3ce889d"
+        },
+        "validation": {
+          "rows": 100,
+          "row_ids_sha256": "42458c62a52b6172cdcba439a7290099799a7ba0de7ca346fe4f04a0489eb4a6"
+        },
+        "test": {
+          "rows": 509,
+          "row_ids_sha256": "49b35f5ef869de4bdc75ec3ee41f974346245fd3684f3af3d551cf79653f4782"
+        },
+        "excluded": {
+          "rows": 3582,
+          "row_ids_sha256": "1e8bdf4ed332a552cf7f6033901a047a6e8dc78858944e12e71269ba5c064345"
+        }
+      }
+    },
+    "MUL_TEXT_PRODUCT_SENTIMENT__fold2": {
+      "fingerprint": "a80ead6dfa3100a627d6a4098b7feb82162a0689826f76b6035ed7e4b5546ff4",
+      "metadata": {
+        "outer_fold": 2,
+        "outer_seed": 44,
+        "phase1_assignments_verified": false,
+        "protocol": "historical_benchmark_v1",
+        "sampled_ordered_ids_sha256": "e9607e8597696b047b4b7a0d06d28c87b30f6b95d60eb6510e141477150e8c50",
+        "sampling_source_sha256": "765d70a397f9dd8d5d0f8b172654aa1880efad32bf8f838603483e62ad52e55c",
+        "splitting_source_sha256": "397ef61a98c447fb1488b26e866fd34d598590766c187002fba6f461f485a0ac",
+        "tabstar": "1.1.15",
+        "train_examples": 1000,
+        "upstream_commit": "599bd6a5631c96f8aef297cc4cb6e4c197ae0dca",
+        "validation_seed": 41
+      },
+      "partitions": {
+        "train": {
+          "rows": 900,
+          "row_ids_sha256": "1e52e9c16909227dfdc6ae1c657e0faed44756f6e1b13ea01df9039444232f7c"
+        },
+        "validation": {
+          "rows": 100,
+          "row_ids_sha256": "e009c80b995ae216878c258442b6f354e0d5af9e4d50c536ed8de2bd33d36e1d"
+        },
+        "test": {
+          "rows": 509,
+          "row_ids_sha256": "c99c94cef1aa4ce6e0fc96322a28af3f97d70d480981f18a7bdaf2e3980220e4"
+        },
+        "excluded": {
+          "rows": 3582,
+          "row_ids_sha256": "22ec6c93df7010e993e8c1495dcecb9ed570c3a1cbc1fb6280302aa247328473"
+        }
+      }
+    },
+    "REG_TEXT_VIDEO_GAMES_SALES__fold0": {
+      "fingerprint": "5a3d3614abbbbb4b3854a5fa9bf4180d8e0f429036b7d49b6ce1951dd7aaefd7",
+      "metadata": {
+        "outer_fold": 0,
+        "outer_seed": 42,
+        "phase1_assignments_verified": false,
+        "protocol": "historical_benchmark_v1",
+        "sampled_ordered_ids_sha256": "0ff8032652ca174de9f5fbfcca0c758b4e73ac7b0a30e8e152c6667be15ccf1a",
+        "sampling_source_sha256": "765d70a397f9dd8d5d0f8b172654aa1880efad32bf8f838603483e62ad52e55c",
+        "splitting_source_sha256": "397ef61a98c447fb1488b26e866fd34d598590766c187002fba6f461f485a0ac",
+        "tabstar": "1.1.15",
+        "train_examples": 1000,
+        "upstream_commit": "599bd6a5631c96f8aef297cc4cb6e4c197ae0dca",
+        "validation_seed": 41
+      },
+      "partitions": {
+        "train": {
+          "rows": 900,
+          "row_ids_sha256": "468bb72b2ba9d6b30cbbcfa7f2bce9bcfa68c18b82fbf83644e72739362962c6"
+        },
+        "validation": {
+          "rows": 100,
+          "row_ids_sha256": "d61c6152a2b8c2fadf9d38b53b7916f8df68c77f43ac84002db901762a784a2c"
+        },
+        "test": {
+          "rows": 1659,
+          "row_ids_sha256": "26a035656a1b37558f0d902c650b2d0a858b83d335e495f2d764faf73c6763bb"
+        },
+        "excluded": {
+          "rows": 13939,
+          "row_ids_sha256": "a966d4a7c20f66bd919afff688caf9f43ee4f972ba5c6f09d5dd2fa9a336d9d5"
+        }
+      }
+    },
+    "REG_TEXT_VIDEO_GAMES_SALES__fold1": {
+      "fingerprint": "0929622bb1898b6246fa24e03cc7b6e35c26e55933984dd80cad0d681ed22f5c",
+      "metadata": {
+        "outer_fold": 1,
+        "outer_seed": 43,
+        "phase1_assignments_verified": false,
+        "protocol": "historical_benchmark_v1",
+        "sampled_ordered_ids_sha256": "f5b288f361e068bf005eab7436e6e1c8a93dbe9f818bc24cf5de7338b870c193",
+        "sampling_source_sha256": "765d70a397f9dd8d5d0f8b172654aa1880efad32bf8f838603483e62ad52e55c",
+        "splitting_source_sha256": "397ef61a98c447fb1488b26e866fd34d598590766c187002fba6f461f485a0ac",
+        "tabstar": "1.1.15",
+        "train_examples": 1000,
+        "upstream_commit": "599bd6a5631c96f8aef297cc4cb6e4c197ae0dca",
+        "validation_seed": 41
+      },
+      "partitions": {
+        "train": {
+          "rows": 900,
+          "row_ids_sha256": "de34c7c73cb2256c0d42f37c8d510fe653ca1a71de2d1e399589df7ab749a35e"
+        },
+        "validation": {
+          "rows": 100,
+          "row_ids_sha256": "a110bcfd218f622bb5e0498d2e118cda31a67d724c979501db0dcd8840ba5423"
+        },
+        "test": {
+          "rows": 1659,
+          "row_ids_sha256": "38553d1246d608517fb9c18fa9ceb53c80a95506b7aafb479b2841b7acfcd38b"
+        },
+        "excluded": {
+          "rows": 13939,
+          "row_ids_sha256": "7d9d0b1c56ccd155e17b7a847782ce15369c98f82b77993848361e90f2d460f9"
+        }
+      }
+    },
+    "REG_TEXT_VIDEO_GAMES_SALES__fold2": {
+      "fingerprint": "ab368a75f923c8ba81bfd31b965c528b6bea708ab05a4b9c595f4d6429c5b702",
+      "metadata": {
+        "outer_fold": 2,
+        "outer_seed": 44,
+        "phase1_assignments_verified": false,
+        "protocol": "historical_benchmark_v1",
+        "sampled_ordered_ids_sha256": "7353782c9ad5dca34e70ee03a5c916133c74c43e1fc4ac322f811351dd8f190f",
+        "sampling_source_sha256": "765d70a397f9dd8d5d0f8b172654aa1880efad32bf8f838603483e62ad52e55c",
+        "splitting_source_sha256": "397ef61a98c447fb1488b26e866fd34d598590766c187002fba6f461f485a0ac",
+        "tabstar": "1.1.15",
+        "train_examples": 1000,
+        "upstream_commit": "599bd6a5631c96f8aef297cc4cb6e4c197ae0dca",
+        "validation_seed": 41
+      },
+      "partitions": {
+        "train": {
+          "rows": 900,
+          "row_ids_sha256": "dd140954ef0953a8747225dc5146affcd54564679a8a01fa49480e920af41831"
+        },
+        "validation": {
+          "rows": 100,
+          "row_ids_sha256": "c0a34aa4d17d6d4576342c1b183b0c8f821a47e596e589f2e817b488b6a75a10"
+        },
+        "test": {
+          "rows": 1659,
+          "row_ids_sha256": "f603b86fc64fdd3ec46d2e4dfe82b7e80922ae216f9d15b5ea88dd1839363d84"
+        },
+        "excluded": {
+          "rows": 13939,
+          "row_ids_sha256": "3a9b404adc02a7c1f0d541379a6dab80261e47dd976403a91eebc0869fecb7d5"
+        }
+      }
+    }
+  }
+}

@@ -654,7 +654,52 @@ changed. Existing results and source pin remain intact. Targeted prior-artifact
 audit and tested scaling implementation precede an expensive GPU launch. No
 training runtime, GPU capacity or method improvement is claimed by planning.
 
-## Required entry for each later experiment
+## October 21, 2026: scaling implementation and non-fitting preflight
+
+Implemented `scaling_protocol.py`, `scaling.py`, the preflight/default-off
+launch CLI and a separate thin Colab notebook. Reused existing learner adapters;
+the old pilot only gained an explicit optional grouped-teacher flag. The new
+72-stage ledger saves independent size-specific bundles, immutable attempts,
+split/config/source/environment bindings, optimizer accounting, runtime,
+memory, artifact inventories and private predictions. All fits must complete
+before any D prediction; no old benchmark-test inference path exists. Partial
+matrices produce no method decision. Durable predictions recover without new
+inference; changed bindings/inventories/scores fail visibly.
+
+Read six original split JSONs through the Google Drive connector into ignored
+`results/raw/phase4-drive-review/splits`. All fingerprints match the prior
+review. Every ordered train/V/test/excluded assignment matches the Windows
+reconstruction; only the sampling-file byte hash differs with checkout line
+endings. Added public hashes/counts/metadata in `phase4_anchor_rows.json`, with
+no row IDs. Portable comparisons retain upstream pin/module checks.
+
+The first real-data implementation preflight stopped on that source-byte
+fingerprint mismatch before fitting. After explicit portability handling,
+`py -3.11 -m uv run --frozen python scripts/run_scaling.py --output
+results/raw/scaling-implemented-preflight-20261021.json` passed all **18**
+cases, all 900/2700/all teacher schedules, fixed V/D/group checks and schema
+audits. Counts match the original six-case preview. This development working
+tree preflight records source cf6b3887 plus dirty status and performs **zero
+model fits, predictions or outer-test evaluations**; it is not a benchmark run.
+
+`uv` was absent from PATH; used `py -3.11 -m uv`. Locked sync passed (54
+resolved / 52 checked packages). Initial targeted scaling tests exposed an
+undefined sample SD in a one-replicate orchestration fixture; the summary now
+records null SD when fewer than two replicates exist. All 9 initial scaling
+tests then passed in 23.812 s; 2 complete saved-artifact audit fixture tests
+passed in 8.685 s. Full suite including the new notebook guard: **170 tests
+passed in 88.628 s**. Infrastructure checks passed. No real scaling GPU run,
+larger-workload memory result, algorithm gain or actual prior-artifact audit
+pass is claimed. Setup will perform the targeted 108-score/12-teacher/96-scope
+readback on mounted Drive, with no new predictions, before new fitting.
+
+After adding explicit gate/TAR optimizer-step accounting, the final full suite
+passed **170 tests in 155.304 s**, exit code 0. Infrastructure/link, staged
+whitespace, ignored private-file coverage and credential-pattern checks passed.
+Notebook cells compile and contain no saved outputs. The source pin is filled
+only after the tested implementation commit is pushed and remotely verified.
+
+### Required entry for each later experiment
 
 Record run ID/time/status (planned/running/completed/failed/interrupted), exact
 project and upstream SHAs, config hash, dataset/model revisions and permissions,
