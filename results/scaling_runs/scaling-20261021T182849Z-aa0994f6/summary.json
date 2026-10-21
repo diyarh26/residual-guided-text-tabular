@@ -7,5 +7,6 @@
   "run_id": "scaling-20261021T182849Z-aa0994f6",
   "source_commit": "4971335afe78c4ddfbb6d10a3170d23c350d58b2",
   "stages": {},
-  "status": "preparing"
+  "status": "preparing",
+  "supervisor_status": "preparing"
 }
