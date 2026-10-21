@@ -1,7 +1,7 @@
 {
   "comparisons": {},
   "completed_assessments": 0,
-  "completed_fits": 26,
+  "completed_fits": 27,
   "config_sha256": "cfe7a47d48a08b29680308ee33b6cc0c0834591855241889bb51d300c5723537",
   "cost": {
     "basis": "Record actual provider charge after execution",
@@ -992,6 +992,40 @@
       "status": "completed"
     },
     "MUL_TEXT_PRODUCT_SENTIMENT__fold2__size900__residual": {
+      "artifact_bytes": 1905450,
+      "attempt_index": 1,
+      "optimization": {
+        "best_epoch": 10,
+        "completed_epochs": 10,
+        "optimizer_steps_including_resumed_history": 290,
+        "steps_per_epoch": 29
+      },
+      "runtime": {
+        "cuda_peak_allocated_bytes": 201981440,
+        "sampled_peak_rss_bytes": 1735204864,
+        "seconds": 9.39567803600039
+      },
+      "scores": {
+        "train": {
+          "metrics": {
+            "all_classes_present": true,
+            "auc": 1.0,
+            "logloss": 0.00014663493045882515
+          },
+          "rows": 900
+        },
+        "validation": {
+          "metrics": {
+            "all_classes_present": true,
+            "auc": 0.8588827419825921,
+            "logloss": 0.9951953526591064
+          },
+          "rows": 366
+        }
+      },
+      "status": "completed"
+    },
+    "MUL_TEXT_PRODUCT_SENTIMENT__fold2__size900__tar": {
       "artifact_bytes": null,
       "attempt_index": 1,
       "optimization": null,
