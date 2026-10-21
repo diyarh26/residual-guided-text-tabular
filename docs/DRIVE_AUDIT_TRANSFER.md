@@ -45,7 +45,7 @@ if len(uploaded) != 1:
     raise ValueError("Select exactly the private pilot audit ZIP.")
 archive = Path(next(iter(uploaded))).resolve()
 helper = Path("/content/refutab_audit_transfer.py")
-helper_sha = "SET_VERIFIED_TRANSFER_COMMIT"
+helper_sha = "b6a34226d88664c50db42647e312598e5bf59017"
 urllib.request.urlretrieve(
     f"https://raw.githubusercontent.com/diyarh26/residual-guided-text-tabular/{helper_sha}/src/refutab/audit_transfer.py",
     helper,

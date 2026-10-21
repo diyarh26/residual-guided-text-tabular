@@ -185,8 +185,8 @@ limitations before interpreting broader experiments.
 - Repository: https://github.com/diyarh26/residual-guided-text-tabular
 - Branch: `main`.
 - Latest verified pushed commit at edit time:
-  `af7f82e4d8f076314dfde45d8b99a89af26ceb40`
-  (`chore: pin scaling Colab notebook to verified implementation`).
+  `b6a34226d88664c50db42647e312598e5bf59017`
+  (`fix: support portable prior-pilot audit inputs across Drive accounts`).
 - The checkpointed notebook/update instructions were pushed earlier.
   Compare actual HEAD with the remote to identify the current session tip.
 - This field identifies the previously verified commit, avoiding a self-hash

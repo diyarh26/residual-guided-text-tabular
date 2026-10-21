@@ -729,7 +729,9 @@ exit 0. Locked sync, notebook compilation, infrastructure/local-link checks,
 whitespace and private-file ignore checks passed. No network or actual Colab
 transfer was exercised by these tests. [Restore instructions](DRIVE_AUDIT_TRANSFER.md)
 rerun only the interrupted audit after transfer, preserving the already-created
-capacity evidence and the prepared runtime.
+capacity evidence and the prepared runtime. The helper implementation
+`b6a34226d88664c50db42647e312598e5bf59017` was pushed and remotely verified; the transfer
+notebook and restore cell pin that exact utility source.
 
 ### Required entry for each later experiment
 
