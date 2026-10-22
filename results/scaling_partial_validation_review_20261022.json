@@ -1,0 +1,434 @@
+{
+  "review_date": "2026-10-22",
+  "status": "partial_validation_only_not_registered_assessment",
+  "run_id": "scaling-20261021T182849Z-aa0994f6",
+  "source_commit": "4971335afe78c4ddfbb6d10a3170d23c350d58b2",
+  "results_commit": "6baa18bdbc7041d8749b25f5420bbd3db7794518",
+  "input_sha256": {
+    "summary.json": "ca9a08b3183a054d980e8e5028566c03af0ed969f92394c74c5f6953f43142d3",
+    "scores.csv": "6ea53b0c5017cc654c809e1d8636f9902f04b8ff51e47de95a73dfa58a8f0b33"
+  },
+  "dataset": "MUL_TEXT_PRODUCT_SENTIMENT",
+  "metric": "macro OVR AUROC",
+  "completed_fits": 35,
+  "planned_fits": 72,
+  "assessment_D_score_sets": 0,
+  "games_results_available": false,
+  "sizes": {
+    "900": {
+      "methods": {
+        "frozen": {
+          "folds": [
+            0,
+            1,
+            2
+          ],
+          "validation_auc_by_fold": [
+            0.872582625729227,
+            0.7936980135802426,
+            0.869997833592121
+          ],
+          "mean_validation_auc": 0.8454261576338635,
+          "sample_sd_validation_auc": 0.044816525445667124,
+          "mean_validation_logloss": 0.9470116099130874
+        },
+        "direct": {
+          "folds": [
+            0,
+            1,
+            2
+          ],
+          "validation_auc_by_fold": [
+            0.87002323126,
+            0.8085228131244255,
+            0.8827662693093206
+          ],
+          "mean_validation_auc": 0.8537707712312487,
+          "sample_sd_validation_auc": 0.039700497973063596,
+          "mean_validation_logloss": 0.9338966286702126
+        },
+        "residual": {
+          "folds": [
+            0,
+            1,
+            2
+          ],
+          "validation_auc_by_fold": [
+            0.8863522646004948,
+            0.8071308034282951,
+            0.8588827419825921
+          ],
+          "mean_validation_auc": 0.8507886033371274,
+          "sample_sd_validation_auc": 0.04022618907967281,
+          "mean_validation_logloss": 0.9348408282343799
+        },
+        "tar": {
+          "folds": [
+            0,
+            1,
+            2
+          ],
+          "validation_auc_by_fold": [
+            0.8483726352322493,
+            0.8571507108093144,
+            0.8575311585824612
+          ],
+          "mean_validation_auc": 0.8543515015413417,
+          "sample_sd_validation_auc": 0.005181343154387944,
+          "mean_validation_logloss": 0.9209637744291118
+        }
+      },
+      "paired_residual_minus_control": {
+        "frozen": {
+          "folds": [
+            0,
+            1,
+            2
+          ],
+          "residual_mean_on_matched_folds": 0.8507886033371274,
+          "control_mean_on_matched_folds": 0.8454261576338635,
+          "auc_gaps": [
+            0.013769638871267809,
+            0.013432789848052518,
+            -0.011115091609528949
+          ],
+          "mean_auc_gap": 0.005362445703263792,
+          "positive_replicates": 2
+        },
+        "direct": {
+          "folds": [
+            0,
+            1,
+            2
+          ],
+          "residual_mean_on_matched_folds": 0.8507886033371274,
+          "control_mean_on_matched_folds": 0.8537707712312487,
+          "auc_gaps": [
+            0.016329033340494736,
+            -0.001392009696130403,
+            -0.023883527326728493
+          ],
+          "mean_auc_gap": -0.0029821678941213867,
+          "positive_replicates": 1
+        },
+        "tar": {
+          "folds": [
+            0,
+            1,
+            2
+          ],
+          "residual_mean_on_matched_folds": 0.8507886033371274,
+          "control_mean_on_matched_folds": 0.8543515015413417,
+          "auc_gaps": [
+            0.037979629368245504,
+            -0.050019907381019246,
+            0.0013515834001308624
+          ],
+          "mean_auc_gap": -0.003562898204214293,
+          "positive_replicates": 2
+        }
+      }
+    },
+    "2700": {
+      "methods": {
+        "frozen": {
+          "folds": [
+            0,
+            1,
+            2
+          ],
+          "validation_auc_by_fold": [
+            0.8350322090695093,
+            0.8548486789841474,
+            0.8816715135144485
+          ],
+          "mean_validation_auc": 0.8571841338560351,
+          "sample_sd_validation_auc": 0.023407198505393596,
+          "mean_validation_logloss": 0.7041101344742032
+        },
+        "direct": {
+          "folds": [
+            0,
+            1,
+            2
+          ],
+          "validation_auc_by_fold": [
+            0.8510838975284003,
+            0.8553722293439365,
+            0.8933526982133957
+          ],
+          "mean_validation_auc": 0.8666029416952442,
+          "sample_sd_validation_auc": 0.023264985552871664,
+          "mean_validation_logloss": 0.6937183652920064
+        },
+        "residual": {
+          "folds": [
+            0,
+            1,
+            2
+          ],
+          "validation_auc_by_fold": [
+            0.8225199984484771,
+            0.8608297993605986,
+            0.8740783372046145
+          ],
+          "mean_validation_auc": 0.8524760450045634,
+          "sample_sd_validation_auc": 0.02677507203919135,
+          "mean_validation_logloss": 0.7022493160931669
+        },
+        "tar": {
+          "folds": [
+            0,
+            1,
+            2
+          ],
+          "validation_auc_by_fold": [
+            0.8847351498405622,
+            0.8332297516857539,
+            0.8419931318667843
+          ],
+          "mean_validation_auc": 0.8533193444643667,
+          "sample_sd_validation_auc": 0.027557464118194222,
+          "mean_validation_logloss": 0.7311422051605989
+        }
+      },
+      "paired_residual_minus_control": {
+        "frozen": {
+          "folds": [
+            0,
+            1,
+            2
+          ],
+          "residual_mean_on_matched_folds": 0.8524760450045634,
+          "control_mean_on_matched_folds": 0.8571841338560351,
+          "auc_gaps": [
+            -0.012512210621032138,
+            0.0059811203764511545,
+            -0.007593176309834027
+          ],
+          "mean_auc_gap": -0.00470808885147167,
+          "positive_replicates": 1
+        },
+        "direct": {
+          "folds": [
+            0,
+            1,
+            2
+          ],
+          "residual_mean_on_matched_folds": 0.8524760450045634,
+          "control_mean_on_matched_folds": 0.8666029416952442,
+          "auc_gaps": [
+            -0.028563899079923183,
+            0.005457570016662028,
+            -0.019274361008781216
+          ],
+          "mean_auc_gap": -0.01412689669068079,
+          "positive_replicates": 1
+        },
+        "tar": {
+          "folds": [
+            0,
+            1,
+            2
+          ],
+          "residual_mean_on_matched_folds": 0.8524760450045634,
+          "control_mean_on_matched_folds": 0.8533193444643667,
+          "auc_gaps": [
+            -0.06221515139208511,
+            0.027600047674844697,
+            0.032085205337830214
+          ],
+          "mean_auc_gap": -0.0008432994598034002,
+          "positive_replicates": 2
+        }
+      }
+    },
+    "all": {
+      "methods": {
+        "frozen": {
+          "folds": [
+            0,
+            1,
+            2
+          ],
+          "validation_auc_by_fold": [
+            0.8701900359149102,
+            0.8665790260053461,
+            0.882849876469601
+          ],
+          "mean_validation_auc": 0.8732063127966191,
+          "sample_sd_validation_auc": 0.008544506327335994,
+          "mean_validation_logloss": 0.6653428653901127
+        },
+        "direct": {
+          "folds": [
+            0,
+            1,
+            2
+          ],
+          "validation_auc_by_fold": [
+            0.8855907463817895,
+            0.8810688580471819,
+            0.8668348451094857
+          ],
+          "mean_validation_auc": 0.8778314831794857,
+          "sample_sd_validation_auc": 0.00978807464007068,
+          "mean_validation_logloss": 0.6570817641211746
+        },
+        "residual": {
+          "folds": [
+            0,
+            1,
+            2
+          ],
+          "validation_auc_by_fold": [
+            0.8626765488048799,
+            0.8880635840154025,
+            0.8686893167955925
+          ],
+          "mean_validation_auc": 0.8731431498719583,
+          "sample_sd_validation_auc": 0.013266606988946984,
+          "mean_validation_logloss": 0.6738228155684871
+        },
+        "tar": {
+          "folds": [
+            0,
+            1
+          ],
+          "validation_auc_by_fold": [
+            0.905518581120421,
+            0.8937873247690447
+          ],
+          "mean_validation_auc": 0.8996529529447328,
+          "sample_sd_validation_auc": 0.008295250917896005,
+          "mean_validation_logloss": 0.629463052201011
+        }
+      },
+      "paired_residual_minus_control": {
+        "frozen": {
+          "folds": [
+            0,
+            1,
+            2
+          ],
+          "residual_mean_on_matched_folds": 0.8731431498719583,
+          "control_mean_on_matched_folds": 0.8732063127966191,
+          "auc_gaps": [
+            -0.0075134871100303036,
+            0.021484558010056443,
+            -0.014160559674008533
+          ],
+          "mean_auc_gap": -6.316292466079787e-05,
+          "positive_replicates": 1
+        },
+        "direct": {
+          "folds": [
+            0,
+            1,
+            2
+          ],
+          "residual_mean_on_matched_folds": 0.8731431498719583,
+          "control_mean_on_matched_folds": 0.8778314831794857,
+          "auc_gaps": [
+            -0.0229141975769096,
+            0.006994725968220594,
+            0.0018544716861067512
+          ],
+          "mean_auc_gap": -0.004688333307527419,
+          "positive_replicates": 2
+        },
+        "tar": {
+          "folds": [
+            0,
+            1
+          ],
+          "residual_mean_on_matched_folds": 0.8753700664101411,
+          "control_mean_on_matched_folds": 0.8996529529447328,
+          "auc_gaps": [
+            -0.04284203231554118,
+            -0.005723740753642126
+          ],
+          "mean_auc_gap": -0.024282886534591652,
+          "positive_replicates": 0
+        }
+      }
+    }
+  },
+  "all_fit_rows_by_fold": {
+    "0": 3298,
+    "1": 3297,
+    "2": 3298
+  },
+  "paired_change_900_to_all": {
+    "frozen": {
+      "folds": [
+        0,
+        1,
+        2
+      ],
+      "changes": [
+        -0.002392589814316781,
+        0.07288101242510348,
+        0.012852042877479986
+      ],
+      "mean_change": 0.02778015516275556
+    },
+    "direct": {
+      "folds": [
+        0,
+        1,
+        2
+      ],
+      "changes": [
+        0.015567515121789444,
+        0.0725460449227564,
+        -0.015931424199834843
+      ],
+      "mean_change": 0.024060711948237
+    },
+    "residual": {
+      "folds": [
+        0,
+        1,
+        2
+      ],
+      "changes": [
+        -0.023675715795614893,
+        0.0809327805871074,
+        0.009806574813000402
+      ],
+      "mean_change": 0.02235454653483097
+    },
+    "tar": {
+      "folds": [
+        0,
+        1
+      ],
+      "changes": [
+        0.05714594588817179,
+        0.03663661395973028
+      ],
+      "mean_change": 0.046891279923951035
+    }
+  },
+  "optimization_observation": {
+    "completed_gate_stages": 18,
+    "all_selected_epoch_10_at_budget_limit": true,
+    "interpretation": "possible budget limitation; loss slope/convergence not established from these exports"
+  },
+  "interpretation": {
+    "more_data_helps_residual_absolutely": true,
+    "residual_average_advantage_over_direct_observed": false,
+    "largest_residual_effectively_tied_with_frozen": true,
+    "largest_tar_comparison_complete": false,
+    "full_assessment_decision": "await_locked_D_and_remaining_dataset",
+    "recommendation": "keep current experiment unchanged; review gate optimization and teacher signal before a later method change",
+    "limitations": [
+      "validation used for gate selection; not final D performance",
+      "repeated overlapping folds are descriptive, not independent significance evidence",
+      "largest TAR only folds 0 and 1; paired means only",
+      "all train AUROCs nearly perfect across methods; not residual-specific evidence of leakage",
+      "prediction/model artifact readback not performed"
+    ]
+  }
+}

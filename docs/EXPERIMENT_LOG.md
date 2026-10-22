@@ -801,6 +801,39 @@ Private Drive checkpoint contents were not independently read or verified.
 Resume requires the Drive used in the interrupted runtime, not GitHub metrics
 alone. No new experiment, resumption or architecture decision occurred here.
 
+## October 22, 2026: preliminary interpretation of partial validation scores
+
+The user explicitly requested an opinion from the current results. Analysed
+only the already-published train/V score sets at immutable result commit
+`6baa18bdbc7041d8749b25f5420bbd3db7794518`; the result branch remains at that
+commit. No new fitting, inference, D access or old test scoring occurred.
+Added [the scalar review](../results/scaling_partial_validation_review_20261022.json)
+with source/input hashes, method means/SDs, fold-matched differences and their
+actual coverage. Assertions verified all 70 score-set keys, 3298/3297/3298
+largest fitting rows, three complete Frozen/Direct/Residual replicates at
+each size, paired mean arithmetic and all 18 gates selecting epoch 10/10.
+
+Residual mean sentiment V AUROC grows .85079 -> .85248 -> .87314 for
+900/2700/all. Direct grows .85377 -> .86660 -> .87783, and Frozen grows
+.84543 -> .85718 -> .87321. Residual-minus-Direct means stay negative:
+-.00298/-.01413/-.00469. At largest A, residual wins 2/3 Direct pairs, but
+those gains are outweighed by one negative fold. On the two available matched
+largest-A TAR folds, residual .87537 trails TAR .89965, mean gap -.02428,
+with no positive pair. TAR's incomplete coverage is explicit; no unmatched
+three-versus-two fold comparison supports a claim. Supplemental largest V
+log loss is also worse for residual than Frozen/Direct and matched TAR.
+
+Provisional interpretation: more data helps residual absolutely, but current
+selection-validation evidence does not establish a benefit from its residual
+objective. This weakens a simple data-scarcity explanation on this task; it
+does not establish architectural failure or replace the registered D screen.
+Gate selection at the last allowed epoch motivates checking optimization
+budget/teacher signal later; the export does not establish loss convergence,
+and more head training need not improve the downstream learner. Nearly perfect
+training AUROC occurs for all methods, not residual alone, and does not itself
+prove leakage. The games scaling task and D results remain unavailable.
+Preserve the current locked experiment and make no automatic method change.
+
 ### Required entry for each later experiment
 
 Record run ID/time/status (planned/running/completed/failed/interrupted), exact

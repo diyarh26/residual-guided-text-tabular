@@ -165,6 +165,10 @@ of 35/72 fits before a user-reported usage-limit interruption; D assessment is
 still zero. Resume from the same mounted Drive/pinned source. Keep
 all assessment rows fixed across the three sample sizes and evaluate zero old
 outer tests in this development curve. The model architecture remains unchanged.
+The current [partial validation review](../results/scaling_partial_validation_review_20261022.json)
+finds no average residual-over-direct advantage at any sentiment sample size.
+This informs a provisional discussion only: it does not replace D, evaluate
+the unfinished games task, or authorize a redesign during the fixed experiment.
 Account/Drive migration is supported by the standalone CPU audit-transfer
 helper; it preserves the audit requirement and original run. See
 [restoration instructions](DRIVE_AUDIT_TRANSFER.md).

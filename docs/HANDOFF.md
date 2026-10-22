@@ -4,6 +4,22 @@ Updated: October 22, 2026 (Asia/Jerusalem).
 
 ## Current phase and status
 
+**Preliminary validation interpretation, October 22:** user asked for an opinion
+from current scores. The [scalar review](../results/scaling_partial_validation_review_20261022.json)
+compares the fixed GitHub snapshot without new fitting/inference. On sentiment,
+three-fold mean V AUROC at 900/2700/all is Frozen .84543/.85718/.87321,
+Direct .85377/.86660/.87783, Residual .85079/.85248/.87314. Residual improves
+absolutely with data but does not show a mean advantage over Direct at any
+size, and is effectively tied with Frozen at largest A. Largest residual beats
+Direct in 2/3 folds, with smaller gains outweighed by one negative gap. On the
+two matched largest-A TAR folds, residual .87537 trails TAR .89965 (both gaps
+negative); never compare TAR's two-fold mean as though it had three folds.
+All 18 gates selected epoch 10 at the budget limit, motivating a later budget/
+teacher diagnostic without proving nonconvergence or that more epochs help.
+These are selection-validation observations, not D/generalization conclusions.
+Keep the current recipe/run unchanged until the locked remaining comparisons
+are available; no redesign or new GPU work was authorized/executed by this review.
+
 **Actual standalone GPU run interrupted, GitHub progress recovered October 22.**
 The user reports a usage-limit stop. GitHub branch
 `results/scaling-20261021T182849Z-aa0994f6`, commit
@@ -230,8 +246,8 @@ limitations before interpreting broader experiments.
 - Repository: https://github.com/diyarh26/residual-guided-text-tabular
 - Branch: `main`.
 - Latest verified pushed commit at edit time:
-  `6a2b2e14c19dade64cc03c16f956f4ff26b03071`
-  (`chore: pin ready-to-run notebook to verified standalone implementation`).
+  `612d709262c16aff748c031d7bc81fa5cf6d763d`
+  (`docs: record interrupted scaling progress recovered from GitHub`).
 - The checkpointed notebook/update instructions were pushed earlier.
   Compare actual HEAD with the remote to identify the current session tip.
 - This field identifies the previously verified commit, avoiding a self-hash
