@@ -41,7 +41,10 @@ checkpoints remain private in Drive. The earlier pilot audit stays pending.
 [scaling notebook](notebooks/phase4_scaling.ipynb) prepares nested
 900/2,700/largest fitting sets with fixed grouped validation/assessment, four
 methods and three replicates (72 fits). The real-data split preflight passes;
-GPU scaling has not started. The current run-all workflow records the earlier
+The latest verified GitHub snapshot has **35/72 fits completed**, before a
+user-reported usage-limit interruption; assessment scores remain unopened.
+See [saved progress](https://github.com/diyarh26/residual-guided-text-tabular/tree/results/scaling-20261021T182849Z-aa0994f6/results/scaling_runs/scaling-20261021T182849Z-aa0994f6).
+The current run-all workflow records the earlier
 pilot audit as separately deferred. See [execution steps](docs/SCALING_EXPERIMENT.md).
 
 **Phase 4 GPU execution completed:** all **36 fitting stages and 24 outer-test

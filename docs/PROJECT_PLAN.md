@@ -160,7 +160,9 @@ A dedicated scaling runner, grouped nested sampling, persistent attempts and
 assessment barrier are implemented; all 18 real-data split cases pass without
 model fitting. The older guarded Colab setup requires a prior-artifact audit;
 the current standalone notebook defers that review while retaining its GPU
-capacity check. GPU scaling has not run. Keep
+capacity check. Actual GPU scaling has now reached a verified GitHub snapshot
+of 35/72 fits before a user-reported usage-limit interruption; D assessment is
+still zero. Resume from the same mounted Drive/pinned source. Keep
 all assessment rows fixed across the three sample sizes and evaluate zero old
 outer tests in this development curve. The model architecture remains unchanged.
 Account/Drive migration is supported by the standalone CPU audit-transfer

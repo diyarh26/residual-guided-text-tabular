@@ -1,8 +1,32 @@
 # Project handoff
 
-Updated: October 21, 2026 (Asia/Jerusalem).
+Updated: October 22, 2026 (Asia/Jerusalem).
 
 ## Current phase and status
+
+**Actual standalone GPU run interrupted, GitHub progress recovered October 22.**
+The user reports a usage-limit stop. GitHub branch
+`results/scaling-20261021T182849Z-aa0994f6`, commit
+`6baa18bdbc7041d8749b25f5420bbd3db7794518`, contains 35/72 completed fits and
+one in-progress TAR fit, all on Product Sentiment (9 Frozen/9 Direct/9 Residual/
+8 TAR completed). The sales dataset has no saved fitted stage yet. The CSV has
+210 scalar metric rows / 70 score sets (35 train, 35 validation). D assessments
+are zero because all 72 fits must finish first; zero old outer-test predictions.
+The last upload was October 21 at 22:50:38 UTC (October 22, 01:50:38 Jerusalem).
+The saved `running` status is a last snapshot, not proof of a live process.
+This confirms real execution and actual GitHub publication, superseding the
+pre-execution statements below. No algorithm-success decision is made from
+these partial validation scores. Source is the unchanged `4971335...` pin.
+
+Private checkpoints/logs are configured under the Drive mounted in that runtime:
+`MyDrive/ReFuTab/standalone_scaling/scaling-20261021T182849Z-aa0994f6/`, with
+bootstrap console logs in its sibling `_bootstrap` directory. That Drive was
+not accessed in this readback; do not claim independent checkpoint validation.
+The snapshot is cached privately in `results/raw/scaling-github-review-20261022/`.
+Next: resume the same pinned notebook using that same Drive/current.json when
+GPU resources are available; verified completed stages should be reused and
+the interrupted TAR checkpoint recovered if compatible. No training launched
+during this read-only progress check.
 
 **Latest user instruction supersedes the transfer workflow below:** provide one
 fully runnable notebook for another computer/Drive, with results saved to GitHub.
@@ -206,8 +230,8 @@ limitations before interpreting broader experiments.
 - Repository: https://github.com/diyarh26/residual-guided-text-tabular
 - Branch: `main`.
 - Latest verified pushed commit at edit time:
-  `4971335afe78c4ddfbb6d10a3170d23c350d58b2`
-  (`feat: add fresh-Drive run-all notebook with automatic GitHub result saves`).
+  `6a2b2e14c19dade64cc03c16f956f4ff26b03071`
+  (`chore: pin ready-to-run notebook to verified standalone implementation`).
 - The checkpointed notebook/update instructions were pushed earlier.
   Compare actual HEAD with the remote to identify the current session tip.
 - This field identifies the previously verified commit, avoiding a self-hash

@@ -772,6 +772,35 @@ dirty working tree recorded); this is split readiness, not a GPU result.
 Implementation `4971335afe78c4ddfbb6d10a3170d23c350d58b2` was pushed and matched remote main;
 the notebook now pins that exact tested source.
 
+## October 22, 2026: actual scaling progress retrieved from GitHub
+
+User reports the run stopped due to account usage limits. Read the result
+branch directly through authenticated GitHub CLI, without new training or
+inference. Run `scaling-20261021T182849Z-aa0994f6`, source
+`4971335afe78c4ddfbb6d10a3170d23c350d58b2`, latest result commit
+`6baa18bdbc7041d8749b25f5420bbd3db7794518` (October 21, 22:50:38 UTC):
+35/72 completed fits, one running Product Sentiment fold-2/all TAR stage,
+zero D assessments, zero old outer-test predictions, no recorded failure type.
+Completed methods: Frozen 9, Direct 9, Residual 9, TAR 8. The games task has no
+saved stage yet. The `running` status is stale-able snapshot metadata, not a
+live-runtime check or independent proof of the usage-limit cause.
+Recorded hardware is Tesla T4, 15,637,086,208 bytes VRAM, CUDA 12.6 and driver
+580.82.07. Standalone config SHA-256:
+`cfe7a47d48a08b29680308ee33b6cc0c0834591855241889bb51d300c5723537`.
+Provider service charge remains unmeasured/null.
+
+Both public files were cached privately under
+`results/raw/scaling-github-review-20261022/6baa18bdbc7041d8749b25f5420bbd3db7794518/`.
+CSV readback confirms 210 metric rows and 70 unique score sets, exactly 35
+training and 35 validation sets. Summary SHA-256:
+`ca9a08b3183a054d980e8e5028566c03af0ed969f92394c74c5f6953f43142d3`;
+CSV SHA-256: `6ea53b0c5017cc654c809e1d8636f9902f04b8ff51e47de95a73dfa58a8f0b33`.
+The sum of completed-stage recorded fitting durations is 14,075.229855 s,
+excluding the interrupted stage/setup; it is not end-to-end wall time.
+Private Drive checkpoint contents were not independently read or verified.
+Resume requires the Drive used in the interrupted runtime, not GitHub metrics
+alone. No new experiment, resumption or architecture decision occurred here.
+
 ### Required entry for each later experiment
 
 Record run ID/time/status (planned/running/completed/failed/interrupted), exact
