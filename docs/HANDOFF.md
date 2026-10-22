@@ -4,6 +4,21 @@ Updated: October 22, 2026 (Asia/Jerusalem).
 
 ## Current phase and status
 
+**Next-direction discussion, October 22 (proposal only):** user asks what to do
+after the weak validation result. Recommended next practical probe is I1
+conditional innovation subspaces from the existing seven-idea note: investigate
+which predictive text directions survive compression, then compare equal-size
+ordinary supervised projection with conditional residual-guided projection.
+Start with full frozen 384-dimensional embeddings, keep the main output budget
+30 per field and downstream learner fixed, and use training-side grouped V.
+PCA-30 and full-384 Frozen are diagnostic controls; full-384 is not an
+equal-feature-budget comparison. Supervised PCA/PLS is an essential control,
+since generic supervised compression is established work. This is a proposal
+for a small CPU probe, not an accepted globally novel method, an implemented
+redesign, permission to change the interrupted experiment, or a new GPU run.
+The old run/checkpoints remain preserved and incomplete. Finish/assessment
+decisions and any revised evaluation matrix must be declared explicitly.
+
 **Preliminary validation interpretation, October 22:** user asked for an opinion
 from current scores. The [scalar review](../results/scaling_partial_validation_review_20261022.json)
 compares the fixed GitHub snapshot without new fitting/inference. On sentiment,
@@ -246,8 +261,8 @@ limitations before interpreting broader experiments.
 - Repository: https://github.com/diyarh26/residual-guided-text-tabular
 - Branch: `main`.
 - Latest verified pushed commit at edit time:
-  `612d709262c16aff748c031d7bc81fa5cf6d763d`
-  (`docs: record interrupted scaling progress recovered from GitHub`).
+  `b667230cc8cf28c80d2c21446a18f7065ac6922c`
+  (`analysis: review partial scaling validation gains and paired baseline gaps`).
 - The checkpointed notebook/update instructions were pushed earlier.
   Compare actual HEAD with the remote to identify the current session tip.
 - This field identifies the previously verified commit, avoiding a self-hash

@@ -90,6 +90,20 @@ analysis described below. Search-result absence is not proof of originality.
 
 ## I1. Conditional innovation subspaces
 
+October 22 discussion update: after the partial scaling validation review,
+I recommend this as the next small mechanism probe, not a proven replacement.
+More data improved residual AUROC without producing a mean advantage over
+Direct, motivating a different representational mechanism. Retain the ordinary
+supervised projection control: a gain over unsupervised PCA alone would not
+establish the conditional contribution. A full-384 control tests practical
+representation capacity but cannot by itself prove that PCA caused the gap.
+The benchmark's no-PCA ablation still reports TAR gains, so removing PCA is
+not a general solution. No new method fitting or GPU execution occurred during
+this discussion. Primary sources rechecked October 22:
+[supervised PCA](https://web.stanford.edu/~hastie/Papers/spca_JASA.pdf),
+[cross-fitting in DML](https://arxiv.org/abs/1608.00060),
+[MulTaBench F.5](https://arxiv.org/html/2605.10616v1).
+
 **Plain-language idea:** give the model a few text directions that explain what
 the structured columns cannot, instead of allocating every dimension to the
 largest text-variance directions.

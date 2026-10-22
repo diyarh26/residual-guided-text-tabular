@@ -169,6 +169,13 @@ The current [partial validation review](../results/scaling_partial_validation_re
 finds no average residual-over-direct advantage at any sentiment sample size.
 This informs a provisional discussion only: it does not replace D, evaluate
 the unfinished games task, or authorize a redesign during the fixed experiment.
+Next proposed investigation after the user's request for a new direction is
+the I1 conditional-innovation compression probe in
+[the research shortlist](RESEARCH_IDEAS_2026-10-21.md). It compares PCA-30,
+full-384 Frozen (diagnostic), ordinary supervised compression and conditional
+compression, with equal 30-dimensional main comparisons and unchanged
+downstream settings. It is not implemented or selected as a successful method;
+preserve the interrupted run and declare any later protocol amendment.
 Account/Drive migration is supported by the standalone CPU audit-transfer
 helper; it preserves the audit requirement and original run. See
 [restoration instructions](DRIVE_AUDIT_TRANSFER.md).
